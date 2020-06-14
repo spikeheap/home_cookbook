@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<article class="recipe">
+
+  {% if page.image %}
+    <img style="max-width: 100%" src="{{ page.image }}" alt="Photo of a {{ page.name | downcase }}">
+  {% endif %}
+
+  <h1>{{ page.name }}</h1>
+  Based on this <a href="{{ page.isBasedOn }}">original recipe</a> by {{ page.author.name }}
+  <span>{{ page.recipeCategory }} – {{ page.recipeCuisine }}</span>
+  <p>{{ page.description }}</p>
+
+  <ul>
+    <li>Prep time: {{ page.prepTime}}</li>
+    <li>Cook time: {{ page.cookTime}}</li>
+    <li>Yield: {{ page.recipeYield }}</li>
+  </ul>
+
+  <h2>Ingredients</h2>
+  <ul>
+    {% for recipeIngredientItem in page.recipeIngredient %}
+      <li>{{ recipeIngredientItem }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Steps</h2>
+  <ul>
+    {% for recipeInstructionItem in page.recipeInstructions %}
+      <li>{{ recipeInstructionItem }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Metadata</h2>
+
+  <h3>Keywords</h3>
+  <ul>
+    {% for keyword in page.keywords %}
+      <li>{{ keyword }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Suitable for</h3>
+  <ul>
+    {% for suitableForDietItem in page.suitableForDiet %}
+      <li>{{ suitableForDietItem }}</li>
+    {% endfor %}
+  </ul>
+
+</article>
