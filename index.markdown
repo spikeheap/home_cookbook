@@ -6,8 +6,10 @@ layout: home
 ---
 # Home Cookbook
 
-Count: {{ recipes.size }}
-{% for recipe in site.recipes %}
-  <h2>{{ recipe.name }} - {{ recipe.author.name }}</h2>
-  <p>{{ recipe.content | markdownify }}</p>
-{% endfor %}
+<ul>
+  {% for recipe in site.recipes %}
+    <li>
+      <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+    </li>
+  {% endfor %}
+</ul>

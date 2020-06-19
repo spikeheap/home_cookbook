@@ -8,8 +8,8 @@ layout: default
   {% endif %}
 
   <h1>{{ page.name }}</h1>
-  Based on this <a href="{{ page.isBasedOn }}">original recipe</a> by {{ page.author.name }}
-  <span>{{ page.recipeCategory }} – {{ page.recipeCuisine }}</span>
+  <p>Based on this <a href="{{ page.isBasedOn }}">original recipe</a> by {{ page.author.name }}</p>
+  <p>{{ page.recipeCategory }} – {{ page.recipeCuisine }}</p>
   <p>{{ page.description }}</p>
 
   <ul>
