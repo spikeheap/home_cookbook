@@ -1,4 +1,5 @@
 ---
+categories: [Bread]
 name: Focaccia
 description: "This focaccia recipe is easy to make and easy to adapt with whatever
   herbs you have in the house. \r\n"
