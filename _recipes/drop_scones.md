@@ -55,4 +55,5 @@ recipeInstructions:
 - Serve at once with butter, maple syrup or honey, yoghurt, blueberries, raspberries
   or other seasonal fruits.
 type: Recipe
+categories: Breakfast
 ---

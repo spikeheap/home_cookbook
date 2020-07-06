@@ -1,0 +1,17 @@
+---
+layout: page
+---
+
+{% unless page.content == '' %}
+  {{ content }}
+{% endunless %}
+
+<ul>
+  {% assign recipes_in_category = site.recipes | where_exp:"recipe",
+"recipe.categories contains page.title" %}
+  {% for recipe in recipes_in_category %}
+    <li>
+      <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+    </li>
+  {% endfor %}
+</ul>

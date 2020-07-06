@@ -1,0 +1,6 @@
+---
+layout: category
+title: Mexican
+---
+🇲🇽
+

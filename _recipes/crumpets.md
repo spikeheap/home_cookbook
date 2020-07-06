@@ -1,5 +1,6 @@
 ---
-name: Crumpets
+name: "Crumpets"
+categories: Bread
 description: "Turn teatime into an event by making your own crumpets on the hob.\r\n\r\nEquipment:
   For this recipe you will need metal crumpet rings or chefs' rings.\r\n"
 keywords:
@@ -52,3 +53,14 @@ recipeInstructions:
 - 'Serve immediately or leave to cool and then toast before eating with plenty of
   butter. '
 type: Recipe
+categories: Breakfast, Baking
+---
+
+{% if post %}
+    {% assign categories = post.categories %}
+  {% else %}
+    {% assign categories = page.categories %}
+  {% endif %}
+  {% for category in categories %}
+  <a href="{{site.baseurl}}/categories/{{category|slugize}}">{{category}}</a>
+  {% endfor %}
