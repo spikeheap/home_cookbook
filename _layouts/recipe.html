@@ -13,8 +13,8 @@ layout: index
   <p>{{ page.description }}</p>
 
   <ul>
-    <li>Prep time: {{ page.prepTime}}</li>
-    <li>Cook time: {{ page.cookTime}}</li>
+    <li>Prep time: {{ page.prepTime | remove_first: "PT" | replace: 'H', ' hours' | replace: 'M', ' minutes' }}</li>
+    <li>Cook time: {{ page.cookTime | remove_first: "PT" | replace: 'H', ' hours' | replace: 'M', ' minutes' }}</li>
     <li>Yield: {{ page.recipeYield }}</li>
   </ul>
 
@@ -29,22 +29,6 @@ layout: index
   <ul>
     {% for recipeInstructionItem in page.recipeInstructions %}
       <li>{{ recipeInstructionItem }}</li>
-    {% endfor %}
-  </ul>
-
-  <h2>Metadata</h2>
-
-  <h3>Keywords</h3>
-  <ul>
-    {% for keyword in page.keywords %}
-      <li>{{ keyword }}</li>
-    {% endfor %}
-  </ul>
-
-  <h3>Suitable for</h3>
-  <ul>
-    {% for suitableForDietItem in page.suitableForDiet %}
-      <li>{{ suitableForDietItem }}</li>
     {% endfor %}
   </ul>
 
