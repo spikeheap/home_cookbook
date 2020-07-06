@@ -24,12 +24,12 @@ recipeYield: Makes 10-12 crumpets
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 175g/6oz strong white flour
-- 175g/6oz plain flour
+- 175g strong white flour
+- 175g plain flour
 - 2 x 7g sachets instant yeast
 - 1 tsp caster sugar
-- 350ml/12fl oz warm milk
-- 150-200ml/5-7fl oz warm water
+- 350ml oz warm milk
+- 150-200ml oz warm water
 - "½ tsp bicarbonate of soda"
 - 1 tsp salt
 - sunflower oil for cooking

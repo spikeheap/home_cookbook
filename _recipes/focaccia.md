@@ -33,11 +33,11 @@ suitableForDiet:
 - http://schema.org/VeganDiet
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 500g/1lb 2oz strong white flour
+- 500g strong white flour
 - 2 tsp salt
 - 1 sachet (7g) dried easy blend yeast
 - 2 tbsp olive oil
-- 400ml/14fl oz cold water
+- 400ml cold water
 - olive oil, for drizzling
 - fine sea salt
 recipeInstructions:

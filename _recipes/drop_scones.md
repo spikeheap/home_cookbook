@@ -30,12 +30,12 @@ recipeYield: Makes 24
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 175g/6oz self-raising flour
+- 175g self-raising flour
 - 1 tsp baking powder
-- 40g/1½oz caster sugar
+- 40g caster sugar
 - 1 small orange, zest only
 - '1 free-range egg '
-- 200ml/7fl oz milk
+- 200ml oz milk
 - sunflower oil, for greasing
 - butter, maple syrup or honey
 - Greek-style yoghurt
