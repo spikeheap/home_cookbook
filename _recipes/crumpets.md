@@ -1,5 +1,5 @@
 ---
-name: Crumpets
+name: "Crumpets"
 description: "Turn teatime into an event by making your own crumpets on the hob.\r\n\r\nEquipment:
   For this recipe you will need metal crumpet rings or chefs' rings.\r\n"
 keywords:
@@ -52,3 +52,4 @@ recipeInstructions:
 - 'Serve immediately or leave to cool and then toast before eating with plenty of
   butter. '
 type: Recipe
+---
