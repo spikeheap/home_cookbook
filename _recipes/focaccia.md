@@ -1,5 +1,4 @@
 ---
-categories: [Bread]
 name: Focaccia
 description: "This focaccia recipe is easy to make and easy to adapt with whatever
   herbs you have in the house. \r\n"
@@ -57,5 +56,6 @@ recipeInstructions:
   fine sea salt then bake in the oven for 20 minutes. When cooked, drizzle with a
   little more olive oil and serve hot or warm.
 type: Recipe
+categories: [Bread]
 ---
 test
