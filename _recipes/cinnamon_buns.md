@@ -8,7 +8,7 @@ author:
   "@type": Person
   name: Richard Bertinet
 image:
-- images/cinnamon_buns-2160w.jpg
+- /images/cinnamon_buns-2160w.jpg
 prepTime: PT2H
 cookTime: PT20M
 recipeYield: 12
