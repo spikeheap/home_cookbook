@@ -8,7 +8,7 @@ author:
   "@type": Person
   name: Richard Bertinet
 image:
-- //cdn.shopify.com/s/files/1/0283/2619/9375/articles/Richard_Bertinet_cinamon_buns_1080x.jpg
+- images/cinnamon_buns-2160.jpg
 prepTime: PT2H
 cookTime: PT20M
 recipeYield: 12
