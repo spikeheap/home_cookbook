@@ -80,6 +80,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  jekyll (~> 4.1.0)
   jekyll-feed (~> 0.12)
   jekyll-theme-hydeout (~> 4.1)
   tzinfo (~> 1.2)
