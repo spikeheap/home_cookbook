@@ -17,7 +17,7 @@ author:
   "@type": Person
   name: Paul Hollywood
 image:
-- https://food-images.files.bbci.co.uk/food/recipes/crumpets_61013_16x9.jpg
+- /images/crumpets-2160w.jpg
 prepTime: PT2H
 cookTime: PT30M
 recipeYield: Makes 10-12 crumpets

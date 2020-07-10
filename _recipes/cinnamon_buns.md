@@ -14,14 +14,14 @@ cookTime: PT20M
 recipeYield: 12
 
 recipeIngredient:
-# For The Dough;
-- 200g Full Fat Milk
-- 2 Medium Eggs
-- 600g Strong White Bread Flour
-- 25g Fresh Yeast
-- 50g Caster Sugar
-- 10g Salt
-- 200g Unsalted Butter
+- For The Dough:
+    - 200g Full Fat Milk
+    - 2 Medium Eggs
+    - 600g Strong White Bread Flour
+    - 25g Fresh Yeast
+    - 50g Caster Sugar
+    - 10g Salt
+    - 200g Unsalted Butter
 
 #For The Filling;
 - 150g Unsalted Butter

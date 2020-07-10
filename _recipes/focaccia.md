@@ -24,7 +24,7 @@ author:
   "@type": Person
   name: Paul Hollywood
 image:
-- https://food-images.files.bbci.co.uk/food/recipes/focaccia_08389_16x9.jpg
+- /images/focaccia-2160w.jpg.jpg
 prepTime: PT2H
 cookTime: PT1H
 recipeYield: Makes 1 loaf

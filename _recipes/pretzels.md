@@ -20,7 +20,7 @@ author:
   "@type": Person
   name: Paul Hollywood
 image:
-- https://food-images.files.bbci.co.uk/food/recipes/pretzels_71296_16x9.jpg
+- /images/pretzels-2160w.jpg.jpg
 prepTime: PT2H
 cookTime: PT1H
 recipeYield: Makes 12
