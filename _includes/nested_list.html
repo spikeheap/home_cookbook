@@ -1,0 +1,16 @@
+{% assign heading_level = include.heading_level | default: 2 %}
+{% assign nested_heading_level = heading_level | plus: 1 %}
+<h{{heading_level}}>{{ include.title }}</h{{heading_level}}>
+<ul>
+  {% for item in include.list %}
+    {% if item.first %}
+      {% comment %} item is actually a list of more items {% endcomment %}
+      {% include nested_list.html title=item.first list=item.last heading_level=nested_heading_level %}
+    {% else %}
+      {% comment %} item is a single... item {% endcomment %}
+      <li>{{ item }}</li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% comment %} there's no encapsulation here, so we need to reset the nested heading level, otherwise it bleeds into the parent caller. We should probably just not use recursion... {% endcomment %}
+{% assign nested_heading_level = nested_heading_level | minus: 1 %}

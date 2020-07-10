@@ -18,19 +18,9 @@ layout: index
     <li>Yield: {{ page.recipeYield }}</li>
   </ul>
 
-  <h2>Ingredients</h2>
-  <ul>
-    {% for recipeIngredientItem in page.recipeIngredient %}
-      <li>{{ recipeIngredientItem }}</li>
-    {% endfor %}
-  </ul>
+  {% include nested_list.html title="Ingredients" list=page.recipeIngredient %}
 
-  <h2>Steps</h2>
-  <ul>
-    {% for recipeInstructionItem in page.recipeInstructions %}
-      <li>{{ recipeInstructionItem }}</li>
-    {% endfor %}
-  </ul>
+  {% include nested_list.html title="Steps" list=page.recipeInstructions %}
 
   {{ content }}
 </article>
