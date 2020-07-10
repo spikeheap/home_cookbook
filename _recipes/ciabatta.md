@@ -1,4 +1,4 @@
---- !ruby/object:Recipe
+---
 name: Paul Hollywood's ciabatta
 description: "Ciabatta dough is extremely wet, so difficult to make by hand, but if
   you have a freestanding mixer it's simple. Don't be tempted to add more flour or
@@ -57,3 +57,4 @@ recipeInstructions:
   the loaves are golden-brown and sound hollow when tapped on the base. Leave to cool
   completely on a wire rack before serving.
 type: Recipe
+---
