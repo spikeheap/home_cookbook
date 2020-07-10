@@ -14,7 +14,7 @@ cookTime: PT20M
 recipeYield: 12
 
 recipeIngredient:
-- For The Dough:
+  "For The Dough":
     - 200g Full Fat Milk
     - 2 Medium Eggs
     - 600g Strong White Bread Flour
@@ -22,29 +22,36 @@ recipeIngredient:
     - 50g Caster Sugar
     - 10g Salt
     - 200g Unsalted Butter
+  "For The Filling":
+    - 150g Unsalted Butter
+    - 250g Soft Brown Sugar
+    - 2 Tsp Cinnamon
 
-#For The Filling;
-- 150g Unsalted Butter
-- 250g Soft Brown Sugar
-- 2 Tsp Cinnamon
+  For The Egg Glaze:
+    - 1 Egg
+    - 2 Tbsp Full Fat Milk
 
-#For The Egg Glaze;
-- 1 Egg
-- 2 Tbsp Full Fat Milk
-
-# For The Sugar Glaze;
-- 100g Caster Sugar
-- 100g Water
+  For The Sugar Glaze:
+    - 100g Caster Sugar
+    - 100g Water
 
 recipeInstructions:
-- Start by making the dough. Put the milk and eggs into the bowl of a food mixer then add the flour. Break in the yeast to one side of the bowl, then add the salt and sugar and butter to the other side
-- Mix on a slow speed for 4 minutes then increase the speed to medium and mix for a further 10-12 minutes until the dough comes away cleanly from the side of the bowl.
-- Form the dough into a ball and pop into a clean floured bowl. Cover and leave for around 45 minutes or until double in size.
-- Lightly flour a work surface and roll the dough into a rectangle roughly the size of an A3 sheet of paper.
-- For the filling, beat the butter and sugar together until pale and stir in the cinnamon. Spread the filling over the top of the dough.
-- With the long side facing you, fold in half lengthways to enclose the filling and slice it widthways into 12 strips each roughly 3.5cm across. Next, use a sharp knife to cut twice down the length of each strip to make three strands. Plait the three strands together and repeat to make 12 individual plaits.
-- Take each plait and roll it up along its length to create a knot. Grease a 12 cup muffin tray and pop the knots into the tray. Cover and allow to prove for 1 hour.
-- Aim to have your wood fired oven at around 200°C with little to no flame. Brush the knots with the egg glaze and pop into the oven to bake for between 15-20 minutes until golden.
-- Meanwhile, make the sugar glaze. Put the sugar and water in a pan and bring to the boil, turn down to a simmer until you have a light syrup.
-- Brush the baked knots with the syrup while still hot and leave to cool before devouring.
+- Add the milk and eggs to the food mixer bowl.
+- Add the flour, salt, sugar and butter over the wet ingredients, and mix gently to get the salt away from the surface.
+- Add the yeast
+- Mix on slow for 5 minutes (until combined)
+- Increase the mixer speed for 10 minutes until silky and the dough comes away cleanly.
+- Form dough into a ball, cover and leave for 45 minutes (double in size).
+- Tip onto a lightly floured worktop, and roll out to an A3-sized rectangle.
+- "Make the filling: beat the butter and sugar until pale. Stir in the cinnamon."
+- Spread the filling over the dough.
+- Grease a 12-cup muffin tray
+- Fold in half lengthways. Then slice widthways into 12 long-thin strips each ~35mm wide.
+- Take each strip and make 2 addition cuts 80% of the length of the strip to allow plaiting.
+- Plait a strip, then roll it up along the length to create a knot and place it in the greased muffin tray.
+- Cover and leave to prove for 1 hour.
+- Preheat the oven to 200°C.
+- Brush the knots with egg glaze and bake for 15-20 minutes until golden.
+- Meanwhile, make the sugar glaze. Combine the sugar and water in a saucepan and bring to the boil. Once boiling, reduce the heat and simmer until you have a light syrup.
+- Brush the baked knots with the syrup while still hot and leave to cool.
 ---

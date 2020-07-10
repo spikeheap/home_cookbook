@@ -20,7 +20,7 @@ author:
   "@type": Person
   name: Paul Hollywood
 image:
-- /images/pretzels-2160w.jpg.jpg
+- /images/pretzels-2160w.jpg
 prepTime: PT2H
 cookTime: PT1H
 recipeYield: Makes 12
