@@ -1,5 +1,6 @@
 ---
 name: Slow pizza dough
+categories: [Bread]
 description: 
 recipeCuisine: Italian
 isBasedOn: https://www.telegraph.co.uk/foodanddrink/recipes/10680502/Paul-Hollywoods-perfect-pizza-base-recipe.html
