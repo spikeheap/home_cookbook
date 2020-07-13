@@ -3,7 +3,7 @@ name: Sourdough
 categories: [Bread]
 description: 
 isBasedOn: https://www.bbcgoodfood.com/recipes/sourdough
-prepTime: PT2H
+prepTime: PT9H
 cookTime: PT40M
 recipeYield: 1x 900g loaf
 image:
