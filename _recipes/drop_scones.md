@@ -1,5 +1,6 @@
 ---
 name: Mary Berry's drop scones
+categories: Breakfast
 description: "Whether you call them drop scones or Scotch pancakes, this classic recipe
   makes a perfect breakfast, brunch or Pancake Day dish. \r\n"
 keywords:
@@ -54,6 +55,4 @@ recipeInstructions:
   soft. Continue cooking the batter in the same way. '
 - Serve at once with butter, maple syrup or honey, yoghurt, blueberries, raspberries
   or other seasonal fruits.
-type: Recipe
-categories: Breakfast
 ---

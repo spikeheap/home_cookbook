@@ -1,5 +1,6 @@
 ---
 name: Pretzels
+categories: [Bread]
 description: The technique for shaping pretzels is tricky, but once you’ve got the
   hang of it you’ll return to this recipe time and again. There’s enough dough for
   six sweet orange and poppy seed pretzels and six savoury salted pretzels.
@@ -88,6 +89,4 @@ recipeInstructions:
   to cook the syrup until reduced in volume and sticky. Pass through a fine sieve.
 - Place the baked pretzels on a wire cooling rack, brush the sweet pretzels with the
   syrup glaze and sprinkle over the candied zest.
-type: Recipe
-categories: [Bread]
 ---

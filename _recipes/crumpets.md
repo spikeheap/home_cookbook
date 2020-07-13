@@ -1,15 +1,7 @@
 ---
 name: "Crumpets"
-categories: Bread
-description: "Turn teatime into an event by making your own crumpets on the hob.\r\n\r\nEquipment:
-  For this recipe you will need metal crumpet rings or chefs' rings.\r\n"
-keywords:
-- england's finest
-- strong white flour
-- nut free
-- pregnancy friendly
-- vegetarian
-- The Great Comic Relief Bake Off
+categories: [Bread, Breakfast, Baking]
+description: "Turn teatime into an event by making your own crumpets on the hob."
 recipeCategory: Cakes and baking
 recipeCuisine: British
 isBasedOn: https://www.bbc.co.uk/food/recipes/crumpets_61013
@@ -52,6 +44,4 @@ recipeInstructions:
   and cook for a further three minutes. '
 - 'Serve immediately or leave to cool and then toast before eating with plenty of
   butter. '
-type: Recipe
-categories: Breakfast, Baking
 ---

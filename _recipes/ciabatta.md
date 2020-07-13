@@ -57,5 +57,4 @@ recipeInstructions:
 - Preheat the oven to 220C/425F/Gas 8 (200C fan) and bake for 25 minutes, or until
   the loaves are golden-brown and sound hollow when tapped on the base. Leave to cool
   completely on a wire rack before serving.
-type: Recipe
 ---

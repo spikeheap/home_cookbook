@@ -1,6 +1,5 @@
 ---
 name: Cinnamon buns
-type: Recipe
 categories: [Breakfast, Baking, Bread]
 description: These are amazingly soft and sweet. They keep well for a few days, and freeze perfectly too.
 isBasedOn: https://www.gozney.com/blogs/recipes/cinnamon-buns-recipe

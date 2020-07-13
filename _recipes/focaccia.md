@@ -1,22 +1,8 @@
 ---
 name: Focaccia
-description: "This focaccia recipe is easy to make and easy to adapt with whatever
-  herbs you have in the house. \r\n"
-keywords:
-- best bread
-- how to make bread
-- nut-free snack
-- snow day
-- picnic
-- focaccia
-- strong white flour
-- dairy free
-- egg free
-- nut free
-- pregnancy friendly
-- vegan
-- vegetarian
-- The Great British Bake Off
+categories: [Bread]
+description: "This focaccia recipe is easy to make and easy to adapt with whatever herbs you have in the house."
+
 recipeCategory: Cakes and baking
 recipeCuisine: Italian
 isBasedOn: https://www.bbc.co.uk/food/recipes/focaccia_08389
@@ -55,7 +41,5 @@ recipeInstructions:
 - Preheat the oven to 220C/200C Fan/Gas 7. Drizzle the loaves with oil, sprinkle with
   fine sea salt then bake in the oven for 20 minutes. When cooked, drizzle with a
   little more olive oil and serve hot or warm.
-type: Recipe
-categories: [Bread]
+
 ---
-test

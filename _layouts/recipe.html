@@ -8,7 +8,21 @@ layout: index
   {% endif %}
 
   <h1>{{ page.name }}</h1>
-  <p>Based on this <a href="{{ page.isBasedOn }}">recipe</a> by {{ page.author.name }}.</p>
+
+  {% if page.isBasedOn or page.author.name %}
+    <p>
+      Based on 
+      {% if page.isBasedOn %}
+         this <a href="{{ page.isBasedOn }}">recipe</a>
+      {% else %}
+        a recipe
+      {% endif %}
+      
+      {% if page.author %}
+         by {{ page.author.name }}.
+      {% endif %}
+    </p>
+  {% endif %}
 
   <p>{{ page.description }}</p>
 
