@@ -26,14 +26,14 @@ recipeIngredient:
 - 440ml cold water
 
 recipeInstructions:
-- Add the flour, salt and yeast with 330ml cold water to a mixer bowl. Mix with a dough hook at slow speed until it starts to come together.
-- Turn the mixer up to medium. Slowly add the remaining 110ml water. **It will be wet!**. You might not need all the additional water, so stop if it's nearing a batter. Mix for 8-10 minutes, until the dough is smooth and stretchy.
-- Lightly oil a 3 litre square plastic container with a lid and tip the dough in. Leave to prove for 1½ to 2 hours, until at least doubled (maybe trebled). From Paul Hollywood: it's important the dough proves slowly, otherwise it will collapse and your loaves will be flat.
-- Dust two large baking trays and the work surface with flour and semolina.
-- Tip out the dough trying to retain a rough square shape. Keep as much air in the dough as possible. Sprinkle semonlina over the top of the dough.
-- Cut the dough lengthways into 4 pieces. Stretch each loaf lengthways, and place on the baking tray.
-- Leave to rest for 30-45 minutes.
-- Preheat the oven to 220C
-- Bake for 25 minutes, when they should be golden and sound hollow.
-- Leave to cool completely.
+  - 'Add the flour, salt and yeast with 330ml cold water to a mixer bowl. Mix with a dough hook at slow speed until it starts to come together.'
+  - "Turn the mixer up to medium. Slowly add the remaining 110ml water. It will be wet!. You might not need all the additional water, so stop if it's nearing a batter. Mix for 8-10 minutes, until the dough is smooth and stretchy."
+  - Lightly oil a 3 litre square plastic container with a lid and tip the dough in. Leave to prove for 1½ to 2 hours, until at least doubled (maybe trebled). Paul Hollywood says it's important the dough proves slowly, otherwise it will collapse and your loaves will be flat.
+  - Dust two large baking trays and the work surface with flour and semolina.
+  - Tip out the dough trying to retain a rough square shape. Keep as much air in the dough as possible. Sprinkle semonlina over the top of the dough.
+  - Cut the dough lengthways into 4 pieces. Stretch each loaf lengthways, and place on the baking tray.
+  - Leave to rest for 30-45 minutes. Do NOT cover in cling-film, it will stick and be a pain to remove! If you need to cover it, try to keep the cover raised from the surface.
+  - Preheat the oven to 220C
+  - Bake for 25 minutes, when they should be golden and sound hollow.
+  - Leave to cool completely.
 ---
