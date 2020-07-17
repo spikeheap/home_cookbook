@@ -26,6 +26,7 @@ recipeIngredient:
   - 1 onion
   - 2 peppers
   - 2 tomatoes, de-seeded
+  - Lettuce, for decoration (you might intend to add it, but you never will)
   To serve:
   - 16 taco shells
   - Old El Paso extra-hot salsa
