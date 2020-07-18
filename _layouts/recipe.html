@@ -28,7 +28,9 @@ layout: index
 
   <ul>
     <li>Prep time: {{ page.prepTime | remove_first: "PT" | replace: 'H', ' hours' | replace: 'M', ' minutes' }}</li>
-    <li>Cook time: {{ page.cookTime | remove_first: "PT" | replace: 'H', ' hours' | replace: 'M', ' minutes' }}</li>
+    {% if page.cookTime %}
+      <li>Cook time: {{ page.cookTime | remove_first: "PT" | replace: 'H', ' hours' | replace: 'M', ' minutes' }}</li>
+    {% endif %}
     <li>Yield: {{ page.recipeYield }}</li>
   </ul>
 
