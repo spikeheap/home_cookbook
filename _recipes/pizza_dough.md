@@ -12,6 +12,7 @@ prepTime: PT12H
 cookTime: PT30M
 recipeYield: 2
 recipeIngredient:
+- 250g 00 flour (or strong bread flour in a pinch)
 - 160ml of water
 - 20ml of olive oil
 - 5g of fast-acting yeast
