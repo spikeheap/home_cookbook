@@ -14,23 +14,28 @@ cookTime: PT1H
 recipeYield: 6 people
 
 recipeIngredient:
-  - 3 large aubergines (400g each)
-  - 3 onions
-  - 6 cloves of garlic
-  - 1 bunch of fresh sage (30g)
+  - 3 large aubergines, halved lengthways (1.2kg total)
+  - 3 onions, peeled and quartered
+  - 6 cloves of garlic, finely sliced
+  - 1 bunch of fresh sage leaves
   - olive oil
   - 1 teaspoon dried chilli flakes
   - 1 lemon
   - 2 x 400g tins of quality plum tomatoes
-  - 80g mature Cheddar cheese
-  - 80g Parmesan cheese
-  - 300g fresh lasagne sheets
+  - 80g mature Cheddar cheese, grated
+  - 80g Parmesan cheese, grated
+  - 300g fresh lasagne sheets, torn
   - 50g blanched almonds
 
 recipeInstructions:
-  - Place a large shallow casserole pan on a medium heat with 250ml of water. Halve the aubergines lengthways and place in the pan. Peel, quarter and add the onions, then cover with a lid and cook for 20 minutes. Meanwhile, peel and finely slice the garlic, and pick the sage leaves. Preheat the oven to 200ºC/400ºF/gas 6.
-  - Remove the lid, and once most of the liquid has cooked away, make a well in the middle. Add 3 tablespoons of oil, the garlic, chilli flakes and most of the sage leaves, then finely grate in the lemon zest. Once golden, scrunch in the tomatoes, pour in 2 tins' worth of water, and simmer for 20 minutes, stirring occasionally.
-  - Remove the pan from the heat, grate in the cheeses, then season to absolute perfection with sea salt and black pepper. Tear in the pasta sheets and mix up really well to coat and separate, then pull some of the sheets to the top to create a top layer. Bash the almonds until fine and rub the remaining sage leaves with oil, then sprinkle on top. Use the back of a spoon to create some dips and wells, and bake for 25 minutes, or until golden and bubbling.
+  - Add 250ml of water to a large shallow casserole pan, and place over a medium heat.
+  - Add the aubergine and onions, cover with a lid and cook for 20 minutes.
+  - Preheat the oven to 200ºC.
+  - Remove the lid after 20 minutes and let most of the liquid cook away.
+  - Add 3tbps oil, garlic, chilli flakes and 3/4 of the sage leaves. Finely grate the lemon zest over the top.
+  - Add tinned tomatoes and 2 tins of water. Simmer for 20 minutes.
+  - Remove the pan from the heat, add the cheese, and pasta, and season. Pull some of the pasta sheets toward the top to crisp up.
+  - Bake for 25 minutes.
 ---
 
 
