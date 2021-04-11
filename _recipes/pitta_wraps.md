@@ -2,9 +2,9 @@
 name: Pitta Wraps
 categories: [MainMeal]
 description:
-isBasedOn:https://www.bbcgoodfood.com/recipes/chicken-gyros
+isBasedOn: https://www.bbcgoodfood.com/recipes/chicken-gyros
 
-recipeCuisine: Korean/Japanese
+recipeCuisine: Middle Eastern
 
 prepTime: PT2H
 cookTime: PT10M
