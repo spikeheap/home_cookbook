@@ -1,6 +1,7 @@
 ---
 name: Pitta Wraps
 categories: [MainMeal]
+description:
 isBasedOn:https://www.bbcgoodfood.com/recipes/chicken-gyros
 
 recipeCuisine: Korean/Japanese
@@ -23,5 +24,5 @@ recipeInstructions:
   - Roll each portion into a circle around 2mm thick on a floured surface. The shape doesn't have to be exact so long as it can hold filling.
   - If you have the space, let the rolled out pittas rest for 10 minutes.
   - Heat a pan on high heat and cook each pitta about 3 minutes per side or until bublly and with some dark brown spots.
-  - Put the cooked pitta on a plate and cover with a teatowel to keep them warm.
+  - Put the cooked pittas on a plate and cover with a teatowel to keep them warm.
 ---
