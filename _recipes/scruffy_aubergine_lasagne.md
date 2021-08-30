@@ -1,6 +1,6 @@
 ---
 name: Scruffy aubergine lasagne
-categories: [MainMeal, Pasta]
+categories: [Main, Pasta]
 
 isBasedOn: https://www.jamieoliver.com/recipes/pasta-recipes/scruffy-aubergine-lasagne/
 author:

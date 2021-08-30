@@ -1,6 +1,6 @@
 ---
 name: Brooks' Tacos
-categories: [Mexican, MainMeal]
+categories: [Mexican, Main]
 description: Definitely not traditionally Mexican, but this is what we grew up with and brings back memories of extra-hot salsa at my grandparents.
 
 recipeCuisine: Mexican

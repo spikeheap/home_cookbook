@@ -1,6 +1,6 @@
 ---
 name: Fish pie
-categories: [Winter,Pie, MainMeal]
+categories: [Winter,Pie, Main]
 description: From Jamie's Ministry of Food
 keywords:
 - fish

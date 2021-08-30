@@ -1,6 +1,6 @@
 ---
 name: Saag paneer
-categories: [Indian, MainMeal]
+categories: [Indian, Main]
 description: 
 
 prepTime: PT10M
