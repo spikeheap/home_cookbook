@@ -46,6 +46,12 @@ We like bread 🤪
 
 The `category` layout will append a list of the recipes with that category below the content of the above file.
 
+### Resizing an image
+
+```
+magick cinnamon_buns.jpeg -resize 2160x2160 -sampling-factor 4:2:0 -strip -quality 85 cinnamon_buns-2160w.jpg
+```
+
 ## Credit
 
 - Uses the https://github.com/fongandrew/hydeout theme

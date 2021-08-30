@@ -1,6 +1,6 @@
 ---
 name: Slow-cooked bean ragout
-categories: [Mexican]
+categories: [Mexican,MainMeal]
 description: From the Smitten Kitchen Cookbook (p136). We often make the bean ragout to go with tacos. Check the cookbook for pairing with garlicky toast, cumin cream, lime-pickled red onions and avocado 🤤.
 
 author:
