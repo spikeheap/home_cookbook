@@ -1,10 +1,9 @@
 ---
 name: Superfast Huevos Rancheros
-categories: [Mexican, Breakfast]
-meal: [Breakfast, Lunch]
 description: Don't have the time for an hour of simmering? This can go from idea to belly in 30 minutes
 
 recipeCuisine: Mexican
+meal: [Breakfast, Lunch]
 
 prepTime: PT10H
 cookTime: PT20M

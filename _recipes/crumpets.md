@@ -1,9 +1,11 @@
 ---
 name: "Crumpets"
-categories: [Bread, Breakfast, Baking]
+categories: [Bread, Baking]
 description: "Turn teatime into an event by making your own crumpets on the hob."
 recipeCategory: Cakes and baking
 recipeCuisine: British
+meal: Breakfast
+
 isBasedOn: https://www.bbc.co.uk/food/recipes/crumpets_61013
 author:
   "@type": Person

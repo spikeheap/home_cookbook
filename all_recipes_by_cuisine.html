@@ -1,0 +1,31 @@
+---
+title: All recipes by cuisine
+layout: index
+sidebar_link: true
+---
+
+{% assign cuisines = site.recipes | map: "recipeCuisine" | uniq | compact | sort %}
+  {% for cuisine in cuisines %}
+  <h2>{{ cuisine }}</h2>
+
+  <ul>
+    {% assign recipes_in_category = site.recipes | where:"recipeCuisine",
+  cuisine %}
+    {% for recipe in recipes_in_category %}
+      <li>
+        <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+<h2>Misc, or just unspecified...</h2>
+<ul>
+  {% assign recipes_in_category = site.recipes | where:"recipeCuisine",
+nil %}
+  {% for recipe in recipes_in_category %}
+    <li>
+      <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+    </li>
+  {% endfor %}
+</ul>

@@ -1,9 +1,10 @@
 ---
 name: PlanD Sandwich
-categories: [Lunch]
-description: Open-faced sandwich inspired by the PlanD Youtube channel
 
-recipeCuisine:
+meal: Lunch
+recipeCuisine: Korean
+
+description: Open-faced sandwich inspired by the PlanD Youtube channel
 
 prepTime: PT10M
 cookTime: PT10M

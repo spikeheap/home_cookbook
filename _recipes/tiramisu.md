@@ -1,6 +1,6 @@
 ---
 name: Tiramisu
-categories: [Dessert, Sweet]
+meal: Sweet
 recipeCuisine: Italian
 isBasedOn: https://www.alsothecrumbsplease.com/authentic-italian-tiramisu/#ingredients
 

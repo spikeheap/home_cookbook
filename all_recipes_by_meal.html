@@ -1,0 +1,31 @@
+---
+title: All recipes by meal
+layout: index
+sidebar_link: true
+---
+
+{% assign meals = site.recipes | map: "meal" | uniq | compact | sort %}
+  {% for meal in meals %}
+  <h2>{{ meal }}</h2>
+
+  <ul>
+    {% assign recipes_in_category = site.recipes | where:"meal",
+  meal %}
+    {% for recipe in recipes_in_category %}
+      <li>
+        <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+<h2>Misc, or just unspecified...</h2>
+<ul>
+  {% assign recipes_in_category = site.recipes | where:"meal",
+nil %}
+  {% for recipe in recipes_in_category %}
+    <li>
+      <a href="{{ recipe.url }}">{{ recipe.name }}</a>
+    </li>
+  {% endfor %}
+</ul>

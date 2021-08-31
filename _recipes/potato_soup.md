@@ -1,7 +1,8 @@
 ---
 name: Potato soup
 description: "This is really Nivi's Potaty Soop."
-categories: [Soup, Vegan, Quick, Easy, Lunch] 
+categories: [Soup, Vegan, Quick, Easy] 
+meal: Lunch
 prepTime: PT5M
 cookTime: PT20M
 recipeYield: Serves 2

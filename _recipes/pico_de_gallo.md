@@ -1,9 +1,9 @@
 ---
 name: Pico de gallo
-categories: [Mexican]
 description: 
 
 recipeCuisine: Mexican
+meal: Sides
 
 prepTime: PT5M
 recipeYield: 1 bowl

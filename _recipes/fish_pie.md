@@ -1,6 +1,8 @@
 ---
 name: Fish pie
-categories: [Winter,Pie, Main]
+categories: [Winter,Pie]
+meal: Main
+recipeCuisine: British
 description: From Jamie's Ministry of Food
 keywords:
 - fish

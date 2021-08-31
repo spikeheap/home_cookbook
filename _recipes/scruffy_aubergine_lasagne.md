@@ -1,12 +1,13 @@
 ---
 name: Scruffy aubergine lasagne
-categories: [Main, Pasta]
+categories: [Pasta]
 
 isBasedOn: https://www.jamieoliver.com/recipes/pasta-recipes/scruffy-aubergine-lasagne/
 author:
   "@type": Person
   name: Jamie Oliver
 
+meal: Main
 recipeCuisine: Italian
 
 prepTime: PT30M

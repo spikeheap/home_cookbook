@@ -3,6 +3,7 @@ name: Pasta dough
 categories: [Pasta]
 description: 
 
+meal: Main
 recipeCuisine: Italian
 
 prepTime: PT1H

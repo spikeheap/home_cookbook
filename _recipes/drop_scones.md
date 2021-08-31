@@ -1,6 +1,7 @@
 ---
 name: Mary Berry's drop scones
-categories: Breakfast
+meal: Breakfast
+recipeCuisine: British
 description: "Whether you call them drop scones or Scotch pancakes, this classic recipe
   makes a perfect breakfast, brunch or Pancake Day dish. \r\n"
 keywords:

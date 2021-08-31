@@ -1,6 +1,7 @@
 ---
 name: Ciabatta
 categories: [Bread]
+recipeCuisine: Italian
 description: "Ciabatta dough is extremely wet, so difficult to make by hand, but if
   you have a freestanding mixer it's simple. Don't be tempted to add more flour or
   rush the prove as it will spoil the the texture of the finished loaf.\r\n\r\nEquipment

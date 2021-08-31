@@ -1,8 +1,10 @@
 ---
 name: Nadiyas dal
 description: "This dal needs a little more kick than the original recipe, but is great on its own with rice, or as part of a bigger feast"
-categories: [Indian, Vegan, Slow, Easy]
+categories: [Vegan, Slow, Easy]
 recipeCuisine: Indian 
+meal: Main
+
 isBasedOn: https://www.bbc.co.uk/food/recipes/nadiyas_dhal_45569
 author:
   "@type": Person

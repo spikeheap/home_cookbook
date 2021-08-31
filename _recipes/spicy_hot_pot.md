@@ -1,6 +1,7 @@
 ---
 name: Spicy Hot Pot
-categories: [Main, Lunch]
+meal: [Main, Lunch]
+recipeCuisine: Korean
 description: Warming and satisfying sharing hot pot
 
 recipeCuisine: Korean/Japanese

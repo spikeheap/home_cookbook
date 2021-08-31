@@ -1,6 +1,7 @@
 ---
 name: Pearl Cous Cous and Feta salad
-categories: [Lunch]
+meal: Lunch
+recipeCuisine: Greek
 description: Light and filling lunch salad 
 
 recipeCuisine:

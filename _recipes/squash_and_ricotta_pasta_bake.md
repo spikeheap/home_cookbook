@@ -1,6 +1,8 @@
 ---
 name: Butternut squash and ricotta pasta bake
-categories: [Main, Pasta]
+categories: [Pasta]
+meal: Main
+recipeCuisine: Italian
 
 isBasedOn: https://www.jamieoliver.com/recipes/pasta-recipes/squash-and-ricotta-pasta-bake/
 author:
