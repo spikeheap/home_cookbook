@@ -10,7 +10,7 @@ author:
   name: Richard Bertinet
 image:
 - /images/cinnamon_buns-2160w.jpg
-prepTime: PT2H
+prepTime: PT3H
 cookTime: PT20M
 recipeYield: 12
 
@@ -24,9 +24,9 @@ recipeIngredient:
     - 10g Salt
     - 200g Unsalted Butter
   "For The Filling":
-    - 150g Unsalted Butter
-    - 250g Soft Brown Sugar
-    - 2 Tsp Cinnamon
+    - 100g Unsalted Butter
+    - 150g Soft Brown Sugar
+    - 1.5 Tsp Cinnamon
 
   For The Egg Glaze:
     - 1 Egg
