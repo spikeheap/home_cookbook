@@ -6,6 +6,8 @@ keywords:
 - cake
 - swiss roll
 recipeCategory: Cakes and baking
+recipeCuisine: Bulgarian
+meal: Sweet
 author:
   "@type": Person
   name: Granny Bo
