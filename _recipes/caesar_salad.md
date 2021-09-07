@@ -1,4 +1,4 @@
---- !ruby/object:Recipe
+---
 name: Caesar salad
 
 recipeCuisine: American

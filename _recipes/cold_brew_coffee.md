@@ -1,7 +1,7 @@
 ---
 name: Cold brew coffee
 description: Just written down so we remember the ratios
-category: drinks
+meal: Drinks
 
 # recipeCuisine: 
 # meal: 
