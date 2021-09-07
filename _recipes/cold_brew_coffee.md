@@ -10,6 +10,9 @@ prepTime: PT10M
 cookTime: PT8H
 recipeYield: 1 litre
 
+image:
+- /images/cold_brew_coffee.jpg
+
 recipeIngredient:
 - 70g medium-grind coffee
 - 1l cold water
