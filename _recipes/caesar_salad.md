@@ -19,10 +19,10 @@ recipeIngredient:
   - 1 romaine lettuce, sliced
   - 2 chicken breasts
   Dressing:
-  - 6-12 tbsp mayonnaise (there's a recipe for that)
+  - 6-12 tbsp (approx 150ml) [mayonnaise](mayonnaise.html) 
   - 2 tbsp grated Parmesan cheese
   - 1/2 garlic clove, crushed
-  - 1 or 2 anchovies
+  - 3-4 anchovies, crushed
   - a few drops of Worcestershire sauce
 
 recipeInstructions:
@@ -34,4 +34,7 @@ recipeInstructions:
 - Beat the dressing ingredients together, and loosen with a tablespoon of water.
 - Toss everything together and serve
 ---
+Halve this [mayonnaise recipe](mayonnaise.html).
+
 If you don't have stale bread, just shove the cubes in the oven on 150℃ for a bit to dry them out.
+

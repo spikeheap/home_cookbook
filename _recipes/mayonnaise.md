@@ -12,12 +12,11 @@ prepTime: PT10M
 recipeYield: 300ml
 
 recipeIngredient:
-- 250ml grapeseed oil
-- 50ml extra-virgin olive oil (or make up with grapeseed oil)
+- 150ml sunflower/vegetable oil 
 - 1 egg
 - 1 egg yolk
 - 1tbsp dijon mustard
-- 3tbsp white wine vinegar
+- 2tbsp white wine vinegar
 
 recipeInstructions:
 - Bring the eggs to room temperature
@@ -27,3 +26,5 @@ recipeInstructions:
 - Season and mix in vinegar
 ---
 Keep the food processor running the whole time!
+
+Substitute in a little olive oil for some of that peppery flavour.
