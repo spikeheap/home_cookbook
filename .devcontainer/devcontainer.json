@@ -20,7 +20,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "bundle install",
-	"postStartCommand": "nohup bash -c 'bundle exec jekyll serve --livereload'",
+	"postStartCommand": "bundle exec jekyll serve --livereload",
 
 	// Replace when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
