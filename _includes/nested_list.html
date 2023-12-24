@@ -8,7 +8,7 @@
       {% include nested_list.html title=item.first list=item.last heading_level=nested_heading_level %}
     {% else %}
       {% comment %} item is a single... item {% endcomment %}
-      <li>{{ item | markdownify }}</li>
+      <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
     {% endif %}
   {% endfor %}
 </ul>
