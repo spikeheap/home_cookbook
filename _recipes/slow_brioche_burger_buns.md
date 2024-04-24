@@ -4,6 +4,9 @@ description: The best
 
 categories: [Bread, Baking]
 
+meal: Main
+cuisine: General
+
 isBasedOn: https://www.sainsburysmagazine.co.uk/recipes/mains/brioche-burger-buns
 
 prepTime: PT20M
@@ -28,3 +31,4 @@ recipeInstructions:
   - Put them on baking trays, 6 to a tray, cover with a damp tea towel and let rise for an hour.
   - Pre-heat the oven to 180C fan
   - Bake for 25 minutes or until they sound hollow when patted on the bottom.
+---
