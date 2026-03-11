@@ -19,7 +19,7 @@ keywords:
 - vegetarian
 - Classic Mary Berry
 recipeCategory: Cakes and baking
-recipeCuisine: British
+
 isBasedOn: https://www.bbc.co.uk/food/recipes/drop_scones_38257
 author:
   "@type": Person

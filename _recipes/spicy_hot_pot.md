@@ -4,7 +4,6 @@ meal: [Main, Lunch]
 recipeCuisine: Korean
 description: Warming and satisfying sharing hot pot
 
-recipeCuisine: Korean/Japanese
 
 prepTime: PT20M
 cookTime: PT20M

@@ -8,13 +8,9 @@ isBasedOn: https://www.jamieoliver.com/recipes/pasta-recipes/squash-and-ricotta-
 author:
   "@type": Person
   name: Jamie Oliver
-
-recipeCuisine: Italian
-
 prepTime: PT2H
 cookTime: PT30M
 recipeYield: 4 people
-
 recipeIngredient:
   - 1 butternut squash
   - 4 cloves of garlic, finely sliced

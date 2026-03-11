@@ -9,7 +9,7 @@ description: "Ciabatta dough is extremely wet, so difficult to make by hand, but
   hook attachment and a 3 litre/5¼pint square plastic container with a lid."
 
 recipeCategory: Cakes and baking
-recipeCuisine: Italian
+
 isBasedOn: https://www.bbc.co.uk/food/recipes/easy_ciabatta_98431
 author:
   "@type": Person
