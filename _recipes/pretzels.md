@@ -1,6 +1,9 @@
 ---
 name: Pretzels
-categories: [Bread]
+cuisine: German
+meal: Snack
+effort: weekend
+tags: [bread, baking]
 description: The technique for shaping pretzels is tricky, but once you’ve got the
   hang of it you’ll return to this recipe time and again. There’s enough dough for
   six sweet orange and poppy seed pretzels and six savoury salted pretzels.
@@ -14,8 +17,6 @@ keywords:
 - pregnancy friendly
 - vegetarian
 - The Great British Bake Off
-recipeCategory: Cakes and baking
-recipeCuisine: 
 isBasedOn: https://www.bbc.co.uk/food/recipes/pretzels_71296
 author:
   "@type": Person

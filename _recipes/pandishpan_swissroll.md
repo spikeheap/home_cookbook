@@ -1,13 +1,13 @@
 ---
 name: Pandishpan (Swiss Roll)
-categories: [Baking, GrandmaBo]
+cuisine: Bulgarian
+meal: Sweet
+effort: weekend
+tags: [baking, grandma-bo]
 description: 
 keywords:
 - cake
 - swiss roll
-recipeCategory: Cakes and baking
-recipeCuisine: Bulgarian
-meal: Sweet
 author:
   "@type": Person
   name: Granny Bo

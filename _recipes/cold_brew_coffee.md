@@ -1,11 +1,10 @@
 ---
 name: Cold brew coffee
+cuisine: American
+meal: Drink
+effort: weeknight
+tags: [coffee]
 description: Just written down so we remember the ratios
-meal: Drinks
-
-# recipeCuisine: 
-# meal: 
-
 prepTime: PT10M
 cookTime: PT8H
 recipeYield: 1 litre

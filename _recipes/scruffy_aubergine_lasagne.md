@@ -1,14 +1,13 @@
 ---
 name: Scruffy aubergine lasagne
-categories: [Pasta]
-
+cuisine: Italian
+meal: Main
+effort: weekend
+tags: [pasta, vegetarian]
 isBasedOn: https://www.jamieoliver.com/recipes/pasta-recipes/scruffy-aubergine-lasagne/
 author:
   "@type": Person
   name: Jamie Oliver
-
-meal: Main
-recipeCuisine: Italian
 
 prepTime: PT30M
 cookTime: PT1H
@@ -38,6 +37,3 @@ recipeInstructions:
   - Remove the pan from the heat, add the cheese, and pasta, and season. Pull some of the pasta sheets toward the top to crisp up.
   - Bake for 25 minutes.
 ---
-
-
-

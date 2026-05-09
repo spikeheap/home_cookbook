@@ -1,9 +1,10 @@
 ---
 name: Superfast Huevos Rancheros
-description: Don't have the time for an hour of simmering? This can go from idea to belly in 30 minutes
-
-recipeCuisine: Mexican
+cuisine: Mexican
 meal: [Breakfast, Lunch]
+effort: weeknight
+tags: [eggs]
+description: Don't have the time for an hour of simmering? This can go from idea to belly in 30 minutes
 
 prepTime: PT10H
 cookTime: PT20M
@@ -30,4 +31,3 @@ recipeInstructions:
   - Last of all, take the browned chorizo and distribute in the wraps.
   - Add as much hot sauce as you enjoy, and dig in.
 ---
-

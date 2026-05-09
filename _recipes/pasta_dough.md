@@ -1,10 +1,10 @@
 ---
 name: Pasta dough
-categories: [Pasta]
-description: 
-
+cuisine: Italian
 meal: Main
-recipeCuisine: Italian
+effort: weekend
+tags: [pasta]
+description: 
 
 prepTime: PT1H
 cookTime: PT3M

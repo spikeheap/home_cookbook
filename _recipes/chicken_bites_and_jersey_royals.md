@@ -1,9 +1,9 @@
 ---
 name: Chicken bites with Jersey Royals
-description: A quick meal for spring
-
-recipeCuisine: British
+cuisine: British
 meal: Main
+effort: weeknight
+description: A quick meal for spring
 
 prepTime: PT10M
 cookTime: PT20M

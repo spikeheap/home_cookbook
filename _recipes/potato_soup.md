@@ -1,8 +1,10 @@
 ---
 name: Potato soup
-description: "This is really Nivi's Potaty Soop."
-categories: [Soup, Vegan, Quick, Easy] 
+cuisine: British
 meal: Lunch
+effort: weeknight
+tags: [vegan, soup]
+description: "This is really Nivi's Potaty Soop."
 prepTime: PT5M
 cookTime: PT20M
 recipeYield: Serves 2
@@ -24,4 +26,3 @@ recipeInstructions:
 - Sprinkle with rosemary, and season to taste
 
 ---
-

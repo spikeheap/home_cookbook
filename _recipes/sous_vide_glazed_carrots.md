@@ -1,6 +1,9 @@
 ---
 name: Sous Vide Glazed Carrots
-meal: [Sides]
+cuisine: American
+meal: Side
+effort: weekend
+tags: [sous-vide, vegetarian]
 description: >
   Cooking carrots sous vide with butter, sugar, and salt intensifies their
   natural sweetness into something deeper and more carrot-flavoured than you'd
@@ -11,8 +14,6 @@ keywords:
 - side dish
 - vegetarian
 - glazed
-recipeCategory: Side dishes
-recipeCuisine:
 isBasedOn: https://www.seriouseats.com/sous-vide-glazed-carrots-recipe
 author:
   "@type": Person
@@ -37,7 +38,6 @@ recipeInstructions:
 - To finish, empty the entire contents of the bag into a large heavy-bottomed skillet. Cook over high heat, stirring
   constantly, until the liquid has reduced to a shiny glaze, about 2 minutes.
 ---
-
 ## Notes
 
 - Cut larger carrots into even-sized chunks so they all cook at the same rate.

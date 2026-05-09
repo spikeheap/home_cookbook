@@ -1,9 +1,10 @@
 ---
 name: Beef Barbacoa
-description: 
-
-recipeCuisine: Mexican
+cuisine: Mexican
 meal: Main
+effort: project
+tags: [slow-cook]
+description: 
 
 isBasedOn: https://www.wahaca.co.uk/recipe-beef-barbacoa-recipe/
 author:

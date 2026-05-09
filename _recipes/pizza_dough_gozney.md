@@ -1,10 +1,11 @@
 ---
 name: Pizza oven pizza dough
-categories: [Bread]
+cuisine: Italian
+meal: Main
+effort: project
+tags: [pizza, bread]
 description: This consistently comes out well in the pizza oven.
 keywords: pizza
-recipeCategory: Bread
-recipeCuisine: Italian
 isBasedOn: https://www.gozney.com/blogs/recipes/pizza-for-beginners-simple-pizza-dough
 author:
   "@type": Person
@@ -31,7 +32,6 @@ recipeInstructions:
 - Cover and leave to proof at room temperature (18°C) for 8 hours.
 - Prep, cook and serve 🍕
 ---
-
 ## Notes
 
 - If your kitchen is warmer than 18°C, reduce proofing time slightly; if cooler, extend it or proof overnight in the fridge.

@@ -1,9 +1,9 @@
 ---
 name: Pork Belly Skewers with Adobo Glaze
-description: 
-
-recipeCuisine: Phillipino
+cuisine: Filipino
 meal: Main
+effort: weekend
+description: 
 
 isBasedOn: https://www.ocado.com/webshop/recipe/Pork-Belly-Skewers-with-Adobo-Glaze/234186?selectedCategories
 author:

@@ -1,7 +1,9 @@
 ---
 name: Tiramisu
+cuisine: Italian
 meal: Sweet
-recipeCuisine: Italian
+effort: weekend
+tags: [dessert]
 isBasedOn: https://www.alsothecrumbsplease.com/authentic-italian-tiramisu/#ingredients
 
 prepTime: PT30M

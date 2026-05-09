@@ -1,14 +1,14 @@
 ---
 name: Maslenki
-categories: [Baking, GrandmaBo]
+cuisine: Bulgarian
+meal: Sweet
+effort: weeknight
+tags: [baking, grandma-bo]
 description: "Simple butter cookies"
 keywords:
 - cookies
 - butter
 - maslenki
-recipeCategory: Cakes and baking
-recipeCuisine: Bulgarian
-meal: Sweet
 author:
   "@type": Person
   name: Granny Bo

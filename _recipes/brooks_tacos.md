@@ -1,9 +1,9 @@
 ---
 name: Brooks' Tacos
-description: Definitely not traditionally Mexican, but this is what we grew up with and brings back memories of extra-hot salsa at my grandparents.
-
-recipeCuisine: Mexican
+cuisine: Mexican
 meal: Main
+effort: weeknight
+description: Definitely not traditionally Mexican, but this is what we grew up with and brings back memories of extra-hot salsa at my grandparents.
 
 prepTime: PT30M
 cookTime: PT30M

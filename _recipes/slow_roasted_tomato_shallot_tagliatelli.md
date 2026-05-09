@@ -1,10 +1,10 @@
 ---
 name: Slow-roasted tomato and shallot tagliatelli 
-categories: [Pasta]
-description: 
+cuisine: Italian
 meal: Main
-recipeCuisine: Italian
-
+effort: weekend
+tags: [pasta, vegetarian]
+description: 
 prepTime: PT15M
 cookTime: PT2H
 recipeYield: Serves 2

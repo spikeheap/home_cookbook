@@ -1,9 +1,10 @@
 ---
 name: Pico de gallo
+cuisine: Mexican
+meal: Side
+effort: weeknight
+tags: [vegan, salsa]
 description: 
-
-recipeCuisine: Mexican
-meal: Sides
 
 prepTime: PT5M
 recipeYield: 1 bowl

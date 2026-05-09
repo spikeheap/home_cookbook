@@ -1,6 +1,9 @@
 ---
 name: Sourdough
-categories: [Bread]
+cuisine: British
+meal: Side
+effort: project
+tags: [bread]
 description: 
 isBasedOn: https://www.bbcgoodfood.com/recipes/sourdough
 prepTime: PT9H

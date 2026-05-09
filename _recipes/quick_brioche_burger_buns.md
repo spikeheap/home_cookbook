@@ -1,10 +1,10 @@
 ---
 name: Quick Brioche Bun Recipe
+cuisine: American
+meal: Side
+effort: weeknight
+tags: [bread, baking]
 description: "These came from Luke, and they hold up well"
-categories: [Bread, Baking]
-# recipeCuisine:  
-# meal: 
-
 isBasedOn: https://kristineskitchenblog.com/wprm_print/25826#
 # image:
 # - 
@@ -40,4 +40,3 @@ recipeInstructions:
 - Combine the egg and 1 tablespoon milk in a small bowl, stirring with a fork. Remove the towel and brush the tops of the buns with the egg wash. Bake hamburger buns in the oven for 13-15 minutes, until tops are golden.
 
 ---
-

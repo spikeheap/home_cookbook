@@ -1,10 +1,12 @@
 ---
 name: Pear jam
+cuisine: British
+meal: Condiment
+effort: weekend
+tags: [preserves]
 description: 
 
 # recipeCuisine:
-meal: Condiment
-
 prepTime: PT30M
 cookTime: PT1H
 recipeYield: 2 jars

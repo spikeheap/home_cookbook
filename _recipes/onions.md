@@ -1,10 +1,10 @@
 ---
 name: Simple Roasted Onions
+cuisine: British
+meal: Side
+effort: weekend
+tags: [vegan]
 description: "Roasted onions that pack a lot of flavour. Great with roasts or sausages & mash"
-categories: [Side, Vegetable]
-recipeCuisine: British
-meal: Sides
-
 isBasedOn: https://www.riverford.co.uk/recipes/simple-roasted-onions
 
 prepTime: PT5M

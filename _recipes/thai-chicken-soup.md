@@ -1,8 +1,10 @@
 ---
 name: Thai red chicken soup
 
-recipeCuisine: Thai
+cuisine: Thai
 meal: [Main, Lunch]
+effort: weekend
+tags: [soup]
 isBasedOn: https://www.jamieoliver.com/recipes/chicken-recipes/thai-red-chicken-soup/
 author:
   "@type": Person

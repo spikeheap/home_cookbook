@@ -1,8 +1,10 @@
 ---
 name: Caesar salad
 
-recipeCuisine: American
+cuisine: American
 meal: [Main, Lunch]
+effort: weeknight
+tags: [salad]
 isBasedOn: https://www.bbc.co.uk/food/recipes/marys_classic_caesar_72903
 author:
   "@type": Person

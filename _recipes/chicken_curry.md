@@ -1,13 +1,13 @@
 ---
 name: Chetna's chicken curry
+cuisine: Indian
+meal: Main
+effort: weekend
 description: From Jamie Oliver's £1 wonders series.
 
 author:
   "@type": Person
   name: Chetna Makan
-
-recipeCuisine: Indian
-meal: Main
 
 prepTime: PT30M
 cookTime: PT1H

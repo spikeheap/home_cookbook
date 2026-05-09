@@ -1,9 +1,10 @@
 ---
 name: PlanD Sandwich
 
+cuisine: Korean
 meal: Lunch
-recipeCuisine: Korean
-
+effort: weeknight
+tags: [eggs]
 description: Open-faced sandwich inspired by the PlanD Youtube channel
 
 prepTime: PT10M

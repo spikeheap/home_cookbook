@@ -6,10 +6,19 @@ layout: page
   {{ content }}
 {% endunless %}
 
+{% if page.tag %}
+  {% assign matched = site.recipes | where_exp:"r","r.tags contains page.tag" %}
+{% elsif page.meal %}
+  {% assign matched = site.recipes | where_exp:"r","r.meal contains page.meal" %}
+{% elsif page.cuisine %}
+  {% assign matched = site.recipes | where:"cuisine", page.cuisine %}
+{% else %}
+  {% assign tag_slug = page.title | downcase %}
+  {% assign matched = site.recipes | where_exp:"r","r.tags contains tag_slug" %}
+{% endif %}
+
 <ul>
-  {% assign recipes_in_category = site.recipes | where_exp:"recipe",
-"recipe.categories contains page.title" %}
-  {% for recipe in recipes_in_category %}
+  {% for recipe in matched %}
     <li>
       <a href="{{ recipe.url }}">{{ recipe.name }}</a>
     </li>

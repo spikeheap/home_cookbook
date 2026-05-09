@@ -1,7 +1,9 @@
 ---
 name: Mary Berry's drop scones
+cuisine: British
 meal: Breakfast
-recipeCuisine: British
+effort: weeknight
+tags: [baking, sweet]
 description: "Whether you call them drop scones or Scotch pancakes, this classic recipe
   makes a perfect breakfast, brunch or Pancake Day dish. \r\n"
 keywords:
@@ -18,8 +20,6 @@ keywords:
 - pregnancy friendly
 - vegetarian
 - Classic Mary Berry
-recipeCategory: Cakes and baking
-
 isBasedOn: https://www.bbc.co.uk/food/recipes/drop_scones_38257
 author:
   "@type": Person

@@ -1,10 +1,11 @@
 ---
 name: Focaccia
-categories: [Bread]
+cuisine: Italian
+meal: Side
+effort: weekend
+tags: [bread, baking, vegan]
 description: "This focaccia recipe is easy to make and easy to adapt with whatever herbs you have in the house."
 
-recipeCategory: Cakes and baking
-recipeCuisine: Italian
 isBasedOn: https://www.bbc.co.uk/food/recipes/focaccia_08389
 author:
   "@type": Person

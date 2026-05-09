@@ -8,43 +8,40 @@ bundle exec jekyll serve --livereload
 
 > To debug Jekyll boot or loading errors, add `--trace` to the above command
 
-## How to add content
+## Adding a recipe
 
-### Adding a recipe
+Create a Markdown file in `_recipes/` with frontmatter structured like [this example](_recipes/focaccia.md). The structure roughly mirrors the [recipe schema on schema.org](https://schema.org/Recipe).
 
-Create a Markdown file in `_recipes/` with frontmatter structured like [this example](_recipes/focaccia.md). The structure of the frontmatter roughly mirrors the [recipe schema on schema.org](https://schema.org/Recipe), though not all the metadata is currently displayed.
-
-Recipes are assigned one of more categories using `categories` in frontmatter:
+Each recipe is classified along four axes:
 
 ```
 ---
 name: Focaccia
-categories: Bread
+cuisine: Italian              # one of: British, Italian, Mexican, ...
+meal: Side                    # Main, Lunch, Breakfast, Side, Snack, Sweet, Drink, Condiment
+                              #   (use an array for multi: [Main, Lunch])
+effort: weekend               # weeknight | weekend | project
+tags: [bread, baking, vegan]  # free-form, lowercase
 ---
 ```
 
-You can specify multiple categories in an array:
+- **cuisine** — single value, the dominant cuisine.
+- **meal** — when it's eaten. Array if it works for more than one.
+- **effort** — `weeknight` (≤1h, hands-on), `weekend` (1–4h or one involved step), `project` (overnight ferment, multi-day, etc.).
+- **tags** — cross-cutting: `bread`, `pasta`, `vegan`, `vegetarian`, `pizza`, `sous-vide`, `slow-cook`, `salad`, `soup`, `pie`, `eggs`, `salsa`, `dessert`, `sweet`, `baking`, `coffee`, `preserves`, `winter`, `grandma-bo`, `base-recipe`.
 
-```
----
-name: Barbacoa beef tacos
-categories: [Mexican, Party]
----
-```
+### Creating a category page
 
-### Creating a category
-
-Create a Markdown or HTML file in the `/categories/` directory. This must have a `title` matching the category name used on recipes, and should use the `category` layout, e.g.: 
+Create a Markdown or HTML file in the `/categories/` directory using the `category` layout. Set one of `tag`, `meal`, or `cuisine` to choose the filter. If none is set, the layout falls back to filtering by `tag == title.downcase`.
 
 ```
 ---
 layout: category
 title: Bread
+tag: bread
 ---
 We like bread 🤪
 ```
-
-The `category` layout will append a list of the recipes with that category below the content of the above file.
 
 ### Resizing an image
 

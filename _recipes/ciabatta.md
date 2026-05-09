@@ -1,14 +1,14 @@
 ---
 name: Ciabatta
-categories: [Bread]
-recipeCuisine: Italian
+cuisine: Italian
+meal: Side
+effort: project
+tags: [bread]
 description: "Ciabatta dough is extremely wet, so difficult to make by hand, but if
   you have a freestanding mixer it's simple. Don't be tempted to add more flour or
   rush the prove as it will spoil the the texture of the finished loaf.\r\n\r\nEquipment
   and preparation: for this recipe you will need a freestanding mixer with a dough
   hook attachment and a 3 litre/5¼pint square plastic container with a lid."
-
-recipeCategory: Cakes and baking
 
 isBasedOn: https://www.bbc.co.uk/food/recipes/easy_ciabatta_98431
 author:

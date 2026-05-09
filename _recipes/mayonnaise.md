@@ -4,7 +4,10 @@ name: Mayonnaise
 # category:
 
 # recipeCuisine: 
-meal: Sides 
+cuisine: French
+meal: Condiment
+effort: weeknight
+tags: [base-recipe]
 isBasedOn: https://www.magimix.com/int/recipes/Mayonnaise/
 
 prepTime: PT10M

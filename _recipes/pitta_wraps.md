@@ -1,10 +1,11 @@
 ---
 name: Pitta Wraps
+cuisine: Middle Eastern
+meal: Main
+effort: weekend
+tags: [bread]
 description:
 isBasedOn: https://www.bbcgoodfood.com/recipes/chicken-gyros
-
-recipeCuisine: Middle Eastern
-meal: Main
 
 prepTime: PT2H
 cookTime: PT10M

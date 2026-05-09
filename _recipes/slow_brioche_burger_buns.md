@@ -1,11 +1,10 @@
 ---
 name: Slow Brioche Burger Buns receipt
+cuisine: American
+meal: Side
+effort: project
+tags: [bread, baking]
 description: The best
-
-categories: [Bread, Baking]
-
-meal: Main
-cuisine: General
 
 isBasedOn: https://www.sainsburysmagazine.co.uk/recipes/mains/brioche-burger-buns
 

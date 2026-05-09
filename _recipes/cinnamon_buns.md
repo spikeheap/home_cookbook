@@ -1,10 +1,9 @@
 ---
 name: Cinnamon buns
-categories:
-  - Baking
-  - Bread
-  - Sweet
+cuisine: Swedish
 meal: Breakfast
+effort: weekend
+tags: [bread, baking, sweet]
 description: These are amazingly soft and sweet. They keep well for a few days, and freeze perfectly too.
 isBasedOn: https://www.gozney.com/blogs/recipes/cinnamon-buns-recipe
 author:

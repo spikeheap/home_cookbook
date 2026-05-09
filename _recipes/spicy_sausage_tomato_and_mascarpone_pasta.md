@@ -1,9 +1,10 @@
 ---
 name: Spicy Sausage, Tomato and Mascarpone Pasta
-description: 
-
-recipeCuisine: Italian
+cuisine: Italian
 meal: Main
+effort: weeknight
+tags: [pasta]
+description: 
 
 isBasedOn: https://www.ocado.com/webshop/recipe/Spicy-Sausage-Tomato-and-Mascarpone-Pasta/227357?selectedCategories
 author:

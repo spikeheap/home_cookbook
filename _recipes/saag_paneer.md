@@ -1,7 +1,9 @@
 ---
 name: Saag paneer
+cuisine: Indian
 meal: Main
-recipeCuisine: Indian
+effort: weeknight
+tags: [vegetarian]
 description: 
 
 prepTime: PT10M

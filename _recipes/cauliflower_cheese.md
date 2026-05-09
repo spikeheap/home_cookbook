@@ -1,6 +1,9 @@
 ---
 name: Cauliflower Cheese
-categories: [Side dishes]
+cuisine: British
+meal: Side
+effort: weeknight
+tags: [vegetarian]
 description: >
   Britain's most beloved side dish — tender cauliflower florets in a creamy
   cheese sauce with a golden, crispy breadcrumb topping. An essential
@@ -12,8 +15,6 @@ keywords:
 - sunday roast
 - vegetarian
 - comfort food
-recipeCategory: Side dishes
-recipeCuisine: British
 isBasedOn: https://www.greatbritishchefs.com/recipes/cauliflower-cheese-recipe
 author:
   "@type": Person
@@ -52,7 +53,6 @@ recipeInstructions:
   reserved cheese and breadcrumbs. Bake for 45 minutes, or until the cauliflower
   is tender when pierced with a knife and the topping is golden and crisp.
 ---
-
 ## Notes
 
 - A mix of mature cheddar, smoked cheddar, and Parmesan gives the sauce real depth of flavour.

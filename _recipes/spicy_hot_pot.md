@@ -1,7 +1,8 @@
 ---
 name: Spicy Hot Pot
+cuisine: Korean
 meal: [Main, Lunch]
-recipeCuisine: Korean
+effort: weeknight
 description: Warming and satisfying sharing hot pot
 
 

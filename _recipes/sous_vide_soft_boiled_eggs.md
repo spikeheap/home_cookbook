@@ -1,7 +1,9 @@
 ---
 name: Sous Vide Soft-Boiled Eggs
-categories: [Eggs]
+cuisine: American
 meal: Breakfast
+effort: weeknight
+tags: [sous-vide, eggs]
 description: >
   A foolproof method for perfectly set whites with a fully liquid, creamy yolk.
 keywords:
@@ -10,7 +12,6 @@ keywords:
 - soft boiled
 - breakfast
 - vegetarian
-recipeCategory: Eggs
 isBasedOn: https://www.seriouseats.com/sous-vide-101-all-about-eggs
 author:
   "@type": Person

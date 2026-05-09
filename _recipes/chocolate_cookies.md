@@ -1,9 +1,10 @@
 ---
 name: Double chocolate cookies
+cuisine: British
+meal: Sweet
+effort: weeknight
+tags: [baking, sweet]
 description: Yummiest ever
-
-recipeCuisine: British
-meal: Snack
 
 prepTime: PT20M
 cookTime: PT20M
