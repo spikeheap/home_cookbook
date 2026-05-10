@@ -1,0 +1,25 @@
+{%- comment -%}
+  Render recipeInstructions. Handles two shapes:
+  (1) flat array of strings → numbered ol starting at 1
+  (2) hash of { section_name: [steps] } → grouped sections, numbering continues across
+  Usage: {% include instruction_list.html list=page.recipeInstructions %}
+{%- endcomment -%}
+{%- assign list = include.list -%}
+{%- if list.first.first -%}
+  {%- assign cursor = 0 -%}
+  {%- for section in list -%}
+    <h3 class="instruction-section">{{ section.first }}</h3>
+    <ol class="instruction-list" start="{{ cursor | plus: 1 }}" style="counter-reset: step {{ cursor }};">
+      {%- for step in section.last -%}
+        <li>{{ step | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+      {%- endfor -%}
+    </ol>
+    {%- assign cursor = cursor | plus: section.last.size -%}
+  {%- endfor -%}
+{%- else -%}
+  <ol class="instruction-list">
+    {%- for step in list -%}
+      <li>{{ step | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+    {%- endfor -%}
+  </ol>
+{%- endif -%}

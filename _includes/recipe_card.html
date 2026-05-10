@@ -1,0 +1,21 @@
+{%- comment -%}
+  Compact recipe card for grids and rails.
+  Usage: {% include recipe_card.html recipe=recipe %}
+{%- endcomment -%}
+{%- assign r = include.recipe -%}
+<a class="card" href="{{ r.url | relative_url }}">
+  <span class="card__name">{{ r.name }}</span>
+  <span class="card__meta">
+    {%- if r.cuisine -%}<span class="card__cuisine">{{ r.cuisine }}</span>{%- endif -%}
+    {%- assign total_iso = "" -%}
+    {%- capture cap_prep -%}{% include duration.html iso=r.prepTime %}{%- endcapture -%}
+    {%- capture cap_cook -%}{% include duration.html iso=r.cookTime %}{%- endcapture -%}
+    {%- assign cap_prep = cap_prep | strip -%}
+    {%- assign cap_cook = cap_cook | strip -%}
+    {%- if cap_cook != "" -%}
+      <span class="card__time">{{ cap_cook }}</span>
+    {%- elsif cap_prep != "" -%}
+      <span class="card__time">{{ cap_prep }}</span>
+    {%- endif -%}
+  </span>
+</a>

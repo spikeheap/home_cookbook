@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F2E8" />
+  {%- if page.layout == 'recipe' -%}{%- assign page_label = page.name -%}{%- else -%}{%- assign page_label = page.title -%}{%- endif -%}
+  <title>{% if page_label and page_label != "Home" %}{{ page_label }} · {% endif %}{{ site.title }}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description | strip_html | strip_newlines | truncate: 200 }}" />{% endif %}
+
+  <link rel="preload" href="{{ '/assets/fonts/newsreader-display.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="{{ '/assets/css/cookbook.css' | relative_url }}" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}" />
+
+  {%- comment -%} Subtle defaults so anything before the stylesheet loads still looks intentional. {%- endcomment -%}
+  <style>
+    html, body { background:#F7F2E8; color:#1F1812; }
+    body { margin:0; font-family: 'New York', ui-serif, 'Iowan Old Style', Georgia, serif; }
+  </style>
+</head>
+<body class="page-{{ page.layout | default: 'default' }}{% if page.url == '/' %} page-home{% endif %}">
+
+  <header class="site-header">
+    <a href="{{ '/' | relative_url }}" class="site-mark">
+      <span class="site-mark__name">Our&nbsp;Cookbook</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="{{ '/all/' | relative_url }}">All</a>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <span>{{ site.recipes.size }} recipes · cooked at home</span>
+  </footer>
+</body>
+</html>

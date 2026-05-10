@@ -1,0 +1,28 @@
+---
+layout: default
+title: By tag
+permalink: /by-tag/
+---
+
+<article class="all-recipes">
+  <h1 class="all-recipes__title">By tag</h1>
+  <p class="all-recipes__lede">Cross-cutting themes — bread, pasta, vegan, and the rest.</p>
+
+  {%- assign all_tags = "" | split: "," -%}
+  {%- for r in site.recipes -%}
+    {%- if r.tags -%}{%- assign all_tags = all_tags | concat: r.tags -%}{%- endif -%}
+  {%- endfor -%}
+  {%- assign all_tags = all_tags | uniq | sort -%}
+
+  {% for tag in all_tags %}
+    {% assign tagged = site.recipes | where_exp: "r", "r.tags contains tag" | sort: "name" %}
+    <section class="all-recipes__section" id="{{ tag }}">
+      <h2 class="all-recipes__section-title">{{ tag }} <span class="meta">{{ tagged.size }}</span></h2>
+      <ul class="all-recipes__list">
+        {% for r in tagged %}
+          <li><a href="{{ r.url | relative_url }}">{{ r.name }}</a>{% if r.cuisine %}<span class="meta">{{ r.cuisine }}</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+</article>

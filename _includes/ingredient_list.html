@@ -1,0 +1,24 @@
+{%- comment -%}
+  Render recipeIngredient. Handles two shapes:
+  (1) flat array of strings
+  (2) hash where each key is a section name and value is an array of strings
+  Usage: {% include ingredient_list.html list=page.recipeIngredient %}
+{%- endcomment -%}
+{%- assign list = include.list -%}
+{%- if list.first.first -%}
+  {%- comment -%} Hash form: each item is [section_name, [ingredients...]] {%- endcomment -%}
+  {%- for section in list -%}
+    <h3 class="ingredient-section">{{ section.first }}</h3>
+    <ul class="ingredient-list">
+      {%- for item in section.last -%}
+        <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- endfor -%}
+{%- else -%}
+  <ul class="ingredient-list">
+    {%- for item in list -%}
+      <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

@@ -27,9 +27,17 @@ twitter_username: jekyllrb
 github_username:  jekyll
 
 # Build settings
-theme: jekyll-theme-hydeout
 plugins:
   - jekyll-feed
+
+include:
+  - _headers
+  - _redirects
+
+exclude:
+  - Readme.md
+  - vendor
+  - node_modules
 
 collections:
   recipes:

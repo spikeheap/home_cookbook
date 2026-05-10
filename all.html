@@ -1,0 +1,41 @@
+---
+layout: default
+title: All recipes
+permalink: /all/
+---
+
+<article class="all-recipes">
+  <h1 class="all-recipes__title">All recipes</h1>
+  <p class="all-recipes__lede">{{ site.recipes.size }} recipes, organised by how much time and attention they ask of you.</p>
+
+  {% assign weeknight = site.recipes | where: "effort", "weeknight" | sort: "name" %}
+  {% assign weekend   = site.recipes | where: "effort", "weekend"   | sort: "name" %}
+  {% assign project   = site.recipes | where: "effort", "project"   | sort: "name" %}
+
+  <section class="all-recipes__section" id="weeknight">
+    <h2 class="all-recipes__section-title">Weeknight <span class="meta">{{ weeknight.size }}</span></h2>
+    <ul class="all-recipes__list">
+      {% for r in weeknight %}
+        <li><a href="{{ r.url | relative_url }}">{{ r.name }}</a>{% if r.cuisine %}<span class="meta">{{ r.cuisine }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="all-recipes__section" id="weekend">
+    <h2 class="all-recipes__section-title">Weekend <span class="meta">{{ weekend.size }}</span></h2>
+    <ul class="all-recipes__list">
+      {% for r in weekend %}
+        <li><a href="{{ r.url | relative_url }}">{{ r.name }}</a>{% if r.cuisine %}<span class="meta">{{ r.cuisine }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="all-recipes__section" id="project">
+    <h2 class="all-recipes__section-title">Projects <span class="meta">{{ project.size }}</span></h2>
+    <ul class="all-recipes__list">
+      {% for r in project %}
+        <li><a href="{{ r.url | relative_url }}">{{ r.name }}</a>{% if r.cuisine %}<span class="meta">{{ r.cuisine }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+</article>
