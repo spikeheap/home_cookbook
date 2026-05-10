@@ -6,7 +6,7 @@ permalink: /all/
 
 <article class="all-recipes">
   <h1 class="all-recipes__title">All recipes</h1>
-  <p class="all-recipes__lede">{{ site.recipes.size }} recipes, organised by how much time and attention they ask of you.</p>
+  <p class="all-recipes__lede">{{ site.recipes.size }} recipes, organised by how much time and attention they need.</p>
 
   {% assign weeknight = site.recipes | where: "effort", "weeknight" | sort: "name" %}
   {% assign weekend   = site.recipes | where: "effort", "weekend"   | sort: "name" %}
