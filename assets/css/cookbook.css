@@ -13,11 +13,11 @@
   --paper:        #FDFAF3;
   --ink:          #1F1812;
   --ink-soft:     #4A3F38;
-  --mute:         #8C7F73;
+  --mute:         #6E6256;
   --rule:         #E0D8C7;
   --rule-strong:  #C9BFA8;
   --rust:         #A23B23;
-  --rust-soft:    #C2654E;
+  --rust-soft:    #A85944;
 
   /* Type */
   --serif-display: 'Newsreader Display', 'Newsreader', 'New York', 'Iowan Old Style', 'Hoefler Text', 'Source Serif Pro', Georgia, serif;
@@ -371,7 +371,7 @@ img { max-width: 100%; height: auto; }
 .card__cuisine + .card__time::before {
   content: "·";
   margin-right: var(--gap-3);
-  color: var(--rule-strong);
+  color: var(--mute);
 }
 
 /* Browse / chips */
