@@ -3,30 +3,29 @@
   (1) flat array of strings
   (2) hash where each key is a section name and value is an array of strings
 
-  When inline_sub is unset or true (default), ingredient lines that link
-  to another recipe are rendered with that recipe's ingredients/method
-  expanded inline as a <details>.
+  Pass `inline_sub: false` when rendering ingredients of an already-inlined
+  sub-recipe to suppress further expansion. The default (unset) means
+  expand. Note we forward `include.inline_sub` directly without assigning
+  to a local — see the note in ingredient_item.html.
 
   Usage: {% include ingredient_list.html list=page.recipeIngredient %}
          {% include ingredient_list.html list=sub.recipeIngredient inline_sub=false %}
 {%- endcomment -%}
-{%- assign list       = include.list -%}
-{%- assign inline_sub = include.inline_sub -%}
-{%- if inline_sub == nil -%}{%- assign inline_sub = true -%}{%- endif -%}
+{%- assign list = include.list -%}
 
 {%- if list.first.first -%}
   {%- for section in list -%}
     <h3 class="ingredient-section">{{ section.first }}</h3>
     <ul class="ingredient-list">
       {%- for item in section.last -%}
-        {% include ingredient_item.html item=item inline_sub=inline_sub %}
+        {% include ingredient_item.html item=item inline_sub=include.inline_sub %}
       {%- endfor -%}
     </ul>
   {%- endfor -%}
 {%- else -%}
   <ul class="ingredient-list">
     {%- for item in list -%}
-      {% include ingredient_item.html item=item inline_sub=inline_sub %}
+      {% include ingredient_item.html item=item inline_sub=include.inline_sub %}
     {%- endfor -%}
   </ul>
 {%- endif -%}

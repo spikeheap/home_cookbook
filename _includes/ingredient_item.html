@@ -7,14 +7,19 @@
   Usage:
     {% include ingredient_item.html item=item inline_sub=true %}
 
-  Pass inline_sub=false when rendering ingredients of a sub-recipe to
-  avoid runaway recursion.
-{%- endcomment -%}
-{%- assign item        = include.item -%}
-{%- assign inline_sub  = include.inline_sub -%}
-{%- assign sub_match   = nil -%}
+  `inline_sub` is a tri-state: pass false explicitly to suppress the
+  expansion (used when rendering an already-inlined sub-recipe to avoid
+  recursion). Anything else (including unset/nil) means "expand".
 
-{%- if inline_sub and item contains '](' and item contains '.html)' -%}
+  We deliberately read `include.inline_sub` rather than assigning it to a
+  local — Liquid's `assign` propagates to a single shared scope, so a
+  recursive include's `assign inline_sub = false` would clobber the parent
+  loop's variable and break the second pass.
+{%- endcomment -%}
+{%- assign item      = include.item -%}
+{%- assign sub_match = nil -%}
+
+{%- if include.inline_sub != false and item contains '](' and item contains '.html)' -%}
   {%- assign after_paren = item | split: '](' | last -%}
   {%- assign url_part    = after_paren | split: ')' | first -%}
   {%- assign slug        = url_part | replace: '.html', '' -%}
@@ -26,12 +31,6 @@
 <li>
   {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
   {%- if sub_match -%}
-    {%- comment -%}
-      Capture every value we need *before* the nested includes — Liquid
-      `assign` propagates upward, so a recursive include resetting its own
-      locals would clobber `sub_match` and friends if we read them after
-      the include.
-    {%- endcomment -%}
     {%- assign sub_name         = sub_match.name -%}
     {%- assign sub_yield        = sub_match.recipeYield -%}
     {%- assign sub_url_resolved = sub_match.url -%}
