@@ -3,6 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test assets/js/"
+    "test": "node --test assets/js/",
+    "build": "bundle exec jekyll build && npx pagefind --site _site",
+    "dev": "bundle exec jekyll build && npx pagefind --site _site --serve"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }

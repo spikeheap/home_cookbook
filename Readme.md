@@ -1,12 +1,17 @@
 # Our home cookbook
 
-## To run locally
+## Dev server
 
 ```bash
-bundle exec jekyll serve --livereload
+bundle exec jekyll serve --livereload   # content iteration, no search
+npm run dev                             # full site + Pagefind, served on :1414
 ```
 
-> To debug Jekyll boot or loading errors, add `--trace` to the above command
+## Tests
+
+```bash
+npm test
+```
 
 ## Adding a recipe
 
@@ -30,25 +35,8 @@ tags: [bread, baking, vegan]  # free-form, lowercase
 - **effort** — `weeknight` (≤1h, hands-on), `weekend` (1–4h or one involved step), `project` (overnight ferment, multi-day, etc.).
 - **tags** — cross-cutting: `bread`, `pasta`, `vegan`, `vegetarian`, `pizza`, `sous-vide`, `slow-cook`, `salad`, `soup`, `pie`, `eggs`, `salsa`, `dessert`, `sweet`, `baking`, `coffee`, `preserves`, `winter`, `grandma-bo`, `base-recipe`.
 
-### Creating a category page
-
-Create a Markdown or HTML file in the `/categories/` directory using the `category` layout. Set one of `tag`, `meal`, or `cuisine` to choose the filter. If none is set, the layout falls back to filtering by `tag == title.downcase`.
-
-```
----
-layout: category
-title: Bread
-tag: bread
----
-We like bread 🤪
-```
-
 ### Resizing an image
 
 ```
 magick cinnamon_buns.jpeg -resize 2160x2160 -sampling-factor 4:2:0 -strip -quality 85 cinnamon_buns-2160w.jpg
 ```
-
-## Credit
-
-- Uses the https://github.com/fongandrew/hydeout theme

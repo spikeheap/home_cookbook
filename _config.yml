@@ -38,6 +38,12 @@ exclude:
   - Readme.md
   - vendor
   - node_modules
+  - package.json
+  - package-lock.json
+  - assets/js/wake-lock.test.js
+  - assets/js/search.test.js
+  - .github
+  - netlify.toml
 
 collections:
   recipes:

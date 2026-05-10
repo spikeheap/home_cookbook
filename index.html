@@ -8,13 +8,20 @@ title: Home
 {% assign project   = site.recipes | where: "effort", "project"   | sort: "name" %}
 
 <section class="home-hero">
-  <p class="home-hero__eyebrow">A home cookbook</p>
   <h1 class="home-hero__title">Recipes we <em>actually</em> cook.</h1>
-  <p class="home-hero__lede">Forty-eight recipes the family comes back to. Quick weeknight standbys, weekend cooking, and a handful of patient long-game projects.</p>
+  <p class="home-hero__lede">A bunch of recipes we know and love, from easy weeknight meals, through baking with the kids, to bigger things we don't want to forget.</p>
   <form class="home-search" role="search" onsubmit="return false;">
-    <input type="search" placeholder="Search recipes…" aria-label="Search recipes" id="search-input" disabled />
-    <span class="home-search__hint">Coming soon</span>
+    <input type="search"
+           placeholder="Search recipes…"
+           aria-label="Search recipes"
+           aria-autocomplete="list"
+           aria-controls="search-results"
+           autocomplete="off"
+           spellcheck="false"
+           id="search-input" />
+    <span class="home-search__hint">↑↓ to choose · Esc to clear</span>
   </form>
+  <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
 </section>
 
 <section class="rail">

@@ -1,0 +1,7 @@
+[build]
+  command  = "bundle exec jekyll build && npx pagefind --site _site"
+  publish  = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+  RUBY_VERSION = "4.0.1"

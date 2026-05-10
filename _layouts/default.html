@@ -13,7 +13,10 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}" />
 
   {% if page.layout == 'recipe' %}
-    <script defer src="{{ '/assets/js/wake-lock.js' | relative_url }}"></script>
+    <script type="module" src="{{ '/assets/js/wake-lock.js' | relative_url }}"></script>
+  {% endif %}
+  {% if page.url == '/' %}
+    <script type="module" src="{{ '/assets/js/search.js' | relative_url }}"></script>
   {% endif %}
 
   {%- comment -%} Subtle defaults so anything before the stylesheet loads still looks intentional. {%- endcomment -%}

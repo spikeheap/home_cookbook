@@ -130,15 +130,6 @@ img { max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--rule);
 }
 
-.home-hero__eyebrow {
-  font-family: var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
-  color: var(--mute);
-  margin: 0 0 var(--gap-3);
-}
-
 .home-hero__title {
   font-family: var(--serif-display);
   font-weight: 500;
@@ -195,6 +186,87 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--mute);
+}
+
+/* Search results dropdown */
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--gap-3);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  max-width: 28rem;
+  max-height: 26rem;
+  overflow-y: auto;
+  box-shadow: 0 1px 0 rgba(31, 24, 18, 0.04);
+}
+
+.search-result {
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.search-result:last-child { border-bottom: 0; }
+
+.search-result:hover,
+.search-result[aria-selected="true"] {
+  background: var(--cream);
+  text-decoration: none;
+}
+
+.search-result__name {
+  font-family: var(--serif-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.search-result:hover .search-result__name,
+.search-result[aria-selected="true"] .search-result__name {
+  color: var(--rust);
+}
+
+.search-result__meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mute);
+}
+
+.search-result__excerpt {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+
+.search-result__excerpt mark {
+  background: rgba(162, 59, 35, 0.14);
+  color: var(--rust);
+  padding: 0 0.15em;
+  border-radius: 1px;
+}
+
+.search-results__empty {
+  padding: 1rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  text-align: center;
 }
 
 /* Rails */
