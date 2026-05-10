@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="{{ '/assets/css/cookbook.css' | relative_url }}" />
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}" />
 
+  {% if page.layout == 'recipe' %}
+    <script defer src="{{ '/assets/js/wake-lock.js' | relative_url }}"></script>
+  {% endif %}
+
   {%- comment -%} Subtle defaults so anything before the stylesheet loads still looks intentional. {%- endcomment -%}
   <style>
     html, body { background:#F7F2E8; color:#1F1812; }
