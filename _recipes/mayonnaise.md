@@ -15,12 +15,19 @@ prepTime: PT10M
 recipeYield: 300ml
 
 recipeIngredient:
-- 150ml sunflower/vegetable oil 
-- 1 egg
-- 1 egg yolk
-- 1tbsp dijon mustard
-- 2tbsp white wine vinegar
-
+- quantity: 150
+  unit: ml
+  item: sunflower/vegetable oil
+- quantity: 1
+  item: egg
+- quantity: 1
+  item: egg yolk
+- quantity: 1
+  unit: tbsp
+  item: dijon mustard
+- quantity: 2
+  unit: tbsp
+  item: white wine vinegar
 recipeInstructions:
 - Bring the eggs to room temperature
 - Add the eggs, mustard and 1 tbsp of oil to the food processor (smallest bowl).

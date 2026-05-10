@@ -12,18 +12,34 @@ prepTime: PT2H
 cookTime: PT30M
 recipeYield: 4 people
 recipeIngredient:
-  - 1 butternut squash
-  - 4 cloves of garlic, finely sliced
-  - 1 bunch of fresh basil
-  - 400g tin of chopped tomatoes
-  - 500g dried penne
-  - 3 tablespoons ricotta cheese
-  - 750ml vegetable stock
-  - 150g mozzarella
-  - Parmesan cheese, grated to serve
-  - 2 sprigs fresh sage leaves
-  - a pinch of chilli flakes
-
+- quantity: 1
+  item: butternut squash
+- quantity: 4
+  unit: clove
+  item: garlic, finely sliced
+- quantity: 1
+  unit: bunch
+  item: fresh basil
+- quantity: 400
+  unit: g
+  item: tin chopped tomatoes
+- quantity: 500
+  unit: g
+  item: dried penne
+- quantity: 3
+  unit: tbsp
+  item: ricotta cheese
+- quantity: 750
+  unit: ml
+  item: vegetable stock
+- quantity: 150
+  unit: g
+  item: mozzarella
+- item: Parmesan cheese, grated to serve
+- quantity: 2
+  unit: sprig
+  item: fresh sage leaves
+- item: a pinch of chilli flakes
 recipeInstructions:
   Roast the squash:
     - Preheat the oven to 200°C

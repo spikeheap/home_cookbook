@@ -16,10 +16,18 @@ recipeYield: Makes 5 × 300g dough balls
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 1kg 00 pizza flour
-- 600g water
-- 30g salt
-- 2g fresh yeast, or 1g instant dry yeast
+- quantity: 1
+  unit: kg
+  item: 00 pizza flour
+- quantity: 600
+  unit: g
+  item: water
+- quantity: 30
+  unit: g
+  item: salt
+- quantity: 2
+  unit: g
+  item: fresh yeast, or 1g instant dry yeast
 recipeInstructions:
 - Pour all the water into a large mixing bowl. Add the yeast and stir to dissolve.
 - Add half the flour (500g) and mix by hand for 30 seconds.

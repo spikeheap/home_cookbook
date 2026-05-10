@@ -10,14 +10,19 @@ cookTime: PT2H
 recipeYield: Serves 2
 
 recipeIngredient:
-- 300-400g cherry tomatoes
-- 5 shallots
-- 200g <a href="/recipes/pasta_dough.html">fresh tagliatelli</a>
-- Black pepper
-- Olive, grapeseed, or any high-smoke-point oil
-- Extra-virgin olive oil
-- Parmesan
-
+- quantity: 300
+  quantity_max: 400
+  unit: g
+  item: cherry tomatoes
+- quantity: 5
+  item: shallots
+- quantity: 200
+  unit: g
+  item: <a href="/recipes/pasta_dough.html">fresh tagliatelli</a>
+- item: Black pepper
+- item: Olive, grapeseed, or any high-smoke-point oil
+- item: Extra-virgin olive oil
+- item: Parmesan
 recipeInstructions:
   - Preheat the oven to 150℃.
   - Halve the cherry tomatoes and lie face-up in an oiled roasting tin. 

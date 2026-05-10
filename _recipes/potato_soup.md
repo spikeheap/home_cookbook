@@ -10,14 +10,25 @@ cookTime: PT20M
 recipeYield: Serves 2
 
 recipeIngredient:
-- 2 leftover jacket potatoes (cooked)
-- 500ml boiling water
-- 1 chicken/vegetable stock cube
-- 1 tbsp paprika
-- 1 tsp garlic powder (or 1 clove, cooked off)
-- 1 tsp onion powder (or 1 onion, softened)
-- 1 sprig rosemary, chopped
-
+- quantity: 2
+  item: leftover jacket potatoes (cooked)
+- quantity: 500
+  unit: ml
+  item: boiling water
+- quantity: 1
+  item: chicken/vegetable stock cube
+- quantity: 1
+  unit: tbsp
+  item: paprika
+- quantity: 1
+  unit: tsp
+  item: garlic powder (or 1 clove, cooked off)
+- quantity: 1
+  unit: tsp
+  item: onion powder (or 1 onion, softened)
+- quantity: 1
+  unit: sprig
+  item: rosemary, chopped
 recipeInstructions:
 - Peel the potatoes and break up into a saucepan with the water
 - Add everything else _except the rosemary) and bring to a simmer for 5 minutes

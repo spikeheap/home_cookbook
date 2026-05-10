@@ -13,10 +13,12 @@ image:
 - /images/cold_brew_coffee.jpg
 
 recipeIngredient:
-- 70g medium-grind coffee
-- 1l cold water
-
-
+- quantity: 70
+  unit: g
+  item: medium-grind coffee
+- quantity: 1
+  unit: l
+  item: cold water
 recipeInstructions:
 - Add the coffee 
 - Pour through the water

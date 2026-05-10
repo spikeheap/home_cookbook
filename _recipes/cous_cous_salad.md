@@ -11,18 +11,26 @@ cookTime: PT10M
 recipeYield: 2 person
 
 recipeIngredient:
-- 125g pearl cous cous
-- 150g feta (or to taste)
-- 2 medium tomatoes
-- half a large cucumber
-- 1 pepper
-- rocket or lettuce
-- handful of parsley/mint/dill
-- 1 Tbsp extra virgin olive oil
-- 1 Tbsp paprika (or to taste)
-- sumac/fenugreek to taste
-
-
+- quantity: 125
+  unit: g
+  item: pearl cous cous
+- quantity: 150
+  unit: g
+  item: feta (or to taste)
+- quantity: 2
+  item: medium tomatoes
+- item: half a large cucumber
+- quantity: 1
+  item: pepper
+- item: rocket or lettuce
+- item: handful of parsley/mint/dill
+- quantity: 1
+  unit: tbsp
+  item: extra virgin olive oil
+- quantity: 1
+  unit: tbsp
+  item: paprika (or to taste)
+- item: sumac/fenugreek to taste
 recipeInstructions:
 - Cook cous cous following package instructions.
 - Cut the vegateables into small pieces.

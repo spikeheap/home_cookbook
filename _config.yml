@@ -42,6 +42,7 @@ exclude:
   - package-lock.json
   - assets/js/wake-lock.test.js
   - assets/js/search.test.js
+  - assets/js/scale.test.js
   - .github
   - netlify.toml
 

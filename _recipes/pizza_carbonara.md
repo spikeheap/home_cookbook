@@ -12,17 +12,27 @@ recipeYield: 1 × 12" pizza
 
 recipeIngredient:
   Base:
-  - 1 ball [pizza dough](pizza_dough_gozney.html)
-  - 2 tbsp crème fraîche (or a thin layer of olive oil if you prefer)
+  - quantity: 1
+    unit: ball
+    item: "[pizza dough](pizza_dough_gozney.html)"
+  - quantity: 2
+    unit: tbsp
+    item: crème fraîche (or a thin layer of olive oil if you prefer)
   Toppings:
-  - 60g guanciale or pancetta, cut into small lardons
-  - 80g fior di latte mozzarella, torn into pieces
-  - 30g Pecorino Romano, finely grated
+  - quantity: 60
+    unit: g
+    item: guanciale or pancetta, cut into small lardons
+  - quantity: 80
+    unit: g
+    item: fior di latte mozzarella, torn into pieces
+  - quantity: 30
+    unit: g
+    item: Pecorino Romano, finely grated
   Finishing — added after baking:
-  - 1 egg yolk
-  - Plenty of black pepper
-  - A drizzle of olive oil
-
+  - quantity: 1
+    item: egg yolk
+  - item: Plenty of black pepper
+  - item: A drizzle of olive oil
 recipeInstructions:
 - Stretch the dough into a 12" round on a well-floured peel.
 - Spread the crème fraîche thinly across the base.

@@ -11,9 +11,11 @@ cookTime: PT3M
 recipeYield: Serves 2
 
 recipeIngredient:
-- 200g 00 flour
-- 2 large eggs
-
+- quantity: 200
+  unit: g
+  item: 00 flour
+- quantity: 2
+  item: large eggs
 recipeInstructions:
   - Mix the eggs and flour, and knead for a minute or two to combine.
   - Wrap in cling film and rest in the fridge for 30-60 minutes (the dough, not you).

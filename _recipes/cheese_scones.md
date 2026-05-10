@@ -11,12 +11,19 @@ cookTime: PT20M
 recipeYield: 10 scones
 
 recipeIngredient:
-  - 225g self-raising flour
-  - pinch of salt
-  - 55g butter
-  - 25g cheddar
-  - 150ml milk
-
+- quantity: 225
+  unit: g
+  item: self-raising flour
+- item: pinch of salt
+- quantity: 55
+  unit: g
+  item: butter
+- quantity: 25
+  unit: g
+  item: cheddar
+- quantity: 150
+  unit: ml
+  item: milk
 recipeInstructions:
   - Heat the oven to 220C/200C Fan/Gas 7. Lightly grease a baking sheet.
   - Mix together the flour and salt and rub in the butter. Stir in the cheese and then the milk to get a soft dough.

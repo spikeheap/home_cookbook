@@ -11,21 +11,33 @@ recipeYield: 2 people
 
 recipeIngredient:
   For the chicken:
-  - 2 chicken breasts, cut into bites
-  - 1 Tbsp corn starch
-  - 1 Tbsp rice wine, such as sake or soju
-  - pinch of salt
-  - black pepper
+  - quantity: 2
+    item: chicken breasts, cut into bites
+  - quantity: 1
+    unit: tbsp
+    item: corn starch
+  - quantity: 1
+    unit: tbsp
+    item: rice wine, such as sake or soju
+  - item: pinch of salt
+  - item: black pepper
   Potatoes:
-  - 250g Jersey Royals
-  - 2 Tbsp extra virgin olive oil (or any other oil)
-  - 1 Tbsp apple cider vinegar
-  - 1 tsp Dijon mustard
-  - pinch of salt
+  - quantity: 250
+    unit: g
+    item: Jersey Royals
+  - quantity: 2
+    unit: tbsp
+    item: extra virgin olive oil (or any other oil)
+  - quantity: 1
+    unit: tbsp
+    item: apple cider vinegar
+  - quantity: 1
+    unit: tsp
+    item: Dijon mustard
+  - item: pinch of salt
   To serve:
-  - greens of your choice, such as tenderstem broccoli or cavalo nero, prepared in your favourite way
-
-
+  - item: greens of your choice, such as tenderstem broccoli or cavalo nero, prepared
+      in your favourite way
 recipeInstructions:
 - Wash the Jersey Royals and cut them in to bite sized pieces.
 - Boil them until they're fork tender, about 15 minutes

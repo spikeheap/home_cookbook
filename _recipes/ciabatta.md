@@ -20,12 +20,19 @@ cookTime: PT1H
 recipeYield: Makes 4 small loaves
 
 recipeIngredient:
-- 500g strong white bread flour, plus extra for dusting
-- 10g salt
-- 20g fresh yeast (or 10g instant yeast)
-- fine semolina, for dusting
-- 440ml cold water
-
+- quantity: 500
+  unit: g
+  item: strong white bread flour, plus extra for dusting
+- quantity: 10
+  unit: g
+  item: salt
+- quantity: 20
+  unit: g
+  item: fresh yeast (or 10g instant yeast)
+- item: fine semolina, for dusting
+- quantity: 440
+  unit: ml
+  item: cold water
 recipeInstructions:
   - 'Add the flour, salt and yeast with 330ml cold water to a mixer bowl. Mix with a dough hook at slow speed until it starts to come together.'
   - "Turn the mixer up to medium. Slowly add the remaining 110ml water. It will be wet!. You might not need all the additional water, so stop if it's nearing a batter. Mix for 8-10 minutes, until the dough is smooth and stretchy."

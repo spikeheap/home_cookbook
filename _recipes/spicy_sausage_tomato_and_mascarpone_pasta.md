@@ -17,13 +17,22 @@ recipeYield: 4 people
 
 recipeIngredient:
   Barbacoa marinade:
-    - 2 pork, fennel and chilli sausages, meat squeezed out of the casings and roughly chopped
-    - 2 tbsp olive oil
-    - 1 (400g) tin finely chopped tomatoes
-    - 400g short pasta, such as fusilli, penne, mafalda corta or orecchiette
-    - 125g mascarpone
-    - ½ whole nutmeg (approx.), grated
-
+  - quantity: 2
+    item: pork, fennel and chilli sausages, meat squeezed out of the casings and roughly
+      chopped
+  - quantity: 2
+    unit: tbsp
+    item: olive oil
+  - quantity: 1
+    item: "(400g) tin finely chopped tomatoes"
+  - quantity: 400
+    unit: g
+    item: short pasta, such as fusilli, penne, mafalda corta or orecchiette
+  - quantity: 125
+    unit: g
+    item: mascarpone
+  - quantity: 0.5
+    item: whole nutmeg (approx.), grated
 recipeInstructions:
 - In a pan, fry the sausage meat in the olive oil over a medium-high heat for 5 mins, until just browning.
 - Stir in the chopped tomatoes, reduce the heat to medium-low and cook for 10 mins, or until thickened and rich. Season to taste.

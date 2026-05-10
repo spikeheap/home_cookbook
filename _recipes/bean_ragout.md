@@ -15,17 +15,33 @@ cookTime: PT3H
 recipeYield: 8 people
 
 recipeIngredient:
-  - 1 large onion (finely chopped)
-  - 3 garlic cloves (finely chopped)
-  - 1 tablespoon ground cumin
-  - 1 teaspoon dried oregano
-  - 2 teaspoons smoked paprika
-  - 450g dried black beans, rinsed but not soaked
-  - 1 dried chilli
-  - 2 tablespoons tomato purée
-  - 2.5l unsalted vegetable/chicken stock
-  - 1 tablespoon lime juice or sherry vinegar
-
+- quantity: 1
+  item: large onion (finely chopped)
+- quantity: 3
+  item: garlic cloves (finely chopped)
+- quantity: 1
+  unit: tbsp
+  item: ground cumin
+- quantity: 1
+  unit: tsp
+  item: dried oregano
+- quantity: 2
+  unit: tsp
+  item: smoked paprika
+- quantity: 450
+  unit: g
+  item: dried black beans, rinsed but not soaked
+- quantity: 1
+  item: dried chilli
+- quantity: 2
+  unit: tbsp
+  item: tomato purée
+- quantity: 2.5
+  unit: l
+  item: unsalted vegetable/chicken stock
+- quantity: 1
+  unit: tbsp
+  item: lime juice or sherry vinegar
 recipeInstructions:
   - Lightly brown the onion and garlic in a large pot over a medium heat
   - Add the spices to the pan and sauté for a minute

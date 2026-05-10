@@ -14,11 +14,18 @@ author:
   name: Granny Bo
 recipeYield: Makes 24 cookies
 recipeIngredient:
-- 250g softened butter
-- 250g icing sugar
-- 2 egg whites
-- 500g flour
-- vanilla extract
+- quantity: 250
+  unit: g
+  item: softened butter
+- quantity: 250
+  unit: g
+  item: icing sugar
+- quantity: 2
+  item: egg whites
+- quantity: 500
+  unit: g
+  item: flour
+- item: vanilla extract
 recipeInstructions:
 - Preheat the oven to 150C
 - Beat sugar and butter together till pale and combined

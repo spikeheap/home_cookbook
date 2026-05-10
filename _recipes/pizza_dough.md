@@ -14,11 +14,21 @@ prepTime: PT12H
 cookTime: PT30M
 recipeYield: 2
 recipeIngredient:
-- 250g 00 flour (or strong bread flour in a pinch)
-- 160ml of water
-- 20ml of olive oil
-- 5g of fast-acting yeast
-- 5g of salt
+- quantity: 250
+  unit: g
+  item: 00 flour (or strong bread flour in a pinch)
+- quantity: 160
+  unit: ml
+  item: water
+- quantity: 20
+  unit: ml
+  item: olive oil
+- quantity: 5
+  unit: g
+  item: fast-acting yeast
+- quantity: 5
+  unit: g
+  item: salt
 recipeInstructions:
 - Add all the ingredients in a bowl (keeping salt and yeast as separate as possible).
 - Mix and knead for 5-10 minutes.

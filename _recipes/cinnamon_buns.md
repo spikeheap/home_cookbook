@@ -16,23 +16,49 @@ cookTime: PT20M
 recipeYield: 12
 recipeIngredient:
   For The Dough:
-    - 200g Full Fat Milk
-    - 2 Medium Eggs
-    - 600g Strong White Bread Flour
-    - 25g Fresh Yeast
-    - 50g Caster Sugar
-    - 10g Salt
-    - 200g Unsalted Butter
+  - quantity: 200
+    unit: g
+    item: Full Fat Milk
+  - quantity: 2
+    item: Medium Eggs
+  - quantity: 600
+    unit: g
+    item: Strong White Bread Flour
+  - quantity: 25
+    unit: g
+    item: Fresh Yeast
+  - quantity: 50
+    unit: g
+    item: Caster Sugar
+  - quantity: 10
+    unit: g
+    item: Salt
+  - quantity: 200
+    unit: g
+    item: Unsalted Butter
   For The Filling:
-    - 100g Unsalted Butter
-    - 150g Soft Brown Sugar
-    - 1.5 Tsp Cinnamon
+  - quantity: 100
+    unit: g
+    item: Unsalted Butter
+  - quantity: 150
+    unit: g
+    item: Soft Brown Sugar
+  - quantity: 1.5
+    unit: tsp
+    item: Cinnamon
   For The Egg Glaze:
-    - 1 Egg
-    - 2 Tbsp Full Fat Milk
+  - quantity: 1
+    item: Egg
+  - quantity: 2
+    unit: tbsp
+    item: Full Fat Milk
   For The Sugar Glaze:
-    - 100g Caster Sugar
-    - 100g Water
+  - quantity: 100
+    unit: g
+    item: Caster Sugar
+  - quantity: 100
+    unit: g
+    item: Water
 recipeInstructions:
   - Add the milk and eggs to the food mixer bowl.
   - Add the flour, salt, sugar and butter over the wet ingredients, and mix gently to get the salt away from the surface.

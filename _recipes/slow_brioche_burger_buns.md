@@ -13,15 +13,30 @@ cookTime: PT4H
 recipeYield: 12 buns
 
 recipeIngredient:
-  - 600g strong white bread flour, plus extra for kneading
-  - 1½ tsp salt
-  - 2 tsp fast-action dried yeast
-  - 2 tbsp caster sugar
-  - 100g unsalted butter, softened
-  - 2 medium eggs, beaten
-  - 50ml tepid milk
-  - 225-250ml tepid water
-
+- quantity: 600
+  unit: g
+  item: strong white bread flour, plus extra for kneading
+- quantity: 1.5
+  unit: tsp
+  item: salt
+- quantity: 2
+  unit: tsp
+  item: fast-action dried yeast
+- quantity: 2
+  unit: tbsp
+  item: caster sugar
+- quantity: 100
+  unit: g
+  item: unsalted butter, softened
+- quantity: 2
+  item: medium eggs, beaten
+- quantity: 50
+  unit: ml
+  item: tepid milk
+- quantity: 225
+  quantity_max: 250
+  unit: ml
+  item: tepid water
 recipeInstructions:
   - Mix all the dough ingredients except the butter
   - Once the dough has come together, add the butter in small chunks until all is incorporated.

@@ -10,13 +10,18 @@ prepTime: PT5M
 recipeYield: 1 bowl
 
 recipeIngredient:
-  - 4 tomatoes
-  - 1 small red onion
-  - 1 tbsp jalapeño peppers, or a small fresh chili
-  - 2 garlic cloves, crushed
-  - small bunch coriander
-  - 1 lime
-
+- quantity: 4
+  item: tomatoes
+- quantity: 1
+  item: small red onion
+- quantity: 1
+  unit: tbsp
+  item: jalapeño peppers, or a small fresh chili
+- quantity: 2
+  item: garlic cloves, crushed
+- item: small bunch coriander
+- quantity: 1
+  item: lime
 recipeInstructions:
 - Finely chop everything but the lime and mix
 - Squeeze lime juice over it and season

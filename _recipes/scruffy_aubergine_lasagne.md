@@ -14,19 +14,36 @@ cookTime: PT1H
 recipeYield: 6 people
 
 recipeIngredient:
-  - 3 large aubergines, halved lengthways (1.2kg total)
-  - 3 onions, peeled and quartered
-  - 6 cloves of garlic, finely sliced
-  - 1 bunch of fresh sage leaves
-  - olive oil
-  - 1 teaspoon dried chilli flakes
-  - 1 lemon
-  - 2 x 400g tins of quality plum tomatoes
-  - 80g mature Cheddar cheese, grated
-  - 80g Parmesan cheese, grated
-  - 300g fresh lasagne sheets, torn
-  - 50g blanched almonds
-
+- quantity: 3
+  item: large aubergines, halved lengthways (1.2kg total)
+- quantity: 3
+  item: onions, peeled and quartered
+- quantity: 6
+  unit: clove
+  item: garlic, finely sliced
+- quantity: 1
+  unit: bunch
+  item: fresh sage leaves
+- item: olive oil
+- quantity: 1
+  unit: tsp
+  item: dried chilli flakes
+- quantity: 1
+  item: lemon
+- quantity: 2
+  item: x 400g tins of quality plum tomatoes
+- quantity: 80
+  unit: g
+  item: mature Cheddar cheese, grated
+- quantity: 80
+  unit: g
+  item: Parmesan cheese, grated
+- quantity: 300
+  unit: g
+  item: fresh lasagne sheets, torn
+- quantity: 50
+  unit: g
+  item: blanched almonds
 recipeInstructions:
   - Add 250ml of water to a large shallow casserole pan, and place over a medium heat.
   - Add the aubergine and onions, cover with a lid and cook for 20 minutes.

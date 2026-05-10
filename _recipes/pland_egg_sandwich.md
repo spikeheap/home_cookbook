@@ -12,14 +12,14 @@ cookTime: PT10M
 recipeYield: 1 person
 
 recipeIngredient:
-  - 1/2 a cup shredded cabbage
-  - 2 eggs
-  - Salt and pepper
-  - Slice of bread
-  - Ham or other topping
-  - Kethcup/Mayonnaise/Hot Sauce
-
-
+- quantity: 0.5
+  item: a cup shredded cabbage
+- quantity: 2
+  item: eggs
+- item: Salt and pepper
+- item: Slice of bread
+- item: Ham or other topping
+- item: Kethcup/Mayonnaise/Hot Sauce
 recipeInstructions:
 - Put the shredded cabbage in a bowl and crack the eggs.
 - Mix until the eggs and the cabbage look like they're part of the same mixture.

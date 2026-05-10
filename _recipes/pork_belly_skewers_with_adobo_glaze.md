@@ -16,19 +16,33 @@ recipeYield: 6 people
 
 recipeIngredient:
   Barbacoa marinade:
-    - 1 kg pork belly slices, cut into 3 cm pieces
-    - 2 garlic cloves, roughly chopped
-    - 1 onion, roughly chopped
-    - 2 bay leaves
-    - 1 tsp soft brown sugar
-    - 80ml dark soy sauce
-    - 80ml distilled white vinegar
-    - 6 black peppercorns, whole
-    - 2 red onions
-    - 2 (250g) packs pak choi, halved lengthways
-    - ½ tbsp olive oil
-
-
+  - quantity: 1
+    unit: kg
+    item: pork belly slices, cut into 3 cm pieces
+  - quantity: 2
+    item: garlic cloves, roughly chopped
+  - quantity: 1
+    item: onion, roughly chopped
+  - quantity: 2
+    item: bay leaves
+  - quantity: 1
+    unit: tsp
+    item: soft brown sugar
+  - quantity: 80
+    unit: ml
+    item: dark soy sauce
+  - quantity: 80
+    unit: ml
+    item: distilled white vinegar
+  - quantity: 6
+    item: black peppercorns, whole
+  - quantity: 2
+    item: red onions
+  - quantity: 2
+    item: "(250g) packs pak choi, halved lengthways"
+  - quantity: 0.5
+    unit: tbsp
+    item: olive oil
 recipeInstructions:
 - Put the pork, garlic, onion, bay leaves, sugar, soy, vinegar, peppercorns and 250ml water in a large, deep pan. Bring to a brisk simmer over a high heat. Cover, reduce to low heat and simmer for 35 mins or until the pork is cooked.
 - Light the barbecue 30 mins before you start grilling. If you’re using wooden skewers, soak them in water for 20 mins.

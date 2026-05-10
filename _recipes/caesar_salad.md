@@ -16,17 +16,30 @@ recipeYield: Serves 4
 
 recipeIngredient:
   Salad:
-  - 3 tbsp extra-virgin olive oil
-  - 2 slices of slightly stale bread, cubed
-  - 1 romaine lettuce, sliced
-  - 2 chicken breasts
+  - quantity: 3
+    unit: tbsp
+    item: extra-virgin olive oil
+  - quantity: 2
+    unit: slices
+    item: slightly stale bread, cubed
+  - quantity: 1
+    item: romaine lettuce, sliced
+  - quantity: 2
+    item: chicken breasts
   Dressing:
-  - 6-12 tbsp (approx 150ml) [mayonnaise](mayonnaise.html) 
-  - 2 tbsp grated Parmesan cheese
-  - 1/2 garlic clove, crushed
-  - 3-4 anchovies, crushed
-  - a few drops of Worcestershire sauce
-
+  - quantity: 6
+    quantity_max: 12
+    unit: tbsp
+    item: "(approx 150ml) [mayonnaise](mayonnaise.html)"
+  - quantity: 2
+    unit: tbsp
+    item: grated Parmesan cheese
+  - quantity: 0.5
+    item: garlic clove, crushed
+  - quantity: 3
+    quantity_max: 4
+    item: anchovies, crushed
+  - item: a few drops of Worcestershire sauce
 recipeInstructions:
 - Fry the cubes of bread in the extra-virgin olive oil over a fairly low heat (it shouldn't smoke), until they're golden brown.
 - Set to one side and season with salt and pepper

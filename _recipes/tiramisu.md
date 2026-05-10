@@ -11,14 +11,26 @@ cookTime: PT12H
 recipeYield: Serves 12
 
 recipeIngredient:
-- 3 large egg yolks, cold
-- 120 g unpacked powdered sugar, sifted
-- 500 g full-fat mascarpone, cold
-- 27-36 Italian ladyfingers (hard ones)
-- 120 ml cooled brewed espresso or strong coffee
-- 2 tbsp unsweetened cocoa powder
-- 1 tbsp spiced rum
-
+- quantity: 3
+  item: large egg yolks, cold
+- quantity: 120
+  unit: g
+  item: unpacked powdered sugar, sifted
+- quantity: 500
+  unit: g
+  item: full-fat mascarpone, cold
+- quantity: 27
+  quantity_max: 36
+  item: Italian ladyfingers (hard ones)
+- quantity: 120
+  unit: ml
+  item: cooled brewed espresso or strong coffee
+- quantity: 2
+  unit: tbsp
+  item: unsweetened cocoa powder
+- quantity: 1
+  unit: tbsp
+  item: spiced rum
 recipeInstructions:
 - Beat the egg yolks & powdered sugar in a large bowl until creamy
 - Add mascarpone and mix on medium for a minute until smooth

@@ -11,28 +11,51 @@ recipeYield: 4 people
 
 recipeIngredient:
   For the beef:
-  - 400g extra-lean beef
-  - 1 tablespoon chili powder
-  - ¼ teaspoon garlic powder
-  - ¼ teaspoon onion powder
-  - ¼ teaspoon crushed red pepper flakes
-  - ¼ teaspoon dried oregano
-  - ½ teaspoon paprika
-  - 1 ½ teaspoons ground cumin
-  - 1 teaspoon sea salt
-  - 1 teaspoon black pepper
+  - quantity: 400
+    unit: g
+    item: extra-lean beef
+  - quantity: 1
+    unit: tbsp
+    item: chili powder
+  - quantity: 0.25
+    unit: tsp
+    item: garlic powder
+  - quantity: 0.25
+    unit: tsp
+    item: onion powder
+  - quantity: 0.25
+    unit: tsp
+    item: crushed red pepper flakes
+  - quantity: 0.25
+    unit: tsp
+    item: dried oregano
+  - quantity: 0.5
+    unit: tsp
+    item: paprika
+  - quantity: 1
+    item: " ½ teaspoons ground cumin"
+  - quantity: 1
+    unit: tsp
+    item: sea salt
+  - quantity: 1
+    unit: tsp
+    item: black pepper
   Other fillings:
-  - 250g cheddar cheese
-  - 1 onion
-  - 2 peppers
-  - 2 tomatoes, de-seeded
-  - Lettuce, for decoration (you might intend to add it, but you never will)
+  - quantity: 250
+    unit: g
+    item: cheddar cheese
+  - quantity: 1
+    item: onion
+  - quantity: 2
+    item: peppers
+  - quantity: 2
+    item: tomatoes, de-seeded
+  - item: Lettuce, for decoration (you might intend to add it, but you never will)
   To serve:
-  - 16 taco shells
-  - Old El Paso extra-hot salsa
-  - Lime (not traditional at all)
-
-
+  - quantity: 16
+    item: taco shells
+  - item: Old El Paso extra-hot salsa
+  - item: Lime (not traditional at all)
 recipeInstructions:
 - Prepare the non-meat fillings. Grate the cheese (always make more than you think you'll need). Finely dice the rest of the fillings and place in separate bowls. Squeeze a little lime over the onions to keep them fresh.
 - Preheat the oven to 200℃ for the taco shells.

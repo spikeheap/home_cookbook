@@ -13,12 +13,21 @@ image:
 - /images/sourdough-2160w.jpg
 
 recipeIngredient:
-- 500g strong white flour
-- 300g sourdough starter
-- 1 tsp fine salt
-- 1 tbsp malt extract or honey
-- 225ml warm water
-
+- quantity: 500
+  unit: g
+  item: strong white flour
+- quantity: 300
+  unit: g
+  item: sourdough starter
+- quantity: 1
+  unit: tsp
+  item: fine salt
+- quantity: 1
+  unit: tbsp
+  item: malt extract or honey
+- quantity: 225
+  unit: ml
+  item: warm water
 recipeInstructions:
   Prep:
   - Add everything into a large mixing bowl, and stir/mix on slow speed until combined. Add a little extra water if it's too dry.

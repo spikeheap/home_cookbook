@@ -11,19 +11,34 @@ cookTime: PT30M
 recipeYield: 2
 
 recipeIngredient:
-- 2 tbsp oil
-- 1 tsp turmeric
-- 1 tsp hot chilli powder
-- 230g paneer
-- 500g spinach
-- 1 red onion
-- 2 garlic cloves
-- thumb-sized piece of ginger
-- 1 small green chilli
-- 1 tsp garam masala
-- 1 lemon
-- rice, to serve
-
+- quantity: 2
+  unit: tbsp
+  item: oil
+- quantity: 1
+  unit: tsp
+  item: turmeric
+- quantity: 1
+  unit: tsp
+  item: hot chilli powder
+- quantity: 230
+  unit: g
+  item: paneer
+- quantity: 500
+  unit: g
+  item: spinach
+- quantity: 1
+  item: red onion
+- quantity: 2
+  item: garlic cloves
+- item: thumb-sized piece of ginger
+- quantity: 1
+  item: small green chilli
+- quantity: 1
+  unit: tsp
+  item: garam masala
+- quantity: 1
+  item: lemon
+- item: rice, to serve
 recipeInstructions:
   - Start by cooking the rice.
   - Chop the paneer into 2cm cubes.

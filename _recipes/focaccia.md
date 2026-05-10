@@ -20,13 +20,23 @@ suitableForDiet:
 - http://schema.org/VeganDiet
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 500g strong white flour
-- 2 tsp salt
-- 1 sachet (7g) dried easy blend yeast
-- 2 tbsp olive oil
-- 400ml cold water
-- olive oil, for drizzling
-- fine sea salt
+- quantity: 500
+  unit: g
+  item: strong white flour
+- quantity: 2
+  unit: tsp
+  item: salt
+- quantity: 1
+  unit: sachet
+  item: "(7g) dried easy blend yeast"
+- quantity: 2
+  unit: tbsp
+  item: olive oil
+- quantity: 400
+  unit: ml
+  item: cold water
+- item: olive oil, for drizzling
+- item: fine sea salt
 recipeInstructions:
 - Place the flour, salt, yeast, olive oil and 300ml/10½fl oz of the water into a large
   bowl. Gently stir with your hand or a wooden spoon to form a dough, then knead the

@@ -12,12 +12,18 @@ cookTime: PT10M
 recipeYield: 2 person
 
 recipeIngredient:
-  - 250g strong white bread flour
-  - 7g sachet yeast
-  - 1 tsp golden caster sugar
-  - 2 tsp olive oil, plus a little for greasing
-
-
+- quantity: 250
+  unit: g
+  item: strong white bread flour
+- quantity: 7
+  unit: g
+  item: sachet yeast
+- quantity: 1
+  unit: tsp
+  item: golden caster sugar
+- quantity: 2
+  unit: tsp
+  item: olive oil, plus a little for greasing
 recipeInstructions:
   - Put all the ingredients in a stand mixer and knead for about 10 minutes until the dough is smooth and not sticky.
   - Let the dough rise an hour to and hour and half depending on ambient temperature.

@@ -12,11 +12,15 @@ cookTime: PT1H
 recipeYield: 2 jars
 
 recipeIngredient:
-  - 900g pear flesh (after peeling and coring)
-  - 300g caster sugar (1/3 volume of fruit)
-  - Juice of 1 lemon
-  - 3 cardamom pods
-
+- quantity: 900
+  unit: g
+  item: pear flesh (after peeling and coring)
+- quantity: 300
+  unit: g
+  item: caster sugar (1/3 volume of fruit)
+- item: Juice of 1 lemon
+- quantity: 3
+  item: cardamom pods
 recipeInstructions:
   - Peel & core the pears
   - Chop into small pieces that are perfect for jam. They'll be soft and break down a bit once cooked.

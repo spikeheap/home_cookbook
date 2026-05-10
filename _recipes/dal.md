@@ -22,19 +22,33 @@ suitableForDiet:
 - http://schema.org/VegetarianDiet
 
 recipeIngredient:
-- 250g/9oz toor dal (yellow split pigeon peas)
-- 2 tbsp vegetable oil
-- 4 onions, chopped
-- 2 red chilli, finely chopped (seeds removed if preferred)
-- 8 garlic cloves, crushed
-- 1 tsp ground turmeric
-- 1 tsp chilli powder
-- 2 tsp ground cumin
-- 3 small dried red chillies
-- 2 floury potatoes, peeled and cut into 5mm dice
-- 2 tomatoes, roughly chopped
-- large handful fresh coriander leaves
-
+- quantity: 250
+  item: g/9oz toor dal (yellow split pigeon peas)
+- quantity: 2
+  unit: tbsp
+  item: vegetable oil
+- quantity: 4
+  item: onions, chopped
+- quantity: 2
+  item: red chilli, finely chopped (seeds removed if preferred)
+- quantity: 8
+  item: garlic cloves, crushed
+- quantity: 1
+  unit: tsp
+  item: ground turmeric
+- quantity: 1
+  unit: tsp
+  item: chilli powder
+- quantity: 2
+  unit: tsp
+  item: ground cumin
+- quantity: 3
+  item: small dried red chillies
+- quantity: 2
+  item: floury potatoes, peeled and cut into 5mm dice
+- quantity: 2
+  item: tomatoes, roughly chopped
+- item: large handful fresh coriander leaves
 recipeInstructions:
 - Soak the split peas overnight.
 - Fry the onion until softened, then add the chilli and garlic.

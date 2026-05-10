@@ -11,16 +11,26 @@ cookTime: PT20M
 recipeYield: Serves 2
 
 recipeIngredient:
-- 2 red onions
-- 1 red pepper
-- 1 mild chili
-- 100g tomatoes (if you like)
-- 50-100g chorizo
-- 4 eggs
-- dash of milk
-- 2-4 wraps
-- Cholula hot sauce
-
+- quantity: 2
+  item: red onions
+- quantity: 1
+  item: red pepper
+- quantity: 1
+  item: mild chili
+- quantity: 100
+  unit: g
+  item: tomatoes (if you like)
+- quantity: 50
+  quantity_max: 100
+  unit: g
+  item: chorizo
+- quantity: 4
+  item: eggs
+- item: dash of milk
+- quantity: 2
+  quantity_max: 4
+  item: wraps
+- item: Cholula hot sauce
 recipeInstructions:
   - Slice the onions, pepper, and chili. Halve the cherry tomatoes.
   - Add the onions to a sauté pan over medium/high heat with a glug of oil, and sprinkle with a little salt to help them brown.

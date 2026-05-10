@@ -12,17 +12,25 @@ recipeYield: 1 × 12" pizza
 
 recipeIngredient:
   Base (margherita):
-  - 1 ball [pizza dough](pizza_dough_gozney.html)
-  - 3 tbsp [tomato sauce](pizza_tomato_sauce.html)
-  - 100g fior di latte mozzarella, torn into pieces
-  - A few fresh basil leaves
+  - quantity: 1
+    unit: ball
+    item: "[pizza dough](pizza_dough_gozney.html)"
+  - quantity: 3
+    unit: tbsp
+    item: "[tomato sauce](pizza_tomato_sauce.html)"
+  - quantity: 100
+    unit: g
+    item: fior di latte mozzarella, torn into pieces
+  - item: A few fresh basil leaves
   Finishing — added after baking:
-  - 4–6 slices Parma ham (prosciutto crudo)
-  - A handful of rocket
-  - Shaved Parmigiano-Reggiano
-  - Olive oil to drizzle
-  - Black pepper
-
+  - quantity: 4
+    quantity_max: 6
+    unit: slices
+    item: Parma ham (prosciutto crudo)
+  - item: A handful of rocket
+  - item: Shaved Parmigiano-Reggiano
+  - item: Olive oil to drizzle
+  - item: Black pepper
 recipeInstructions:
 - Stretch the dough into a 12" round on a well-floured peel.
 - Spread the tomato sauce thinly. Tear over the mozzarella, tuck in half the basil.

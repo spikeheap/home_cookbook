@@ -17,27 +17,43 @@ recipeYield: 4 people
 
 recipeIngredient:
   Barbacoa marinade:
-    - 2 tbsp apple cider vinegar
-    - 2 garlic cloves, finely chopped
-    - 2 tsp ground cumin
-    - 1 tsp dried oregano
-    - A pinch ground cloves
-    - 1 tsp tomato puree
-    - 3 tbsp Wahaca Chipotle Chilli sauce
-    - Juice of ½ lime
-
+  - quantity: 2
+    unit: tbsp
+    item: apple cider vinegar
+  - quantity: 2
+    item: garlic cloves, finely chopped
+  - quantity: 2
+    unit: tsp
+    item: ground cumin
+  - quantity: 1
+    unit: tsp
+    item: dried oregano
+  - item: A pinch ground cloves
+  - quantity: 1
+    unit: tsp
+    item: tomato puree
+  - quantity: 3
+    unit: tbsp
+    item: Wahaca Chipotle Chilli sauce
+  - item: Juice of ½ lime
   To slow cook:
-    - 1 tbsp vegetable oil
-    - 175ml chicken stock
-    - 2 bay leaves
-    - 500g stewing beef, cut into chunks
-    - 1 large red onion, finely sliced
- 
-  To serve: 
-    - Tortillas
-    - Guacamole
-    - Salsa
-
+  - quantity: 1
+    unit: tbsp
+    item: vegetable oil
+  - quantity: 175
+    unit: ml
+    item: chicken stock
+  - quantity: 2
+    item: bay leaves
+  - quantity: 500
+    unit: g
+    item: stewing beef, cut into chunks
+  - quantity: 1
+    item: large red onion, finely sliced
+  To serve:
+  - item: Tortillas
+  - item: Guacamole
+  - item: Salsa
 recipeInstructions:
 - Mix the marinade ingredients in a bowl.
 - Coat the beef in the marinade.

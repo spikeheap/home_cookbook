@@ -11,19 +11,37 @@ cookTime: PT20M
 recipeYield: 20-22 cookies
 
 recipeIngredient:
-  - 125g dark chocolate, chopped
-  - 175g unsalted butter
-  - 175g light brown sugar
-  - 75g caster sugar
-  - 2 free range eggs
-  - 1 tsp vanilla extract
-  - 200g plain flour
-  - 40g cocoa powder
-  - 1 tsp bicarb
-  - 1/2 tsp baking powder
-  - pinch of salt
-  - optional additions like pistachios or other nuts, about 200g
-
+- quantity: 125
+  unit: g
+  item: dark chocolate, chopped
+- quantity: 175
+  unit: g
+  item: unsalted butter
+- quantity: 175
+  unit: g
+  item: light brown sugar
+- quantity: 75
+  unit: g
+  item: caster sugar
+- quantity: 2
+  item: free range eggs
+- quantity: 1
+  unit: tsp
+  item: vanilla extract
+- quantity: 200
+  unit: g
+  item: plain flour
+- quantity: 40
+  unit: g
+  item: cocoa powder
+- quantity: 1
+  unit: tsp
+  item: bicarb
+- quantity: 0.5
+  unit: tsp
+  item: baking powder
+- item: pinch of salt
+- item: optional additions like pistachios or other nuts, about 200g
 recipeInstructions:
   - Melt the dark chocolate in a heatproof bowl over a saucepan of barely simmering water. Stir until smooth, remove from the heat and leave to cool slightly.
   - in a bowl, beat the soft butter with both sugars with a wooden spoon for about 1 minute until smooth and combined but not fluffy (alternatively use an electric whisk). Gradually add the beaten eggs, mixing well between each addition. Add the vanilla and mix again.

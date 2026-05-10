@@ -15,12 +15,20 @@ cookTime: PT90M
 recipeYield: Serves 6
 
 recipeIngredient:
-  - 1 x 1.6 kg whole free-range chicken
-  - 1.2kg butternut squash
-  - 1 bunch of fresh coriander
-  - 100g Thai red curry paste
-  - 400ml tin of light coconut milk
-
+- quantity: 1
+  item: x 1.6 kg whole free-range chicken
+- quantity: 1.2
+  unit: kg
+  item: butternut squash
+- quantity: 1
+  unit: bunch
+  item: fresh coriander
+- quantity: 100
+  unit: g
+  item: Thai red curry paste
+- quantity: 400
+  unit: ml
+  item: tin light coconut milk
 recipeInstructions:
   - Sit the chicken in a large, deep pan.
   - Cut the squash into 3cm chunks, discarding the seeds.

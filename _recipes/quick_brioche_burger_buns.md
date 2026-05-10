@@ -15,19 +15,38 @@ recipeYield: 8 buns
 
 recipeIngredient:
   Buns:
-  - 230ml warm water
-  - 60ml warm whole milk
-  - 7g instant yeast
-  - 25g granulated sugar
-  - 7g salt
-  - 1 egg
-  - 250g plain flour
-  - 220g white whole wheat flour
-  - 25g unsalted butter, cut into 4 pieces
+  - quantity: 230
+    unit: ml
+    item: warm water
+  - quantity: 60
+    unit: ml
+    item: warm whole milk
+  - quantity: 7
+    unit: g
+    item: instant yeast
+  - quantity: 25
+    unit: g
+    item: granulated sugar
+  - quantity: 7
+    unit: g
+    item: salt
+  - quantity: 1
+    item: egg
+  - quantity: 250
+    unit: g
+    item: plain flour
+  - quantity: 220
+    unit: g
+    item: white whole wheat flour
+  - quantity: 25
+    unit: g
+    item: unsalted butter, cut into 4 pieces
   Egg wash:
-  - 1 egg
-  - 1 tablespoon milk
-
+  - quantity: 1
+    item: egg
+  - quantity: 1
+    unit: tbsp
+    item: milk
 recipeInstructions:
 - Line a baking sheet with parchment paper or a silicone baking mat.
 - Combine the warm water, warm milk, yeast and sugar in the bowl of a stand mixer. Stir gently to combine. Let stand for 5 minutes.

@@ -26,17 +26,36 @@ recipeYield: 4–6 servings
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 500g cauliflower
-- 30g plain flour
-- 30g butter
-- 400g whole milk
-- 3 bay leaves
-- 1 pinch of freshly grated nutmeg
-- 1 dash of white wine vinegar
-- 175g mature cheddar (or a mix of smoked cheddar and Parmesan), grated
-- 1 tsp English mustard
-- 1 tbsp Panko breadcrumbs
-- sea salt and freshly ground black pepper
+- quantity: 500
+  unit: g
+  item: cauliflower
+- quantity: 30
+  unit: g
+  item: plain flour
+- quantity: 30
+  unit: g
+  item: butter
+- quantity: 400
+  unit: g
+  item: whole milk
+- quantity: 3
+  item: bay leaves
+- quantity: 1
+  unit: pinch
+  item: freshly grated nutmeg
+- quantity: 1
+  unit: dash
+  item: white wine vinegar
+- quantity: 175
+  unit: g
+  item: mature cheddar (or a mix of smoked cheddar and Parmesan), grated
+- quantity: 1
+  unit: tsp
+  item: English mustard
+- quantity: 1
+  unit: tbsp
+  item: Panko breadcrumbs
+- item: sea salt and freshly ground black pepper
 recipeInstructions:
 - Gently heat the milk in a small pan or microwave with the bay leaves until warm.
 - Place a saucepan over a medium heat with the flour and butter. Use a spatula to

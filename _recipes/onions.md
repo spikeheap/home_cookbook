@@ -13,13 +13,21 @@ recipeYield: Serves 4
 
 
 recipeIngredient:
-- 8 red or white onions, roots left intact
-- knob of butter or oil
-- 1 tbsp light brown sugar
-- 2 tbsp balsamic, sherry or red wine vinegar
-- 100ml veg stock
-- 2 sprigs fresh thyme
-
+- quantity: 8
+  item: red or white onions, roots left intact
+- item: knob of butter or oil
+- quantity: 1
+  unit: tbsp
+  item: light brown sugar
+- quantity: 2
+  unit: tbsp
+  item: balsamic, sherry or red wine vinegar
+- quantity: 100
+  unit: ml
+  item: veg stock
+- quantity: 2
+  unit: sprigs
+  item: fresh thyme
 recipeInstructions:
 - Preheat oven to 200℃
 - Place the onions in an oven dish

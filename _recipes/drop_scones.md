@@ -32,16 +32,26 @@ recipeYield: Makes 24
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 175g self-raising flour
-- 1 tsp baking powder
-- 40g caster sugar
-- 1 small orange, zest only
-- '1 free-range egg '
-- 200ml oz milk
-- sunflower oil, for greasing
-- butter, maple syrup or honey
-- Greek-style yoghurt
-- fresh blueberries and raspberries
+- quantity: 175
+  unit: g
+  item: self-raising flour
+- quantity: 1
+  unit: tsp
+  item: baking powder
+- quantity: 40
+  unit: g
+  item: caster sugar
+- quantity: 1
+  item: small orange, zest only
+- quantity: 1
+  item: free-range egg
+- quantity: 200
+  unit: ml
+  item: oz milk
+- item: sunflower oil, for greasing
+- item: butter, maple syrup or honey
+- item: Greek-style yoghurt
+- item: fresh blueberries and raspberries
 recipeInstructions:
 - 'Place the flour, baking powder, sugar and orange zest in a mixing bowl. Make a
   well in the centre and then add the egg and half of the milk. Beat well with a whisk

@@ -20,10 +20,15 @@ recipeYield: Makes 12
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 140g plain flour
-- 4 eggs (about 200ml)
-- 200ml milk
-- oil
+- quantity: 140
+  unit: g
+  item: plain flour
+- quantity: 4
+  item: eggs (about 200ml)
+- quantity: 200
+  unit: ml
+  item: milk
+- item: oil
 recipeInstructions:
 - Heat the oven to 210°C fan. Add oil to 12-hole non-stick muffin tin and place in the oven to heat through.
 - Beat the eggs and flour until smooth

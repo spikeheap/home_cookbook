@@ -22,8 +22,8 @@ recipeYield: 1–12 eggs
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- eggs (as many as required, up to 12)
-- ice, for the ice bath
+- item: eggs (as many as required, up to 12)
+- item: ice, for the ice bath
 recipeInstructions:
 - Set the sous vide to 63°C
 - Add eggs and cook for 45 minutes to 1 hour

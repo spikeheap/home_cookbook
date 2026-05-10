@@ -13,15 +13,23 @@ recipeYield: 1 loaf (about 10 slices)
 
 recipeIngredient:
   For the cake:
-    - 225g unsalted butter, softened
-    - 225g caster sugar
-    - 4 eggs
-    - 225g self-raising flour
-    - Zest of 1 lemon
+  - quantity: 225
+    unit: g
+    item: unsalted butter, softened
+  - quantity: 225
+    unit: g
+    item: caster sugar
+  - quantity: 4
+    item: eggs
+  - quantity: 225
+    unit: g
+    item: self-raising flour
+  - item: Zest of 1 lemon
   For the drizzle topping:
-    - Juice of 1½ lemons
-    - 85g caster sugar
-
+  - item: Juice of 1½ lemons
+  - quantity: 85
+    unit: g
+    item: caster sugar
 recipeInstructions:
   - Heat the oven to 180°C/160°C fan/gas 4.
   - Beat together the butter and caster sugar until pale and creamy, then add the eggs one at a time, slowly mixing through.

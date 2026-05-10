@@ -14,20 +14,41 @@ cookTime: PT1H
 recipeYield: 8 people
 
 recipeIngredient:
-  - 12 chicken thighs , skin on, bone in
-  - 8 tablespoons natural yoghurt
-  - 1½ teaspoons salt
-  - 2 teaspoons garam masala
-  - 2 teaspoons turmeric powder
-  - 2 teaspoons chilli powder
-  - 6 garlic cloves , grated
-  - 4 tablespoons sunflower oil
-  - 2 teaspoons cumin seeds
-  - 8 onions , roughly choped
-  - 2 x 400 g tins of chopped tomatoes
-  - 900 g basmati rice (75g per serving)
-  - 1 handful of fresh coriander leaves , finely chopped (10g)
-
+- quantity: 12
+  item: chicken thighs , skin on, bone in
+- quantity: 8
+  unit: tbsp
+  item: natural yoghurt
+- quantity: 1.5
+  unit: tsp
+  item: salt
+- quantity: 2
+  unit: tsp
+  item: garam masala
+- quantity: 2
+  unit: tsp
+  item: turmeric powder
+- quantity: 2
+  unit: tsp
+  item: chilli powder
+- quantity: 6
+  item: garlic cloves , grated
+- quantity: 4
+  unit: tbsp
+  item: sunflower oil
+- quantity: 2
+  unit: tsp
+  item: cumin seeds
+- quantity: 8
+  item: onions , roughly choped
+- quantity: 2
+  item: x 400 g tins of chopped tomatoes
+- quantity: 900
+  unit: g
+  item: basmati rice (75g per serving)
+- quantity: 1
+  unit: handful
+  item: fresh coriander leaves , finely chopped (10g)
 recipeInstructions:
   - Remove the chicken thigh skins (roast with salt for 20-25 minutes to crisp). Mix the yoghurt, salt, garam masala, turmeric, chilli powder and garlic. Add chicken and set aside.
   - Heat the oil in a pan and add the cumin seeds. Once they begin to sizzle, add the onions and cook for 10 to 12 minutes on a medium heat, or until they turn golden.

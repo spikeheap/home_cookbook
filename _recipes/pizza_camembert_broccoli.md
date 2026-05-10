@@ -12,16 +12,24 @@ recipeYield: 1 × 12" pizza
 
 recipeIngredient:
   Base:
-  - 1 ball [pizza dough](pizza_dough_gozney.html)
-  - 3 tbsp [tomato sauce](pizza_tomato_sauce.html)
+  - quantity: 1
+    unit: ball
+    item: "[pizza dough](pizza_dough_gozney.html)"
+  - quantity: 3
+    unit: tbsp
+    item: "[tomato sauce](pizza_tomato_sauce.html)"
   Toppings:
-  - 100g camembert, sliced into thin wedges
-  - 100g tenderstem broccoli, blanched 60 seconds and shocked in cold water
-  - 1 garlic clove, finely sliced
-  - Pinch of chilli flakes
-  - Olive oil to drizzle
-  - Salt and black pepper
-
+  - quantity: 100
+    unit: g
+    item: camembert, sliced into thin wedges
+  - quantity: 100
+    unit: g
+    item: tenderstem broccoli, blanched 60 seconds and shocked in cold water
+  - quantity: 1
+    item: garlic clove, finely sliced
+  - item: Pinch of chilli flakes
+  - item: Olive oil to drizzle
+  - item: Salt and black pepper
 recipeInstructions:
 - Stretch the dough into a 12" round on a well-floured peel.
 - Spread the tomato sauce thinly to within 1cm of the edge.

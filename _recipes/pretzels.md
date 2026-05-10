@@ -29,20 +29,44 @@ recipeYield: Makes 12
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 500g strong white flour
-- 10g salt
-- 7g fast-action yeast, or 18g fresh yeast
-- 40g butter, softened
-- '1 tbsp malt extract '
-- 280ml milk
-- 2 oranges, zest only
-- '50g poppy seeds '
-- oil, for greasing
-- 21g bicarbonate of soda
-- 20g rock salt
-- 50g sesame seeds
-- 3 oranges, juice of 3, zest of 1 cut into thin slithers
-- 125g sugar
+- quantity: 500
+  unit: g
+  item: strong white flour
+- quantity: 10
+  unit: g
+  item: salt
+- quantity: 7
+  unit: g
+  item: fast-action yeast, or 18g fresh yeast
+- quantity: 40
+  unit: g
+  item: butter, softened
+- quantity: 1
+  unit: tbsp
+  item: malt extract
+- quantity: 280
+  unit: ml
+  item: milk
+- quantity: 2
+  item: oranges, zest only
+- quantity: 50
+  unit: g
+  item: poppy seeds
+- item: oil, for greasing
+- quantity: 21
+  unit: g
+  item: bicarbonate of soda
+- quantity: 20
+  unit: g
+  item: rock salt
+- quantity: 50
+  unit: g
+  item: sesame seeds
+- quantity: 3
+  item: oranges, juice of 3, zest of 1 cut into thin slithers
+- quantity: 125
+  unit: g
+  item: sugar
 recipeInstructions:
 - 'Add the flour, salt, yeast and butter to a bowl. In a jug, add the malt extract
   to the milk and stir to dissolve. Add the milk mixture gradually to the flour and

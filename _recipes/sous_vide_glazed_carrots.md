@@ -24,11 +24,17 @@ recipeYield: 4 servings
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- 450g baby carrots, peeled or well-scrubbed; or medium-large carrots, peeled and
-  cut into 2.5cm chunks
-- 2 tbsp (30g) unsalted butter
-- ½ tsp kosher salt
-- freshly ground black pepper
+- quantity: 450
+  unit: g
+  item: baby carrots, peeled or well-scrubbed; or medium-large carrots, peeled and
+    cut into 2.5cm chunks
+- quantity: 2
+  unit: tbsp
+  item: "(30g) unsalted butter"
+- quantity: 0.5
+  unit: tsp
+  item: kosher salt
+- item: freshly ground black pepper
 recipeInstructions:
 - Set the sous vide to 84°C.
 - Combine the carrots, butter, salt, and a few grinds of pepper in a

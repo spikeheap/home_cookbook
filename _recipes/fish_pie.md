@@ -16,20 +16,38 @@ cookTime: PT40M
 recipeYield: 4
 
 recipeIngredient:
-- 1kg potatoes
-- 1 carrot
-- 2 sticks celery
-- 150 g good-quality Cheddar cheese
-- 1 lemon
-- ½ fresh red chilli
-- 4 sprigs fresh flat-leaf parsley
-- 300 g salmon, skin off, bones removed & cut into chunks
-- 300 g undyed smoked haddock fillets, skin off, bones removed & cut into chunks
-- 125 g raw peeled king prawns
-- olive oil
-- 1 good handful spinach, chopped
-- 2 ripe tomatoes, quartered, optional
-
+- quantity: 1
+  unit: kg
+  item: potatoes
+- quantity: 1
+  item: carrot
+- quantity: 2
+  unit: sticks
+  item: celery
+- quantity: 150
+  unit: g
+  item: good-quality Cheddar cheese
+- quantity: 1
+  item: lemon
+- quantity: 0.5
+  item: fresh red chilli
+- quantity: 4
+  unit: sprigs
+  item: fresh flat-leaf parsley
+- quantity: 300
+  unit: g
+  item: salmon, skin off, bones removed & cut into chunks
+- quantity: 300
+  unit: g
+  item: undyed smoked haddock fillets, skin off, bones removed & cut into chunks
+- quantity: 125
+  unit: g
+  item: raw peeled king prawns
+- item: olive oil
+- quantity: 1
+  item: good handful spinach, chopped
+- quantity: 2
+  item: ripe tomatoes, quartered, optional
 recipeInstructions:
   - Preheat the oven to 200°C and bring a large pan of salted water to the boil. 
   - Peel the potatoes and cut into 2cm chunks. Once the water is boiling, add your potatoes and cook for around 12 minutes, until soft (you can stick your knife into them to check).
