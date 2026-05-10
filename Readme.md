@@ -39,6 +39,7 @@ tags: [bread, baking, vegan]  # free-form, lowercase
 
 - **Sub-recipe scaling.** When you change the scale on a recipe page, only the parent recipe's ingredients are multiplied. Recipes that inline another recipe (e.g. caesar → mayonnaise, pizza → dough/sauce) leave the inlined sub-recipe unchanged. The right model needs a "fraction-of-yield" concept (the parent uses 150ml of a recipe that yields 300ml), which we don't track yet.
 
+- WCAG AA compliance. Currently there are 110 elements with low contrast which need fixing
 ### Resizing an image
 
 ```
