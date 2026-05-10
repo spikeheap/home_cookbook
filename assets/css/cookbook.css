@@ -716,6 +716,111 @@ img { max-width: 100%; height: auto; }
 
 .ingredient-list li:last-child { border-bottom: 0; }
 
+/* Inline sub-recipe disclosure */
+
+.sub-recipe {
+  margin-top: var(--gap-2);
+  border: 1px dashed var(--rule-strong);
+  border-radius: 2px;
+  background: var(--paper);
+  font-size: 0.95rem;
+}
+
+.sub-recipe summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-3);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rust);
+}
+
+.sub-recipe summary::-webkit-details-marker { display: none; }
+
+.sub-recipe summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  font-size: 0.95rem;
+  color: var(--rust);
+}
+
+.sub-recipe[open] summary::before { content: "−"; }
+
+.sub-recipe__name {
+  flex: 1;
+  letter-spacing: 0.12em;
+}
+
+.sub-recipe__yield {
+  color: var(--mute);
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+
+.sub-recipe__body {
+  padding: 0.6rem 0.85rem 0.85rem;
+  border-top: 1px dashed var(--rule);
+}
+
+.sub-recipe__heading {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+  margin: 0.65rem 0 0.3rem;
+  font-weight: 500;
+}
+
+.sub-recipe__heading:first-child { margin-top: 0; }
+
+.sub-recipe__body .ingredient-list,
+.sub-recipe__body .instruction-list {
+  margin-bottom: 0.5rem;
+}
+
+.sub-recipe__body .ingredient-list li {
+  font-size: 0.92rem;
+  padding: 0.3rem 0;
+}
+
+.sub-recipe__body .instruction-list {
+  gap: var(--gap-3);
+}
+
+.sub-recipe__body .instruction-list li {
+  font-size: 0.95rem;
+  grid-template-columns: 1.7rem 1fr;
+  gap: var(--gap-2);
+}
+
+.sub-recipe__body .instruction-list li::before {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
+}
+
+.sub-recipe__more {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rust);
+}
+
+.sub-recipe__more::after {
+  content: " →";
+}
+
 /* Instruction list — large outline-circle numbers in the gutter */
 
 .instruction-section {

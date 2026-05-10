@@ -2,23 +2,31 @@
   Render recipeIngredient. Handles two shapes:
   (1) flat array of strings
   (2) hash where each key is a section name and value is an array of strings
+
+  When inline_sub is unset or true (default), ingredient lines that link
+  to another recipe are rendered with that recipe's ingredients/method
+  expanded inline as a <details>.
+
   Usage: {% include ingredient_list.html list=page.recipeIngredient %}
+         {% include ingredient_list.html list=sub.recipeIngredient inline_sub=false %}
 {%- endcomment -%}
-{%- assign list = include.list -%}
+{%- assign list       = include.list -%}
+{%- assign inline_sub = include.inline_sub -%}
+{%- if inline_sub == nil -%}{%- assign inline_sub = true -%}{%- endif -%}
+
 {%- if list.first.first -%}
-  {%- comment -%} Hash form: each item is [section_name, [ingredients...]] {%- endcomment -%}
   {%- for section in list -%}
     <h3 class="ingredient-section">{{ section.first }}</h3>
     <ul class="ingredient-list">
       {%- for item in section.last -%}
-        <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+        {% include ingredient_item.html item=item inline_sub=inline_sub %}
       {%- endfor -%}
     </ul>
   {%- endfor -%}
 {%- else -%}
   <ul class="ingredient-list">
     {%- for item in list -%}
-      <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+      {% include ingredient_item.html item=item inline_sub=inline_sub %}
     {%- endfor -%}
   </ul>
 {%- endif -%}
