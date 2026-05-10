@@ -13,7 +13,7 @@ recipeYield: 1 × 12" pizza
 recipeIngredient:
   Base (margherita):
   - 1 ball [pizza dough](pizza_dough_gozney.html)
-  - 3 tbsp tomato sauce (passata, olive oil, salt)
+  - 3 tbsp [tomato sauce](pizza_tomato_sauce.html)
   - 100g fior di latte mozzarella, torn into pieces
   - A few fresh basil leaves
   Finishing — added after baking:

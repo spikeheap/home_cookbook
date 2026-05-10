@@ -13,7 +13,7 @@ recipeYield: 1 × 12" pizza
 recipeIngredient:
   Base:
   - 1 ball [pizza dough](pizza_dough_gozney.html)
-  - 3 tbsp tomato sauce (passata, olive oil, salt)
+  - 3 tbsp [tomato sauce](pizza_tomato_sauce.html)
   Toppings:
   - 100g camembert, sliced into thin wedges
   - 100g tenderstem broccoli, blanched 60 seconds and shocked in cold water
