@@ -37,6 +37,10 @@ tags: [bread, baking, vegan]  # free-form, lowercase
 
 ## Future improvements
 
+- **Netlify form to add recipes.** We end up editing the YAML, but we'd rather just edit a form, with GitHub auth probably.
+
+- **Add a scraper script..** I used to have a scraper but it's lost and the schema has changed. Re-add it, maybe with a form trigger to run it as a Netlify function.
+
 - **Sub-recipe scaling.** When you change the scale on a recipe page, only the parent recipe's ingredients are multiplied. Recipes that inline another recipe (e.g. caesar → mayonnaise, pizza → dough/sauce) leave the inlined sub-recipe unchanged. The right model needs a "fraction-of-yield" concept (the parent uses 150ml of a recipe that yields 300ml), which we don't track yet.
 
 ```

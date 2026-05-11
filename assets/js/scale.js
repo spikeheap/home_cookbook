@@ -102,5 +102,18 @@ export function setupScale(opts = {}) {
 
 if (typeof document !== "undefined") {
   const root = document.querySelector(".recipe");
-  if (root) setupScale({ root });
+  if (root) {
+    const controller = setupScale({ root });
+    if (controller) {
+      // Normalise the rendered quantities (e.g. 0.5 → ½) so the page is
+      // already consistent before any button is clicked. Deferred so it
+      // never blocks the initial paint.
+      const normalise = () => controller.apply(1);
+      const schedule  = typeof requestIdleCallback === "function"
+        ? () => requestIdleCallback(normalise)
+        : () => setTimeout(normalise, 0);
+      if (document.readyState === "complete") schedule();
+      else window.addEventListener("load", schedule, { once: true });
+    }
+  }
 }
