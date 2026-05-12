@@ -1,48 +1,19 @@
 {%- comment -%}
-  Render recipeIngredient. Three shapes are supported:
-
-  (a) Flat array of structured items (current preferred form):
-        recipeIngredient:
-        - {quantity: 200, unit: g, item: flour}
-
-  (b) Sectioned hash → array of items, items may be structured or string:
-        recipeIngredient:
-          Base: [...]
-          Toppings: [...]
-
-  (c) Flat array of plain strings (legacy):
-        recipeIngredient:
-        - 200g flour
-
-  Detection key: a structured ingredient hash has `item` or `quantity`;
-  a section pair `[name, items]` has neither. Keep this detection here
-  rather than in ingredient_item.html so the loop stays simple.
+  Render recipeIngredient. Uniform shape:
+    recipeIngredient:
+      - heading: optional section name
+        items:
+          - {quantity?, quantity_max?, unit?, item?}
+  Pass `inline_sub=false` to suppress sub-recipe expansion.
 {%- endcomment -%}
 {%- assign list = include.list -%}
-{%- assign first = list.first -%}
-
-{%- if first.item or first.quantity or first.unit -%}
-  {%- comment -%} (a) flat array of structured items {%- endcomment -%}
+{%- for section in list -%}
+  {%- if section.heading and section.heading != "" -%}
+    <h3 class="ingredient-section">{{ section.heading }}</h3>
+  {%- endif -%}
   <ul class="ingredient-list">
-    {%- for item in list -%}
+    {%- for item in section.items -%}
       {% include ingredient_item.html item=item inline_sub=include.inline_sub %}
     {%- endfor -%}
   </ul>
-{%- elsif first.first -%}
-  {%- comment -%} (b) sectioned hash {%- endcomment -%}
-  {%- for section in list -%}
-    <h3 class="ingredient-section">{{ section.first }}</h3>
-    <ul class="ingredient-list">
-      {%- for item in section.last -%}
-        {% include ingredient_item.html item=item inline_sub=include.inline_sub %}
-      {%- endfor -%}
-    </ul>
-  {%- endfor -%}
-{%- else -%}
-  {%- comment -%} (c) flat array of strings {%- endcomment -%}
-  <ul class="ingredient-list">
-    {%- for item in list -%}
-      {% include ingredient_item.html item=item inline_sub=include.inline_sub %}
-    {%- endfor -%}
-  </ul>
-{%- endif -%}
+{%- endfor -%}

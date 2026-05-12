@@ -1,7 +1,7 @@
 ---
 name: Beef Barbacoa
 cuisine: Mexican
-meal: Main
+meal: [Main]
 effort: project
 tags: [slow-cook]
 description: 
@@ -16,7 +16,8 @@ cookTime: PT6H
 recipeYield: 4 people
 
 recipeIngredient:
-  Barbacoa marinade:
+- heading: Barbacoa marinade
+  items:
   - quantity: 2
     unit: tbsp
     item: apple cider vinegar
@@ -36,7 +37,8 @@ recipeIngredient:
     unit: tbsp
     item: Wahaca Chipotle Chilli sauce
   - item: Juice of ½ lime
-  To slow cook:
+- heading: To slow cook
+  items:
   - quantity: 1
     unit: tbsp
     item: vegetable oil
@@ -50,18 +52,22 @@ recipeIngredient:
     item: stewing beef, cut into chunks
   - quantity: 1
     item: large red onion, finely sliced
-  To serve:
+- heading: To serve
+  items:
   - item: Tortillas
   - item: Guacamole
   - item: Salsa
 recipeInstructions:
-- Mix the marinade ingredients in a bowl.
-- Coat the beef in the marinade.
-- Leave overnight in the fridge.
-- Sweat the onions until translucent in a small amount of oil.
-- Add the beef to the pan and brown on all sides.
-- Add the chicken stock and bay leaves and bring to the boil.
-- Transfer into an oven safe casserole dish with a lid and put into a pre-heated oven at 180°C for around 1 hour 30 minutes or until the beef is tender.
-- Shred the beef.
-- Serve with warm tortillas, sour cream and tomato salsa.
+- items:
+  - Mix the marinade ingredients in a bowl.
+  - Coat the beef in the marinade.
+  - Leave overnight in the fridge.
+  - Sweat the onions until translucent in a small amount of oil.
+  - Add the beef to the pan and brown on all sides.
+  - Add the chicken stock and bay leaves and bring to the boil.
+  - Transfer into an oven safe casserole dish with a lid and put into a pre-heated
+    oven at 180°C for around 1 hour 30 minutes or until the beef is tender.
+  - Shred the beef.
+  - Serve with warm tortillas, sour cream and tomato salsa.
+
 ---

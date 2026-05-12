@@ -1,7 +1,7 @@
 ---
 name: Sous Vide Glazed Carrots
 cuisine: American
-meal: Side
+meal: [Side]
 effort: weekend
 tags: [sous-vide, vegetarian]
 description: >
@@ -24,25 +24,29 @@ recipeYield: 4 servings
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- quantity: 450
-  unit: g
-  item: baby carrots, peeled or well-scrubbed; or medium-large carrots, peeled and
-    cut into 2.5cm chunks
-- quantity: 2
-  unit: tbsp
-  item: "(30g) unsalted butter"
-- quantity: 0.5
-  unit: tsp
-  item: kosher salt
-- item: freshly ground black pepper
+- items:
+  - quantity: 450
+    unit: g
+    item: baby carrots, peeled or well-scrubbed; or medium-large carrots, peeled and
+      cut into 2.5cm chunks
+  - quantity: 2
+    unit: tbsp
+    item: "(30g) unsalted butter"
+  - quantity: 0.5
+    unit: tsp
+    item: kosher salt
+  - item: freshly ground black pepper
 recipeInstructions:
-- Set the sous vide to 84°C.
-- Combine the carrots, butter, salt, and a few grinds of pepper in a
-  vacuum bag and seal. 
-- Cook in the water bath until fully tender, about 1 hour. At this point the
-  carrots can be refrigerated in the sealed bag for up to 1 week.
-- To finish, empty the entire contents of the bag into a large heavy-bottomed skillet. Cook over high heat, stirring
-  constantly, until the liquid has reduced to a shiny glaze, about 2 minutes.
+- items:
+  - Set the sous vide to 84°C.
+  - Combine the carrots, butter, salt, and a few grinds of pepper in a vacuum bag
+    and seal.
+  - Cook in the water bath until fully tender, about 1 hour. At this point the carrots
+    can be refrigerated in the sealed bag for up to 1 week.
+  - To finish, empty the entire contents of the bag into a large heavy-bottomed skillet.
+    Cook over high heat, stirring constantly, until the liquid has reduced to a shiny
+    glaze, about 2 minutes.
+
 ---
 ## Notes
 

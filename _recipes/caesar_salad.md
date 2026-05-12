@@ -15,7 +15,8 @@ cookTime: PT10M
 recipeYield: Serves 4
 
 recipeIngredient:
-  Salad:
+- heading: Salad
+  items:
   - quantity: 3
     unit: tbsp
     item: extra-virgin olive oil
@@ -26,7 +27,8 @@ recipeIngredient:
     item: romaine lettuce, sliced
   - quantity: 2
     item: chicken breasts
-  Dressing:
+- heading: Dressing
+  items:
   - quantity: 6
     quantity_max: 12
     unit: tbsp
@@ -41,13 +43,16 @@ recipeIngredient:
     item: anchovies, crushed
   - item: a few drops of Worcestershire sauce
 recipeInstructions:
-- Fry the cubes of bread in the extra-virgin olive oil over a fairly low heat (it shouldn't smoke), until they're golden brown.
-- Set to one side and season with salt and pepper
-- Butterfly the chicken breasts
-- Cook the chicken on a hot griddle pan for a few minutes each side.
-- Rest the chicken for a few minutes before slicing into chunks
-- Beat the dressing ingredients together, and loosen with a tablespoon of water.
-- Toss everything together and serve
+- items:
+  - Fry the cubes of bread in the extra-virgin olive oil over a fairly low heat (it
+    shouldn't smoke), until they're golden brown.
+  - Set to one side and season with salt and pepper
+  - Butterfly the chicken breasts
+  - Cook the chicken on a hot griddle pan for a few minutes each side.
+  - Rest the chicken for a few minutes before slicing into chunks
+  - Beat the dressing ingredients together, and loosen with a tablespoon of water.
+  - Toss everything together and serve
+
 ---
 Halve this [mayonnaise recipe](mayonnaise.html).
 

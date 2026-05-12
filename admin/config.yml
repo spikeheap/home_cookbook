@@ -1,0 +1,133 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: images
+public_folder: /images
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "_"
+
+collections:
+  - name: recipes
+    label: Recipes
+    label_singular: Recipe
+    folder: _recipes
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{fields.name}}"
+    summary: "{{name}} — {{cuisine}}"
+    sortable_fields: [name, cuisine, effort]
+    editor:
+      preview: false
+    fields:
+      - { name: name, label: Name, widget: string }
+
+      - name: cuisine
+        label: Cuisine
+        widget: select
+        options:
+          [American, British, Bulgarian, Filipino, French, German, Greek,
+           Indian, Italian, Korean, Mexican, Middle Eastern, Swedish, Thai]
+
+      - name: meal
+        label: Meal
+        widget: select
+        multiple: true
+        options: [Breakfast, Lunch, Main, Side, Snack, Sweet, Drink, Condiment]
+
+      - name: effort
+        label: Effort
+        widget: select
+        options: [weeknight, weekend, project]
+
+      - { name: tags, label: Tags, widget: list, required: false, default: [] }
+
+      - { name: description, label: Description, widget: text, required: false }
+
+      - { name: image, label: Image, widget: image, required: false }
+
+      - name: isBasedOn
+        label: Source URL
+        widget: string
+        required: false
+        pattern: ["^https?://", "Must be an http(s) URL"]
+
+      - name: author
+        label: Author
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: "@type", label: Type, widget: hidden, default: Person }
+          - { name: name, label: Name, widget: string }
+
+      - name: prepTime
+        label: Prep time
+        hint: "ISO 8601 duration, e.g. PT30M or PT2H"
+        widget: string
+        required: false
+        pattern: ["^PT", "Use ISO 8601 duration, e.g. PT2H30M"]
+
+      - name: cookTime
+        label: Cook time
+        hint: "ISO 8601 duration, e.g. PT45M"
+        widget: string
+        required: false
+        pattern: ["^PT", "Use ISO 8601 duration"]
+
+      - name: recipeYield
+        label: Yield
+        hint: 'e.g. "Serves 4" or "Makes 12 buns"'
+        widget: string
+        required: false
+
+      - name: suitableForDiet
+        label: Suitable for diet
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: Vegan,        value: "http://schema.org/VeganDiet" }
+          - { label: Vegetarian,   value: "http://schema.org/VegetarianDiet" }
+          - { label: Low lactose,  value: "http://schema.org/LowLactoseDiet" }
+          - { label: Gluten free,  value: "http://schema.org/GlutenFreeDiet" }
+          - { label: Low calorie,  value: "http://schema.org/LowCalorieDiet" }
+
+      - { name: keywords, label: Keywords, widget: list, required: false, default: [] }
+
+      - name: recipeIngredient
+        label: Ingredients
+        label_singular: Section
+        widget: list
+        summary: "{{fields.heading}}"
+        fields:
+          - { name: heading, label: Section heading (optional), widget: string, required: false }
+          - name: items
+            label: Items
+            label_singular: Ingredient
+            widget: list
+            summary: "{{fields.quantity}} {{fields.unit}} {{fields.item}}"
+            fields:
+              - { name: quantity,     label: Qty,        widget: number, value_type: float, required: false }
+              - { name: quantity_max, label: Qty (max),  widget: number, value_type: float, required: false }
+              - { name: unit,         label: Unit,       widget: string, required: false }
+              - { name: item,         label: Item,       widget: string, required: false }
+
+      - name: recipeInstructions
+        label: Method
+        label_singular: Section
+        widget: list
+        summary: "{{fields.heading}}"
+        fields:
+          - { name: heading, label: Section heading (optional), widget: string, required: false }
+          - name: items
+            label: Steps
+            label_singular: Step
+            widget: list
+            field: { name: step, label: Step, widget: text }
+
+      - { name: body, label: Notes, widget: markdown, required: false }

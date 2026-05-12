@@ -3,11 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test assets/js/",
+    "test": "node --test assets/js/ scripts/",
     "build": "bundle exec jekyll build && npx pagefind --site _site",
-    "dev": "bundle exec jekyll build && npx pagefind --site _site --serve"
+    "dev": "bundle exec jekyll build && npx pagefind --site _site --serve",
+    "scrape": "node scripts/scrape-recipe.js"
   },
   "devDependencies": {
+    "js-yaml": "^4.1.0",
     "pagefind": "^1.5.2"
   }
 }

@@ -1,7 +1,7 @@
 ---
 name: Yorkshire Puddings
 cuisine: British
-meal: Side
+meal: [Side]
 effort: weeknight
 description: Just make sure the oil is as hot as can be!
 keywords:
@@ -20,21 +20,26 @@ recipeYield: Makes 12
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:
-- quantity: 140
-  unit: g
-  item: plain flour
-- quantity: 4
-  item: eggs (about 200ml)
-- quantity: 200
-  unit: ml
-  item: milk
-- item: oil
+- items:
+  - quantity: 140
+    unit: g
+    item: plain flour
+  - quantity: 4
+    item: eggs (about 200ml)
+  - quantity: 200
+    unit: ml
+    item: milk
+  - item: oil
 recipeInstructions:
-- Heat the oven to 210°C fan. Add oil to 12-hole non-stick muffin tin and place in the oven to heat through.
-- Beat the eggs and flour until smooth
-- Gradually beat in the milk until combined and lump free. 
-- Season!
-- Pour the batter evenly into the tin and bake for 20–25 minutes until the puddings have puffed up and browned.
+- items:
+  - Heat the oven to 210°C fan. Add oil to 12-hole non-stick muffin tin and place
+    in the oven to heat through.
+  - Beat the eggs and flour until smooth
+  - Gradually beat in the milk until combined and lump free.
+  - Season!
+  - Pour the batter evenly into the tin and bake for 20–25 minutes until the puddings
+    have puffed up and browned.
+
 ---
 ## Notes
 
