@@ -1,6 +1,6 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: spikeheap/home_cookbook
 
 media_folder: images
 public_folder: /images
