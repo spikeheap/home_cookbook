@@ -55,8 +55,8 @@ task :recipe, [:slug] do |_t, args|
     date: #{Date.today.iso8601}
     name: #{name}
     cuisine:
-    meal: [Main]
-    effort: weeknight
+    meal: [Main] # Main, Lunch, Breakfast, Side, Snack, Sweet, Drink, Condiment
+    effort: # weeknight | weekend | project
     tags: []
     description:
     prepTime: PT0M
