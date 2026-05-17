@@ -63,11 +63,15 @@
         <% if sub_match.data.recipeYield %><span class="sub-recipe__yield"><%= sub_match.data.recipeYield %></span><% end %>
       </summary>
       <div class="sub-recipe__body">
-        <h4 class="sub-recipe__heading">Ingredients</h4>
-        <%= render "ingredient_list", list: sub_match.data.recipeIngredient, inline_sub: false %>
-        <h4 class="sub-recipe__heading">Method</h4>
-        <%= render "instruction_list", list: sub_match.data.recipeInstructions %>
-        <a class="sub-recipe__more" href="<%= sub_match.relative_url %>">Full recipe</a>
+        <div class="sub-recipe__ingredients">
+          <h4 class="sub-recipe__heading">Ingredients</h4>
+          <%= render "ingredient_list", list: sub_match.data.recipeIngredient, inline_sub: false %>
+        </div>
+        <div class="sub-recipe__method">
+          <h4 class="sub-recipe__heading">Method</h4>
+          <%= render "instruction_list", list: sub_match.data.recipeInstructions %>
+          <a class="sub-recipe__more" href="<%= sub_match.relative_url %>">Full recipe</a>
+        </div>
       </div>
     </details>
   <% end %>

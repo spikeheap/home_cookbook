@@ -1039,6 +1039,51 @@ img { max-width: 100%; height: auto; }
    Print
    ============================================================ */
 
+/* Sub-recipes appendix (print-only) */
+
+.recipe-subs { display: none; }
+
+.recipe-sub {
+  margin-top: var(--gap-5);
+  break-inside: avoid;
+}
+
+.recipe-sub__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-3);
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: var(--gap-2);
+  margin-bottom: var(--gap-3);
+}
+
+.recipe-sub__title {
+  font-family: var(--serif-display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+
+.recipe-sub__yield {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+  margin: 0;
+}
+
+.recipe-sub__heading {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rust);
+  margin: 0 0 var(--gap-3);
+  font-weight: 500;
+}
+
 @media print {
   html { color-scheme: light; }
   body { background: white; color: black; font-size: 11pt; }
@@ -1047,4 +1092,17 @@ img { max-width: 100%; height: auto; }
   .recipe-ingredients { position: static !important; }
   a { color: black; }
   .instruction-list li { break-inside: avoid; }
+
+  /* Inline sub-recipes: keep ingredients visible, drop the method (it's in the appendix) */
+  .sub-recipe { border: 0; background: transparent; margin-top: var(--gap-2); }
+  .sub-recipe > summary { list-style: none; padding: 0; cursor: default; }
+  .sub-recipe > summary::before,
+  .sub-recipe[open] > summary::before { content: "↳ "; color: var(--mute); }
+  .sub-recipe__body { padding: 0; border: 0; }
+  .sub-recipe__method,
+  .sub-recipe__more { display: none; }
+
+  /* Show the appendix and let each sub-recipe break cleanly */
+  .recipe-subs { display: block; margin-top: var(--gap-6); }
+  .recipe-sub { break-inside: avoid; }
 }

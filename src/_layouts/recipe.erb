@@ -6,6 +6,16 @@ layout: default
   prep = capture { render "duration", iso: page.prepTime }.strip
   cook = capture { render "duration", iso: page.cookTime }.strip
   body_html = content.to_s.strip
+
+  sub_slugs = []
+  Array(page.recipeIngredient).each do |section|
+    Array(section["items"]).each do |item|
+      text = item.is_a?(Hash) ? (item["item"] || "") : item.to_s
+      next unless text.include?("](") && text.include?(".html)")
+      sub_slugs << text.split("](").last.split(")").first.sub(".html", "")
+    end
+  end
+  sub_recipes = sub_slugs.uniq.filter_map { |s| collections.recipes.resources.find { |r| r.basename_without_ext == s } }
 %>
 <article class="recipe" data-recipe-name="<%= page.name %>" data-pagefind-body>
 
@@ -76,6 +86,22 @@ layout: default
     <section class="recipe-notes">
       <h2 class="recipe-section-title">Notes</h2>
       <%= content %>
+    </section>
+  <% end %>
+
+  <% unless sub_recipes.empty? %>
+    <section class="recipe-subs" aria-label="Sub-recipes">
+      <h2 class="recipe-section-title">Sub-recipes</h2>
+      <% sub_recipes.each do |sub| %>
+        <article class="recipe-sub">
+          <header class="recipe-sub__head">
+            <h3 class="recipe-sub__title"><%= sub.data.name %></h3>
+            <% if sub.data.recipeYield %><p class="recipe-sub__yield"><%= sub.data.recipeYield %></p><% end %>
+          </header>
+          <h4 class="recipe-sub__heading">Method</h4>
+          <%= render "instruction_list", list: sub.data.recipeInstructions %>
+        </article>
+      <% end %>
     </section>
   <% end %>
 

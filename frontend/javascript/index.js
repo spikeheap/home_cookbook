@@ -4,6 +4,7 @@ import { setupTheme } from "./lib/theme.js";
 import { setupSearch } from "./lib/search.js";
 import { setupScale } from "./lib/scale.js";
 import { setupWakeLock } from "./lib/wake-lock.js";
+import { setupPrintExpansion } from "./lib/print.js";
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
@@ -28,6 +29,7 @@ function init() {
     }
 
     setupWakeLock(recipeRoot.querySelector('[data-tool="wakelock"]'));
+    setupPrintExpansion(recipeRoot);
   }
 }
 
