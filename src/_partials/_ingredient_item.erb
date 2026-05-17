@@ -21,17 +21,24 @@
 <%
   inline_sub = true unless defined?(inline_sub) && !inline_sub.nil?
 
-  inline_md = ->(text) { safe(markdownify(text.to_s).sub(%r{\A<p>}, "").sub(%r{</p>\z}, "")) }
-
   item_hash = item.is_a?(Hash)
   item_text = item_hash ? (item["item"] || "") : item.to_s
 
   sub_match = nil
-  if inline_sub && item_text.include?("](") && item_text.include?(".html)")
-    after_paren = item_text.split("](").last
-    url_part = after_paren.split(")").first
-    slug = url_part.sub(".html", "")
+  raw_href = nil
+  if item_text.include?("](") && item_text.include?(".html)")
+    raw_href = item_text.split("](").last.split(")").first
+    slug = raw_href.sub(".html", "")
     sub_match = collections.recipes.resources.find { |r| r.basename_without_ext == slug }
+  end
+  inline_sub_match = inline_sub ? sub_match : nil
+
+  inline_md = ->(text) do
+    html = markdownify(text.to_s).sub(%r{\A<p>}, "").sub(%r{</p>\z}, "")
+    # Rewrite the raw `slug.html` markdown link to the resource's canonical URL,
+    # so internal links look the same as everywhere else on the site.
+    html = html.sub(%Q{href="#{raw_href}"}, %Q{href="#{sub_match.relative_url}"}) if sub_match
+    safe(html)
   end
 
   attached_units = %w[g kg mg ml l cl oz lb]
@@ -56,7 +63,7 @@
     <span class="ingredient__scale-hint" data-scale-hint hidden></span>
   <% end %>
 
-  <% if sub_match %>
+  <% if inline_sub_match %>
     <details class="sub-recipe">
       <summary>
         <span class="sub-recipe__name"><%= sub_match.data.name %></span>

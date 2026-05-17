@@ -712,7 +712,7 @@ img { max-width: 100%; height: auto; }
 
 .recipe-image {
   margin: 0;
-  border-radius: 2px;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--paper);
   border: 1px solid var(--rule);
