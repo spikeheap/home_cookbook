@@ -17,9 +17,9 @@ npm test
 
 Three ways:
 
-1. **`/admin/`** — Sveltia CMS, a form-based editor that commits straight to GitHub. See [Netlify setup](#netlify-dependencies) below.
-2. **Scrape from a URL** — `npm run scrape -- https://…` extracts JSON-LD `Recipe` schema and writes a draft `_recipes/<slug>.md` for you to refine.
-3. **Hand-edit YAML** — copy [`_recipes/focaccia.md`](_recipes/focaccia.md) as a template.
+1. **Generate a skeleton** — `bundle exec rake 'recipe[Crispy Tofu Bowl]'` writes `src/_recipes/crispy_tofu_bowl.md` with today's date and the canonical frontmatter shape, ready to fill in. The slug is normalised from the argument; quotes are required in zsh so the brackets aren't globbed.
+2. **Scrape from a URL** — `npm run scrape -- https://…` extracts JSON-LD `Recipe` schema and writes a draft `src/_recipes/<slug>.md` for you to refine.
+3. **Hand-edit YAML** — copy [`src/_recipes/focaccia.md`](src/_recipes/focaccia.md) as a template.
 
 Each recipe is classified along four axes:
 

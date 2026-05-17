@@ -1,0 +1,49 @@
+---
+layout: default
+title: Sweet
+permalink: /sweet/
+---
+<%
+  sweet_recipes = collections.recipes.resources.select { |r| sweet?(r) }
+  by_effort = ->(name) { sweet_recipes.select { |r| r.data.effort == name }.sort_by { |r| r.data.name.to_s.downcase } }
+  weeknight = by_effort.("weeknight")
+  weekend   = by_effort.("weekend")
+  project   = by_effort.("project")
+%>
+<article class="all-recipes">
+  <h1 class="all-recipes__title">Sweet</h1>
+  <p class="all-recipes__lede"><%= sweet_recipes.size %> recipes — bakes, puddings, and other sweet things.</p>
+
+  <% if weeknight.any? %>
+    <section class="all-recipes__section" id="weeknight">
+      <h2 class="all-recipes__section-title">Weeknight <span class="meta"><%= weeknight.size %></span></h2>
+      <ul class="all-recipes__list">
+        <% weeknight.each do |r| %>
+          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if weekend.any? %>
+    <section class="all-recipes__section" id="weekend">
+      <h2 class="all-recipes__section-title">Weekend <span class="meta"><%= weekend.size %></span></h2>
+      <ul class="all-recipes__list">
+        <% weekend.each do |r| %>
+          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if project.any? %>
+    <section class="all-recipes__section" id="project">
+      <h2 class="all-recipes__section-title">Projects <span class="meta"><%= project.size %></span></h2>
+      <ul class="all-recipes__list">
+        <% project.each do |r| %>
+          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</article>

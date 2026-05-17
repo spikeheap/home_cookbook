@@ -3,7 +3,10 @@ layout: default
 title: Home
 ---
 <%
-  recipes = collections.recipes.resources
+  all_recipes = collections.recipes.resources
+  # Sweet has its own page; the home rails are savoury-only.
+  recipes = all_recipes.reject { |r| sweet?(r) }
+
   by_effort = ->(name) { recipes.select { |r| r.data.effort == name }.sort_by { |r| r.data.name.to_s.downcase } }
   weeknight = by_effort.("weeknight")
   weekend   = by_effort.("weekend")
@@ -109,10 +112,10 @@ title: Home
 
   <div class="browse__group">
     <p class="browse__label">By cuisine</p>
-    <% cuisines = recipes.map { |r| r.data.cuisine }.compact.uniq.sort %>
+    <% cuisines = all_recipes.map { |r| r.data.cuisine }.compact.uniq.sort %>
     <ul class="chip-list">
       <% cuisines.each do |cuisine|
-           in_cuisine = recipes.select { |r| r.data.cuisine == cuisine }
+           in_cuisine = all_recipes.select { |r| r.data.cuisine == cuisine }
            anchor = cuisine.downcase.gsub(" ", "-") %>
         <li>
           <a class="chip" href="<%= relative_url "/by-cuisine/##{anchor}" %>">
@@ -125,10 +128,10 @@ title: Home
 
   <div class="browse__group">
     <p class="browse__label">By tag</p>
-    <% all_tags = recipes.flat_map { |r| Array(r.data.tags) }.uniq.sort %>
+    <% all_tags = all_recipes.flat_map { |r| Array(r.data.tags) }.uniq.sort %>
     <ul class="chip-list">
       <% all_tags.each do |tag|
-           tagged = recipes.select { |r| Array(r.data.tags).include?(tag) } %>
+           tagged = all_recipes.select { |r| Array(r.data.tags).include?(tag) } %>
         <li>
           <a class="chip" href="<%= relative_url "/by-tag/##{tag}" %>">
             <%= tag %><span class="chip__count"><%= tagged.size %></span>

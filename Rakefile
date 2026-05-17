@@ -37,13 +37,45 @@ namespace :frontend do
   end
 end
 
-#
-# Add your own Rake tasks here! You can use `environment` as a prerequisite
-# in order to write automations or other commands requiring a loaded site.
-#
-# task :my_task => :environment do
-#   puts site.root_dir
-#   automation do
-#     say_status :rake, "I'm a Rake tast =) #{site.config.url}"
-#   end
-# end
+desc "Generate a skeleton recipe at src/_recipes/<slug>.md (e.g. rake 'recipe[crispy_tofu]')"
+task :recipe, [:slug] do |_t, args|
+  require "date"
+
+  raw = args[:slug] || abort("Usage: rake 'recipe[slug_or_name]'")
+  slug = raw.downcase.gsub(/[^a-z0-9]+/, "_").gsub(/^_+|_+$/, "")
+  abort("Slug is empty after normalisation") if slug.empty?
+
+  path = "src/_recipes/#{slug}.md"
+  abort("#{path} already exists") if File.exist?(path)
+
+  name = slug.split("_").map(&:capitalize).join(" ")
+
+  File.write(path, <<~MD)
+    ---
+    date: #{Date.today.iso8601}
+    name: #{name}
+    cuisine:
+    meal: [Main]
+    effort: weeknight
+    tags: []
+    description:
+    prepTime: PT0M
+    cookTime: PT0M
+    recipeYield:
+    isBasedOn: <URL>
+    author:
+      "@type": Person
+      name: <NAME>
+    recipeIngredient:
+      - items:
+          - quantity:
+            unit:
+            item:
+    recipeInstructions:
+      - items:
+          -
+    ---
+  MD
+
+  puts "Created #{path}"
+end
