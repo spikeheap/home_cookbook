@@ -1,13 +1,16 @@
 # Our home cookbook
 
+This cookbook is build on the [Bridgetown](https://www.bridgetownrb.com) static site generator.
+
 ## Dev server
 
 ```bash
-bundle exec jekyll serve --livereload   # content iteration, no search
-npm run dev                             # full site + Pagefind, served on :1414
+bin/bt dev
 ```
 
 ## Tests
+
+The tests are completely separate to Bridgetown, and were used to enable the migration both of framework and hosting provider.
 
 ```bash
 npm test
@@ -15,7 +18,7 @@ npm test
 
 ## Adding a recipe
 
-Three ways:
+Three different ways:
 
 1. **Generate a skeleton** — `bundle exec rake 'recipe[Crispy Tofu Bowl]'` writes `src/_recipes/crispy_tofu_bowl.md` with today's date and the canonical frontmatter shape, ready to fill in. The slug is normalised from the argument; quotes are required in zsh so the brackets aren't globbed.
 2. **Scrape from a URL** — `npm run scrape -- https://…` extracts JSON-LD `Recipe` schema and writes a draft `src/_recipes/<slug>.md` for you to refine.
@@ -63,32 +66,12 @@ recipeIngredient:
     items: [...]
 ```
 
-## Netlify dependencies
-
-The `/admin/` route uses Sveltia CMS, which authenticates against the repo through Netlify. One-time setup:
-
-1. **Netlify Identity** — Site settings → Identity → *Enable Identity*. Set registration to *Invite only* (cookbook is private).
-2. **Git Gateway** — Identity → Services → *Enable Git Gateway*. This is what lets Sveltia commit to the repo without leaving Netlify.
-3. **Invite yourself** — Identity → *Invite users* → enter your email. Click the link in the invite email, set a password, and you're in.
-
-Sveltia and the Netlify Identity widget load from CDNs (`unpkg.com`, `identity.netlify.com`) — no build step needed.
-
-## Scraping a recipe from a URL
-
-```bash
-npm run scrape -- https://www.bbc.co.uk/food/recipes/focaccia_08389
-```
-
-Finds the JSON-LD `Recipe` block on the page, maps fields to this project's schema (handling `HowToStep` / `HowToSection` for instructions, fractions and ranges in ingredient quantities), and writes `_recipes/<slug>.md`. Cuisine / meal / effort / tags / image are left blank — fill them in via `/admin/` or by editing the file.
-
 ## Future improvements
+
+- **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.
 
 - **Sub-recipe scaling.** When you change the scale on a recipe page, only the parent recipe's ingredients are multiplied. Recipes that inline another recipe (e.g. caesar → mayonnaise, pizza → dough/sauce) leave the inlined sub-recipe unchanged. The right model needs a "fraction-of-yield" concept (the parent uses 150ml of a recipe that yields 300ml), which we don't track yet.
 
-- **Recipe scaling** Can we normalise on "people this will feed" and enable scaling to specific group sizes, rather than a recipe for 4 being doubled or halved?
+- **Recipe scaling.** Can we normalise on "people this will feed" and enable scaling to specific group sizes, rather than a recipe for 4 being doubled or halved?
 
-## Image processing
-
-```
-magick cinnamon_buns.jpeg -resize 2160x2160 -sampling-factor 4:2:0 -strip -quality 85 cinnamon_buns-2160w.jpg
-```
+- **Image scaling.** Add image scaling rake tasks to generate images for different screen sizes.
