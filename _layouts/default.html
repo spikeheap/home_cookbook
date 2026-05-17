@@ -25,6 +25,19 @@
   <link rel="stylesheet" href="{{ '/assets/css/cookbook.css' | relative_url }}" />
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}" />
 
+  {%- comment -%} Apply stored theme before paint so the toggle never flashes the wrong scheme. {%- endcomment -%}
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   {% if page.layout == 'recipe' %}
     <script type="module" src="{{ '/assets/js/wake-lock.js' | relative_url }}"></script>
     <script type="module" src="{{ '/assets/js/scale.js' | relative_url }}"></script>
@@ -35,7 +48,11 @@
 
   {%- comment -%} Subtle defaults so anything before the stylesheet loads still looks intentional. {%- endcomment -%}
   <style>
-    html, body { background:#F7F2E8; color:#1F1812; }
+    html { color-scheme: light dark; }
+    html, body {
+      background: light-dark(#F7F2E8, #1A1612);
+      color: light-dark(#1F1812, #F0E6D2);
+    }
     body { margin:0; font-family: 'New York', ui-serif, 'Iowan Old Style', Georgia, serif; }
   </style>
 </head>
@@ -47,6 +64,27 @@
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="{{ '/all/' | relative_url }}">All</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: auto" title="Toggle theme" data-theme="auto">
+        <svg class="theme-toggle__icon theme-toggle__icon--auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none" />
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="M4.93 4.93l1.41 1.41" />
+          <path d="M17.66 17.66l1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="M4.93 19.07l1.41-1.41" />
+          <path d="M17.66 6.34l1.41-1.41" />
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <span class="theme-toggle__sr">Theme: auto</span>
+      </button>
     </nav>
   </header>
 

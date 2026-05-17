@@ -8,16 +8,23 @@
 }
 
 :root {
-  /* Palette */
-  --cream:        #F7F2E8;
-  --paper:        #FDFAF3;
-  --ink:          #1F1812;
-  --ink-soft:     #4A3F38;
-  --mute:         #6E6256;
-  --rule:         #E0D8C7;
-  --rule-strong:  #C9BFA8;
-  --rust:         #A23B23;
-  --rust-soft:    #A85944;
+  color-scheme: light dark;
+
+  /* Palette — warm paper in light, warm low-light in dark */
+  --cream:        light-dark(#F7F2E8, #1A1612);
+  --paper:        light-dark(#FDFAF3, #221D17);
+  --ink:          light-dark(#1F1812, #F0E6D2);
+  --ink-soft:     light-dark(#4A3F38, #C9BFA8);
+  --mute:         light-dark(#6E6256, #8A7E70);
+  --rule:         light-dark(#E0D8C7, #2E2820);
+  --rule-strong:  light-dark(#C9BFA8, #443B30);
+  --rust:         light-dark(#A23B23, #D9714F);
+  --rust-soft:    light-dark(#A85944, #C26045);
+
+  /* Translucent rust wash + page shadow — kept in sync per scheme */
+  --rust-wash:    light-dark(rgba(162, 59, 35, 0.14), rgba(217, 113, 79, 0.18));
+  --rust-wash-soft: light-dark(rgba(162, 59, 35, 0.08), rgba(217, 113, 79, 0.12));
+  --shadow-soft:  light-dark(rgba(31, 24, 18, 0.04), rgba(0, 0, 0, 0.35));
 
   /* Type */
   --serif-display: 'Newsreader Display', 'Newsreader', 'New York', 'Iowan Old Style', 'Hoefler Text', 'Source Serif Pro', Georgia, serif;
@@ -91,6 +98,7 @@ img { max-width: 100%; height: auto; }
 
 .site-nav {
   display: flex;
+  align-items: center;
   gap: var(--gap-4);
 }
 
@@ -100,6 +108,65 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--ink-soft);
+}
+
+.theme-toggle {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0.2rem;
+  padding-left: calc(0.2rem + var(--gap-3));
+  margin: -0.2rem;
+  margin-left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 120ms ease;
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 0.95rem;
+  background: var(--rule-strong);
+  transform: translateY(-50%);
+}
+
+.theme-toggle:hover { color: var(--rust); }
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+.theme-toggle__icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: none;
+}
+
+.theme-toggle[data-theme="auto"]  .theme-toggle__icon--auto,
+.theme-toggle[data-theme="light"] .theme-toggle__icon--light,
+.theme-toggle[data-theme="dark"]  .theme-toggle__icon--dark {
+  display: block;
+}
+
+.theme-toggle__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .site-main {
@@ -200,7 +267,7 @@ img { max-width: 100%; height: auto; }
   max-width: 28rem;
   max-height: 26rem;
   overflow-y: auto;
-  box-shadow: 0 1px 0 rgba(31, 24, 18, 0.04);
+  box-shadow: 0 1px 0 var(--shadow-soft);
 }
 
 .search-result {
@@ -253,7 +320,7 @@ img { max-width: 100%; height: auto; }
 }
 
 .search-result__excerpt mark {
-  background: rgba(162, 59, 35, 0.14);
+  background: var(--rust-wash);
   color: var(--rust);
   padding: 0 0.15em;
   border-radius: 1px;
@@ -752,7 +819,7 @@ img { max-width: 100%; height: auto; }
   letter-spacing: 0.06em;
   color: var(--rust);
   white-space: nowrap;
-  background: rgba(162, 59, 35, 0.08);
+  background: var(--rust-wash-soft);
   padding: 0.05rem 0.4rem;
   border-radius: 999px;
 }
@@ -973,8 +1040,9 @@ img { max-width: 100%; height: auto; }
    ============================================================ */
 
 @media print {
+  html { color-scheme: light; }
   body { background: white; color: black; font-size: 11pt; }
-  .site-header, .site-footer, .recipe-tools { display: none; }
+  .site-header, .site-footer, .recipe-tools, .theme-toggle { display: none; }
   .recipe-body { grid-template-columns: 1fr !important; }
   .recipe-ingredients { position: static !important; }
   a { color: black; }
