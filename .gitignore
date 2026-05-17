@@ -1,7 +1,41 @@
+# Bridgetown
+output
+.bridgetown-cache
+.bridgetown-metadata
+.routes.json
+
+# Jekyll leftovers
 _site
-.sass-cache
 .jekyll-cache
 .jekyll-metadata
-vendor
+
+# Dependencies
 node_modules
+vendor
+
+# Caches
+.sass-cache
+.npm
+.node_repl_history
+
+# Bundler / dotenv / byebug
+/.bundle
+.env
+.byebug_history
+
+# OS / editor
 .DS_Store
+
+# Yarn
+yarn-error.log
+yarn-debug.log*
+.pnp/
+.pnp.js
+.yarn-integrity
+
+# Tempfiles
+/tmp/*
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep

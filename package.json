@@ -3,13 +3,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test \"assets/js/**/*.test.js\" \"scripts/**/*.test.js\"",
-    "build": "bundle exec jekyll build && npx pagefind --site _site",
-    "dev": "bundle exec jekyll build && npx pagefind --site _site --serve",
+    "start": "bin/bridgetown start",
+    "build": "bundle exec rake deploy && pagefind --site output",
+    "esbuild": "node esbuild.config.js --minify",
+    "esbuild-dev": "node esbuild.config.js --watch",
+    "test": "node --test \"frontend/javascript/**/*.test.js\" \"scripts/**/*.test.js\"",
     "scrape": "node scripts/scrape-recipe.js"
   },
   "devDependencies": {
+    "esbuild": "^0.25.11",
+    "glob": "^11.0.3",
     "js-yaml": "^4.1.0",
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "postcss": "^8.5.6",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^16.1.0",
+    "postcss-load-config": "^6.0.1",
+    "postcss-preset-env": "^10.4.0",
+    "read-cache": "^1.0.0"
   }
 }

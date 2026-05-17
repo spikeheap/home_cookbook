@@ -1,0 +1,25 @@
+---
+layout: default
+title: By tag
+permalink: /by-tag/
+---
+<%
+  recipes = collections.recipes.resources
+  all_tags = recipes.flat_map { |r| Array(r.data.tags) }.uniq.sort
+%>
+<article class="all-recipes">
+  <h1 class="all-recipes__title">By tag</h1>
+  <p class="all-recipes__lede">Cross-cutting themes — bread, pasta, vegan, and the rest.</p>
+
+  <% all_tags.each do |tag|
+       tagged = recipes.select { |r| Array(r.data.tags).include?(tag) }.sort_by { |r| r.data.name.to_s.downcase } %>
+    <section class="all-recipes__section" id="<%= tag %>">
+      <h2 class="all-recipes__section-title"><%= tag %> <span class="meta"><%= tagged.size %></span></h2>
+      <ul class="all-recipes__list">
+        <% tagged.each do |r| %>
+          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</article>

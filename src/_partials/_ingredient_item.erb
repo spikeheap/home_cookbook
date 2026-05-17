@@ -1,0 +1,74 @@
+<%#
+  Render a single ingredient. Handles two shapes:
+
+  (1) Hash form (preferred):
+      { quantity: 200, unit: g, item: "strong white flour", quantity_max?, optional? }
+      Renders the quantity in a scalable span; JS multiplies on scale.
+
+  (2) String form (legacy):
+      "200g strong white flour"
+      Rendered as plain text — won't scale, gets a "× N" hint when scaled.
+
+  Items without a numeric quantity (e.g. "Salt and pepper to taste") also
+  get a "× N" hint when the recipe is scaled, so the cook is reminded
+  these need manual adjustment.
+
+  If the item text contains `[label](slug.html)` and `slug` resolves to
+  another recipe, the recipe's ingredients/method are inlined as a
+  collapsible <details>. Pass `inline_sub: false` from a sub-recipe render
+  to avoid recursion.
+%>
+<%
+  inline_sub = true unless defined?(inline_sub) && !inline_sub.nil?
+
+  inline_md = ->(text) { safe(markdownify(text.to_s).sub(%r{\A<p>}, "").sub(%r{</p>\z}, "")) }
+
+  item_hash = item.is_a?(Hash)
+  item_text = item_hash ? (item["item"] || "") : item.to_s
+
+  sub_match = nil
+  if inline_sub && item_text.include?("](") && item_text.include?(".html)")
+    after_paren = item_text.split("](").last
+    url_part = after_paren.split(")").first
+    slug = url_part.sub(".html", "")
+    sub_match = collections.recipes.resources.find { |r| r.basename_without_ext == slug }
+  end
+
+  attached_units = %w[g kg mg ml l cl oz lb]
+  unit = item_hash ? item["unit"] : nil
+  qty = item_hash ? item["quantity"] : nil
+  qty_max = item_hash ? item["quantity_max"] : nil
+  optional = item_hash ? item["optional"] : nil
+  sep = attached_units.include?(unit.to_s) ? "" : " "
+%>
+<li class="ingredient">
+  <% if qty %>
+    <span class="ingredient__qty"
+          data-quantity="<%= qty %>"<% if qty_max %> data-quantity-max="<%= qty_max %>"<% end %><% if unit %> data-unit="<%= unit %>"<% end %>><%= qty %><% if qty_max %>–<%= qty_max %><% end %><% if unit %><%= sep %><%= unit %><% end %></span><%
+    if item_hash && item["item"] %> <span class="ingredient__name"><%= inline_md.(item["item"]) %></span><% end %><%
+    if optional %> <span class="ingredient__optional">optional</span><% end %>
+  <% else %>
+    <% if item_hash && item["item"] %>
+      <span class="ingredient__name"><%= inline_md.(item["item"]) %></span>
+    <% else %>
+      <span class="ingredient__name"><%= inline_md.(item.to_s) %></span>
+    <% end %>
+    <span class="ingredient__scale-hint" data-scale-hint hidden></span>
+  <% end %>
+
+  <% if sub_match %>
+    <details class="sub-recipe">
+      <summary>
+        <span class="sub-recipe__name"><%= sub_match.data.name %></span>
+        <% if sub_match.data.recipeYield %><span class="sub-recipe__yield"><%= sub_match.data.recipeYield %></span><% end %>
+      </summary>
+      <div class="sub-recipe__body">
+        <h4 class="sub-recipe__heading">Ingredients</h4>
+        <%= render "ingredient_list", list: sub_match.data.recipeIngredient, inline_sub: false %>
+        <h4 class="sub-recipe__heading">Method</h4>
+        <%= render "instruction_list", list: sub_match.data.recipeInstructions %>
+        <a class="sub-recipe__more" href="<%= sub_match.relative_url %>">Full recipe</a>
+      </div>
+    </details>
+  <% end %>
+</li>
