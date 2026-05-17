@@ -1,0 +1,23 @@
+<%#
+  Render recipeInstructions. Uniform shape:
+    recipeInstructions:
+      - heading: optional section name
+        items:
+          - "Step text..."
+  Numbering continues across sections.
+%>
+<%
+  cursor = 0
+  inline_md = ->(text) { safe(markdownify(text.to_s).sub(%r{\A<p>}, "").sub(%r{</p>\z}, "")) }
+  Array(list).each do |section|
+%>
+  <% if section["heading"] && !section["heading"].to_s.empty? %>
+    <h3 class="instruction-section"><%= section["heading"] %></h3>
+  <% end %>
+  <ol class="instruction-list"<% if cursor > 0 %> start="<%= cursor + 1 %>" style="counter-reset: step <%= cursor %>;"<% end %>>
+    <% Array(section["items"]).each do |step| %>
+      <li><%= inline_md.(step) %></li>
+    <% end %>
+  </ol>
+  <% cursor += Array(section["items"]).size %>
+<% end %>

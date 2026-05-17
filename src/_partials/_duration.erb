@@ -1,0 +1,25 @@
+<% # Render a friendly ISO-8601 duration (e.g. PT1H30M) as "1h 30m".
+  s = (iso || "").to_s.delete(" ")
+  output = ""
+  unless s.empty?
+    s = s.sub(/\APT/, "")
+    hours = 0
+    mins = 0
+    if s.include?("H")
+      hpart, _, rest = s.partition("H")
+      hours = hpart.to_i
+      s = rest
+    end
+    if s.include?("M")
+      mpart, = s.partition("M")
+      mins = mpart.to_i
+    end
+    output = if hours > 0
+               mins > 0 ? "#{hours}h #{mins}m" : "#{hours}h"
+             elsif mins > 0
+               "#{mins}m"
+             else
+               ""
+             end
+  end
+%><%= output %>

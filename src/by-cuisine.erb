@@ -1,0 +1,26 @@
+---
+layout: default
+title: By cuisine
+permalink: /by-cuisine/
+---
+<%
+  recipes = collections.recipes.resources
+  cuisines = recipes.map { |r| r.data.cuisine }.compact.uniq.sort
+%>
+<article class="all-recipes">
+  <h1 class="all-recipes__title">By cuisine</h1>
+  <p class="all-recipes__lede"><%= recipes.size %> recipes from across our regular rotation.</p>
+
+  <% cuisines.each do |cuisine|
+       in_cuisine = recipes.select { |r| r.data.cuisine == cuisine }.sort_by { |r| r.data.name.to_s.downcase }
+       anchor = cuisine.downcase.gsub(" ", "-") %>
+    <section class="all-recipes__section" id="<%= anchor %>">
+      <h2 class="all-recipes__section-title"><%= cuisine %> <span class="meta"><%= in_cuisine.size %></span></h2>
+      <ul class="all-recipes__list">
+        <% in_cuisine.each do |r| %>
+          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.effort %><span class="meta"><%= r.data.effort %></span><% end %></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</article>

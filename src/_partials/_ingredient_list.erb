@@ -1,0 +1,20 @@
+<%#
+  Render recipeIngredient. Uniform shape:
+    recipeIngredient:
+      - heading: optional section name
+        items:
+          - {quantity?, quantity_max?, unit?, item?}
+  Pass `inline_sub: false` to suppress sub-recipe expansion.
+%>
+<% list ||= []
+   inline_sub = true if !defined?(inline_sub) || inline_sub.nil?
+   Array(list).each do |section| %>
+  <% if section["heading"] && !section["heading"].to_s.empty? %>
+    <h3 class="ingredient-section"><%= section["heading"] %></h3>
+  <% end %>
+  <ul class="ingredient-list">
+    <% Array(section["items"]).each do |item| %>
+      <%= render "ingredient_item", item: item, inline_sub: inline_sub %>
+    <% end %>
+  </ul>
+<% end %>

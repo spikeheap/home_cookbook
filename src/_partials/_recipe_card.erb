@@ -1,0 +1,13 @@
+<%
+  r = recipe
+  prep = capture { render "duration", iso: r.data.prepTime }.strip
+  cook = capture { render "duration", iso: r.data.cookTime }.strip
+  time_label = cook.empty? ? prep : cook
+%>
+<a class="card" href="<%= r.relative_url %>">
+  <span class="card__name"><%= r.data.name %></span>
+  <span class="card__meta">
+    <% if r.data.cuisine %><span class="card__cuisine"><%= r.data.cuisine %></span><% end %>
+    <% unless time_label.empty? %><span class="card__time"><%= time_label %></span><% end %>
+  </span>
+</a>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F2E8" />
+  <%
+    page_label = resource.data.layout.to_s == "recipe" ? resource.data.name : resource.data.title
+  %>
+  <title><% if page_label && page_label != "Home" %><%= page_label %> · <% end %><%= site.metadata.title %></title>
+  <% if resource.data.description %>
+    <meta name="description" content="<%= strip_html(resource.data.description).gsub(/\s+/, " ").strip[0, 200] %>" />
+  <% end %>
+
+  <link rel="icon" href="<%= relative_url '/favicon.ico' %>" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="<%= relative_url '/favicon.svg' %>" />
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= relative_url '/favicon-16.png' %>" />
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32.png' %>" />
+
+  <link rel="apple-touch-icon" href="<%= relative_url '/apple-touch-icon.png' %>" />
+  <link rel="apple-touch-icon" sizes="152x152" href="<%= relative_url '/apple-touch-icon-152.png' %>" />
+  <link rel="apple-touch-icon" sizes="167x167" href="<%= relative_url '/apple-touch-icon-167.png' %>" />
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= relative_url '/apple-touch-icon.png' %>" />
+
+  <link rel="manifest" href="<%= relative_url '/webmanifest.json' %>" />
+  <meta name="apple-mobile-web-app-title" content="Cookbook" />
+
+  <link rel="preload" href="<%= relative_url '/assets/fonts/newsreader-display.woff2' %>" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="<%= asset_path :css %>" />
+  <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>" />
+
+  <%# Apply stored theme before paint so the toggle never flashes the wrong scheme. %>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <script src="<%= asset_path :js %>" type="module"></script>
+  <%= live_reload_dev_js %>
+
+  <%# Subtle defaults so anything before the stylesheet loads still looks intentional. %>
+  <style>
+    html { color-scheme: light dark; }
+    html, body {
+      background: light-dark(#F7F2E8, #1A1612);
+      color: light-dark(#1F1812, #F0E6D2);
+    }
+    body { margin:0; font-family: 'New York', ui-serif, 'Iowan Old Style', Georgia, serif; }
+  </style>
+</head>
+<body class="page-<%= resource.data.layout || 'default' %><%= ' page-home' if resource.relative_url == '/' %>">
+
+  <header class="site-header">
+    <a href="<%= relative_url '/' %>" class="site-mark">
+      <span class="site-mark__name">Our&nbsp;Cookbook</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="<%= relative_url '/all/' %>">All</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: auto" title="Toggle theme" data-theme="auto">
+        <svg class="theme-toggle__icon theme-toggle__icon--auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none" />
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="M4.93 4.93l1.41 1.41" />
+          <path d="M17.66 17.66l1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="M4.93 19.07l1.41-1.41" />
+          <path d="M17.66 6.34l1.41-1.41" />
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <span class="theme-toggle__sr">Theme: auto</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    <%= yield %>
+  </main>
+
+  <footer class="site-footer">
+    <span><%= collections.recipes.resources.size %> recipes · cooked at home</span>
+  </footer>
+</body>
+</html>

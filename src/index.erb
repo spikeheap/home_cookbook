@@ -1,0 +1,140 @@
+---
+layout: default
+title: Home
+---
+<%
+  recipes = collections.recipes.resources
+  by_effort = ->(name) { recipes.select { |r| r.data.effort == name }.sort_by { |r| r.data.name.to_s.downcase } }
+  weeknight = by_effort.("weeknight")
+  weekend   = by_effort.("weekend")
+  project   = by_effort.("project")
+
+  with_tag = ->(tag) { recipes.select { |r| Array(r.data.tags).include?(tag) }.sort_by { |r| r.data.name.to_s.downcase } }
+  pizza = with_tag.("pizza")
+  pasta = with_tag.("pasta")
+%>
+<section class="home-hero">
+  <h1 class="home-hero__title">Recipes we <em>actually</em> cook.</h1>
+  <p class="home-hero__lede">A bunch of recipes we know and love, from easy weeknight meals, through baking with the kids, to bigger things we don't want to forget.</p>
+  <form class="home-search" role="search" onsubmit="return false;">
+    <input type="search"
+           placeholder="Search recipes…"
+           aria-label="Search recipes"
+           aria-autocomplete="list"
+           aria-controls="search-results"
+           autocomplete="off"
+           spellcheck="false"
+           id="search-input" />
+    <span class="home-search__hint">↑↓ to choose · Esc to clear</span>
+  </form>
+  <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Tonight</h2>
+      <p class="rail__sub"><%= weeknight.size %> recipes · under an hour, weeknight-friendly</p>
+    </div>
+    <a class="rail__more" href="<%= relative_url '/all/#weeknight' %>">All weeknight recipes</a>
+  </header>
+  <ul class="card-grid">
+    <% weeknight.first(9).each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Weekend</h2>
+      <p class="rail__sub"><%= weekend.size %> recipes · a bit more time, a bit more involved</p>
+    </div>
+    <a class="rail__more" href="<%= relative_url '/all/#weekend' %>">All weekend recipes</a>
+  </header>
+  <ul class="card-grid">
+    <% weekend.first(9).each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Projects</h2>
+      <p class="rail__sub"><%= project.size %> recipes · multi-day or hands-on</p>
+    </div>
+  </header>
+  <ul class="card-grid">
+    <% project.each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Pizza</h2>
+      <p class="rail__sub"><%= pizza.size %> recipes · doughs and toppings</p>
+    </div>
+    <a class="rail__more" href="<%= relative_url '/by-tag/#pizza' %>">All pizzas</a>
+  </header>
+  <ul class="card-grid">
+    <% pizza.each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Pasta</h2>
+      <p class="rail__sub"><%= pasta.size %> recipes · doughs and sauces</p>
+    </div>
+    <a class="rail__more" href="<%= relative_url '/by-tag/#pasta' %>">All pasta</a>
+  </header>
+  <ul class="card-grid">
+    <% pasta.each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="browse">
+  <h2 class="browse__title">Browse</h2>
+
+  <div class="browse__group">
+    <p class="browse__label">By cuisine</p>
+    <% cuisines = recipes.map { |r| r.data.cuisine }.compact.uniq.sort %>
+    <ul class="chip-list">
+      <% cuisines.each do |cuisine|
+           in_cuisine = recipes.select { |r| r.data.cuisine == cuisine }
+           anchor = cuisine.downcase.gsub(" ", "-") %>
+        <li>
+          <a class="chip" href="<%= relative_url "/by-cuisine/##{anchor}" %>">
+            <%= cuisine %><span class="chip__count"><%= in_cuisine.size %></span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="browse__group">
+    <p class="browse__label">By tag</p>
+    <% all_tags = recipes.flat_map { |r| Array(r.data.tags) }.uniq.sort %>
+    <ul class="chip-list">
+      <% all_tags.each do |tag|
+           tagged = recipes.select { |r| Array(r.data.tags).include?(tag) } %>
+        <li>
+          <a class="chip" href="<%= relative_url "/by-tag/##{tag}" %>">
+            <%= tag %><span class="chip__count"><%= tagged.size %></span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
