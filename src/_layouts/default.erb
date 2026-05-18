@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#F7F2E8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F2E8">
   <%
     page_label = resource.data.layout.to_s == "recipe" ? resource.data.name : resource.data.title
   %>
   <title><% if page_label && page_label != "Home" %><%= page_label %> · <% end %><%= site.metadata.title %></title>
   <% if resource.data.description %>
-    <meta name="description" content="<%= strip_html(resource.data.description).gsub(/\s+/, " ").strip[0, 200] %>" />
+    <meta name="description" content="<%= strip_html(resource.data.description).gsub(/\s+/, " ").strip[0, 200] %>">
   <% end %>
 
-  <link rel="icon" href="<%= relative_url '/favicon.ico' %>" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="<%= relative_url '/favicon.svg' %>" />
-  <link rel="icon" type="image/png" sizes="16x16" href="<%= relative_url '/favicon-16.png' %>" />
-  <link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32.png' %>" />
+  <link rel="icon" href="<%= relative_url '/favicon.ico' %>" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="<%= relative_url '/favicon.svg' %>">
 
-  <link rel="apple-touch-icon" href="<%= relative_url '/apple-touch-icon-v2.png' %>" />
-  <link rel="apple-touch-icon" sizes="152x152" href="<%= relative_url '/apple-touch-icon-152-v2.png' %>" />
-  <link rel="apple-touch-icon" sizes="167x167" href="<%= relative_url '/apple-touch-icon-167-v2.png' %>" />
-  <link rel="apple-touch-icon" sizes="180x180" href="<%= relative_url '/apple-touch-icon-v2.png' %>" />
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= relative_url '/favicon-16.png' %>">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32.png' %>">
 
-  <link rel="manifest" href="<%= relative_url '/webmanifest.json' %>" />
-  <meta name="apple-mobile-web-app-title" content="Cookbook" />
+  <link rel="apple-touch-icon" href="<%= relative_url '/apple-touch-icon-v2.png' %>">
+  <link rel="apple-touch-icon" sizes="152x152" href="<%= relative_url '/apple-touch-icon-152-v2.png' %>">
+  <link rel="apple-touch-icon" sizes="167x167" href="<%= relative_url '/apple-touch-icon-167-v2.png' %>">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= relative_url '/apple-touch-icon-v2.png' %>">
 
-  <link rel="preload" href="<%= relative_url '/assets/fonts/newsreader-display.woff2' %>" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="<%= asset_path :css %>" />
-  <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>" />
+  <link rel="manifest" href="<%= relative_url '/webmanifest.json' %>">
+  <meta name="apple-mobile-web-app-title" content="Cookbook">
+
+  <link rel="preload" href="<%= relative_url '/assets/fonts/newsreader-display.woff2' %>" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="<%= asset_path :css %>">
+  <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>">
 
   <%# Apply stored theme before paint so the toggle never flashes the wrong scheme. %>
   <script>
