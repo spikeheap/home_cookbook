@@ -1,6 +1,7 @@
 [build]
-  command  = "npm run build"
-  publish  = "output"
+  # Install yamllint into the build environment, add ~/.local/bin to PATH, then run the normal npm build
+  command = "python3 -m pip install --user yamllint && export PATH=$HOME/.local/bin:$PATH && npm run build"
+  publish = "output"
 
 [build.environment]
   NODE_VERSION = "24"
