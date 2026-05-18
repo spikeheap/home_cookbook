@@ -44,7 +44,6 @@ recipeInstructions:
     ball and place in lightly oiled containers or a dough tray.
   - Cover and leave to proof at room temperature (18°C) for 8 hours.
   - "Prep, cook and serve \U0001F355"
-
 ---
 ## Notes
 

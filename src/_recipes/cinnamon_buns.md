@@ -89,5 +89,4 @@ recipeInstructions:
     bring to the boil. Once boiling, reduce the heat and simmer until you have a light
     syrup.
   - Brush the baked knots with the syrup while still hot and leave to cool.
-
 ---

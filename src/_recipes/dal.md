@@ -60,5 +60,4 @@ recipeInstructions:
   - Add the tomatoes and simmer for 10–15 minutes, until they have softened but not
     dissolved.
   - Garnish with coriander to serve.
-
 ---

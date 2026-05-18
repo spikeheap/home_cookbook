@@ -65,5 +65,4 @@ recipeInstructions:
     heat for 40 to 45 minutes, or until the chicken is cooked through.
   - Cook the rice.
   - Sprinkle coriander over to serve.
-
 ---

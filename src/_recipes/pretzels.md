@@ -118,5 +118,4 @@ recipeInstructions:
     a fine sieve.
   - Place the baked pretzels on a wire cooling rack, brush the sweet pretzels with
     the syrup glaze and sprinkle over the candied zest.
-
 ---

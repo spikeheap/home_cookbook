@@ -44,5 +44,4 @@ recipeInstructions:
   - Wrap in plastic wrap (to protect from odours) then refrigerate for 8-12 hours.
     It'll keep in the fridge for up to three days
   - Before serving, dust lightly with cocoa powder
-
 ---

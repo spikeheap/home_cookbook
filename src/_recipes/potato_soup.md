@@ -38,5 +38,4 @@ recipeInstructions:
   - Blitz in a blender until silky smooth
   - Transfer back to the pan, and add water or simmer down to the viscosity you want
   - Sprinkle with rosemary, and season to taste
-
 ---

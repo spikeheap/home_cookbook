@@ -15,7 +15,7 @@ isBasedOn: https://www.bbc.co.uk/food/recipes/easy_ciabatta_98431
 author:
   "@type": Person
   name: Paul Hollywood
-image: 
+image:
 prepTime: PT2H
 cookTime: PT1H
 recipeYield: Makes 4 small loaves
@@ -57,5 +57,4 @@ recipeInstructions:
   - Preheat the oven to 220C
   - Bake for 25 minutes, when they should be golden and sound hollow.
   - Leave to cool completely.
-
 ---

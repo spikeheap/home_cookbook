@@ -78,5 +78,4 @@ recipeInstructions:
     baking the cookies in batches. Leave to cool on the baking trays until firm and
     then transfer to a wire rack to cool completely. Store in airtight boxes in between
     layers of baking paper.
-
 ---

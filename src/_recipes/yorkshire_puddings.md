@@ -40,7 +40,6 @@ recipeInstructions:
   - Season!
   - Pour the batter evenly into the tin and bake for 20–25 minutes until the puddings
     have puffed up and browned.
-
 ---
 ## Notes
 

@@ -38,5 +38,4 @@ recipeInstructions:
   - Heat a pan on high heat and cook each pitta about 3 minutes per side or until
     bublly and with some dark brown spots.
   - Put the cooked pittas on a plate and cover with a teatowel to keep them warm.
-
 ---

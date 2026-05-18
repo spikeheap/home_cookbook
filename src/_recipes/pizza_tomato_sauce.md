@@ -26,6 +26,5 @@ recipeInstructions:
 - items:
   - Whisk everything together in a bowl.
   - Taste and adjust salt; add a pinch of sugar if it tastes sharp.
-
 ---
 Use a smooth Italian passata (e.g. Mutti) rather than chopped tomatoes.

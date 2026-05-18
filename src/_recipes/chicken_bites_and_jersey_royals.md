@@ -53,5 +53,4 @@ recipeInstructions:
   - Heat 2 Tbsp oil in a pan and add the chicken. Let it cook for 5 minutes on one
     side then flip. Cook for another 5 minutes till done.
   - Serve the potatoes and chicken plus any other sides and enjoy.
-
 ---

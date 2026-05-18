@@ -34,6 +34,5 @@ recipeInstructions:
   - Remove the shells and lower the eggs into the boiling water for 30 seconds to
     1 minute to develop a skin
   - Remove the eggs and serve
-
 ---
 The eggs can be kept warm indefinitely at 130 degrees without overcooking

@@ -47,5 +47,4 @@ recipeInstructions:
     and add to the wraps.
   - Last of all, take the browned chorizo and distribute in the wraps.
   - Add as much hot sauce as you enjoy, and dig in.
-
 ---

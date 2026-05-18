@@ -42,6 +42,5 @@ recipeInstructions:
   - Bake at 450°C in a pizza oven for 60–90 seconds, or 250°C in a home oven on a
     hot stone for 8–10 minutes, until the crust is charred and the cheese is bubbling.
   - Finish with another drizzle of olive oil and a crack of black pepper.
-
 ---
 The blanching keeps the broccoli tender-crisp instead of bitter and shrivelled.

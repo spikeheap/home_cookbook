@@ -25,5 +25,4 @@ recipeInstructions:
   - Pour through the water
   - Refrigerate overnight
   - Remove the grounds and keep in the fridge for a few days
-
 ---

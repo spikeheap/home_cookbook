@@ -41,5 +41,4 @@ recipeInstructions:
   - Once the cous cous has been cooked, put in a bowl and add the feta, olive oil
     and spices. Mix well.
   - Add the rest of the ingredients and mix well.
-
 ---

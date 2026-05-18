@@ -8,7 +8,7 @@ tags: [bread, baking]
 description: "These came from Luke, and they hold up well"
 isBasedOn: https://kristineskitchenblog.com/wprm_print/25826#
 # image:
-# - 
+# -
 
 prepTime: 45M
 cookTime: 15M
@@ -68,5 +68,4 @@ recipeInstructions:
   - Combine the egg and 1 tablespoon milk in a small bowl, stirring with a fork. Remove
     the towel and brush the tops of the buns with the egg wash. Bake hamburger buns
     in the oven for 13-15 minutes, until tops are golden.
-
 ---

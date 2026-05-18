@@ -73,5 +73,4 @@ recipeInstructions:
     or until cooked through, crispy and golden on top.
   - Serve piping hot with tomato ketchup, baked beans, steamed veg or a lovely green
     salad
-
 ---

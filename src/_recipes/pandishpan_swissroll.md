@@ -5,7 +5,7 @@ cuisine: Bulgarian
 meal: [Sweet]
 effort: weekend
 tags: [baking, grandma-bo]
-description: 
+description:
 keywords:
 - cake
 - swiss roll
@@ -37,5 +37,4 @@ recipeInstructions:
     gives no baking instructions)
   - Turn over on a towel and let cool for about 10 minutes
   - Spread the filling and roll gently to form a swiss roll
-
 ---

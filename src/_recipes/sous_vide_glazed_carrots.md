@@ -47,7 +47,6 @@ recipeInstructions:
   - To finish, empty the entire contents of the bag into a large heavy-bottomed skillet.
     Cook over high heat, stirring constantly, until the liquid has reduced to a shiny
     glaze, about 2 minutes.
-
 ---
 ## Notes
 

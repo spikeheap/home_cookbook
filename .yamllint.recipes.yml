@@ -1,0 +1,21 @@
+extends: default
+
+rules:
+  line-length: disable
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+  empty-lines:
+    max: 1
+    max-start: 0
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+    forbid-in-block-sequences: false
+  document-end: disable
+  truthy:
+    check-keys: false
+  comments:
+    require-starting-space: true
+    min-spaces-from-content: 2
+  comments-indentation: {}

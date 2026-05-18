@@ -5,7 +5,7 @@ cuisine: Mexican
 meal: [Main]
 effort: project
 tags: [slow-cook]
-description: 
+description:
 
 isBasedOn: https://www.wahaca.co.uk/recipe-beef-barbacoa-recipe/
 author:
@@ -70,5 +70,4 @@ recipeInstructions:
     oven at 180°C for around 1 hour 30 minutes or until the beef is tender.
   - Shred the beef.
   - Serve with warm tortillas, sour cream and tomato salsa.
-
 ---

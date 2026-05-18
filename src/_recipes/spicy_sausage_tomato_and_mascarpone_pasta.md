@@ -5,7 +5,7 @@ cuisine: Italian
 meal: [Main]
 effort: weeknight
 tags: [pasta]
-description: 
+description:
 
 isBasedOn: https://www.ocado.com/webshop/recipe/Spicy-Sausage-Tomato-and-Mascarpone-Pasta/227357?selectedCategories
 author:
@@ -48,5 +48,4 @@ recipeInstructions:
     sauce, adding a little of the water to loosen if needed, and serve immediately
     with ground black pepper. Leftovers will keep in an airtight container in the
     fridge for 3 days.
-
 ---

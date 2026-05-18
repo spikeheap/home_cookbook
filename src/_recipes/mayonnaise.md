@@ -1,10 +1,10 @@
 ---
 date: 2021-09-07
 name: Mayonnaise
-# description: 
+# description:
 # category:
 
-# recipeCuisine: 
+# recipeCuisine:
 cuisine: French
 meal: [Condiment]
 effort: weeknight
@@ -37,7 +37,6 @@ recipeInstructions:
   - Blend for 20 seconds.
   - Drizzle in the oil
   - Season and mix in vinegar
-
 ---
 Keep the food processor running the whole time!
 

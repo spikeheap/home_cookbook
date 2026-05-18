@@ -4,7 +4,7 @@ name: Pork Belly Skewers with Adobo Glaze
 cuisine: Filipino
 meal: [Main]
 effort: weekend
-description: 
+description:
 
 isBasedOn: https://www.ocado.com/webshop/recipe/Pork-Belly-Skewers-with-Adobo-Glaze/234186?selectedCategories
 author:
@@ -66,5 +66,4 @@ recipeInstructions:
     often, until wilted.
   - Serve the pork brushed with the warm adobo glaze, with the pak choi and steamed
     rice, if you like.
-
 ---

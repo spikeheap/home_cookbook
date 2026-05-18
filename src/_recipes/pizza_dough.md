@@ -5,12 +5,12 @@ cuisine: Italian
 meal: [Main]
 effort: project
 tags: [pizza, bread]
-description: 
+description:
 isBasedOn: https://www.telegraph.co.uk/foodanddrink/recipes/10680502/Paul-Hollywoods-perfect-pizza-base-recipe.html
 author:
   "@type": Person
   name: Paul Hollywood
-image: 
+image:
 prepTime: PT12H
 cookTime: PT30M
 recipeYield: 2
@@ -42,5 +42,4 @@ recipeInstructions:
   - Spread them out with fingers into 6 to 7 inch circles until they are the same
     thickness all over. Toss/spin the dough on your knuckles to make the dough to
     be thinner in the middle and thicker on the edges.
-
 ---

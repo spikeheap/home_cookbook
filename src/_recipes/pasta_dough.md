@@ -5,7 +5,7 @@ cuisine: Italian
 meal: [Main]
 effort: weekend
 tags: [pasta]
-description: 
+description:
 
 prepTime: PT1H
 cookTime: PT3M
@@ -27,7 +27,6 @@ recipeInstructions:
     it's glossy
   - Reduce the width one notch at a time until you get to 7 (of 8).
   - Cut into 3mm strips, or any shape you might like
-
 ---
 E.g.:
 - [Slow-roasted tomato and shallot tagliatelli](/recipes/slow_roasted_tomato_shallot_tagliatelli)

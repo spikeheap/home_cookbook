@@ -49,5 +49,4 @@ recipeInstructions:
     – the juice will sink in and the sugar will form a lovely, crisp topping.
   - Leave in the tin until completely cool, then remove and serve. Will keep in an
     airtight container for 3-4 days, or freeze for up to 1 month.
-
 ---

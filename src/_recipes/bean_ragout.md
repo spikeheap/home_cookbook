@@ -51,6 +51,5 @@ recipeInstructions:
   - Add all the remaining ingredients <em>except</em> the lime juice, and bring to
     the boil
   - Reduce to a very low simmer and cook for 3 hours, until the beans are tender
-
 ---
 To thicken things up a bit, blend a cup of the bean mixture once cooked, then return it to the ragout.

@@ -72,5 +72,4 @@ recipeInstructions:
   - Warm the taco shells for 3-5 minutes. They'll be soft when they come out of the
     oven, and harden up as they cool.
   - Put everything out on the table, and dig in.
-
 ---

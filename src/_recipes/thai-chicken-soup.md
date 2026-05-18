@@ -10,7 +10,7 @@ isBasedOn: https://www.jamieoliver.com/recipes/chicken-recipes/thai-red-chicken-
 author:
   "@type": Person
   name: Jamie Oliver
-image: 
+image:
 prepTime: PT20M
 cookTime: PT90M
 recipeYield: Serves 6
@@ -40,6 +40,5 @@ recipeInstructions:
   - Cover and simmer on a medium heat for 1 hour 20 minutes.
   - Shred the chicken directly in the pan.
   - Season and serve in bowls.
-
 ---
 This doesn't need noodles or anything adding.

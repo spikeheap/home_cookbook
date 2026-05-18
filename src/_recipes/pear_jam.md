@@ -5,7 +5,7 @@ cuisine: British
 meal: [Condiment]
 effort: weekend
 tags: [preserves]
-description: 
+description:
 
 # recipeCuisine:
 prepTime: PT30M
@@ -38,6 +38,5 @@ recipeInstructions:
   - When the mixture reaches 105℃, immediately remove from the heat and transfer to
     the jars.
   - Leave to cool, and refrigerate/freeze.
-
 ---
 It's all about the ratios: add 1/3 the weight of fruit as sugar.

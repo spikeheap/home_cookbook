@@ -5,7 +5,7 @@ cuisine: Mexican
 meal: [Side]
 effort: weeknight
 tags: [vegan, salsa]
-description: 
+description:
 
 prepTime: PT5M
 recipeYield: 1 bowl
@@ -29,5 +29,4 @@ recipeInstructions:
   - Finely chop everything but the lime and mix
   - Squeeze lime juice over it and season
   - Leave in the fridge for 20 minutes to infuse
-
 ---

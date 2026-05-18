@@ -2,7 +2,7 @@
 date: 2026-05-17
 name: Passionfruit Raspberry Macaron Cake
 cuisine: French
-meal: [Dessert]
+meal: [Sweet]
 effort: project
 tags: [sweet]
 description: Macaron cake with passionfruit cream and fresh raspberries
@@ -85,7 +85,6 @@ recipeInstructions:
       - Add a raspberry to the centre of the macaron, then pipe more cream over the top (coming slightly above the top of the raspberries).
       - Place the macaron top on, then top by sticking a single raspberry with the cream.
       - Leave in the fridge overnight (don't eat immediately).
-
 ---
 The yield is a guess – we expect to be able to make 12 cakes _and_ have left-over for macarons or extra cakes. Once we've made it again we can update here.
 
@@ -114,7 +113,7 @@ The cream is based on a creme patissiere, but swapping 1/2 the milk for passionf
 The sweetness and acidity needs to be balanced, so starting points are:
 
 - **Lime juice**: 120% sugar
-- **Blackcurrent**: 70% sugar 
+- **Blackcurrent**: 70% sugar
 - **Strawberry**: 50% sugar
 
 They're just a guide – the sweetness of each fruit will make a difference.
@@ -131,7 +130,7 @@ Soften butter _way_ more than you think. It shouldn't melt, but should be very g
 
 #### Eggs
 
-Weigh eggs rather than counting them, to be precise. 
+Weigh eggs rather than counting them, to be precise.
 
 - 20g ~= 1 yolk yolk
 - 30g ~= 1 egg white

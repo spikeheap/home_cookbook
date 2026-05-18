@@ -32,5 +32,4 @@ recipeInstructions:
   - Cook for a couple of minutes or until the egg is almost fully done.
   - Carefully flip the sandwich and let the bread toast.
   - Layer the ham and any other toppings and serve.
-
 ---

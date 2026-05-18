@@ -60,5 +60,4 @@ recipeInstructions:
   - Pour into an oiled dish, and tear the mozarella over the top. Sprinkle torn sage
     leaves over this.
   - Cook for 15 minutes, & serve with parmesan & salad.
-
 ---

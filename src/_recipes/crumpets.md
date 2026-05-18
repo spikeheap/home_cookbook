@@ -63,5 +63,4 @@ recipeInstructions:
     rings and cook for a further three minutes. '
   - 'Serve immediately or leave to cool and then toast before eating with plenty of
     butter. '
-
 ---

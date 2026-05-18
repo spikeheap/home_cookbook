@@ -54,5 +54,4 @@ recipeInstructions:
   - Preheat the oven to 220C/200C Fan/Gas 7. Drizzle the loaves with oil, sprinkle
     with fine sea salt then bake in the oven for 20 minutes. When cooked, drizzle
     with a little more olive oil and serve hot or warm.
-
 ---

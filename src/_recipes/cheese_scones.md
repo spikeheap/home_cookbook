@@ -37,5 +37,4 @@ recipeInstructions:
     it all up.
   - Brush the tops of the scones with a little milk. Bake for 12–15 minutes until
     well risen and golden. Cool on a wire rack.
-
 ---

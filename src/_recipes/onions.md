@@ -12,7 +12,6 @@ prepTime: PT5M
 cookTime: PT90M
 recipeYield: Serves 4
 
-
 recipeIngredient:
 - items:
   - quantity: 8
@@ -37,6 +36,5 @@ recipeInstructions:
   - Melt the butter before adding all the other ingredients and pouring over the simple-roasted-onions
   - Cover and roast for 45 minutes
   - Uncover and roast for another 45 minutes
-
 ---
 Tip: halve the onions if you're in a rush

@@ -6,7 +6,6 @@ meal: [Main, Lunch]
 effort: weeknight
 description: Warming and satisfying sharing hot pot
 
-
 prepTime: PT20M
 cookTime: PT20M
 recipeYield: 2 person
@@ -45,5 +44,4 @@ recipeInstructions:
   - Add the noodles, adjust the water level if needed and cook until they're done.
   - Top with cheese if using and cover to let it melt.
   - Serve in the middle of the table with bowls of rice, nori, bonito flakes and kimchi.
-
 ---

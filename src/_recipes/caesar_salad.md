@@ -10,7 +10,7 @@ isBasedOn: https://www.bbc.co.uk/food/recipes/marys_classic_caesar_72903
 author:
   "@type": Person
   name: Mary Berry
-image: 
+image:
 prepTime: PT30M
 cookTime: PT10M
 recipeYield: Serves 4
@@ -53,7 +53,6 @@ recipeInstructions:
   - Rest the chicken for a few minutes before slicing into chunks
   - Beat the dressing ingredients together, and loosen with a tablespoon of water.
   - Toss everything together and serve
-
 ---
 Halve this [mayonnaise recipe](mayonnaise.html).
 

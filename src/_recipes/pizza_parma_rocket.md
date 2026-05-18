@@ -45,6 +45,5 @@ recipeInstructions:
   - Top with rocket, shaved Parmigiano, the rest of the basil, a drizzle of olive
     oil, and a generous turn of black pepper.
   - Slice and serve immediately.
-
 ---
 Don't bake the Parma ham — the contrast between hot, charred crust and cool, salty, gently-warmed ham is the whole point.

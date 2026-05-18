@@ -74,7 +74,6 @@ recipeInstructions:
     sauce and stir to combine. Pour into an ovenproof dish, then sprinkle over the
     reserved cheese and breadcrumbs. Bake for 45 minutes, or until the cauliflower
     is tender when pierced with a knife and the topping is golden and crisp.
-
 ---
 ## Notes
 

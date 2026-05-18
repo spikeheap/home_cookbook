@@ -5,7 +5,7 @@ cuisine: British
 meal: [Side]
 effort: project
 tags: [bread]
-description: 
+description:
 isBasedOn: https://www.bbcgoodfood.com/recipes/sourdough
 prepTime: PT9H
 cookTime: PT40M
@@ -50,5 +50,4 @@ recipeInstructions:
   - Make deep slashes in the top of the loaf.
   - Bake for ~35 minutes until deep brown and hollow-sounding.
   - Remove and allow to cool.
-
 ---

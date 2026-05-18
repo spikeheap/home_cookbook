@@ -1,11 +1,11 @@
 ---
 date: 2020-08-01
-name: Slow-roasted tomato and shallot tagliatelli 
+name: Slow-roasted tomato and shallot tagliatelli
 cuisine: Italian
 meal: [Main]
 effort: weekend
 tags: [pasta, vegetarian]
-description: 
+description:
 prepTime: PT15M
 cookTime: PT2H
 recipeYield: Serves 2
@@ -37,5 +37,4 @@ recipeInstructions:
   - When the pasta is ready, add it to the tomatoes with a ladle of the pasta water.
   - Add the shallots, and a generous glug of good extra-virgin olive oil.
   - Serve with ground black pepper, parmesan.
-
 ---

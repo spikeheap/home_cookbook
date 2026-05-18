@@ -48,7 +48,6 @@ recipeInstructions:
   - Shower with grated Pecorino, a generous turn of black pepper, and a final drizzle
     of olive oil.
   - Slice quickly so the yolk is still glossy when it hits the plate.
-
 ---
 The egg yolk goes on _after_ baking and gets thinned by residual heat, like proper carbonara. If you'd rather have it set, slip the yolk on with 60 seconds of bake left.
 

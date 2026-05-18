@@ -37,5 +37,4 @@ recipeInstructions:
   - Shape into
   - Use a table spoon to scoop out the mixture and place on lined baking tray
   - Bake for 20-30 minutes, till the edges are golden
-
 ---

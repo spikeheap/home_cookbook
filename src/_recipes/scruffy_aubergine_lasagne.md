@@ -58,5 +58,4 @@ recipeInstructions:
   - Remove the pan from the heat, add the cheese, and pasta, and season. Pull some
     of the pasta sheets toward the top to crisp up.
   - Bake for 25 minutes.
-
 ---

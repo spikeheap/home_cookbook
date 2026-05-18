@@ -5,7 +5,7 @@ cuisine: Indian
 meal: [Main]
 effort: weeknight
 tags: [vegetarian]
-description: 
+description:
 
 prepTime: PT10M
 cookTime: PT30M
@@ -56,5 +56,4 @@ recipeInstructions:
     of the liquid has evaporated.
   - Add 50ml water to deglaze the pan, add the paneer to warm.
   - Serve with lemon and rice.
-
 ---
