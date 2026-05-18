@@ -109,6 +109,16 @@ Always have a large bowl of water next to the stove when working with boiling su
 
 The cream is based on a creme patissiere, but swapping 1/2 the milk for passionfruit juice. Ultimately becomes a creme mousseline.
 
+#### Swapping out passionfruit
+
+The sweetness and acidity needs to be balanced, so starting points are:
+
+- **Lime juice**: 120% sugar
+- **Blackcurrent**: 70% sugar 
+- **Strawberry**: 50% sugar
+
+They're just a guide – the sweetness of each fruit will make a difference.
+
 #### Macaron piping technique
 
 For the large macarons pipe from the centre in a spiral, holding the piping back a couple of centimetres above the mat.
