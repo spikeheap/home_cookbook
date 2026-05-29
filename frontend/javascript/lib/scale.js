@@ -49,7 +49,7 @@ function subFractionFor(el) {
   return Number.isFinite(f) && f > 0 ? f : 1;
 }
 
-function nextOnLadder(current, direction) {
+export function nextOnLadder(current, direction) {
   const idx = MULTIPLIER_LADDER.indexOf(current);
   if (idx === -1) return direction === "up" ? 1 : 0.5;
   const next = direction === "up" ? idx + 1 : idx - 1;
