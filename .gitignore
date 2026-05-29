@@ -34,6 +34,8 @@ yarn-debug.log*
 .yarn-integrity
 
 # Tempfiles
+# (also covers /tmp/categoriser/ — the raw OFF taxonomy download used by
+# scripts/build-categoriser-dictionary.mjs).
 /tmp/*
 !/tmp/.keep
 /tmp/pids/*

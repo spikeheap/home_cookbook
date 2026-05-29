@@ -8,7 +8,14 @@
 // separate `manual` bucket so the cook can scan them. Different units of the
 // same item stay on separate rows — no unit conversion (v0).
 
+import dictionaryData from "./categoriser-dictionary.json" with { type: "json" };
+
 const SUB_LINK_RE = /\[[^\]]+\]\(([a-z0-9_-]+)\.html\)/i;
+
+// Tier 2 categoriser: offline dictionary derived from the Open Food Facts
+// ingredients taxonomy. Built by scripts/build-categoriser-dictionary.mjs.
+// Keys are normalised by normaliseItemName() so runtime lookups collide.
+const DICTIONARY = new Map(Object.entries(dictionaryData.entries || {}));
 
 // Items whose normalised name matches these patterns are dropped from the
 // shopping list entirely (you don't shop for water). Conservative so that
@@ -136,9 +143,9 @@ export function categorise(name, unit) {
   const padded = ` ${lower} `;
   const u      = (unit || "").toLowerCase();
 
-  // Pack format (tinned, jarred, sachet) is a strong signal for Cupboard and
-  // overrides keyword matches like "tomato" → Produce. A few categories still
-  // win: frozen peas in a packet are Frozen, canned beer is Drinks.
+  // Tier 1: pack format (tinned, jarred, sachet) is a strong signal for
+  // Cupboard and overrides any other lookup. A few categories still win:
+  // frozen peas in a packet are Frozen, canned beer is Drinks.
   if (PACK_UNITS.has(u)) {
     for (const cat of ["Frozen", "Drinks"]) {
       const rule = CATEGORY_RULES.find(r => r.category === cat);
@@ -147,6 +154,15 @@ export function categorise(name, unit) {
     return "Cupboard";
   }
 
+  // Tier 2: direct lookup in the offline OFF dictionary. `name` is already
+  // normalised by aggregate() before categorise() is called, but defend
+  // against direct callers (tests, ad-hoc surveys) by normalising again.
+  const dictKey = normaliseItemName(name);
+  const dictHit = DICTIONARY.get(dictKey);
+  if (dictHit) return dictHit;
+
+  // Tier 3: keyword-rule fallback. Handles qualifier-laden text the
+  // dictionary won't catch (e.g. "ground cumin", "extra virgin olive oil").
   for (const rule of CATEGORY_RULES) {
     if (rule.patterns.some(p => padded.includes(p))) return rule.category;
   }

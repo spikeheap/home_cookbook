@@ -318,6 +318,39 @@ test("categorise: butternut / ground pork / pearl no longer false-match", () => 
   assert.equal(categorise("x 400g tins of chopped tomatoes"), "Cupboard");
 });
 
+test("categorise: dictionary (Tier 2) resolves common ingredient names", () => {
+  // These ingredients exist in the offline OFF dictionary and should resolve
+  // there before the keyword fallback fires.
+  assert.equal(categorise("salmon"),                  "Meat & fish");
+  assert.equal(categorise("haddock"),                 "Meat & fish");
+  assert.equal(categorise("chicken thigh"),           "Meat & fish");
+  assert.equal(categorise("aubergine"),               "Produce");
+  assert.equal(categorise("courgette"),               "Produce");
+  assert.equal(categorise("chickpea"),                "Cupboard");
+  assert.equal(categorise("basmati rice"),            "Cupboard");
+  assert.equal(categorise("balsamic vinegar"),        "Cupboard");
+  assert.equal(categorise("passata"),                 "Cupboard");
+  assert.equal(categorise("ciabatta"),                "Bakery");
+  assert.equal(categorise("focaccia"),                "Bakery");
+  assert.equal(categorise("egg yolk"),                "Dairy & eggs");
+});
+
+test("categorise: dictionary defers to fallback for qualifier-laden text", () => {
+  // The dictionary build strips entries like "dried oregano" / "ground cumin"
+  // so the keyword fallback wins for these — preserving the routing that
+  // CATEGORY_RULES encodes for dried/ground/frozen variants.
+  assert.equal(categorise("dried oregano"),           "Cupboard");
+  assert.equal(categorise("ground cumin"),            "Cupboard");
+  assert.equal(categorise("smoked salmon"),           "Meat & fish");
+  assert.equal(categorise("frozen peas"),             "Frozen");
+});
+
+test("categorise: pack-unit short-circuit still wins over dictionary", () => {
+  // "salmon" alone → Meat & fish via the dict, but in a tin (rare but
+  // possible) the pack-unit short-circuit takes precedence.
+  assert.equal(categorise("salmon", "tin"),           "Cupboard");
+});
+
 test("CATEGORY_ORDER is the canonical, shopping-order list", () => {
   assert.deepEqual(CATEGORY_ORDER, [
     "Produce", "Bakery", "Meat & fish", "Dairy & eggs", "Cupboard", "Frozen", "Drinks", "Other",
