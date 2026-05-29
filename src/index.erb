@@ -15,6 +15,8 @@ title: Home
   with_tag = ->(tag) { recipes.select { |r| Array(r.data.tags).include?(tag) }.sort_by { |r| r.data.name.to_s.downcase } }
   pizza = with_tag.("pizza")
   pasta = with_tag.("pasta")
+
+  latest = recipes.sort_by { |r| r.data.date.to_s }.reverse.first(6)
 %>
 <section class="home-hero">
   <h1 class="home-hero__title">Recipes we <em>actually</em> cook.</h1>
@@ -31,6 +33,19 @@ title: Home
     <span class="home-search__hint">↑↓ to choose · Esc to clear</span>
   </form>
   <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
+</section>
+
+<section class="rail">
+  <header class="rail__header">
+    <div>
+      <h2 class="rail__title">Latest</h2>
+    </div>
+  </header>
+  <ul class="card-grid">
+    <% latest.each do |r| %>
+      <li><%= render "recipe_card", recipe: r %></li>
+    <% end %>
+  </ul>
 </section>
 
 <section class="rail">
