@@ -18,7 +18,7 @@ permalink: /by-cuisine/
       <h2 class="all-recipes__section-title"><%= cuisine %> <span class="meta"><%= in_cuisine.size %></span></h2>
       <ul class="all-recipes__list">
         <% in_cuisine.each do |r| %>
-          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.effort %><span class="meta"><%= r.data.effort %></span><% end %></li>
+          <%= render "recipe_list_item", recipe: r, meta: r.data.effort %>
         <% end %>
       </ul>
     </section>

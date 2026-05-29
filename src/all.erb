@@ -18,7 +18,7 @@ permalink: /all/
     <h2 class="all-recipes__section-title">Weeknight <span class="meta"><%= weeknight.size %></span></h2>
     <ul class="all-recipes__list">
       <% weeknight.each do |r| %>
-        <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
   </section>
@@ -27,7 +27,7 @@ permalink: /all/
     <h2 class="all-recipes__section-title">Weekend <span class="meta"><%= weekend.size %></span></h2>
     <ul class="all-recipes__list">
       <% weekend.each do |r| %>
-        <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
   </section>
@@ -36,7 +36,7 @@ permalink: /all/
     <h2 class="all-recipes__section-title">Projects <span class="meta"><%= project.size %></span></h2>
     <ul class="all-recipes__list">
       <% project.each do |r| %>
-        <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
   </section>

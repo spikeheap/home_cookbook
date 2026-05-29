@@ -91,6 +91,29 @@ export function addRecipeToPlan({ slug, value, slot, storage = (typeof localStor
   return next;
 }
 
+export function isInPlan(slug, storage = (typeof localStorage !== "undefined" ? localStorage : null)) {
+  if (!slug) return false;
+  return loadPlan(storage).entries.some(e => e.slug === slug);
+}
+
+// Toggle a recipe in/out of the plan. If the slug is already present, the
+// existing entry is removed; otherwise a new entry is added. Returns the new
+// plan and whether the recipe ended up added or removed, so callers can update
+// button state without re-reading storage.
+export function togglePlanEntry({ slug, value, slot, storage = (typeof localStorage !== "undefined" ? localStorage : null) }) {
+  if (!slug || !slot) return { plan: loadPlan(storage), added: false };
+  const plan = loadPlan(storage);
+  const existing = plan.entries.find(e => e.slug === slug);
+  if (existing) {
+    const next = removeEntry(plan, existing.id);
+    savePlan(next, storage);
+    return { plan: next, added: false };
+  }
+  const next = addEntry(plan, { slug, value, slot });
+  savePlan(next, storage);
+  return { plan: next, added: true };
+}
+
 export function nextStepValue(value, direction, mode) {
   if (mode === "servings") {
     return direction === "up" ? value + 1 : Math.max(1, value - 1);

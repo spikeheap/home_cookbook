@@ -5,6 +5,7 @@ import {
   addEntry, removeEntry, updateEntry, clearEntries,
   modeForRecipe, defaultValueForRecipe, slotForRecipe, slotForMeal,
   nextStepValue, groupBySlot, addRecipeToPlan, renderEntry,
+  isInPlan, togglePlanEntry,
   SLOT_ORDER,
 } from "./plan.js";
 
@@ -151,5 +152,36 @@ test("addRecipeToPlan ignores calls missing slug or slot", () => {
   const storage = fakeStorage();
   addRecipeToPlan({ slug: "", value: 1, slot: "Other", storage });
   addRecipeToPlan({ slug: "x", value: 1, slot: "", storage });
+  assert.equal(loadPlan(storage).entries.length, 0);
+});
+
+test("isInPlan reflects whether a slug has any matching entry", () => {
+  const storage = fakeStorage();
+  assert.equal(isInPlan("focaccia", storage), false);
+  addRecipeToPlan({ slug: "focaccia", value: 1, slot: "Other", storage });
+  assert.equal(isInPlan("focaccia", storage), true);
+  assert.equal(isInPlan("other_recipe", storage), false);
+  assert.equal(isInPlan("", storage), false);
+});
+
+test("togglePlanEntry adds when absent, removes when present", () => {
+  const storage = fakeStorage();
+
+  const first = togglePlanEntry({ slug: "dal", value: 6, slot: "Dinner", storage });
+  assert.equal(first.added, true);
+  assert.equal(loadPlan(storage).entries.length, 1);
+
+  const second = togglePlanEntry({ slug: "dal", value: 6, slot: "Dinner", storage });
+  assert.equal(second.added, false);
+  assert.equal(loadPlan(storage).entries.length, 0);
+
+  const third = togglePlanEntry({ slug: "dal", value: 4, slot: "Dinner", storage });
+  assert.equal(third.added, true, "re-adding works after removal");
+});
+
+test("togglePlanEntry ignores empty slug/slot and reports the unchanged plan", () => {
+  const storage = fakeStorage();
+  const { added } = togglePlanEntry({ slug: "", value: 1, slot: "Other", storage });
+  assert.equal(added, false);
   assert.equal(loadPlan(storage).entries.length, 0);
 });

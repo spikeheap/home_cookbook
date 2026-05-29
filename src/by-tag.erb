@@ -17,7 +17,7 @@ permalink: /by-tag/
       <h2 class="all-recipes__section-title"><%= tag %> <span class="meta"><%= tagged.size %></span></h2>
       <ul class="all-recipes__list">
         <% tagged.each do |r| %>
-          <li><a href="<%= r.relative_url %>"><%= r.data.name %></a><% if r.data.cuisine %><span class="meta"><%= r.data.cuisine %></span><% end %></li>
+          <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
         <% end %>
       </ul>
     </section>

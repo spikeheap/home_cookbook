@@ -591,6 +591,38 @@ img { max-width: 100%; height: auto; }
 
 .all-recipes__list a:hover { color: var(--rust); }
 
+.recipe-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.recipe-row__link { flex: 1 1 auto; min-width: 0; }
+
+.recipe-row__add {
+  flex: 0 0 auto;
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  width: 1.3rem;
+  height: 1.3rem;
+  padding: 0;
+  line-height: 1;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.recipe-row__add:hover,
+.recipe-row__add[data-state="added"] {
+  background: var(--rust);
+  color: var(--cream);
+  border-color: var(--rust);
+}
+
 .all-recipes .meta {
   font-family: var(--mono);
   font-size: 0.7rem;
@@ -704,8 +736,10 @@ img { max-width: 100%; height: auto; }
 }
 
 .tool:hover { border-color: var(--rust); color: var(--rust); background: var(--paper); }
-.tool[aria-pressed="true"] { border-color: var(--rust); background: var(--rust); color: var(--cream); }
-.tool[aria-pressed="true"]:hover { background: var(--rust-soft); border-color: var(--rust-soft); }
+.tool[aria-pressed="true"],
+.tool[data-state="added"] { border-color: var(--rust); background: var(--rust); color: var(--cream); }
+.tool[aria-pressed="true"]:hover,
+.tool[data-state="added"]:hover { background: var(--rust-soft); border-color: var(--rust-soft); }
 
 .tool__icon { font-size: 0.85rem; }
 

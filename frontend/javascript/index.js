@@ -5,7 +5,7 @@ import { setupSearch } from "./lib/search.js";
 import { setupScale } from "./lib/scale.js";
 import { setupWakeLock } from "./lib/wake-lock.js";
 import { setupPrintExpansion } from "./lib/print.js";
-import { setupPlan, addRecipeToPlan } from "./lib/plan.js";
+import { setupPlan, togglePlanEntry, isInPlan } from "./lib/plan.js";
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
@@ -24,7 +24,7 @@ function init() {
     setupRecipeAddToPlan(recipeRoot, scale);
   }
 
-  setupCardAddButtons(document);
+  setupAddButtons(document);
 
   const planRoot = document.querySelector(".plan");
   if (planRoot) {
@@ -38,13 +38,14 @@ function init() {
   }
 }
 
-function flashAdded(btn, doneLabel, restoreLabel, ms = 1500) {
-  btn.textContent = doneLabel;
-  btn.dataset.state = "added";
-  setTimeout(() => {
-    btn.textContent = restoreLabel;
+function setAddedState(btn, added, { addedLabel, restLabel } = {}) {
+  if (added) {
+    btn.dataset.state = "added";
+    if (addedLabel != null) btn.textContent = addedLabel;
+  } else {
     delete btn.dataset.state;
-  }, ms);
+    if (restLabel != null) btn.textContent = restLabel;
+  }
 }
 
 function setupRecipeAddToPlan(recipeRoot, scale) {
@@ -54,27 +55,37 @@ function setupRecipeAddToPlan(recipeRoot, scale) {
   const slot = recipeRoot.dataset.recipeSlot || "Other";
   if (!slug) return;
 
-  const labelEl = btn.querySelector(".tool__label");
-  const original = labelEl ? labelEl.textContent : "Add to plan";
+  const labelEl   = btn.querySelector(".tool__label");
+  const addLabel  = "Add to plan";
+  const inLabel   = "In plan";
+  const setLabel  = (text) => { if (labelEl) labelEl.textContent = text; };
+
+  const initial = isInPlan(slug);
+  setAddedState(btn, initial);
+  setLabel(initial ? inLabel : addLabel);
 
   btn.addEventListener("click", () => {
     const value = scale && typeof scale.getValue === "function" ? scale.getValue() : 1;
-    addRecipeToPlan({ slug, value, slot });
-    if (labelEl) flashAdded(labelEl, "Added", original);
+    const { added } = togglePlanEntry({ slug, value, slot });
+    setAddedState(btn, added);
+    setLabel(added ? inLabel : addLabel);
   });
 }
 
-function setupCardAddButtons(scope) {
-  scope.querySelectorAll(".card__add").forEach(btn => {
+function setupAddButtons(scope) {
+  scope.querySelectorAll("[data-plan-add-slug]").forEach(btn => {
+    const slug  = btn.dataset.planAddSlug;
+    const value = parseFloat(btn.dataset.planAddValue);
+    const slot  = btn.dataset.planAddSlot;
+    if (!slug || !slot || !Number.isFinite(value)) return;
+
+    setAddedState(btn, isInPlan(slug), { addedLabel: "✓", restLabel: "+" });
+
     btn.addEventListener("click", e => {
       e.preventDefault();
       e.stopPropagation();
-      const slug  = btn.dataset.planAddSlug;
-      const value = parseFloat(btn.dataset.planAddValue);
-      const slot  = btn.dataset.planAddSlot;
-      if (!slug || !slot || !Number.isFinite(value)) return;
-      addRecipeToPlan({ slug, value, slot });
-      flashAdded(btn, "✓", "+");
+      const { added } = togglePlanEntry({ slug, value, slot });
+      setAddedState(btn, added, { addedLabel: "✓", restLabel: "+" });
     });
   });
 }

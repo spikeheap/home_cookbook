@@ -1,0 +1,14 @@
+<%
+  r = recipe
+  meta = defined?(meta) ? meta : nil
+%>
+<li class="recipe-row">
+  <a class="recipe-row__link" href="<%= r.relative_url %>"><%= r.data.name %></a>
+  <% if meta && !meta.to_s.empty? %><span class="meta"><%= meta %></span><% end %>
+  <button type="button" class="recipe-row__add plan-add"
+          data-plan-add-slug="<%= r.basename_without_ext %>"
+          data-plan-add-value="<%= default_plan_value_for(r) %>"
+          data-plan-add-slot="<%= plan_slot_for(r) %>"
+          title="Add to plan"
+          aria-label="Toggle <%= r.data.name %> in plan">+</button>
+</li>
