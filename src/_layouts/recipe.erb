@@ -77,9 +77,19 @@ layout: default
   <% end %>
 
   <div class="recipe-body">
+    <%
+      ingredient_count = Array(page.recipeIngredient).sum { |s| Array(s["items"]).size }
+    %>
     <section class="recipe-ingredients" aria-label="Ingredients">
-      <h2 class="recipe-section-title">Ingredients</h2>
-      <%= render "ingredient_list", list: page.recipeIngredient %>
+      <details class="recipe-ingredients__panel" open>
+        <summary class="recipe-section-title recipe-ingredients__summary">
+          Ingredients
+          <span class="recipe-ingredients__count" aria-hidden="true"><%= ingredient_count %></span>
+        </summary>
+        <div class="recipe-ingredients__body">
+          <%= render "ingredient_list", list: page.recipeIngredient %>
+        </div>
+      </details>
     </section>
 
     <section class="recipe-steps" aria-label="Method">

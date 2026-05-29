@@ -86,3 +86,11 @@ Omit `uses_fraction` for sub-recipes you intentionally want to display unchanged
 - **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.
 
 - **Image scaling.** Add image scaling rake tasks to generate images for different screen sizes.
+
+- **Mobile recipe-page UX — beyond the sticky-collapsible ingredients we have today.** While reading method steps the cook still has to expand-and-scan to find which ingredients a specific step uses. Options ranked roughly by effort:
+
+  - *Auto-detect ingredient pills above each step.* For each step's text, fuzzy-match against the recipe's own ingredient list and render matched items as compact chips above the step. Re-use the existing `.ingredient__qty` markup so the stepper scales the pill quantities for free. ~3–4 hours; ~80% right out of the box (will mis-fire on generic words like "salt" when a recipe has multiple, and miss things like "the dough" that don't name an ingredient).
+  - *Manual `uses:` per step.* Authors annotate each step with which ingredients it touches (`uses: [flour, eggs]`). Perfect signal but adds a tax to every recipe — ~3–5 hours one-off plus an ongoing authoring cost.
+  - *Inline anchor styling.* Same matcher as the pills, but the ingredient *words* in step text become styled spans that peek the ingredient row when tapped. Less visual change, still needs scrolling for quantities.
+  - *Bidirectional tap-to-highlight.* Tap an ingredient → step(s) that use it pulse; tap a step → its ingredients highlight. Nearly free on top of the matcher.
+  - *Floating action button + bottom sheet.* iOS-native pattern as an alternative to the sticky bar — circular button bottom-right opens a half-screen overlay with ingredients.

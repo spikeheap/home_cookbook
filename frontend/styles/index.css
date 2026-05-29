@@ -820,6 +820,81 @@ img { max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--rule);
 }
 
+/* Ingredients: collapsible + sticky-at-top on mobile so the list is always
+   one tap away while reading method steps. Desktop already has the
+   ingredients section sticky in a sidebar (see .recipe-body @media query),
+   so the collapsible affordance is mobile-only in practice. */
+.recipe-ingredients__panel {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  margin: 0 calc(-1 * var(--gap-4));
+  padding: 0 var(--gap-4) var(--gap-3);
+}
+
+.recipe-ingredients__summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-3);
+  margin: 0;
+  padding: var(--gap-3) 0;
+  border-bottom: 0;
+  user-select: none;
+}
+
+.recipe-ingredients__summary::-webkit-details-marker { display: none; }
+.recipe-ingredients__summary::after {
+  content: "▾";
+  font-size: 0.8rem;
+  color: var(--mute);
+  margin-left: auto;
+  transition: transform 160ms ease;
+}
+.recipe-ingredients__panel[open] .recipe-ingredients__summary::after {
+  transform: rotate(180deg);
+}
+
+.recipe-ingredients__count {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--mute);
+  font-weight: 400;
+}
+
+.recipe-ingredients__body {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Desktop: ingredients sit in the sidebar; the details element is open and
+   the toggle affordance is suppressed (no chevron, no pointer cursor, no
+   scrollable body). The existing sticky rule on .recipe-ingredients keeps
+   the sidebar visible while the user scrolls the method. */
+@media (min-width: 56rem) {
+  .recipe-ingredients__panel {
+    position: static;
+    background: transparent;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .recipe-ingredients__summary {
+    cursor: default;
+    padding: 0 0 var(--gap-2);
+    margin-bottom: var(--gap-4);
+    border-bottom: 1px solid var(--rule);
+  }
+  .recipe-ingredients__summary::after { display: none; }
+  .recipe-ingredients__body {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 /* Ingredient list */
 
 .ingredient-section {
