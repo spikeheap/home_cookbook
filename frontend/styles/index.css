@@ -794,19 +794,42 @@ img { max-width: 100%; height: auto; }
 /* Body — two-column on wider screens */
 
 .recipe-body {
-  display: grid;
-  gap: var(--gap-8);
-  align-items: start;
+  display: block;
+}
+
+.recipe-body > .recipe-steps {
+  margin-top: var(--gap-8);
+}
+
+/* Mobile sticky: the section is the sticky element; its containing block is
+   .recipe-body which is tall (steps follow it in flow), so there's room to
+   stick. The panel inside the section can't be sticky because the section
+   would be exactly panel-height — no scroll range. */
+.recipe-ingredients {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  margin: 0 calc(-1 * var(--gap-4));
+  padding: 0 var(--gap-4) var(--gap-3);
 }
 
 @media (min-width: 56rem) {
   .recipe-body {
+    display: grid;
     grid-template-columns: 18rem 1fr;
     gap: var(--gap-10);
+    align-items: start;
   }
+  .recipe-body > .recipe-steps { margin-top: 0; }
   .recipe-ingredients {
-    position: sticky;
     top: var(--gap-5);
+    background: transparent;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0;
+    z-index: auto;
   }
 }
 
@@ -820,18 +843,11 @@ img { max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--rule);
 }
 
-/* Ingredients: collapsible + sticky-at-top on mobile so the list is always
-   one tap away while reading method steps. Desktop already has the
-   ingredients section sticky in a sidebar (see .recipe-body @media query),
-   so the collapsible affordance is mobile-only in practice. */
+/* Collapsible <details> inside the sticky section. The summary doubles as
+   the section heading; the chevron rotates with [open]. */
 .recipe-ingredients__panel {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
-  margin: 0 calc(-1 * var(--gap-4));
-  padding: 0 var(--gap-4) var(--gap-3);
+  /* No sticky here — the parent .recipe-ingredients section owns the sticky
+     behaviour so the containing block has room to scroll. */
 }
 
 .recipe-ingredients__summary {
@@ -870,18 +886,11 @@ img { max-width: 100%; height: auto; }
   overflow-y: auto;
 }
 
-/* Desktop: ingredients sit in the sidebar; the details element is open and
-   the toggle affordance is suppressed (no chevron, no pointer cursor, no
-   scrollable body). The existing sticky rule on .recipe-ingredients keeps
-   the sidebar visible while the user scrolls the method. */
+/* Desktop: ingredients sit in the sidebar; the toggle affordance is
+   suppressed (no chevron, no pointer cursor, no scroll cap). The existing
+   sticky on .recipe-ingredients keeps the sidebar visible alongside the
+   method. */
 @media (min-width: 56rem) {
-  .recipe-ingredients__panel {
-    position: static;
-    background: transparent;
-    border-bottom: 0;
-    margin: 0;
-    padding: 0;
-  }
   .recipe-ingredients__summary {
     cursor: default;
     padding: 0 0 var(--gap-2);
