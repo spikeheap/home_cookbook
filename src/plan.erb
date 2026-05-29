@@ -21,7 +21,7 @@ permalink: /plan/
   # Escape `</` so a stray closing tag in any string can't break out of <script>.
   recipes_json = JSON.generate(recipes_data).gsub("</", "<\\/")
 %>
-<script type="application/json" id="plan-recipes-data"><%= recipes_json %></script>
+<script type="application/json" id="plan-recipes-data"><%= safe(recipes_json) %></script>
 
 <article class="plan">
   <header class="plan-head">
