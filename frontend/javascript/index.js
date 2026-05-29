@@ -31,8 +31,14 @@ function init() {
     const dataEl = document.getElementById("plan-recipes-data");
     let recipes = [];
     if (dataEl) {
-      try { recipes = JSON.parse(dataEl.textContent); }
-      catch (_) { recipes = []; }
+      try {
+        recipes = JSON.parse(dataEl.textContent);
+      } catch (err) {
+        console.warn("plan: failed to parse #plan-recipes-data; rendering with empty index", err);
+        recipes = [];
+      }
+    } else {
+      console.warn("plan: #plan-recipes-data not found on the page");
     }
     setupPlan({ root: planRoot, recipes });
   }
