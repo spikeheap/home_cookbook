@@ -1,0 +1,54 @@
+---
+layout: default
+title: Meal plan
+permalink: /plan/
+---
+<%
+  require "json"
+
+  recipes_data = collections.recipes.resources.map do |r|
+    {
+      slug:             r.basename_without_ext,
+      name:             r.data.name,
+      url:              r.relative_url,
+      servings:         r.data.servings,
+      meal:             Array(r.data.meal),
+      recipeYield:      r.data.recipeYield,
+      recipeIngredient: r.data.recipeIngredient,
+    }
+  end
+
+  # Escape `</` so a stray closing tag in any string can't break out of <script>.
+  recipes_json = JSON.generate(recipes_data).gsub("</", "<\\/")
+%>
+<script type="application/json" id="plan-recipes-data"><%= recipes_json %></script>
+
+<article class="plan">
+  <header class="plan-head">
+    <h1 class="plan-head__title">Meal plan</h1>
+    <p class="plan-head__lede" data-plan-empty>
+      Add recipes from anywhere on the site — they'll appear here grouped by meal,
+      with a reconciled shopping list below.
+    </p>
+  </header>
+
+  <section class="plan-list" data-plan-list aria-live="polite"></section>
+
+  <section class="plan-shop" data-plan-shop hidden>
+    <header class="plan-shop__head">
+      <h2 class="plan-shop__title">Shopping list <span class="plan-shop__count" data-plan-shop-count></span></h2>
+    </header>
+
+    <ul class="plan-shop__items" data-plan-shop-items></ul>
+
+    <div class="plan-shop__manual" data-plan-shop-manual hidden>
+      <h3 class="plan-shop__subtitle">To add manually</h3>
+      <ul class="plan-shop__manual-items" data-plan-shop-manual-items></ul>
+    </div>
+
+    <div class="plan-shop__tools" role="toolbar" aria-label="Plan tools">
+      <button type="button" class="tool" data-plan-action="copy">Copy shopping list</button>
+      <button type="button" class="tool" data-plan-action="clear">Clear plan</button>
+    </div>
+  </section>
+</article>
