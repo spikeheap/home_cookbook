@@ -17,9 +17,11 @@ recipeIngredient:
   - quantity: 1
     unit: ball
     item: "[pizza dough](pizza_dough_gozney.html)"
+    uses_fraction: 0.2
   - quantity: 3
     unit: tbsp
     item: "[tomato sauce](pizza_tomato_sauce.html)"
+    uses_fraction: 0.25
   - quantity: 100
     unit: g
     item: fior di latte mozzarella, torn into pieces

@@ -17,6 +17,7 @@ recipeIngredient:
   - quantity: 1
     unit: ball
     item: "[pizza dough](pizza_dough_gozney.html)"
+    uses_fraction: 0.2
   - quantity: 2
     unit: tbsp
     item: crème fraîche (or a thin layer of olive oil if you prefer)

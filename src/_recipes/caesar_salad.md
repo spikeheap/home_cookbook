@@ -35,6 +35,7 @@ recipeIngredient:
     quantity_max: 12
     unit: tbsp
     item: "(approx 150ml) [mayonnaise](mayonnaise.html)"
+    uses_fraction: 0.5
   - quantity: 2
     unit: tbsp
     item: grated Parmesan cheese
@@ -55,7 +56,5 @@ recipeInstructions:
   - Beat the dressing ingredients together, and loosen with a tablespoon of water.
   - Toss everything together and serve
 ---
-Halve this [mayonnaise recipe](mayonnaise.html).
-
 If you don't have stale bread, just shove the cubes in the oven on 150℃ for a bit to dry them out.
 
