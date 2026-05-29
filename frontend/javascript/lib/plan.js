@@ -184,7 +184,7 @@ function renderShopItem(item) {
     ? `${item.sources.length} recipes`
     : item.sources.join(", ");
   return `
-    <li>
+    <li class="plan-shop__item">
       <span class="plan-shop__qty">${esc(qty)}</span>
       <span class="plan-shop__name">${esc(item.displayName)}</span>
       <span class="plan-shop__sources">${esc(sources)}</span>
@@ -192,9 +192,19 @@ function renderShopItem(item) {
   `;
 }
 
+function renderShopCategory(category) {
+  const items = category.items.map(renderShopItem).join("");
+  return `
+    <section class="plan-shop__category">
+      <h3 class="plan-shop__category-title">${esc(category.name)} <span class="plan-shop__category-count">${category.items.length}</span></h3>
+      <ul class="plan-shop__category-list">${items}</ul>
+    </section>
+  `;
+}
+
 function renderManualItem(item) {
   return `
-    <li>
+    <li class="plan-shop__item plan-shop__item--manual">
       <span class="plan-shop__name">${esc(item.displayName)}</span>
       <span class="plan-shop__sources">${esc(item.source)}</span>
     </li>
@@ -202,7 +212,8 @@ function renderManualItem(item) {
 }
 
 function shoppingListText(agg) {
-  const lines = agg.grouped.map(g => `${formatQuantityWithUnit(g.quantity, g.unit)} ${g.displayName}`.trim());
+  const allItems = agg.byCategory.flatMap(g => g.items);
+  const lines = allItems.map(g => `${formatQuantityWithUnit(g.quantity, g.unit)} ${g.displayName}`.trim());
   if (agg.manual.length > 0) {
     lines.push("", "To add manually:");
     for (const m of agg.manual) lines.push(`- ${m.displayName}`);
@@ -230,13 +241,13 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
     if (!shopEl) return;
     if (plan.entries.length === 0) { shopEl.hidden = true; return; }
 
-    const agg   = aggregate(plan, recipes || []);
-    const total = agg.grouped.length + agg.manual.length;
+    const agg = aggregate(plan, recipes || []);
+    const total = agg.byCategory.reduce((sum, c) => sum + c.items.length, 0) + agg.manual.length;
     if (total === 0) { shopEl.hidden = true; return; }
 
     shopEl.hidden = false;
     if (shopCountEl) shopCountEl.textContent = `${total} item${total === 1 ? "" : "s"}`;
-    if (shopItemsEl) shopItemsEl.innerHTML = agg.grouped.map(renderShopItem).join("");
+    if (shopItemsEl) shopItemsEl.innerHTML = agg.byCategory.map(renderShopCategory).join("");
 
     if (shopManualEl) {
       if (agg.manual.length === 0) {
