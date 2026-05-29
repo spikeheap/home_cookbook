@@ -17,17 +17,7 @@ function init() {
 
   const recipeRoot = document.querySelector(".recipe");
   if (recipeRoot) {
-    const scale = setupScale({ root: recipeRoot });
-    if (scale) {
-      // Normalise rendered quantities (e.g. 0.5 → ½) without blocking paint.
-      const normalise = () => scale.apply(1);
-      const schedule = typeof requestIdleCallback === "function"
-        ? () => requestIdleCallback(normalise)
-        : () => setTimeout(normalise, 0);
-      if (document.readyState === "complete") schedule();
-      else window.addEventListener("load", schedule, { once: true });
-    }
-
+    setupScale({ root: recipeRoot });
     setupWakeLock(recipeRoot.querySelector('[data-tool="wakelock"]'));
     setupPrintExpansion(recipeRoot);
   }

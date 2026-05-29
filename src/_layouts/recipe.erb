@@ -48,13 +48,11 @@ layout: default
         <span class="tool__icon" aria-hidden="true">◉</span>
         <span class="tool__label">Keep screen awake</span>
       </button>
-      <div class="tool tool--scale" data-tool="scale">
-        <span class="tool__icon" aria-hidden="true">×</span>
-        <span class="tool__label">Scale</span>
-        <button type="button" data-scale="0.5">½</button>
-        <button type="button" data-scale="1" aria-pressed="true">1</button>
-        <button type="button" data-scale="2">2</button>
-        <button type="button" data-scale="3">3</button>
+      <div class="tool tool--scale" data-tool="scale"<% if page.servings %> data-base-servings="<%= page.servings %>"<% end %>>
+        <span class="tool__label"><%= page.servings ? "Serves" : "Make" %></span>
+        <button type="button" data-step="down" aria-label="Decrease">−</button>
+        <span class="tool__value" data-scale-value><%= page.servings ? page.servings : "×1" %></span>
+        <button type="button" data-step="up" aria-label="Increase">+</button>
       </div>
       <button type="button" class="tool" data-tool="print" onclick="window.print()">
         <span class="tool__icon" aria-hidden="true">⎙</span>

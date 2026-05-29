@@ -23,16 +23,30 @@ function makeHint() {
   };
 }
 
-function makeButton(scale) {
+function makeButton() {
   const listeners = {};
   return {
-    dataset: { scale: String(scale) },
-    attrs:   {},
     listeners,
     addEventListener(type, fn) { listeners[type] = fn; },
-    setAttribute(k, v)         { this.attrs[k] = v; },
-    click()                    { listeners.click && listeners.click(); },
+    click() { listeners.click && listeners.click(); },
   };
+}
+
+function makeValueEl() {
+  return { textContent: "" };
+}
+
+function makeTool({ baseServings = null } = {}) {
+  return { dataset: baseServings != null ? { baseServings: String(baseServings) } : {} };
+}
+
+function setup({ baseServings = null, qtys = [], hints = [] } = {}) {
+  const tool    = makeTool({ baseServings });
+  const downBtn = makeButton();
+  const upBtn   = makeButton();
+  const valueEl = makeValueEl();
+  const handle  = setupScale({ tool, downBtn, upBtn, valueEl, qtyElements: qtys, hintElements: hints });
+  return { handle, downBtn, upBtn, valueEl };
 }
 
 test("formatQuantity renders integers, common fractions, and falls back to decimals", () => {
@@ -47,110 +61,121 @@ test("formatQuantity renders integers, common fractions, and falls back to decim
   assert.equal(formatQuantity(0.07), "0.07");
 });
 
-test("returns null when there are no scale buttons", () => {
-  const handle = setupScale({ buttons: [], qtyElements: [], hintElements: [] });
+test("returns null when there is no .tool--scale element", () => {
+  const handle = setupScale({ root: null });
   assert.strictEqual(handle, null);
 });
 
-test("clicking a scale button multiplies each quantity and sets aria-pressed", () => {
-  const qty1 = makeQty({ quantity: 200, unit: "g" });
-  const qty2 = makeQty({ quantity: 1,   unit: "tsp" });
-  const buttons = [makeButton(0.5), makeButton(1), makeButton(2), makeButton(3)];
+test("servings mode: stepper increments people and scales by value / baseServings", () => {
+  const qty = makeQty({ quantity: 200, unit: "g" });
+  const { handle, downBtn, upBtn, valueEl } = setup({ baseServings: 4, qtys: [qty] });
 
-  setupScale({ qtyElements: [qty1, qty2], hintElements: [], buttons });
+  assert.equal(handle.getMode(), "servings");
+  assert.equal(handle.getValue(), 4);
+  assert.equal(handle.getFactor(), 1);
+  assert.equal(qty.textContent, "200g");
+  assert.equal(valueEl.textContent, "4");
 
-  buttons[2].click(); // 2x
+  upBtn.click();
+  assert.equal(handle.getValue(), 5);
+  assert.equal(qty.textContent, "250g");
+  assert.equal(valueEl.textContent, "5");
 
-  assert.equal(qty1.textContent, "400g");
-  assert.equal(qty2.textContent, "2 tsp");
-  assert.equal(buttons[0].attrs["aria-pressed"], "false");
-  assert.equal(buttons[1].attrs["aria-pressed"], "false");
-  assert.equal(buttons[2].attrs["aria-pressed"], "true");
-  assert.equal(buttons[3].attrs["aria-pressed"], "false");
+  downBtn.click(); downBtn.click(); downBtn.click();
+  assert.equal(handle.getValue(), 2);
+  assert.equal(qty.textContent, "100g");
+});
+
+test("servings mode: minimum 1 person; further decreases are no-ops", () => {
+  const { handle, downBtn } = setup({ baseServings: 2 });
+  downBtn.click(); // 1
+  downBtn.click(); // still 1
+  downBtn.click();
+  assert.equal(handle.getValue(), 1);
+});
+
+test("multiplier mode: walks the ½ / 1 / 2 / 3 … ladder", () => {
+  const qty = makeQty({ quantity: 100, unit: "g" });
+  const { handle, downBtn, upBtn, valueEl } = setup({ qtys: [qty] });
+
+  assert.equal(handle.getMode(), "multiplier");
+  assert.equal(handle.getValue(), 1);
+  assert.equal(valueEl.textContent, "×1");
+
+  upBtn.click();
+  assert.equal(handle.getValue(), 2);
+  assert.equal(qty.textContent, "200g");
+  assert.equal(valueEl.textContent, "×2");
+
+  upBtn.click();
+  assert.equal(handle.getValue(), 3);
+  assert.equal(qty.textContent, "300g");
+
+  downBtn.click(); downBtn.click(); downBtn.click();
+  assert.equal(handle.getValue(), 0.5);
+  assert.equal(qty.textContent, "50g");
+  assert.equal(valueEl.textContent, "×½");
+});
+
+test("multiplier mode: clamped at the top of the ladder", () => {
+  const { handle, upBtn } = setup();
+  for (let i = 0; i < 20; i++) upBtn.click();
+  assert.equal(handle.getValue(), 10);
 });
 
 test("ranges scale both endpoints", () => {
   const qty = makeQty({ quantity: 4, quantity_max: 6, unit: "slices" });
-  const buttons = [makeButton(0.5), makeButton(2)];
+  const { upBtn } = setup({ qtys: [qty] });
 
-  setupScale({ qtyElements: [qty], hintElements: [], buttons });
-
-  buttons[1].click(); // 2x
+  upBtn.click(); // ×2
   assert.equal(qty.textContent, "8–12 slices");
-
-  buttons[0].click(); // 0.5x
-  assert.equal(qty.textContent, "2–3 slices");
-});
-
-test("scaling halves to common fractions", () => {
-  const qty = makeQty({ quantity: 1, unit: "tsp" });
-  const buttons = [makeButton(0.5)];
-
-  setupScale({ qtyElements: [qty], hintElements: [], buttons });
-  buttons[0].click();
-
-  assert.equal(qty.textContent, "½ tsp");
 });
 
 test("scale hint shows '× N' on unscaled items at non-1 factor, hides at 1", () => {
   const hint = makeHint();
-  const buttons = [makeButton(1), makeButton(2)];
+  const { downBtn, upBtn } = setup({ hints: [hint] });
 
-  setupScale({ qtyElements: [], hintElements: [hint], buttons });
-
-  buttons[1].click();
+  upBtn.click(); // ×2
   assert.equal(hint.hidden, false);
   assert.equal(hint.textContent, "× 2");
 
-  buttons[0].click();
+  downBtn.click(); // back to ×1
   assert.equal(hint.hidden, true);
   assert.equal(hint.textContent, "");
 });
 
 test("re-scaling always uses the original quantity (no compounding)", () => {
   const qty = makeQty({ quantity: 100, unit: "g" });
-  const buttons = [makeButton(2), makeButton(3), makeButton(0.5)];
+  const { upBtn, downBtn } = setup({ qtys: [qty] });
 
-  setupScale({ qtyElements: [qty], hintElements: [], buttons });
-
-  buttons[0].click();
-  assert.equal(qty.textContent, "200g");
-  buttons[1].click();
-  assert.equal(qty.textContent, "300g");
-  buttons[2].click();
+  upBtn.click(); assert.equal(qty.textContent, "200g");
+  upBtn.click(); assert.equal(qty.textContent, "300g");
+  downBtn.click(); downBtn.click(); downBtn.click(); // back to ½
   assert.equal(qty.textContent, "50g");
 });
 
 test("attached units render without a space; word units render with one", () => {
   const grams = makeQty({ quantity: 100, unit: "g" });
   const cup   = makeQty({ quantity: 1,   unit: "cup" });
-  const buttons = [makeButton(1)];
-
-  setupScale({ qtyElements: [grams, cup], hintElements: [], buttons });
-  buttons[0].click();
+  setup({ qtys: [grams, cup] });
 
   assert.equal(grams.textContent, "100g");
   assert.equal(cup.textContent,   "1 cup");
 });
 
-test("getFactor reports the active scale", () => {
-  const buttons = [makeButton(2), makeButton(0.5)];
-  const handle = setupScale({ qtyElements: [], hintElements: [], buttons });
-
-  assert.equal(handle.getFactor(), 1);
-  buttons[0].click();
-  assert.equal(handle.getFactor(), 2);
-  buttons[1].click();
-  assert.equal(handle.getFactor(), 0.5);
+test("initial render normalises decimal quantities into fraction glyphs", () => {
+  const qty = makeQty({ quantity: 0.5, unit: "tsp" });
+  setup({ qtys: [qty] });
+  assert.equal(qty.textContent, "½ tsp");
 });
 
-test("apply() can be called directly to set a factor programmatically", () => {
+test("setValue can be called directly to set a stepper value", () => {
   const qty = makeQty({ quantity: 50, unit: "ml" });
-  const buttons = [makeButton(1), makeButton(2)];
+  const { handle, valueEl } = setup({ baseServings: 2, qtys: [qty] });
 
-  const handle = setupScale({ qtyElements: [qty], hintElements: [], buttons });
-  handle.apply(3);
-
-  assert.equal(qty.textContent, "150ml");
+  handle.setValue(6);
+  assert.equal(handle.getValue(), 6);
   assert.equal(handle.getFactor(), 3);
+  assert.equal(qty.textContent, "150ml");
+  assert.equal(valueEl.textContent, "6");
 });
