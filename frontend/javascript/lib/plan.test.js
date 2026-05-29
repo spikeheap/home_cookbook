@@ -4,7 +4,7 @@ import {
   emptyPlan, loadPlan, savePlan,
   addEntry, removeEntry, updateEntry, clearEntries,
   modeForRecipe, defaultValueForRecipe, slotForRecipe, slotForMeal,
-  nextStepValue, groupBySlot, addRecipeToPlan,
+  nextStepValue, groupBySlot, addRecipeToPlan, renderEntry,
   SLOT_ORDER,
 } from "./plan.js";
 
@@ -126,6 +126,25 @@ test("addRecipeToPlan appends an entry and persists it", () => {
   const loaded = loadPlan(storage);
   assert.equal(loaded.entries.length, 2);
   assert.deepEqual(loaded.entries.map(e => e.slug), ["focaccia", "chicken_curry"]);
+});
+
+test("renderEntry degrades gracefully when the recipe is missing from the index", () => {
+  // Reproduces the original crash: stale slug after a recipe is renamed/removed.
+  const entry = { id: "abc", slug: "ghost", value: 4, slot: "Dinner" };
+  const html = renderEntry(entry, undefined);
+  assert.match(html, /plan-entry--missing/);
+  assert.match(html, /Unknown recipe: ghost/);
+  // The remove button must still render so the user can clean up the stale entry.
+  assert.match(html, /data-plan-remove="abc"/);
+});
+
+test("renderEntry renders a stepper and link when the recipe is present", () => {
+  const entry  = { id: "x", slug: "chicken_curry", value: 6, slot: "Dinner" };
+  const recipe = { slug: "chicken_curry", name: "Chetna's chicken curry", url: "/recipes/chicken_curry", servings: 8, meal: ["Main"] };
+  const html = renderEntry(entry, recipe);
+  assert.match(html, /href="\/recipes\/chicken_curry"/);
+  assert.match(html, /Chetna&#39;s chicken curry/);
+  assert.match(html, /data-plan-step="up"/);
 });
 
 test("addRecipeToPlan ignores calls missing slug or slot", () => {

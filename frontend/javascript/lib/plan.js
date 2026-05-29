@@ -115,7 +115,17 @@ function esc(s) {
   }[c]));
 }
 
-function renderEntry(entry, recipe) {
+export function renderEntry(entry, recipe) {
+  if (!recipe) {
+    // Stale entry — recipe was renamed/removed since this was added. Render a
+    // degraded row so the user can at least remove it.
+    return `
+      <li class="plan-entry plan-entry--missing" data-plan-entry-id="${esc(entry.id)}">
+        <span class="plan-entry__name plan-entry__name--missing">Unknown recipe: ${esc(entry.slug)}</span>
+        <button type="button" class="plan-entry__remove" data-plan-remove="${esc(entry.id)}" aria-label="Remove from plan">×</button>
+      </li>
+    `;
+  }
   const mode  = modeForRecipe(recipe);
   const label = mode === "servings" ? "Serves" : "Make";
   const valueText = mode === "servings" ? String(entry.value) : `×${formatQuantity(entry.value)}`;
@@ -136,7 +146,6 @@ function renderEntry(entry, recipe) {
 function renderGroup({ slot, entries }, recipesIndex) {
   const items = entries
     .map(e => renderEntry(e, recipesIndex.get(e.slug)))
-    .filter(Boolean)
     .join("");
   return `
     <section class="plan-group" data-plan-slot="${esc(slot)}">
