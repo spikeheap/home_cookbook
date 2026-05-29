@@ -33,6 +33,12 @@ import build from "./config/esbuild.defaults.js"
  * @type {BuildOptions}
  */
 const esbuildOptions = {
+  // Enable code-splitting so dynamic `import()` calls land in their own chunks,
+  // loaded only when needed. Keeps the ~85 KB OFF ingredient dictionary out of
+  // the bundle that runs on every page — it's pulled in lazily when the plan
+  // page calls into aggregator.js.
+  splitting: true,
+  format: "esm",
   plugins: [
     // add new plugins here...
   ],

@@ -5,8 +5,19 @@
 // multiplier otherwise. The aggregator derives the scaling factor from it.
 
 import { formatQuantity, formatQuantityWithUnit, nextOnLadder } from "./scale.js";
-import { aggregate } from "./aggregator.js";
 import LZString from "lz-string";
+
+// aggregator.js carries the ~85 KB ingredient dictionary; only the /plan/ page
+// ever calls into it. Lazy-loaded here so every other page (homepage, recipe
+// pages, listings) doesn't pay for the dictionary in its main bundle.
+let _aggregate;
+async function getAggregate() {
+  if (!_aggregate) {
+    const mod = await import("./aggregator.js");
+    _aggregate = mod.aggregate;
+  }
+  return _aggregate;
+}
 
 const STORAGE_KEY = "cookbook.plan";
 const VERSION     = 1;
@@ -335,10 +346,11 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
   const recipesIndex = new Map((recipes || []).map(r => [r.slug, r]));
   let plan = loadPlan(storage);
 
-  function renderShop() {
+  async function renderShop() {
     if (!shopEl) return;
     if (plan.entries.length === 0) { shopEl.hidden = true; return; }
 
+    const aggregate = await getAggregate();
     const agg = aggregate(plan, recipes || []);
     const total = agg.byCategory.reduce((sum, c) => sum + c.items.length, 0) + agg.manual.length;
     if (total === 0) { shopEl.hidden = true; return; }
@@ -409,6 +421,7 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
   if (copyBtn) {
     const originalLabel = copyBtn.textContent;
     copyBtn.addEventListener("click", async () => {
+      const aggregate = await getAggregate();
       const text = shoppingListText(aggregate(plan, recipes || []));
       if (!text) return;
       try {
