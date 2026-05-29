@@ -4,7 +4,8 @@
 // `value` is the user-facing number — people count for recipes with `servings`,
 // multiplier otherwise. The aggregator derives the scaling factor from it.
 
-import { formatQuantity, nextOnLadder } from "./scale.js";
+import { formatQuantity, formatQuantityWithUnit, nextOnLadder } from "./scale.js";
+import { aggregate } from "./aggregator.js";
 
 const STORAGE_KEY = "cookbook.plan";
 const VERSION     = 1;
@@ -132,26 +133,89 @@ function renderGroup({ slot, entries }, recipesIndex) {
   `;
 }
 
+function renderShopItem(item) {
+  const qty     = formatQuantityWithUnit(item.quantity, item.unit);
+  const sources = item.sources.length > 2
+    ? `${item.sources.length} recipes`
+    : item.sources.join(", ");
+  return `
+    <li>
+      <span class="plan-shop__qty">${esc(qty)}</span>
+      <span class="plan-shop__name">${esc(item.displayName)}</span>
+      <span class="plan-shop__sources">${esc(sources)}</span>
+    </li>
+  `;
+}
+
+function renderManualItem(item) {
+  return `
+    <li>
+      <span class="plan-shop__name">${esc(item.displayName)}</span>
+      <span class="plan-shop__sources">${esc(item.source)}</span>
+    </li>
+  `;
+}
+
+function shoppingListText(agg) {
+  const lines = agg.grouped.map(g => `${formatQuantityWithUnit(g.quantity, g.unit)} ${g.displayName}`.trim());
+  if (agg.manual.length > 0) {
+    lines.push("", "To add manually:");
+    for (const m of agg.manual) lines.push(`- ${m.displayName}`);
+  }
+  return lines.join("\n");
+}
+
 export function setupPlan({ root, recipes, storage = (typeof localStorage !== "undefined" ? localStorage : null) }) {
   if (!root) return null;
-  const listEl  = root.querySelector("[data-plan-list]");
-  const emptyEl = root.querySelector("[data-plan-empty]");
-  const clearBtn = root.querySelector('[data-plan-action="clear"]');
+  const listEl       = root.querySelector("[data-plan-list]");
+  const emptyEl      = root.querySelector("[data-plan-empty]");
+  const clearBtn     = root.querySelector('[data-plan-action="clear"]');
+  const copyBtn      = root.querySelector('[data-plan-action="copy"]');
+  const shopEl       = root.querySelector("[data-plan-shop]");
+  const shopCountEl  = root.querySelector("[data-plan-shop-count]");
+  const shopItemsEl  = root.querySelector("[data-plan-shop-items]");
+  const shopManualEl       = root.querySelector("[data-plan-shop-manual]");
+  const shopManualItemsEl  = root.querySelector("[data-plan-shop-manual-items]");
   if (!listEl) return null;
 
   const recipesIndex = new Map((recipes || []).map(r => [r.slug, r]));
   let plan = loadPlan(storage);
 
+  function renderShop() {
+    if (!shopEl) return;
+    if (plan.entries.length === 0) { shopEl.hidden = true; return; }
+
+    const agg   = aggregate(plan, recipes || []);
+    const total = agg.grouped.length + agg.manual.length;
+    if (total === 0) { shopEl.hidden = true; return; }
+
+    shopEl.hidden = false;
+    if (shopCountEl) shopCountEl.textContent = `${total} item${total === 1 ? "" : "s"}`;
+    if (shopItemsEl) shopItemsEl.innerHTML = agg.grouped.map(renderShopItem).join("");
+
+    if (shopManualEl) {
+      if (agg.manual.length === 0) {
+        shopManualEl.hidden = true;
+        if (shopManualItemsEl) shopManualItemsEl.innerHTML = "";
+      } else {
+        shopManualEl.hidden = false;
+        if (shopManualItemsEl) shopManualItemsEl.innerHTML = agg.manual.map(renderManualItem).join("");
+      }
+    }
+  }
+
   function render() {
     if (plan.entries.length === 0) {
       if (emptyEl) emptyEl.hidden = false;
       listEl.innerHTML = "";
+      renderShop();
       return;
     }
     if (emptyEl) emptyEl.hidden = true;
 
     const groups = groupBySlot(plan.entries).filter(g => g.entries.length > 0);
     listEl.innerHTML = groups.map(g => renderGroup(g, recipesIndex)).join("");
+    renderShop();
   }
 
   function commit(next) {
@@ -185,6 +249,22 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
       if (plan.entries.length === 0) return;
       if (typeof confirm === "function" && !confirm("Clear the meal plan?")) return;
       commit(clearEntries(plan));
+    });
+  }
+
+  if (copyBtn) {
+    const originalLabel = copyBtn.textContent;
+    copyBtn.addEventListener("click", async () => {
+      const text = shoppingListText(aggregate(plan, recipes || []));
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "Copied";
+        setTimeout(() => { copyBtn.textContent = originalLabel; }, 1500);
+      } catch (_) {
+        copyBtn.textContent = "Copy failed";
+        setTimeout(() => { copyBtn.textContent = originalLabel; }, 1500);
+      }
     });
   }
 

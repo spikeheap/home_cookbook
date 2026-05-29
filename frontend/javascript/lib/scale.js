@@ -34,6 +34,10 @@ export function formatQuantity(n) {
   return n.toFixed(2).replace(/\.?0+$/, "");
 }
 
+export function formatQuantityWithUnit(qty, unit) {
+  return formatQtyWithUnit(qty, null, unit);
+}
+
 function formatQtyWithUnit(qty, qtyMax, unit) {
   let text = formatQuantity(qty);
   if (qtyMax != null) text += "–" + formatQuantity(qtyMax);
