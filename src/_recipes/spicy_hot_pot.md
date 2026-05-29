@@ -9,6 +9,7 @@ description: Warming and satisfying sharing hot pot
 prepTime: PT20M
 cookTime: PT20M
 recipeYield: 2 person
+servings: 2
 
 recipeIngredient:
 - items:

@@ -11,6 +11,7 @@ description: Open-faced sandwich inspired by the PlanD Youtube channel
 prepTime: PT10M
 cookTime: PT10M
 recipeYield: 1 person
+servings: 1
 
 recipeIngredient:
 - items:

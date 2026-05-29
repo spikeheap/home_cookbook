@@ -15,6 +15,7 @@ isBasedOn: https://hot-thai-kitchen.com/laab-moo/
 prepTime: PT15M
 cookTime: PT15M
 recipeYield: Serves 3-4
+servings: 3
 
 recipeIngredient:
 - heading: Toasted rice powder (kao kua)

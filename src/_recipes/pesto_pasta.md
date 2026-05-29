@@ -15,6 +15,7 @@ isBasedOn: https://www.jamieoliver.com/recipes/pasta/chicken-pesto-pasta/
 prepTime: PT10M
 cookTime: PT15M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - heading: Pesto

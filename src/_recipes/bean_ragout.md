@@ -14,6 +14,7 @@ author:
 prepTime: PT30M
 cookTime: PT3H
 recipeYield: 8 people
+servings: 8
 
 recipeIngredient:
 - items:

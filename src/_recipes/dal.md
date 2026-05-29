@@ -14,6 +14,7 @@ image: https://food-images.files.bbci.co.uk/food/recipes/nadiyas_dhal_45569_16x9
 prepTime: PT12H
 cookTime: PT2H
 recipeYield: Serves 6-8
+servings: 6
 suitableForDiet:
 - http://schema.org/LowLactoseDiet
 - http://schema.org/GlutenFreeDiet

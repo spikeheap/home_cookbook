@@ -14,6 +14,7 @@ image:
 prepTime: PT20M
 cookTime: PT90M
 recipeYield: Serves 6
+servings: 6
 
 recipeIngredient:
 - items:

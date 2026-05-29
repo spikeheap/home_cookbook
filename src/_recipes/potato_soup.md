@@ -9,6 +9,7 @@ description: "This is really Nivi's Potaty Soop."
 prepTime: PT5M
 cookTime: PT20M
 recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - items:

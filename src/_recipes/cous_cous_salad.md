@@ -10,6 +10,7 @@ description: Light and filling lunch salad
 prepTime: PT20M
 cookTime: PT10M
 recipeYield: 2 person
+servings: 2
 
 recipeIngredient:
 - items:

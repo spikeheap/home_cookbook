@@ -9,6 +9,7 @@ description:
 prepTime: PT15M
 cookTime: PT2H
 recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - items:

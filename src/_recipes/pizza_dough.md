@@ -14,6 +14,7 @@ image:
 prepTime: PT12H
 cookTime: PT30M
 recipeYield: 2
+servings: 2
 recipeIngredient:
 - items:
   - quantity: 250

@@ -14,6 +14,7 @@ isBasedOn: https://www.waitrose.com/ecom/recipe/jacket-potatoes-with-creme-fraic
 prepTime: PT10M
 cookTime: PT1H
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:

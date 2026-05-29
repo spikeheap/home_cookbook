@@ -11,6 +11,7 @@ isBasedOn: https://www.bbcgoodfood.com/recipes/chicken-gyros
 prepTime: PT2H
 cookTime: PT10M
 recipeYield: 2 person
+servings: 2
 
 recipeIngredient:
 - items:

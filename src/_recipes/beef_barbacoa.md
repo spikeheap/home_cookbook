@@ -15,6 +15,7 @@ author:
 prepTime: PT30M
 cookTime: PT6H
 recipeYield: 4 people
+servings: 4
 
 recipeIngredient:
 - heading: Barbacoa marinade

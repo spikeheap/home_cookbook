@@ -9,6 +9,7 @@ description: A quick meal for spring
 prepTime: PT10M
 cookTime: PT20M
 recipeYield: 2 people
+servings: 2
 
 recipeIngredient:
 - heading: For the chicken

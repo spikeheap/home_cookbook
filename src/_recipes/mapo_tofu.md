@@ -15,6 +15,7 @@ isBasedOn: https://www.chinasichuanfood.com/mapo-tofu-recipe/
 prepTime: PT10M
 cookTime: PT10M
 recipeYield: Serves 2 (double for 4)
+servings: 2
 
 recipeIngredient:
 - items:

@@ -16,6 +16,7 @@ isBasedOn: https://mykoreankitchen.com/bulgogi-korean-bbq-beef/
 prepTime: PT20M
 cookTime: PT10M
 recipeYield: Serves 4-6
+servings: 4
 
 recipeIngredient:
 - items:

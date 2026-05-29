@@ -10,6 +10,7 @@ description:
 prepTime: PT1H
 cookTime: PT3M
 recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - items:

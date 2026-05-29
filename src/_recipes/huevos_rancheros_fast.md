@@ -10,6 +10,7 @@ description: Don't have the time for an hour of simmering? This can go from idea
 prepTime: PT10H
 cookTime: PT20M
 recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - items:

@@ -13,6 +13,7 @@ author:
 prepTime: PT30M
 cookTime: PT1H
 recipeYield: Serves 6 to 8
+servings: 6
 
 recipeIngredient:
 - items:

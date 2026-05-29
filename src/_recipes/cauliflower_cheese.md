@@ -24,6 +24,7 @@ image:
 prepTime: PT15M
 cookTime: PT45M
 recipeYield: 4–6 servings
+servings: 4
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:

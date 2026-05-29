@@ -11,6 +11,7 @@ isBasedOn: https://www.riverford.co.uk/recipes/simple-roasted-onions
 prepTime: PT5M
 cookTime: PT90M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:

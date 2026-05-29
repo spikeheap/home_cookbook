@@ -9,6 +9,7 @@ description: Definitely not traditionally Mexican, but this is what we grew up w
 prepTime: PT30M
 cookTime: PT30M
 recipeYield: 4 people
+servings: 4
 
 recipeIngredient:
 - heading: For the beef

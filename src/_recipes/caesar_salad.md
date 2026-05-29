@@ -14,6 +14,7 @@ image:
 prepTime: PT30M
 cookTime: PT10M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - heading: Salad

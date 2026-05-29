@@ -22,6 +22,7 @@ author:
 prepTime: PT10M
 cookTime: PT1H
 recipeYield: 4 servings
+servings: 4
 suitableForDiet:
 - http://schema.org/VegetarianDiet
 recipeIngredient:

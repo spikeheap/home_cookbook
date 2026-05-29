@@ -15,6 +15,7 @@ isBasedOn: https://www.theguardian.com/food/2021/jun/24/spaghetti-with-lemon-and
 prepTime: PT5M
 cookTime: PT15M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:
