@@ -1,11 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import LZString from "lz-string";
 import {
   emptyPlan, loadPlan, savePlan,
   addEntry, removeEntry, updateEntry, clearEntries,
   modeForRecipe, defaultValueForRecipe, slotForRecipe, slotForMeal,
   nextStepValue, groupBySlot, addRecipeToPlan, renderEntry,
   isInPlan, togglePlanEntry,
+  encodePlan, decodePlan, mergeEntries, replaceEntries,
   SLOT_ORDER,
 } from "./plan.js";
 
@@ -185,3 +187,146 @@ test("togglePlanEntry ignores empty slug/slot and reports the unchanged plan", (
   assert.equal(added, false);
   assert.equal(loadPlan(storage).entries.length, 0);
 });
+
+// ---- URL sharing ----------------------------------------------------------
+
+test("encodePlan strips ids and decodePlan round-trips the entries", () => {
+  const plan = {
+    version: 1,
+    entries: [
+      { id: "device-a-1", slug: "focaccia",      value: 1,   slot: "Other"     },
+      { id: "device-a-2", slug: "chicken_curry", value: 6,   slot: "Dinner"    },
+      { id: "device-a-3", slug: "pancakes",      value: 0.5, slot: "Breakfast" },
+    ],
+  };
+  const encoded = encodePlan(plan);
+  assert.equal(typeof encoded, "string");
+  assert.ok(encoded.length > 0);
+  assert.ok(!encoded.includes("device-a-"), "encoded form must not leak per-device ids");
+
+  const result = decodePlan(encoded);
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.entries, [
+    { slug: "focaccia",      value: 1,   slot: "Other"     },
+    { slug: "chicken_curry", value: 6,   slot: "Dinner"    },
+    { slug: "pancakes",      value: 0.5, slot: "Breakfast" },
+  ]);
+});
+
+test("encodePlan handles an empty plan", () => {
+  const encoded = encodePlan(emptyPlan());
+  const result = decodePlan(encoded);
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.entries, []);
+});
+
+test("decodePlan returns ok:false on malformed input without throwing", () => {
+  assert.equal(decodePlan("").ok, false);
+  assert.equal(decodePlan(null).ok, false);
+  assert.equal(decodePlan(undefined).ok, false);
+  assert.equal(decodePlan(123).ok, false);
+  // Random garbage that doesn't decompress cleanly.
+  assert.equal(decodePlan("!!!not-valid-lz!!!").ok, false);
+});
+
+test("decodePlan rejects payloads with the wrong schema version", () => {
+  const wrongVersion = LZStringEncode({ v: 999, entries: [] });
+  const result = decodePlan(wrongVersion);
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, "version");
+});
+
+test("decodePlan rejects payloads with a non-array entries field", () => {
+  const badShape = LZStringEncode({ v: 1, entries: "nope" });
+  const result = decodePlan(badShape);
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, "shape");
+});
+
+test("decodePlan drops individual entries that fail field-level validation", () => {
+  const payload = LZStringEncode({
+    v: 1,
+    entries: [
+      { slug: "ok",           value: 2, slot: "Dinner" },
+      { slug: "",             value: 2, slot: "Dinner" }, // empty slug
+      { slug: "missing_slot", value: 2 },                  // no slot
+      { slug: "nan_value",    value: NaN, slot: "Other" }, // not finite
+      { slug: "wrong_types",  value: "two", slot: "Other" },
+      "not an object",
+      null,
+      { slug: "also_ok",      value: 1, slot: "Lunch" },
+    ],
+  });
+  const result = decodePlan(payload);
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.entries.map(e => e.slug), ["ok", "also_ok"]);
+});
+
+test("replaceEntries generates fresh ids and discards the previous plan entries", () => {
+  const plan = addEntry(emptyPlan(), { slug: "existing", value: 1, slot: "Other" });
+  const imported = [
+    { slug: "focaccia",      value: 1, slot: "Other"  },
+    { slug: "chicken_curry", value: 6, slot: "Dinner" },
+  ];
+  const next = replaceEntries(plan, imported);
+  assert.deepEqual(next.entries.map(e => e.slug), ["focaccia", "chicken_curry"]);
+  next.entries.forEach(e => {
+    assert.equal(typeof e.id, "string");
+    assert.ok(e.id.length > 0);
+  });
+  // Ids must differ between regenerated entries.
+  const [a, b] = next.entries;
+  assert.notEqual(a.id, b.id);
+});
+
+test("mergeEntries appends new slugs and skips duplicates", () => {
+  let plan = addEntry(emptyPlan(), { slug: "focaccia",      value: 1, slot: "Other" });
+  plan     = addEntry(plan,        { slug: "chicken_curry", value: 4, slot: "Dinner" });
+  const imported = [
+    { slug: "chicken_curry", value: 8, slot: "Dinner" }, // duplicate slug — drop
+    { slug: "pancakes",      value: 1, slot: "Breakfast" },
+    { slug: "focaccia",      value: 2, slot: "Other" },  // duplicate slug — drop
+  ];
+  const next = mergeEntries(plan, imported);
+  assert.deepEqual(next.entries.map(e => e.slug), [
+    "focaccia", "chicken_curry", "pancakes",
+  ]);
+  // Existing entries are kept verbatim (ids untouched, values unchanged).
+  assert.equal(next.entries[0].value, 1);
+  assert.equal(next.entries[1].value, 4);
+  // New entry got a fresh id.
+  assert.equal(typeof next.entries[2].id, "string");
+  assert.ok(next.entries[2].id.length > 0);
+});
+
+test("mergeEntries on an empty plan behaves like a fresh import with new ids", () => {
+  const next = mergeEntries(emptyPlan(), [
+    { slug: "a", value: 1, slot: "Other" },
+    { slug: "b", value: 1, slot: "Other" },
+  ]);
+  assert.equal(next.entries.length, 2);
+  assert.notEqual(next.entries[0].id, next.entries[1].id);
+});
+
+test("import flow keeps unknown slugs — plan renderer degrades them gracefully", () => {
+  // Sender's plan contains a recipe the receiver doesn't have.
+  const sender = {
+    version: 1,
+    entries: [{ id: "x", slug: "renamed_or_removed", value: 2, slot: "Dinner" }],
+  };
+  const encoded = encodePlan(sender);
+  const result = decodePlan(encoded);
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.entries.map(e => e.slug), ["renamed_or_removed"]);
+
+  const next = replaceEntries(emptyPlan(), result.entries);
+  // renderEntry without a recipe in the index produces the missing-row markup.
+  const html = renderEntry(next.entries[0], undefined);
+  assert.match(html, /plan-entry--missing/);
+});
+
+// Tiny encoder so tests can build deliberately-shaped payloads (including
+// wrong-version / wrong-shape) without re-implementing lz-string.
+function LZStringEncode(obj) {
+  return LZString.compressToEncodedURIComponent(JSON.stringify(obj));
+}
