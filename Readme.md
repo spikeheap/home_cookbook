@@ -68,6 +68,19 @@ recipeIngredient:
     items: [...]
 ```
 
+### Sub-recipes (`uses_fraction`)
+
+When an ingredient inlines another recipe (markdown link to `slug.html`), add `uses_fraction` to declare what portion of the sub-recipe's batch this recipe uses. The recipe-page stepper multiplies the inlined ingredients by `factor × uses_fraction`, and the sub's summary line shows e.g. "make ½ batch" — updating as the parent scales.
+
+```yaml
+- quantity: 1
+  unit: ball
+  item: "[pizza dough](pizza_dough_gozney.html)"
+  uses_fraction: 0.2          # this recipe uses 1 of 5 dough balls
+```
+
+Omit `uses_fraction` for sub-recipes you intentionally want to display unchanged (e.g. a base recipe whose full batch is used).
+
 ## Future improvements
 
 - **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.

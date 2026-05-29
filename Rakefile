@@ -180,6 +180,18 @@ task :validate, [:paths] do |_t, args|
         errors << "#{path}: invalid servings: #{servings.inspect} (must be a positive integer when present)"
       end
 
+      Array(data["recipeIngredient"]).each_with_index do |section, si|
+        next unless section.is_a?(Hash)
+        Array(section["items"]).each_with_index do |item, ii|
+          next unless item.is_a?(Hash)
+          uf = item["uses_fraction"]
+          next if uf.nil?
+          unless uf.is_a?(Numeric) && uf > 0
+            errors << "#{path}: ingredient #{si}/#{ii} has invalid uses_fraction: #{uf.inspect} (must be a positive number)"
+          end
+        end
+      end
+
       diets = Array(data["suitableForDiet"])
       bad_diets = diets - RECIPE_ALLOWED_DIETS
       unless bad_diets.empty?
