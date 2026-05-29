@@ -38,19 +38,67 @@ export const CATEGORY_ORDER = [
   "Other",
 ];
 
-// First-match-wins keyword rules. Order matters: pantry forms like "tinned",
-// "dried", and "tomato puree" land in Cupboard before their fresh counterparts
-// fall into Produce.
+// First-match-wins keyword rules. Order matters — Cupboard is checked before
+// Bakery, Meat, Dairy and Produce so pantry forms win for ambiguous items
+// like "bread flour", "chicken stock", "tin of coconut milk".
+//
+// Patterns with trailing spaces (e.g. "butter ", "mince ", "pea ") are
+// intentional — they avoid false positives like "butternut", "minced garlic",
+// "pearl couscous" matching "butter", "mince", "pea".
 const CATEGORY_RULES = [
   { category: "Frozen",       patterns: ["frozen", "ice cream", "ice-cream"] },
 
+  { category: "Drinks",       patterns: [
+    "beer", "tonic water", "soda water", "lemonade",
+  ]},
+
+  // Pantry / cupboard — checked before Meat & fish / Dairy / Produce so that
+  // sauces, stocks, tinned, dried, oils, and grains beat their fresh-form
+  // homonyms (chicken stock, fish sauce, tin coconut milk, bread flour, etc.).
+  { category: "Cupboard",     patterns: [
+    "tinned", "tin of", "tin ", "tins ", "tins of", "(tin)", "(can)", "canned",
+    "flour", "sugar", "salt", "oil", "vinegar", "stock", "bouillon",
+    "pasta", "spaghetti", "linguine", "tagliatelli", "tagliatelle", "fettuccine", "fusilli", "penne",
+    "rigatoni", "macaroni", "orzo", "lasagne", "ravioli", "gnocchi", "couscous", "cous cous",
+    "rice", "noodle", "yeast", "baking powder", "baking soda", "bicarb",
+    "cornstarch", "corn starch", "cornflour", "corn flour",
+    "cocoa", "vanilla", "honey", "syrup", "treacle", "malt extract", "essence",
+    "soy sauce", "fish sauce", "mustard", "ketchup", "mayonnaise", "tamari", "miso", "tahini",
+    "worcestershire", "mirin", "sake", "wine", "oyster sauce", "hoisin",
+    "doubanjiang", "gochujang", "gochugaru", "chipotle", "harissa", "sriracha",
+    "sauce", "salsa",
+    "passata", "puree", "purée", "paste", "coconut milk",
+    "coffee", "chocolate", "biscuit", "cracker", "ladyfinger", "savoiardi",
+    "breadcrumb", "panko",
+    "taco shell", "tortilla chip",
+    "lentil", "chickpea", "pulse", "dal ", " dal", "toor",
+    "kidney bean", "black bean", "cannellini", "borlotti", "haricot", "butter bean", "dried bean",
+    "spice", "cinnamon", "cumin", "paprika", "turmeric", "garam masala", "curry powder",
+    "cardamom", "nutmeg", "star anise", "bay leaf", "bay leaves", "fennel seed",
+    "whole cloves", "ground cloves",
+    // Specific "ground X" spices — broad "ground " catches meat (ground pork).
+    "ground cumin", "ground turmeric", "ground cinnamon", "ground ginger",
+    "ground coriander", "ground cardamom", "ground nutmeg", "ground pepper",
+    "ground almonds", "ground rice", "ground chilli",
+    "coriander seed", "seeds", " seed ",
+    "dried", "powder", "peppercorn", "stock cube",
+    // Specific nuts only — bare "nut" catches butternut.
+    "almond", "cashew", "pistachio", "pine ", " pine", "walnut", "hazelnut", "pecan", "macadamia", "peanut",
+    "raisin", "sultana", "currant",
+    "black pepper", "white pepper",
+    "caper", "olive ", "gherkin", "pickle",
+    "minced garlic", "minced ginger",
+    "horseradish",
+  ]},
+
   { category: "Bakery",       patterns: [
-    "bread", "loaf", "bun ", "buns", "tortilla", "pitta", "wrap", "baguette",
+    "loaf", "bun ", "buns", "tortilla", "pitta", "wrap", "baguette",
     "ciabatta", "sourdough", "brioche", "focaccia", "naan", "roll",
+    "bread",  // safe here — Cupboard ran first and would have caught flour / breadcrumb / panko.
   ]},
 
   { category: "Meat & fish",  patterns: [
-    "chicken", "beef", "pork", "lamb", "turkey", "duck", "venison", "mince",
+    "chicken", "beef", "pork", "lamb", "turkey", "duck", "venison", "mince ",
     "rib eye", "ribeye", "sirloin", "rump", "fillet steak", "brisket", "skirt steak",
     "salmon", "trout", "tuna", "cod", "haddock", "prawn", "shrimp", "anchov", "mackerel",
     "bacon", "guanciale", "pancetta", " ham", "parma", "prosciutto", "salami", "chorizo", "sausage",
@@ -58,48 +106,26 @@ const CATEGORY_RULES = [
   ]},
 
   { category: "Dairy & eggs", patterns: [
-    "egg", "milk", "cream", "yoghurt", "yogurt", "butter",
+    "egg", "milk", "cream", "yoghurt", "yogurt", "butter ", "buttermilk",
     "cheese", "cheddar", "parmesan", "parmigiano", "mozzarella", "mascarpone", "ricotta",
     "feta", "camembert", "pecorino", "halloumi", "gruy", "paneer", "crème fraîche", "creme fraiche",
-  ]},
-
-  // Pantry catches `tinned`, `dried`, oils, sauces, spices, baking goods, etc.
-  // — checked before Produce so e.g. "tinned tomatoes" doesn't land in Produce.
-  { category: "Cupboard",     patterns: [
-    "tinned", "tin of", "(tin)", "(can)", "canned",
-    "flour", "sugar", "salt", "oil", "vinegar", "stock", "bouillon",
-    "pasta", "spaghetti", "linguine", "tagliatelli", "tagliatelle", "fettuccine", "fusilli", "penne",
-    "rigatoni", "macaroni", "orzo", "lasagne", "ravioli", "gnocchi",
-    "rice", "noodle", "yeast", "baking powder", "baking soda", "bicarb", "cornstarch", "corn starch", "cornflour",
-    "cocoa", "vanilla", "honey", "syrup", "treacle", "malt extract",
-    "soy sauce", "fish sauce", "mustard", "ketchup", "mayonnaise", "tamari", "miso", "tahini",
-    "worcestershire", "mirin", "sake", "rice wine", "oyster sauce", "hoisin",
-    "passata", "puree", "purée", "paste",
-    "coffee", "chocolate", "biscuit", "cracker", "ladyfinger", "savoiardi",
-    "taco shell", "tortilla chip",
-    "lentil", "bean", "chickpea", "pulse",
-    "spice", "cinnamon", "cumin", "paprika", "turmeric", "garam masala", "curry powder",
-    "cardamom", "nutmeg", "star anise", "bay leaf", "bay leaves", "fennel seed", "whole cloves", "ground cloves",
-    "dried", "ground ", "powder", "seed", "peppercorn", "stock cube",
-    "nut", "almond", "cashew", "pistachio", "pine", "walnut", "hazelnut",
-    "raisin", "sultana", "currant",
-    "black pepper", "white pepper",
-    "caper", "olive ", "gherkin", "pickle",
   ]},
 
   { category: "Produce",      patterns: [
     "onion", "shallot", "garlic", "leek", "spring onion", "scallion",
     "tomato", "lettuce", "rocket", "spinach", "kale", "cabbage", "salad",
-    "pepper", "potato", "jersey royal", "carrot", "courgette", "aubergine", "broccoli", "cauliflower",
-    "mushroom", "celery", "fennel", "asparagus", "pea", "green bean",
+    "pepper ", "peppers", "potato", "jersey royal", "carrot", "courgette",
+    "aubergine", "broccoli", "cauliflower", "squash", "pumpkin", "marrow", "swede", "turnip", "parsnip",
+    "mushroom", "celery", "fennel", "asparagus", "pea ", "peas",
+    "green bean", "runner bean", "broad bean",
+    "pak choi", "bok choy", "choi sum", "kohlrabi", "endive", "chicory",
     "lemon", "lime", "orange", "apple", "pear", "raspberry", "blueberry", "strawberry",
     "passionfruit", "cucumber", "beetroot",
     "ginger", "chilli", "chili",
     "basil", "parsley", "coriander", "mint", "thyme", "rosemary", "sage", "oregano", "dill",
+    "herbs", "herb ",
     "tofu",
   ]},
-
-  { category: "Drinks",       patterns: ["wine", "beer", "juice", "cola", "tonic", "soda water"] },
 ];
 
 const PACK_UNITS = new Set(["tin", "can", "jar", "pack", "packet", "sachet", "tub"]);

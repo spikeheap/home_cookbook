@@ -208,7 +208,9 @@ test("categorise covers a handful of representative items", () => {
   assert.equal(categorise("focaccia"),                 "Bakery");
   assert.equal(categorise("brioche buns"),             "Bakery");
   assert.equal(categorise("frozen peas"),              "Frozen");
-  assert.equal(categorise("white wine"),               "Drinks");
+  assert.equal(categorise("white wine"),               "Cupboard", "cooking wine = cupboard");
+  assert.equal(categorise("white wine vinegar"),       "Cupboard");
+  assert.equal(categorise("rice wine"),                "Cupboard");
   assert.equal(categorise("a thing we don't know"),    "Other");
 });
 
@@ -298,6 +300,22 @@ test("categorise: pack units (tin/can/jar/sachet…) override keyword matches", 
   // …but Frozen and Drinks still win, even in a packet/can.
   assert.equal(categorise("frozen peas",      "pack"), "Frozen");
   assert.equal(categorise("beer",             "can"),  "Drinks");
+});
+
+test("categorise: butternut / ground pork / pearl no longer false-match", () => {
+  assert.equal(categorise("butternut squash"),         "Produce", "previously matched 'nut'");
+  assert.equal(categorise("ground pork"),              "Meat & fish", "previously matched 'ground '");
+  assert.equal(categorise("pearl couscous"),           "Cupboard", "previously matched 'pea'");
+  assert.equal(categorise("dark chocolate"),           "Cupboard", "'cola' substring was matching Drinks");
+  assert.equal(categorise("chicken stock"),            "Cupboard");
+  assert.equal(categorise("fish sauce"),               "Cupboard");
+  assert.equal(categorise("tin light coconut milk"),   "Cupboard", "coconut milk overrides 'milk' → Dairy");
+  assert.equal(categorise("strong white bread flour"), "Cupboard", "flour wins over 'bread' → Bakery");
+  assert.equal(categorise("breadcrumbs"),              "Cupboard");
+  assert.equal(categorise("minced ginger"),            "Cupboard", "jarred minced ginger, not fresh");
+  // Tinned tomatoes in various shapes.
+  assert.equal(categorise("tin chopped tomatoes"),     "Cupboard");
+  assert.equal(categorise("x 400g tins of chopped tomatoes"), "Cupboard");
 });
 
 test("CATEGORY_ORDER is the canonical, shopping-order list", () => {
