@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 import {
   emptyPlan, loadPlan, savePlan,
   addEntry, removeEntry, updateEntry, clearEntries,
-  modeForRecipe, defaultValueForRecipe, slotForRecipe,
-  nextStepValue, groupBySlot,
+  modeForRecipe, defaultValueForRecipe, slotForRecipe, slotForMeal,
+  nextStepValue, groupBySlot, addRecipeToPlan,
   SLOT_ORDER,
 } from "./plan.js";
 
@@ -110,4 +110,27 @@ test("groupBySlot routes unknown slots into Other", () => {
   const grouped = groupBySlot(entries);
   const other = grouped.find(g => g.slot === "Other");
   assert.equal(other.entries.length, 1);
+});
+
+test("slotForMeal accepts a raw meal array (used by data-attribute readers)", () => {
+  assert.equal(slotForMeal(["Breakfast"]),       "Breakfast");
+  assert.equal(slotForMeal(["Main", "Lunch"]),   "Lunch");
+  assert.equal(slotForMeal([]),                  "Other");
+  assert.equal(slotForMeal(null),                "Other");
+});
+
+test("addRecipeToPlan appends an entry and persists it", () => {
+  const storage = fakeStorage();
+  addRecipeToPlan({ slug: "focaccia", value: 1, slot: "Other", storage });
+  addRecipeToPlan({ slug: "chicken_curry", value: 8, slot: "Dinner", storage });
+  const loaded = loadPlan(storage);
+  assert.equal(loaded.entries.length, 2);
+  assert.deepEqual(loaded.entries.map(e => e.slug), ["focaccia", "chicken_curry"]);
+});
+
+test("addRecipeToPlan ignores calls missing slug or slot", () => {
+  const storage = fakeStorage();
+  addRecipeToPlan({ slug: "", value: 1, slot: "Other", storage });
+  addRecipeToPlan({ slug: "x", value: 1, slot: "", storage });
+  assert.equal(loadPlan(storage).entries.length, 0);
 });

@@ -70,12 +70,25 @@ export function defaultValueForRecipe(recipe) {
   return modeForRecipe(recipe) === "servings" ? recipe.servings : 1;
 }
 
-export function slotForRecipe(recipe) {
-  const meals = recipe && Array.isArray(recipe.meal) ? recipe.meal : [];
-  if (meals.includes("Breakfast")) return "Breakfast";
-  if (meals.includes("Lunch"))     return "Lunch";
-  if (meals.includes("Main"))      return "Dinner";
+export function slotForMeal(meals) {
+  if (Array.isArray(meals)) {
+    if (meals.includes("Breakfast")) return "Breakfast";
+    if (meals.includes("Lunch"))     return "Lunch";
+    if (meals.includes("Main"))      return "Dinner";
+  }
   return "Other";
+}
+
+export function slotForRecipe(recipe) {
+  return slotForMeal(recipe && recipe.meal);
+}
+
+export function addRecipeToPlan({ slug, value, slot, storage = (typeof localStorage !== "undefined" ? localStorage : null) }) {
+  if (!slug || !slot) return null;
+  const plan = loadPlan(storage);
+  const next = addEntry(plan, { slug, value, slot });
+  savePlan(next, storage);
+  return next;
 }
 
 export function nextStepValue(value, direction, mode) {

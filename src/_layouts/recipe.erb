@@ -17,7 +17,11 @@ layout: default
   end
   sub_recipes = sub_slugs.uniq.filter_map { |s| collections.recipes.resources.find { |r| r.basename_without_ext == s } }
 %>
-<article class="recipe" data-recipe-name="<%= page.name %>" data-pagefind-body>
+<article class="recipe"
+         data-recipe-name="<%= page.name %>"
+         data-recipe-slug="<%= resource.basename_without_ext %>"
+         data-recipe-slot="<%= plan_slot_for(resource) %>"
+         data-pagefind-body>
 
   <header class="recipe-head">
     <p class="recipe-cuisine" data-pagefind-meta="cuisine"><%= page.cuisine %></p>
@@ -54,6 +58,10 @@ layout: default
         <span class="tool__value" data-scale-value><%= page.servings ? page.servings : "×1" %></span>
         <button type="button" data-step="up" aria-label="Increase">+</button>
       </div>
+      <button type="button" class="tool" data-tool="add-to-plan">
+        <span class="tool__icon" aria-hidden="true">+</span>
+        <span class="tool__label">Add to plan</span>
+      </button>
       <button type="button" class="tool" data-tool="print" onclick="window.print()">
         <span class="tool__icon" aria-hidden="true">⎙</span>
         <span class="tool__label">Print</span>

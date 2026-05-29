@@ -4,10 +4,18 @@
   cook = capture { render "duration", iso: r.data.cookTime }.strip
   time_label = cook.empty? ? prep : cook
 %>
-<a class="card" href="<%= r.relative_url %>">
-  <span class="card__name"><%= r.data.name %></span>
-  <span class="card__meta">
-    <% if r.data.cuisine %><span class="card__cuisine"><%= r.data.cuisine %></span><% end %>
-    <% unless time_label.empty? %><span class="card__time"><%= time_label %></span><% end %>
-  </span>
-</a>
+<div class="card">
+  <a class="card__link" href="<%= r.relative_url %>">
+    <span class="card__name"><%= r.data.name %></span>
+    <span class="card__meta">
+      <% if r.data.cuisine %><span class="card__cuisine"><%= r.data.cuisine %></span><% end %>
+      <% unless time_label.empty? %><span class="card__time"><%= time_label %></span><% end %>
+    </span>
+  </a>
+  <button type="button" class="card__add"
+          data-plan-add-slug="<%= r.basename_without_ext %>"
+          data-plan-add-value="<%= default_plan_value_for(r) %>"
+          data-plan-add-slot="<%= plan_slot_for(r) %>"
+          title="Add to plan"
+          aria-label="Add <%= r.data.name %> to plan">+</button>
+</div>
