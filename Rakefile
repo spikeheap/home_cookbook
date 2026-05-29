@@ -77,6 +77,7 @@ task :recipe, [:slug] do |_t, args|
     prepTime: PT0M
     cookTime: PT0M
     recipeYield:
+    servings:                 # optional integer; omit for batch/yield-based recipes (bread, sweets, drinks)
     image:                    # /images/#{slug}-2160w.jpg
     isBasedOn:                # source URL
     author:
@@ -172,6 +173,11 @@ task :validate, [:paths] do |_t, args|
       effort = data["effort"]
       if effort && !RECIPE_ALLOWED_EFFORTS.include?(effort)
         errors << "#{path}: invalid effort: #{effort.inspect} (allowed: #{RECIPE_ALLOWED_EFFORTS.join(", ")})"
+      end
+
+      servings = data["servings"]
+      if !servings.nil? && !(servings.is_a?(Integer) && servings.positive?)
+        errors << "#{path}: invalid servings: #{servings.inspect} (must be a positive integer when present)"
       end
 
       diets = Array(data["suitableForDiet"])
