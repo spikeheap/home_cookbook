@@ -4,22 +4,33 @@ import { setupScale, formatQuantity } from "./scale.js";
 
 // Hand-rolled fakes mirroring the small DOM surface scale.js touches.
 
-function makeQty({ quantity, quantity_max = null, unit = null } = {}) {
+function makeSubRecipe(usesFraction) {
+  return { dataset: { usesFraction: String(usesFraction) }, matches: sel => sel.includes(".sub-recipe") };
+}
+
+function makeQty({ quantity, quantity_max = null, unit = null, sub = null } = {}) {
   const dataset = { quantity: String(quantity) };
   if (quantity_max != null) dataset.quantityMax = String(quantity_max);
   if (unit != null)         dataset.unit        = unit;
   return {
     dataset,
     textContent: "",
-    closest: () => null,
+    closest: sel => (sub && sel.includes(".sub-recipe") ? sub : null),
   };
 }
 
-function makeHint() {
+function makeHint({ sub = null } = {}) {
   return {
     hidden: true,
     textContent: "",
-    closest: () => null,
+    closest: sel => (sub && sel.includes(".sub-recipe") ? sub : null),
+  };
+}
+
+function makeUsageEl(sub) {
+  return {
+    textContent: "",
+    closest: sel => (sel.includes(".sub-recipe") ? sub : null),
   };
 }
 
@@ -40,12 +51,15 @@ function makeTool({ baseServings = null } = {}) {
   return { dataset: baseServings != null ? { baseServings: String(baseServings) } : {} };
 }
 
-function setup({ baseServings = null, qtys = [], hints = [] } = {}) {
+function setup({ baseServings = null, qtys = [], hints = [], usageEls = [] } = {}) {
   const tool    = makeTool({ baseServings });
   const downBtn = makeButton();
   const upBtn   = makeButton();
   const valueEl = makeValueEl();
-  const handle  = setupScale({ tool, downBtn, upBtn, valueEl, qtyElements: qtys, hintElements: hints });
+  const handle  = setupScale({
+    tool, downBtn, upBtn, valueEl,
+    qtyElements: qtys, hintElements: hints, usageEls,
+  });
   return { handle, downBtn, upBtn, valueEl };
 }
 
@@ -167,6 +181,46 @@ test("initial render normalises decimal quantities into fraction glyphs", () => 
   const qty = makeQty({ quantity: 0.5, unit: "tsp" });
   setup({ qtys: [qty] });
   assert.equal(qty.textContent, "½ tsp");
+});
+
+test("sub-recipe items scale by factor × uses_fraction", () => {
+  const sub      = makeSubRecipe(0.5);
+  const parent   = makeQty({ quantity: 4, unit: "people" });
+  const subItem  = makeQty({ quantity: 200, unit: "ml", sub });
+  const { upBtn } = setup({ qtys: [parent, subItem] });
+
+  // At scale ×1, sub item shows half of base: 100ml.
+  assert.equal(subItem.textContent, "100ml");
+  assert.equal(parent.textContent,  "4 people");
+
+  upBtn.click(); // ×2 — sub item becomes a full batch (200ml).
+  assert.equal(subItem.textContent, "200ml");
+  assert.equal(parent.textContent,  "8 people");
+});
+
+test("sub-recipe hint shows the combined effective factor", () => {
+  const sub  = makeSubRecipe(0.5);
+  const hint = makeHint({ sub });
+  const { upBtn } = setup({ hints: [hint] });
+
+  // ×1 factor × 0.5 sub = 0.5 effective → hint visible.
+  assert.equal(hint.hidden, false);
+  assert.equal(hint.textContent, "× ½");
+
+  upBtn.click(); // ×2 × 0.5 = 1 → hint hidden again.
+  assert.equal(hint.hidden, true);
+});
+
+test("sub-recipe usage label updates with the parent stepper", () => {
+  const sub      = makeSubRecipe(0.5);
+  const usageEl  = makeUsageEl(sub);
+  const { upBtn, downBtn } = setup({ baseServings: 4, usageEls: [usageEl] });
+
+  assert.equal(usageEl.textContent, "make ½× batch");
+  upBtn.click(); // 5 people → 5/4 × 0.5 = 0.625
+  assert.equal(usageEl.textContent, "make ⅝× batch");
+  downBtn.click(); downBtn.click(); downBtn.click(); // 2 people → 2/4 × 0.5 = ¼
+  assert.equal(usageEl.textContent, "make ¼× batch");
 });
 
 test("setValue can be called directly to set a stepper value", () => {

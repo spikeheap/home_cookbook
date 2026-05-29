@@ -5,10 +5,10 @@
 //   - multiplier mode (no data-base-servings)  — stepper value is the multiplier
 //     itself, walking the MULTIPLIER_LADDER (½, 1, 2, 3, …).
 //
-// Items without a numeric quantity (e.g. "Salt and pepper to taste") get a
-// "× N" hint when the recipe is at non-1 factor. Sub-recipe ingredients are
-// deliberately not scaled — the right model for that would need a
-// "fraction-of-yield" concept, see Readme.
+// Items inside an inlined sub-recipe (.sub-recipe[data-uses-fraction]) are
+// scaled by factor × uses_fraction, so caesar's mayonnaise inlines at ½ batch
+// at scale 1 and becomes a full batch at ×2. Items without a numeric quantity
+// get a "× N" hint at non-1 effective factor.
 
 const ATTACHED_UNITS = new Set(["g", "kg", "mg", "ml", "l", "cl", "oz", "lb"]);
 
@@ -41,8 +41,12 @@ function formatQtyWithUnit(qty, qtyMax, unit) {
   return text;
 }
 
-function inSubRecipe(el) {
-  return typeof el.closest === "function" ? !!el.closest(".sub-recipe") : false;
+function subFractionFor(el) {
+  if (typeof el.closest !== "function") return 1;
+  const sub = el.closest(".sub-recipe[data-uses-fraction]");
+  if (!sub) return 1;
+  const f = parseFloat(sub.dataset.usesFraction);
+  return Number.isFinite(f) && f > 0 ? f : 1;
 }
 
 function nextOnLadder(current, direction) {
@@ -65,32 +69,57 @@ export function setupScale(opts = {}) {
   const upBtn   = opts.upBtn   ?? tool.querySelector('[data-step="up"]');
   const valueEl = opts.valueEl ?? tool.querySelector("[data-scale-value]");
 
-  const qtyElements = opts.qtyElements ?? (root
-    ? Array.from(root.querySelectorAll(".ingredient__qty[data-quantity]")).filter(el => !inSubRecipe(el))
-    : []);
-  const hintElements = opts.hintElements ?? (root
-    ? Array.from(root.querySelectorAll("[data-scale-hint]")).filter(el => !inSubRecipe(el))
+  const qtyItems = opts.qtyItems ?? (
+    opts.qtyElements
+      ? opts.qtyElements.map(el => ({ el, subFrac: subFractionFor(el) }))
+      : root
+        ? Array.from(root.querySelectorAll(".ingredient__qty[data-quantity]"))
+            .map(el => ({ el, subFrac: subFractionFor(el) }))
+        : []
+  );
+  const hintItems = opts.hintItems ?? (
+    opts.hintElements
+      ? opts.hintElements.map(el => ({ el, subFrac: subFractionFor(el) }))
+      : root
+        ? Array.from(root.querySelectorAll("[data-scale-hint]"))
+            .map(el => ({ el, subFrac: subFractionFor(el) }))
+        : []
+  );
+  const usageEls = opts.usageEls ?? (root
+    ? Array.from(root.querySelectorAll(".sub-recipe[data-uses-fraction] [data-sub-usage]"))
     : []);
 
   let value  = mode === "servings" ? baseServings : 1;
   let factor = 1;
 
   function render() {
-    qtyElements.forEach(el => {
+    qtyItems.forEach(({ el, subFrac }) => {
+      const eff     = factor * subFrac;
       const baseQty = parseFloat(el.dataset.quantity);
       const baseMax = el.dataset.quantityMax ? parseFloat(el.dataset.quantityMax) : null;
       const unit    = el.dataset.unit || null;
-      el.textContent = formatQtyWithUnit(baseQty * factor, baseMax != null ? baseMax * factor : null, unit);
+      el.textContent = formatQtyWithUnit(baseQty * eff, baseMax != null ? baseMax * eff : null, unit);
     });
 
-    hintElements.forEach(el => {
-      if (factor === 1) {
+    hintItems.forEach(({ el, subFrac }) => {
+      const eff = factor * subFrac;
+      if (eff === 1) {
         el.hidden = true;
         el.textContent = "";
       } else {
         el.hidden = false;
-        el.textContent = `× ${formatQuantity(factor)}`;
+        el.textContent = `× ${formatQuantity(eff)}`;
       }
+    });
+
+    usageEls.forEach(el => {
+      const sub = typeof el.closest === "function"
+        ? el.closest(".sub-recipe[data-uses-fraction]")
+        : null;
+      if (!sub) return;
+      const sf = parseFloat(sub.dataset.usesFraction);
+      if (!Number.isFinite(sf)) return;
+      el.textContent = `make ${formatQuantity(factor * sf)}× batch`;
     });
 
     if (valueEl) {

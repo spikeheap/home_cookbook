@@ -46,6 +46,7 @@
   qty = item_hash ? item["quantity"] : nil
   qty_max = item_hash ? item["quantity_max"] : nil
   optional = item_hash ? item["optional"] : nil
+  uses_fraction = item_hash ? item["uses_fraction"] : nil
   sep = attached_units.include?(unit.to_s) ? "" : " "
 %>
 <li class="ingredient">
@@ -64,10 +65,14 @@
   <% end %>
 
   <% if inline_sub_match %>
-    <details class="sub-recipe">
+    <details class="sub-recipe"<% if uses_fraction %> data-uses-fraction="<%= uses_fraction %>"<% end %>>
       <summary>
         <span class="sub-recipe__name"><%= sub_match.data.name %></span>
-        <% if sub_match.data.recipeYield %><span class="sub-recipe__yield"><%= sub_match.data.recipeYield %></span><% end %>
+        <% if uses_fraction %>
+          <span class="sub-recipe__usage" data-sub-usage>make <%= uses_fraction %>× batch</span>
+        <% elsif sub_match.data.recipeYield %>
+          <span class="sub-recipe__yield"><%= sub_match.data.recipeYield %></span>
+        <% end %>
       </summary>
       <div class="sub-recipe__body">
         <div class="sub-recipe__ingredients">

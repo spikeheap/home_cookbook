@@ -85,6 +85,4 @@ Omit `uses_fraction` for sub-recipes you intentionally want to display unchanged
 
 - **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.
 
-- **Sub-recipe scaling.** When you change the scale on a recipe page, only the parent recipe's ingredients are multiplied. Recipes that inline another recipe (e.g. caesar → mayonnaise, pizza → dough/sauce) leave the inlined sub-recipe unchanged. The right model needs a "fraction-of-yield" concept (the parent uses 150ml of a recipe that yields 300ml), which we don't track yet.
-
 - **Image scaling.** Add image scaling rake tasks to generate images for different screen sizes.
