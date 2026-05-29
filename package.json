@@ -7,7 +7,8 @@
     "build": "bundle exec rake deploy && pagefind --site output",
     "esbuild": "node esbuild.config.js --minify",
     "esbuild-dev": "node esbuild.config.js --watch",
-    "test": "node --test \"frontend/javascript/**/*.test.js\""
+    "test": "node --test \"frontend/javascript/**/*.test.js\"",
+    "build-categoriser-dictionary": "node scripts/build-categoriser-dictionary.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.11",
