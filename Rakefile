@@ -185,9 +185,16 @@ task :validate, [:paths] do |_t, args|
         Array(section["items"]).each_with_index do |item, ii|
           next unless item.is_a?(Hash)
           uf = item["uses_fraction"]
-          next if uf.nil?
-          unless uf.is_a?(Numeric) && uf > 0
+          if !uf.nil? && !(uf.is_a?(Numeric) && uf > 0)
             errors << "#{path}: ingredient #{si}/#{ii} has invalid uses_fraction: #{uf.inspect} (must be a positive number)"
+          end
+          # Catch raw HTML in `item:` text — sub-recipe links must use the
+          # markdown form `[label](slug.html)` so the renderer and aggregator
+          # both recognise them. An unrecognised <a> falls through and gets
+          # displayed verbatim on the plan page.
+          item_text = item["item"]
+          if item_text.is_a?(String) && item_text =~ /<[a-z][^>]*>/i
+            errors << "#{path}: ingredient #{si}/#{ii} `item` contains raw HTML; use markdown link `[label](slug.html)` instead"
           end
         end
       end

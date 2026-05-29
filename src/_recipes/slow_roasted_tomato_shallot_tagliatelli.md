@@ -21,7 +21,8 @@ recipeIngredient:
     item: shallots
   - quantity: 200
     unit: g
-    item: <a href="/recipes/pasta_dough.html">fresh tagliatelli</a>
+    item: "[fresh tagliatelli](pasta_dough.html)"
+    uses_fraction: 1
   - item: Black pepper
   - item: Olive, grapeseed, or any high-smoke-point oil
   - item: Extra-virgin olive oil
