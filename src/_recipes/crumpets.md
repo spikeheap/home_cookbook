@@ -31,11 +31,11 @@ recipeIngredient:
     item: caster sugar
   - quantity: 350
     unit: ml
-    item: oz warm milk
+    item: warm milk
   - quantity: 150
     quantity_max: 200
     unit: ml
-    item: oz warm water
+    item: warm water
   - quantity: 0.5
     unit: tsp
     item: bicarbonate of soda

@@ -48,7 +48,7 @@ recipeIngredient:
     item: free-range egg
   - quantity: 200
     unit: ml
-    item: oz milk
+    item: milk
   - item: sunflower oil, for greasing
   - item: butter, maple syrup or honey
   - item: Greek-style yoghurt

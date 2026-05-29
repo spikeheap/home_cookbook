@@ -10,6 +10,21 @@
 
 const SUB_LINK_RE = /\[[^\]]+\]\(([a-z0-9_-]+)\.html\)/i;
 
+// Items whose normalised name matches these patterns are dropped from the
+// shopping list entirely (you don't shop for water). Conservative so that
+// "water chestnut" or "rose water" wouldn't be silently lost.
+const IGNORE_NAME_PATTERNS = [
+  /^water$/,
+  /^(cold|warm|hot|boiling|tepid|ice|chilled|room temperature)\s+water$/,
+  /^water\s+or\s+/,
+  /^about\s+\d+\w*\s+water$/,
+];
+
+function shouldIgnore(normalisedName) {
+  if (!normalisedName) return false;
+  return IGNORE_NAME_PATTERNS.some(re => re.test(normalisedName));
+}
+
 // Category names in the order they're typically encountered when walking a
 // shop. Empty buckets are omitted from the rendered list.
 export const CATEGORY_ORDER = [
@@ -36,6 +51,7 @@ const CATEGORY_RULES = [
 
   { category: "Meat & fish",  patterns: [
     "chicken", "beef", "pork", "lamb", "turkey", "duck", "venison", "mince",
+    "rib eye", "ribeye", "sirloin", "rump", "fillet steak", "brisket", "skirt steak",
     "salmon", "trout", "tuna", "cod", "haddock", "prawn", "shrimp", "anchov", "mackerel",
     "bacon", "guanciale", "pancetta", " ham", "parma", "prosciutto", "salami", "chorizo", "sausage",
     "fish ",
@@ -43,8 +59,8 @@ const CATEGORY_RULES = [
 
   { category: "Dairy & eggs", patterns: [
     "egg", "milk", "cream", "yoghurt", "yogurt", "butter",
-    "cheese", "parmesan", "parmigiano", "mozzarella", "mascarpone", "ricotta",
-    "feta", "camembert", "pecorino", "halloumi", "gruy",
+    "cheese", "cheddar", "parmesan", "parmigiano", "mozzarella", "mascarpone", "ricotta",
+    "feta", "camembert", "pecorino", "halloumi", "gruy", "paneer", "crème fraîche", "creme fraiche",
   ]},
 
   // Pantry catches `tinned`, `dried`, oils, sauces, spices, baking goods, etc.
@@ -52,23 +68,27 @@ const CATEGORY_RULES = [
   { category: "Cupboard",     patterns: [
     "tinned", "tin of", "(tin)", "(can)", "canned",
     "flour", "sugar", "salt", "oil", "vinegar", "stock", "bouillon",
-    "pasta", "rice", "noodle", "yeast", "baking powder", "baking soda",
-    "cocoa", "vanilla", "honey", "syrup", "treacle",
+    "pasta", "rice", "noodle", "yeast", "baking powder", "baking soda", "bicarb", "cornstarch", "cornflour",
+    "cocoa", "vanilla", "honey", "syrup", "treacle", "malt extract",
     "soy sauce", "fish sauce", "mustard", "ketchup", "mayonnaise", "tamari", "miso", "tahini",
+    "worcestershire", "mirin", "sake", "rice wine", "oyster sauce", "hoisin",
     "passata", "puree", "purée", "paste",
-    "coffee", "chocolate", "biscuit", "cracker",
+    "coffee", "chocolate", "biscuit", "cracker", "ladyfinger", "savoiardi",
+    "taco shell", "tortilla chip",
     "lentil", "bean", "chickpea", "pulse",
     "spice", "cinnamon", "cumin", "paprika", "turmeric", "garam masala", "curry powder",
+    "cardamom", "nutmeg", "star anise", "bay leaf", "fennel seed", "whole cloves", "ground cloves",
     "dried", "ground ", "powder", "seed", "peppercorn", "stock cube",
     "nut", "almond", "cashew", "pistachio", "pine", "walnut", "hazelnut",
     "raisin", "sultana", "currant",
     "black pepper", "white pepper",
+    "caper", "olive ", "gherkin", "pickle",
   ]},
 
   { category: "Produce",      patterns: [
     "onion", "shallot", "garlic", "leek", "spring onion",
     "tomato", "lettuce", "rocket", "spinach", "kale", "cabbage", "salad",
-    "pepper", "potato", "carrot", "courgette", "aubergine", "broccoli", "cauliflower",
+    "pepper", "potato", "jersey royal", "carrot", "courgette", "aubergine", "broccoli", "cauliflower",
     "mushroom", "celery", "fennel", "asparagus", "pea", "green bean",
     "lemon", "lime", "orange", "apple", "pear", "raspberry", "blueberry", "strawberry",
     "passionfruit", "cucumber", "beetroot",
@@ -156,11 +176,13 @@ function expandItems(recipe, factor, sourceLabel, recipesIndex) {
         continue;
       }
 
-      const rawQty = isHash ? item.quantity : null;
-      const unit   = isHash ? item.unit || null : null;
+      const rawQty     = isHash ? item.quantity : null;
+      const unit       = isHash ? item.unit || null : null;
+      const normalised = normaliseItemName(itemText);
+      if (shouldIgnore(normalised)) continue;
       out.push({
         text:        itemText,
-        normalised:  normaliseItemName(itemText),
+        normalised,
         displayName: displayItemName(itemText),
         quantity:    Number.isFinite(rawQty) ? rawQty * factor : null,
         unit,

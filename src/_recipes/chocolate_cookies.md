@@ -38,7 +38,7 @@ recipeIngredient:
     item: cocoa powder
   - quantity: 1
     unit: tsp
-    item: bicarb
+    item: bicarbonate of soda
   - quantity: 0.5
     unit: tsp
     item: baking powder

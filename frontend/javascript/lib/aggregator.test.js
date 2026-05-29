@@ -212,6 +212,72 @@ test("categorise covers a handful of representative items", () => {
   assert.equal(categorise("a thing we don't know"),    "Other");
 });
 
+test("categorise: dairy patterns cover cheddar, paneer, crème fraîche", () => {
+  assert.equal(categorise("mature cheddar"),       "Dairy & eggs");
+  assert.equal(categorise("grated cheddar"),       "Dairy & eggs");
+  assert.equal(categorise("paneer"),               "Dairy & eggs");
+  assert.equal(categorise("crème fraîche"),        "Dairy & eggs");
+  assert.equal(categorise("creme fraiche"),        "Dairy & eggs");
+});
+
+test("categorise: cupboard patterns cover sauces, baking, snacks, capers", () => {
+  assert.equal(categorise("bicarbonate of soda"),  "Cupboard");
+  assert.equal(categorise("bicarb"),               "Cupboard");
+  assert.equal(categorise("capers"),               "Cupboard");
+  assert.equal(categorise("cardamom pods"),        "Cupboard");
+  assert.equal(categorise("cornstarch"),           "Cupboard");
+  assert.equal(categorise("cornflour"),            "Cupboard");
+  assert.equal(categorise("malt extract"),         "Cupboard");
+  assert.equal(categorise("mirin"),                "Cupboard");
+  assert.equal(categorise("worcestershire sauce"), "Cupboard");
+  assert.equal(categorise("italian ladyfingers"),  "Cupboard");
+  assert.equal(categorise("taco shells"),          "Cupboard");
+});
+
+test("categorise: produce covers jersey royals and other potato-like items", () => {
+  assert.equal(categorise("jersey royals"),        "Produce");
+  assert.equal(categorise("baby potatoes"),        "Produce");
+});
+
+test("categorise: meat patterns cover ribeye and sirloin cuts", () => {
+  assert.equal(categorise("rib eye steak"),        "Meat & fish");
+  assert.equal(categorise("ribeye"),               "Meat & fish");
+  assert.equal(categorise("top sirloin"),          "Meat & fish");
+});
+
+test("aggregate skips items whose normalised name is water (any temperature)", () => {
+  const r = {
+    slug: "x", name: "X", servings: 1, recipeIngredient: [
+      { items: [
+        { quantity: 1, unit: "l",  item: "water" },
+        { quantity: 200, unit: "ml", item: "cold water" },
+        { quantity: 50, unit: "ml", item: "warm water" },
+        { quantity: 1, unit: "l", item: "water or stock" },
+        { quantity: 100, unit: "g", item: "flour" },
+      ] },
+    ],
+  };
+  const plan = { version: 1, entries: [{ id: "a", slug: "x", value: 1, slot: "Other" }] };
+  const agg = aggregate(plan, [r]);
+  const names = flatItems(agg).map(i => i.name);
+  assert.deepEqual(names, ["flour"], "all the water lines are dropped; flour remains");
+});
+
+test("aggregate keeps named water-derived items like water chestnut and rose water", () => {
+  const r = {
+    slug: "x", name: "X", servings: 1, recipeIngredient: [
+      { items: [
+        { quantity: 100, unit: "g",  item: "water chestnuts" },
+        { quantity: 1, unit: "tsp",  item: "rose water" },
+      ] },
+    ],
+  };
+  const plan = { version: 1, entries: [{ id: "a", slug: "x", value: 1, slot: "Other" }] };
+  const agg = aggregate(plan, [r]);
+  const names = flatItems(agg).map(i => i.name).sort();
+  assert.deepEqual(names, ["rose water", "water chestnuts"]);
+});
+
 test("categorise: pack units (tin/can/jar/sachet…) override keyword matches", () => {
   // "tomatoes" alone is Produce; in a tin it's Cupboard.
   assert.equal(categorise("chopped tomatoes", "tin"),  "Cupboard");
