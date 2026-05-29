@@ -32,7 +32,8 @@ recipeIngredient:
   - quantity: 1
     item: red onion
   - quantity: 2
-    item: garlic cloves
+    unit: clove
+    item: garlic
   - item: thumb-sized piece of ginger
   - quantity: 1
     item: small green chilli

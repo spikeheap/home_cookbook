@@ -35,7 +35,8 @@ recipeIngredient:
     unit: tsp
     item: chilli powder
   - quantity: 6
-    item: garlic cloves , grated
+    unit: clove
+    item: garlic, grated
   - quantity: 4
     unit: tbsp
     item: sunflower oil

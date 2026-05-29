@@ -41,7 +41,8 @@ recipeIngredient:
     unit: tsp
     item: dried oregano
   - quantity: 1
-    item: clove of garlic
+    unit: clove
+    item: garlic
   - quantity: 1
     unit: tsp
     item: English mustard (heaped)

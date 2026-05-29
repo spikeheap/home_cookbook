@@ -24,7 +24,8 @@ recipeIngredient:
     unit: tbsp
     item: apple cider vinegar
   - quantity: 2
-    item: garlic cloves, finely chopped
+    unit: clove
+    item: garlic, finely chopped
   - quantity: 2
     unit: tsp
     item: ground cumin

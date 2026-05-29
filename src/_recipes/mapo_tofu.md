@@ -42,7 +42,8 @@ recipeIngredient:
     unit: tbsp
     item: pepper flakes or powder (optional)
   - quantity: 2
-    item: garlic cloves, finely chopped
+    unit: clove
+    item: garlic, finely chopped
   - quantity: 5
     unit: slices
     item: ginger, finely minced (~1 tsp)

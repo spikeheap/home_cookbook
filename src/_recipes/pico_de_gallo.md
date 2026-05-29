@@ -20,7 +20,8 @@ recipeIngredient:
     unit: tbsp
     item: jalapeño peppers, or a small fresh chili
   - quantity: 2
-    item: garlic cloves, crushed
+    unit: clove
+    item: garlic, crushed
   - item: small bunch coriander
   - quantity: 1
     item: lime

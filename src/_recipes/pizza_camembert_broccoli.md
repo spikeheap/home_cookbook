@@ -31,7 +31,8 @@ recipeIngredient:
     unit: g
     item: tenderstem broccoli, blanched 60 seconds and shocked in cold water
   - quantity: 1
-    item: garlic clove, finely sliced
+    unit: clove
+    item: garlic, finely sliced
   - item: Pinch of chilli flakes
   - item: Olive oil to drizzle
   - item: Salt and black pepper

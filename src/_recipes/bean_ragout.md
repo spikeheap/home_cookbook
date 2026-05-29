@@ -21,7 +21,8 @@ recipeIngredient:
   - quantity: 1
     item: large onion (finely chopped)
   - quantity: 3
-    item: garlic cloves (finely chopped)
+    unit: clove
+    item: garlic, finely chopped
   - quantity: 1
     unit: tbsp
     item: ground cumin

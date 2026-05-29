@@ -23,7 +23,8 @@ recipeIngredient:
     unit: kg
     item: pork belly slices, cut into 3 cm pieces
   - quantity: 2
-    item: garlic cloves, roughly chopped
+    unit: clove
+    item: garlic, roughly chopped
   - quantity: 1
     item: onion, roughly chopped
   - quantity: 2

@@ -25,7 +25,8 @@ recipeIngredient:
   - quantity: 2
     item: large unwaxed lemons
   - quantity: 1
-    item: clove garlic, peeled and bashed but kept whole
+    unit: clove
+    item: garlic, peeled and bashed but kept whole
   - quantity: 100
     unit: ml
     item: olive oil

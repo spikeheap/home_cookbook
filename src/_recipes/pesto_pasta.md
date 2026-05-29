@@ -21,7 +21,8 @@ recipeIngredient:
 - heading: Pesto
   items:
   - quantity: 0.5
-    item: clove garlic
+    unit: clove
+    item: garlic
   - quantity: 1
     item: big bunch fresh basil
   - quantity: 50

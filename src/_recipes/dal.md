@@ -34,7 +34,8 @@ recipeIngredient:
   - quantity: 2
     item: red chilli, finely chopped (seeds removed if preferred)
   - quantity: 8
-    item: garlic cloves, crushed
+    unit: clove
+    item: garlic, crushed
   - quantity: 1
     unit: tsp
     item: ground turmeric

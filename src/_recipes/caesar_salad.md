@@ -40,7 +40,8 @@ recipeIngredient:
     unit: tbsp
     item: grated Parmesan cheese
   - quantity: 0.5
-    item: garlic clove, crushed
+    unit: clove
+    item: garlic, crushed
   - quantity: 3
     quantity_max: 4
     item: anchovies, crushed
