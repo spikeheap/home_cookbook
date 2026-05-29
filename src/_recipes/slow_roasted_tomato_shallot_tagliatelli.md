@@ -25,7 +25,7 @@ recipeIngredient:
     uses_fraction: 1
   - item: Black pepper
   - item: Olive, grapeseed, or any high-smoke-point oil
-  - item: Extra-virgin olive oil
+  - item: extra virgin olive oil
   - item: Parmesan
 recipeInstructions:
 - items:

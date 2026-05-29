@@ -70,7 +70,7 @@ recipeIngredient:
   items:
   - quantity: 1
     unit: tbsp
-    item: cornstarch
+    item: cornflour
   - quantity: 2.5
     unit: tbsp
     item: water

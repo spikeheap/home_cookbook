@@ -18,7 +18,7 @@ recipeIngredient:
     item: chicken breasts, cut into bites
   - quantity: 1
     unit: tbsp
-    item: corn starch
+    item: cornflour
   - quantity: 1
     unit: tbsp
     item: rice wine, such as sake or soju

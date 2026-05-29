@@ -68,7 +68,9 @@ const CATEGORY_RULES = [
   { category: "Cupboard",     patterns: [
     "tinned", "tin of", "(tin)", "(can)", "canned",
     "flour", "sugar", "salt", "oil", "vinegar", "stock", "bouillon",
-    "pasta", "rice", "noodle", "yeast", "baking powder", "baking soda", "bicarb", "cornstarch", "cornflour",
+    "pasta", "spaghetti", "linguine", "tagliatelli", "tagliatelle", "fettuccine", "fusilli", "penne",
+    "rigatoni", "macaroni", "orzo", "lasagne", "ravioli", "gnocchi",
+    "rice", "noodle", "yeast", "baking powder", "baking soda", "bicarb", "cornstarch", "corn starch", "cornflour",
     "cocoa", "vanilla", "honey", "syrup", "treacle", "malt extract",
     "soy sauce", "fish sauce", "mustard", "ketchup", "mayonnaise", "tamari", "miso", "tahini",
     "worcestershire", "mirin", "sake", "rice wine", "oyster sauce", "hoisin",
@@ -77,7 +79,7 @@ const CATEGORY_RULES = [
     "taco shell", "tortilla chip",
     "lentil", "bean", "chickpea", "pulse",
     "spice", "cinnamon", "cumin", "paprika", "turmeric", "garam masala", "curry powder",
-    "cardamom", "nutmeg", "star anise", "bay leaf", "fennel seed", "whole cloves", "ground cloves",
+    "cardamom", "nutmeg", "star anise", "bay leaf", "bay leaves", "fennel seed", "whole cloves", "ground cloves",
     "dried", "ground ", "powder", "seed", "peppercorn", "stock cube",
     "nut", "almond", "cashew", "pistachio", "pine", "walnut", "hazelnut",
     "raisin", "sultana", "currant",
@@ -86,7 +88,7 @@ const CATEGORY_RULES = [
   ]},
 
   { category: "Produce",      patterns: [
-    "onion", "shallot", "garlic", "leek", "spring onion",
+    "onion", "shallot", "garlic", "leek", "spring onion", "scallion",
     "tomato", "lettuce", "rocket", "spinach", "kale", "cabbage", "salad",
     "pepper", "potato", "jersey royal", "carrot", "courgette", "aubergine", "broccoli", "cauliflower",
     "mushroom", "celery", "fennel", "asparagus", "pea", "green bean",
@@ -94,6 +96,7 @@ const CATEGORY_RULES = [
     "passionfruit", "cucumber", "beetroot",
     "ginger", "chilli", "chili",
     "basil", "parsley", "coriander", "mint", "thyme", "rosemary", "sage", "oregano", "dill",
+    "tofu",
   ]},
 
   { category: "Drinks",       patterns: ["wine", "beer", "juice", "cola", "tonic", "soda water"] },

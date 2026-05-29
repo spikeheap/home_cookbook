@@ -237,6 +237,18 @@ test("categorise: cupboard patterns cover sauces, baking, snacks, capers", () =>
 test("categorise: produce covers jersey royals and other potato-like items", () => {
   assert.equal(categorise("jersey royals"),        "Produce");
   assert.equal(categorise("baby potatoes"),        "Produce");
+  assert.equal(categorise("scallion whites"),      "Produce");
+  assert.equal(categorise("soft tofu"),            "Produce");
+});
+
+test("categorise: cupboard covers pasta shapes, cornflour spellings, bay leaves", () => {
+  assert.equal(categorise("spaghetti or linguine"), "Cupboard");
+  assert.equal(categorise("fettuccine"),            "Cupboard");
+  assert.equal(categorise("gnocchi"),               "Cupboard");
+  assert.equal(categorise("cornflour"),             "Cupboard");
+  assert.equal(categorise("corn starch"),           "Cupboard");
+  assert.equal(categorise("bay leaves"),            "Cupboard");
+  assert.equal(categorise("balsamic vinegar"),      "Cupboard");
 });
 
 test("categorise: meat patterns cover ribeye and sirloin cuts", () => {

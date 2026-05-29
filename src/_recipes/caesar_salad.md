@@ -21,7 +21,7 @@ recipeIngredient:
   items:
   - quantity: 3
     unit: tbsp
-    item: extra-virgin olive oil
+    item: extra virgin olive oil
   - quantity: 2
     unit: slices
     item: slightly stale bread, cubed

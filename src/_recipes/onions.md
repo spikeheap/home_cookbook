@@ -23,7 +23,7 @@ recipeIngredient:
     item: light brown sugar
   - quantity: 2
     unit: tbsp
-    item: balsamic, sherry or red wine vinegar
+    item: balsamic vinegar (or sherry or red wine)
   - quantity: 100
     unit: ml
     item: veg stock
