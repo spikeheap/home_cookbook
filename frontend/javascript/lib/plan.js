@@ -112,6 +112,11 @@ export function decodePlan(encoded) {
   catch (_) { return { ok: false, reason: "decompress" }; }
   if (!json) return { ok: false, reason: "decompress" };
 
+  // lz-string is an excellent zip-bomb vector: ~50 KB of fragment can
+  // decompress to ~10 MB of repetitive JSON. Legitimate plans serialise to
+  // well under 10 KB, so cap conservatively at 200 KB and bail early.
+  if (json.length > 200_000) return { ok: false, reason: "too_big" };
+
   let parsed;
   try { parsed = JSON.parse(json); }
   catch (_) { return { ok: false, reason: "json" }; }
@@ -224,6 +229,15 @@ function esc(s) {
   }[c]));
 }
 
+// Defence in depth for `href=` interpolation. `esc()` only HTML-escapes;
+// it doesn't reject dangerous schemes like `javascript:` or `data:`. We
+// allow only site-relative paths and absolute http(s) URLs; anything
+// else (or non-string input) becomes `#`, which navigates nowhere.
+export function safeHref(u) {
+  if (typeof u !== "string") return "#";
+  return /^(\/|https?:\/\/)/i.test(u) ? u : "#";
+}
+
 export function renderEntry(entry, recipe) {
   if (!recipe) {
     // Stale entry — recipe was renamed/removed since this was added. Render a
@@ -240,7 +254,7 @@ export function renderEntry(entry, recipe) {
   const valueText = mode === "servings" ? String(entry.value) : `×${formatQuantity(entry.value)}`;
   return `
     <li class="plan-entry" data-plan-entry-id="${esc(entry.id)}">
-      <a class="plan-entry__name" href="${esc(recipe.url)}">${esc(recipe.name)}</a>
+      <a class="plan-entry__name" href="${esc(safeHref(recipe.url))}">${esc(recipe.name)}</a>
       <div class="plan-entry__stepper">
         <span class="plan-entry__label">${esc(label)}</span>
         <button type="button" class="plan-entry__step" data-plan-step="down" data-plan-id="${esc(entry.id)}" aria-label="Decrease">−</button>
@@ -457,21 +471,29 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
   if (typeof window !== "undefined" && window.location && window.location.hash) {
     const m = window.location.hash.match(/^#data=(.+)$/);
     if (m) {
-      let raw = m[1];
-      // Be permissive about pasted URLs that may have re-encoded characters
-      // like '+' as '%2B'. Fall back to the raw fragment on malformed escapes.
-      try { raw = decodeURIComponent(raw); } catch (_) { /* keep raw */ }
-      const result = decodePlan(raw);
-      if (!result.ok) {
-        console.warn(`plan: ignored malformed shared plan (${result.reason})`);
-      } else if (result.entries.length === 0) {
-        console.warn("plan: shared link contained no valid entries");
+      const raw = m[1];
+      // A malformed escape (e.g. a stray `%` from a truncated paste or
+      // a crafted hash) means the fragment isn't a valid share link.
+      // Skip the import attempt entirely rather than feed the raw,
+      // un-decoded byte sequence into `decodePlan` — defence in depth.
+      let decoded;
+      try { decoded = decodeURIComponent(raw); }
+      catch (_) { decoded = null; }
+      if (decoded === null) {
+        console.warn("plan: ignored malformed shared plan (uri)");
       } else {
-        const choice = resolveImportChoice(result.entries.length, plan.entries.length > 0);
-        if (choice === "replace") {
-          commit(replaceEntries(plan, result.entries));
-        } else if (choice === "merge") {
-          commit(mergeEntries(plan, result.entries));
+        const result = decodePlan(decoded);
+        if (!result.ok) {
+          console.warn(`plan: ignored malformed shared plan (${result.reason})`);
+        } else if (result.entries.length === 0) {
+          console.warn("plan: shared link contained no valid entries");
+        } else {
+          const choice = resolveImportChoice(result.entries.length, plan.entries.length > 0);
+          if (choice === "replace") {
+            commit(replaceEntries(plan, result.entries));
+          } else if (choice === "merge") {
+            commit(mergeEntries(plan, result.entries));
+          }
         }
       }
       // Always clear the hash so reload doesn't re-prompt.

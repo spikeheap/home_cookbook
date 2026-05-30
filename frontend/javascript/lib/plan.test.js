@@ -8,6 +8,7 @@ import {
   nextStepValue, groupBySlot, addRecipeToPlan, renderEntry,
   isInPlan, togglePlanEntry,
   encodePlan, decodePlan, mergeEntries, replaceEntries,
+  safeHref,
   SLOT_ORDER,
 } from "./plan.js";
 
@@ -330,3 +331,77 @@ test("import flow keeps unknown slugs — plan renderer degrades them gracefully
 function LZStringEncode(obj) {
   return LZString.compressToEncodedURIComponent(JSON.stringify(obj));
 }
+
+// ---- Security: safeHref ---------------------------------------------------
+
+test("safeHref rejects javascript:, data:, vbscript:, and non-string input", () => {
+  assert.equal(safeHref("javascript:alert(1)"),         "#");
+  assert.equal(safeHref("JavaScript:alert(1)"),         "#");
+  assert.equal(safeHref("data:text/html,<script>1</script>"), "#");
+  assert.equal(safeHref("vbscript:msgbox(1)"),          "#");
+  assert.equal(safeHref(""),                            "#");
+  assert.equal(safeHref(null),                          "#");
+  assert.equal(safeHref(undefined),                     "#");
+  assert.equal(safeHref(42),                            "#");
+  assert.equal(safeHref({}),                            "#");
+});
+
+test("safeHref allows site-relative paths and absolute http(s) URLs", () => {
+  assert.equal(safeHref("/recipes/x"),                  "/recipes/x");
+  assert.equal(safeHref("/recipes/x?q=1#frag"),         "/recipes/x?q=1#frag");
+  assert.equal(safeHref("https://example.com"),         "https://example.com");
+  assert.equal(safeHref("http://example.com"),          "http://example.com");
+  assert.equal(safeHref("HTTPS://Example.com/path"),    "HTTPS://Example.com/path");
+});
+
+test("renderEntry routes a poisoned recipe.url through safeHref", () => {
+  const entry  = { id: "x", slug: "evil", value: 1, slot: "Dinner" };
+  const recipe = { slug: "evil", name: "Evil", url: "javascript:alert(1)", servings: 4, meal: ["Main"] };
+  const html = renderEntry(entry, recipe);
+  // The href becomes "#" rather than the poisoned scheme.
+  assert.match(html, /href="#"/);
+  assert.doesNotMatch(html, /javascript:/);
+});
+
+// ---- Security: decodePlan size cap ---------------------------------------
+
+test("decodePlan returns ok:false { reason: 'too_big' } for a ~250 KB payload", () => {
+  // Build a payload whose decompressed JSON exceeds the 200 KB cap.
+  // A long string of 'a's compresses extremely well via lz-string, so the
+  // encoded fragment is small but expands back to >200 KB.
+  const bigString = "a".repeat(250_000);
+  const payload   = { v: 1, entries: [{ slug: bigString, value: 1, slot: "Other" }] };
+  const encoded   = LZString.compressToEncodedURIComponent(JSON.stringify(payload));
+
+  const result = decodePlan(encoded);
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, "too_big");
+});
+
+test("decodePlan stays under the cap for a legitimate plan", () => {
+  // 50 entries (well past any realistic shared plan) decompresses to ~5 KB.
+  const entries = Array.from({ length: 50 }, (_, i) => ({
+    slug:  `recipe_${i}`,
+    value: 1,
+    slot:  "Dinner",
+  }));
+  const encoded = LZString.compressToEncodedURIComponent(JSON.stringify({ v: 1, entries }));
+  const result  = decodePlan(encoded);
+  assert.equal(result.ok, true);
+  assert.equal(result.entries.length, 50);
+});
+
+// ---- Security: decodePlan + decodeURIComponent ---------------------------
+
+test("decodePlan rejects garbage that fails URIComponent decoding upstream", () => {
+  // A bare `%` is illegal in URI escapes — encodeURIComponent on a real
+  // share fragment will never produce it. We pass it straight to
+  // decodePlan to confirm the function doesn't blow up on hostile input;
+  // the upstream setupPlan hash-import path bails before reaching here
+  // (covered by the M3 fix in plan.js).
+  const result = decodePlan("%E0%A4%A");
+  assert.equal(result.ok, false);
+  // Either "decompress" (lz-string returns "" / null) or "json" — both are
+  // acceptable rejections; the point is no throw.
+  assert.ok(["decompress", "json", "shape"].includes(result.reason), `got reason: ${result.reason}`);
+});
