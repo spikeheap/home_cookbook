@@ -68,18 +68,32 @@ recipeIngredient:
     items: [...]
 ```
 
-### Sub-recipes (`uses_fraction`)
+### Per-item flags
 
-When an ingredient inlines another recipe (markdown link to `slug.html`), add `uses_fraction` to declare what portion of the sub-recipe's batch this recipe uses. The recipe-page stepper multiplies the inlined ingredients by `factor × uses_fraction`, and the sub's summary line shows e.g. "make ½ batch" — updating as the parent scales.
+Each ingredient hash supports a couple of optional flags beyond the
+core `quantity` / `unit` / `item`:
 
 ```yaml
+- quantity: 2
+  item: kaffir lime leaves
+  optional: true              # renders an OPTIONAL pill next to the name
 - quantity: 1
   unit: ball
   item: "[pizza dough](pizza_dough_gozney.html)"
   uses_fraction: 0.2          # this recipe uses 1 of 5 dough balls
 ```
 
-Omit `uses_fraction` for sub-recipes you intentionally want to display unchanged (e.g. a base recipe whose full batch is used).
+- **`optional: true`** — renders a small OPTIONAL pill next to the
+  ingredient name. The validator (`bundle exec rake validate`) refuses
+  the word "optional" embedded inside item text, so the pill is the
+  canonical signal.
+- **`uses_fraction`** — when an ingredient inlines another recipe
+  (markdown link to `slug.html`), declare what portion of the
+  sub-recipe's batch this recipe uses. The recipe-page stepper
+  multiplies the inlined ingredients by `factor × uses_fraction`, and
+  the sub's summary line shows e.g. "make ½ batch" — updating as the
+  parent scales. Omit `uses_fraction` for sub-recipes whose full batch
+  is used.
 
 ## Security / threat model
 
@@ -109,26 +123,44 @@ out so future-me (or anyone) doesn't loosen them by accident:
 
 Other relevant defences in code; don't loosen without thinking:
 
-- `Content-Security-Policy` in `src/_headers`. The inline theme-bootstrap
-  script in `src/_layouts/default.erb` is allowed via a SHA-256 hash;
-  recompute with `npm run compute-csp-hash` after any edit to that
-  script (whitespace included).
+- `Content-Security-Policy` in `src/_headers`. Headers stay strict
+  (`script-src 'self' 'wasm-unsafe-eval'`); the theme + plan-mode
+  bootstrap lives in `src/assets/theme-bootstrap.js` as a static file
+  rather than inline so the CSP doesn't need a per-edit SHA-256 hash
+  (Netlify's HTML minifier rewrites whitespace inside inline
+  `<script>` blocks, invalidating any pre-computed hash).
+  `wasm-unsafe-eval` is the narrow grant required for Pagefind's
+  search index; broader `unsafe-eval` is not.
 - The plan-share import flow (URL hash → `decodePlan`) validates schema
   version, payload shape, and per-entry types, and caps the
   decompressed JSON at 200 KB to defuse lz-string zip-bombs.
 - Search excerpts from Pagefind are HTML-escaped except for `<mark>` /
   `</mark>` (the highlight tags), via `safeExcerpt` in `search.js`.
 
-## Future improvements
+## Runtime UX worth knowing about
 
-- **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.
+- **Mobile ingredients peek sheet.** On narrow viewports the recipe
+  page's ingredients block is pinned to the bottom of the viewport
+  with only the heading visible above the fold; tapping the heading
+  slides the full list up. On desktop the same markup renders as a
+  sticky sidebar. Driven by `frontend/javascript/lib/ingredients-sheet.js`,
+  gated on `html.js` so a no-JS visit falls back to an in-flow
+  ingredients section.
+- **Tick + Reset.** Tap an ingredient row (recipe page) or a row in
+  the meal plan's shopping list to strike it through. State is
+  persisted per-recipe (`cookbook.ticks.{slug}`) and per-plan
+  (`cookbook.plan-ticks`) in `localStorage`. When at least one item
+  is ticked, a small RESET button takes the count's slot in the
+  heading; tapping it clears the ticks and brings the count back.
+  Stale shop ticks (items no longer in the aggregated list) are
+  pruned on render. Ticking a parent ingredient strikes its inlined
+  sub-recipe items via a CSS cascade; un-ticking the parent leaves
+  individually-ticked sub-items struck.
+
+## Future improvements
 
 - **Image scaling.** Add image scaling rake tasks to generate images for different screen sizes.
 
-- **Mobile recipe-page UX — beyond the sticky-collapsible ingredients we have today.** While reading method steps the cook still has to expand-and-scan to find which ingredients a specific step uses. Options ranked roughly by effort:
+- **Phase 3 — Ocado integration.** Map shopping-list items to Ocado SKUs (favourites, pack counts) so a basket can be assembled. Smart-paste of an existing basket is the proposed starting point.
 
-  - *Auto-detect ingredient pills above each step.* For each step's text, fuzzy-match against the recipe's own ingredient list and render matched items as compact chips above the step. Re-use the existing `.ingredient__qty` markup so the stepper scales the pill quantities for free. ~3–4 hours; ~80% right out of the box (will mis-fire on generic words like "salt" when a recipe has multiple, and miss things like "the dough" that don't name an ingredient).
-  - *Manual `uses:` per step.* Authors annotate each step with which ingredients it touches (`uses: [flour, eggs]`). Perfect signal but adds a tax to every recipe — ~3–5 hours one-off plus an ongoing authoring cost.
-  - *Inline anchor styling.* Same matcher as the pills, but the ingredient *words* in step text become styled spans that peek the ingredient row when tapped. Less visual change, still needs scrolling for quantities.
-  - *Bidirectional tap-to-highlight.* Tap an ingredient → step(s) that use it pulse; tap a step → its ingredients highlight. Nearly free on top of the matcher.
-  - *Floating action button + bottom sheet.* iOS-native pattern as an alternative to the sticky bar — circular button bottom-right opens a half-screen overlay with ingredients.
+- **Phase 4 — Auto-populate basket.** Once mapping is in place, push the resolved basket to Ocado via their API or a scripted flow, with a review step before checkout. Blocked on Phase 3.
