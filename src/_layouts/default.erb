@@ -30,13 +30,18 @@
   <link rel="stylesheet" href="<%= asset_path :css %>">
   <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>">
 
-  <%# Apply stored theme before paint so the toggle never flashes the wrong scheme. %>
+  <%# Apply stored theme + plan-mode before paint so neither flashes the wrong state.
+     If you edit this script (including whitespace) recompute the CSP hash via
+     `npm run compute-csp-hash` and update src/_headers. %>
   <script>
     (function () {
       try {
         var t = localStorage.getItem('theme');
         if (t === 'light' || t === 'dark') {
           document.documentElement.style.colorScheme = t;
+        }
+        if (localStorage.getItem('cookbook.planMode') === 'on') {
+          document.documentElement.classList.add('plan-mode');
         }
       } catch (e) {}
     })();

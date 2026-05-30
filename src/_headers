@@ -22,7 +22,7 @@
 #     `frame-ancestors 'none'`: harden against clickjacking and base
 #     injection.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-gHnHL8/t3FR4DweAXXZT/anhaOLVopmb7tzWEbEmrj0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-zw9gyMRA6yZDlqgEHuA6RxlImIl/ysOFNwC175SMWJc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
