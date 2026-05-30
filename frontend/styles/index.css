@@ -848,6 +848,38 @@ img { max-width: 100%; height: auto; }
   display: inline;
 }
 .recipe-ingredients__chevron { display: none; }
+.recipe-ingredients__chevron-btn {
+  display: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* "Reset" button — JS toggles it visible when at least one ingredient is
+   ticked, and hides the count span in the same step so reset visually
+   takes the count's slot. Inline next to the heading on desktop; sits
+   between the heading text and the chevron on mobile (see media query
+   below). */
+.recipe-ingredients__reset {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.recipe-ingredients__reset:hover { color: var(--rust); }
+.recipe-ingredients__reset[hidden] { display: none; }
+.recipe-ingredients__count[hidden] { display: none; }
 
 @media (max-width: 55.999rem) {
   /* On mobile the section becomes a peek sheet — always glued to the
@@ -884,18 +916,28 @@ img { max-width: 100%; height: auto; }
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Heading + toggle become a real tap target with a visible chevron. */
+  /* Heading row: text toggle + count|reset slot + chevron button (also
+     a toggle target, marginalised to the right). The middle slot holds
+     either the count or the reset button — JS swaps them. */
   html.js .recipe-ingredients__heading {
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 0.75rem;
     padding-bottom: 0.6rem;
   }
   html.js .recipe-ingredients__toggle {
-    display: flex;
+    display: inline-flex;
     align-items: baseline;
-    gap: 0.5rem;
-    width: 100%;
     cursor: pointer;
+  }
+  html.js .recipe-ingredients__heading-text { flex: 0 0 auto; }
+  html.js .recipe-ingredients__chevron-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 0.25rem;
   }
   html.js .recipe-ingredients__heading-text { flex: 0 0 auto; }
   html.js .recipe-ingredients__count { margin-left: 0; }
@@ -934,18 +976,48 @@ img { max-width: 100%; height: auto; }
   margin: 0 0 var(--gap-4);
 }
 
+/* Ingredient rows flow as inline text inside a block <li> rather than as
+   flex items. Flex would isolate qty/name/optional in their own boxes
+   with an unwalkable gap between them, so a strike-through declared
+   on the parent can't draw a continuous line. Inline flow keeps the
+   whitespace text nodes between spans, which means the strike crosses
+   them naturally and wraps with the text. The 'optional' pill becomes
+   inline-block and sits immediately after the name rather than
+   right-aligned at the row edge — a deliberate trade for a clean
+   strike-through. */
 .ingredient-list li {
   padding: 0.4rem 0;
   border-bottom: 1px dashed var(--rule);
   font-size: 1rem;
   line-height: 1.4;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4rem;
 }
 
 .ingredient-list li:last-child { border-bottom: 0; }
+
+/* Tap an ingredient to mark it ticked off; tap again to untick. JS adds
+   the .ticked class and persists it per-recipe in localStorage.
+   We can't use text-decoration to strike the row because each inline
+   span draws its own line at its own font's metric position — qty
+   (mono 0.92rem) and name (serif 1rem) end up at different vertical
+   offsets, leaving a staircase rather than a continuous line. Instead
+   we paint the line as a background gradient on the <span class="ingredient__text">
+   wrapper. Inline-element backgrounds tile per line box, so the
+   gradient draws one horizontal line at each line-box centre,
+   independent of any child's font metrics — and follows naturally
+   when the row wraps. */
+.ingredient-list li.ingredient { cursor: pointer; }
+.ingredient.ticked,
+.ingredient.ticked .ingredient { color: var(--mute); }
+.ingredient.ticked .ingredient__text {
+  background-image: linear-gradient(
+    transparent calc(50% - 0.5px),
+    currentColor calc(50% - 0.5px),
+    currentColor calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+  background-size: 100% 1.4em;
+  background-repeat: repeat-y;
+}
 
 .ingredient__qty {
   font-family: var(--mono);
@@ -956,12 +1028,11 @@ img { max-width: 100%; height: auto; }
   white-space: nowrap;
 }
 
-.ingredient__name {
-  flex: 1 1 auto;
-  min-width: 0;
-}
+.ingredient__name { color: var(--ink); }
 
 .ingredient__optional {
+  display: inline-block;
+  margin-left: 0.4rem;
   font-family: var(--mono);
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -1471,12 +1542,37 @@ html:not(.plan-mode) [data-plan-ui] { display: none !important; }
   margin: 0;
 }
 
+.plan-shop__title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .plan-shop__count {
   color: var(--mute);
   font-family: var(--mono);
   font-size: 0.78rem;
-  margin-left: 0.5rem;
 }
+.plan-shop__count[hidden] { display: none; }
+
+/* Reset button — JS reveals it when ≥1 shopping item is ticked and hides
+   the count in the same step, so reset visually takes the count's slot. */
+.plan-shop__reset {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0.1rem 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.plan-shop__reset:hover { color: var(--rust); }
+.plan-shop__reset[hidden] { display: none; }
 
 .plan-shop__items {
   display: grid;
@@ -1511,6 +1607,23 @@ html:not(.plan-mode) [data-plan-ui] { display: none !important; }
   align-items: baseline;
   padding: 0.4rem 0;
   border-bottom: 1px dashed var(--rule);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Continuous strikethrough — text-decoration won't bridge the explicit
+   grid gaps between qty / name / sources, so we draw a single ::after
+   line across the whole row. */
+.plan-shop__item.ticked { color: var(--mute); }
+.plan-shop__item.ticked::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: currentColor;
+  pointer-events: none;
 }
 
 .plan-shop__qty {

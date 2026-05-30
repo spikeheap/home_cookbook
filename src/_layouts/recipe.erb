@@ -89,7 +89,17 @@ layout: default
                 aria-controls="ingredients-panel-body"
                 aria-expanded="false">
           <span class="recipe-ingredients__heading-text">Ingredients</span>
-          <span class="recipe-ingredients__count" aria-hidden="true"><%= ingredient_count %></span>
+        </button>
+        <span class="recipe-ingredients__count" data-ingredients-count aria-hidden="true"><%= ingredient_count %></span>
+        <button type="button"
+                class="recipe-ingredients__reset"
+                data-ingredients-reset
+                hidden>Reset</button>
+        <button type="button"
+                class="recipe-ingredients__chevron-btn"
+                data-ingredients-toggle
+                aria-hidden="true"
+                tabindex="-1">
           <svg class="recipe-ingredients__chevron" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                stroke-linejoin="round" aria-hidden="true" focusable="false">

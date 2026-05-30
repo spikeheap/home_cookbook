@@ -50,19 +50,8 @@
   sep = attached_units.include?(unit.to_s) ? "" : " "
 %>
 <li class="ingredient">
-  <% if qty %>
-    <span class="ingredient__qty"
-          data-quantity="<%= qty %>"<% if qty_max %> data-quantity-max="<%= qty_max %>"<% end %><% if unit %> data-unit="<%= unit %>"<% end %>><%= qty %><% if qty_max %>–<%= qty_max %><% end %><% if unit %><%= sep %><%= unit %><% end %></span><%
-    if item_hash && item["item"] %> <span class="ingredient__name"><%= inline_md.(item["item"]) %></span><% end %><%
-    if optional %> <span class="ingredient__optional">optional</span><% end %>
-  <% else %>
-    <% if item_hash && item["item"] %>
-      <span class="ingredient__name"><%= inline_md.(item["item"]) %></span>
-    <% else %>
-      <span class="ingredient__name"><%= inline_md.(item.to_s) %></span>
-    <% end %>
-    <span class="ingredient__scale-hint" data-scale-hint hidden></span>
-  <% end %>
+  <span class="ingredient__text"><% if qty %><span class="ingredient__qty"
+          data-quantity="<%= qty %>"<% if qty_max %> data-quantity-max="<%= qty_max %>"<% end %><% if unit %> data-unit="<%= unit %>"<% end %>><%= qty %><% if qty_max %>–<%= qty_max %><% end %><% if unit %><%= sep %><%= unit %><% end %></span><% if item_hash && item["item"] %> <span class="ingredient__name"><%= inline_md.(item["item"]) %></span><% end %><% if optional %> <span class="ingredient__optional">optional</span><% end %><% else %><% if item_hash && item["item"] %><span class="ingredient__name"><%= inline_md.(item["item"]) %></span><% else %><span class="ingredient__name"><%= inline_md.(item.to_s) %></span><% end %><span class="ingredient__scale-hint" data-scale-hint hidden></span><% end %></span>
 
   <% if inline_sub_match %>
     <details class="sub-recipe"<% if uses_fraction %> data-uses-fraction="<%= uses_fraction %>"<% end %>>

@@ -6,6 +6,7 @@ import { setupScale } from "./lib/scale.js";
 import { setupWakeLock } from "./lib/wake-lock.js";
 import { setupPrintExpansion } from "./lib/print.js";
 import { setupIngredientsSheet } from "./lib/ingredients-sheet.js";
+import { setupIngredientTicks } from "./lib/ingredient-ticks.js";
 import {
   setupPlan, togglePlanEntry, isInPlan,
   setupPlanModeToggle,
@@ -31,6 +32,7 @@ function init() {
     setupWakeLock(recipeRoot.querySelector('[data-tool="wakelock"]'));
     setupPrintExpansion(recipeRoot);
     setupIngredientsSheet(recipeRoot);
+    setupIngredientTicks(recipeRoot);
     setupRecipeAddToPlan(recipeRoot, scale);
   }
 

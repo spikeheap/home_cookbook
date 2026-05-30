@@ -13,11 +13,12 @@
 const OPEN_CLASS = "ingredients-open";
 
 export function setupIngredientsSheet(recipeRoot) {
-  const toggle = recipeRoot.querySelector("[data-ingredients-toggle]");
+  const toggles = Array.from(recipeRoot.querySelectorAll("[data-ingredients-toggle]"));
   const panel = recipeRoot.querySelector("#ingredients-panel");
-  if (!toggle || !panel) return;
+  if (toggles.length === 0 || !panel) return;
 
   const html = document.documentElement;
+  const setExpanded = (v) => toggles.forEach(t => t.setAttribute("aria-expanded", String(v)));
 
   let outsideHandler = null;
   let keyHandler = null;
@@ -27,7 +28,7 @@ export function setupIngredientsSheet(recipeRoot) {
   const close = () => {
     if (!isOpen()) return;
     html.classList.remove(OPEN_CLASS);
-    toggle.setAttribute("aria-expanded", "false");
+    setExpanded(false);
     if (outsideHandler) {
       document.removeEventListener("click", outsideHandler, true);
       outsideHandler = null;
@@ -41,7 +42,7 @@ export function setupIngredientsSheet(recipeRoot) {
   const open = () => {
     if (isOpen()) return;
     html.classList.add(OPEN_CLASS);
-    toggle.setAttribute("aria-expanded", "true");
+    setExpanded(true);
 
     // Defer attaching the outside-click listener so the click that opened
     // the sheet doesn't immediately close it.
@@ -59,9 +60,11 @@ export function setupIngredientsSheet(recipeRoot) {
     document.addEventListener("keydown", keyHandler);
   };
 
-  toggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    isOpen() ? close() : open();
+  toggles.forEach(toggle => {
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      isOpen() ? close() : open();
+    });
   });
 }

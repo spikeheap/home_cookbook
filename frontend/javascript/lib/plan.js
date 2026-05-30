@@ -349,13 +349,18 @@ function renderGroup({ slot, entries }, recipesIndex) {
   `;
 }
 
-function renderShopItem(item) {
+function shopItemKey(item)   { return `r:${item.displayName}|${item.unit || ""}`; }
+function manualItemKey(item) { return `m:${item.displayName}|${item.source || ""}`; }
+
+function renderShopItem(item, ticked) {
   const qty     = formatQuantityWithUnit(item.quantity, item.unit);
   const sources = item.sources.length > 2
     ? `${item.sources.length} recipes`
     : item.sources.join(", ");
+  const key = shopItemKey(item);
+  const cls = ticked.has(key) ? "plan-shop__item ticked" : "plan-shop__item";
   return `
-    <li class="plan-shop__item">
+    <li class="${cls}" data-shop-key="${esc(key)}">
       <span class="plan-shop__qty">${esc(qty)}</span>
       <span class="plan-shop__name">${esc(item.displayName)}</span>
       <span class="plan-shop__sources">${esc(sources)}</span>
@@ -363,8 +368,8 @@ function renderShopItem(item) {
   `;
 }
 
-function renderShopCategory(category) {
-  const items = category.items.map(renderShopItem).join("");
+function renderShopCategory(category, ticked) {
+  const items = category.items.map(item => renderShopItem(item, ticked)).join("");
   return `
     <section class="plan-shop__category">
       <h3 class="plan-shop__category-title">${esc(category.name)} <span class="plan-shop__category-count">${category.items.length}</span></h3>
@@ -373,9 +378,13 @@ function renderShopCategory(category) {
   `;
 }
 
-function renderManualItem(item) {
+function renderManualItem(item, ticked) {
+  const key = manualItemKey(item);
+  const cls = ticked.has(key)
+    ? "plan-shop__item plan-shop__item--manual ticked"
+    : "plan-shop__item plan-shop__item--manual";
   return `
-    <li class="plan-shop__item plan-shop__item--manual">
+    <li class="${cls}" data-shop-key="${esc(key)}">
       <span class="plan-shop__name">${esc(item.displayName)}</span>
       <span class="plan-shop__sources">${esc(item.source)}</span>
     </li>
@@ -426,10 +435,42 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
   const shopItemsEl  = root.querySelector("[data-plan-shop-items]");
   const shopManualEl       = root.querySelector("[data-plan-shop-manual]");
   const shopManualItemsEl  = root.querySelector("[data-plan-shop-manual-items]");
+  const shopResetBtn = root.querySelector("[data-plan-shop-reset]");
   if (!listEl) return null;
 
   const recipesIndex = new Map((recipes || []).map(r => [r.slug, r]));
   let plan = loadPlan(storage);
+
+  // Shop ticks — set of stable item keys, persisted in its own storage key.
+  // Pruned after each shop render so keys whose items have left the
+  // aggregated list don't linger forever.
+  const SHOP_TICKS_KEY = "cookbook.plan-ticks";
+  const shopTicks = new Set();
+  try {
+    const raw = storage && storage.getItem(SHOP_TICKS_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) arr.forEach(k => typeof k === "string" && shopTicks.add(k));
+    }
+  } catch {}
+  const persistShopTicks = () => {
+    if (!storage) return;
+    try {
+      if (shopTicks.size === 0) storage.removeItem(SHOP_TICKS_KEY);
+      else storage.setItem(SHOP_TICKS_KEY, JSON.stringify([...shopTicks]));
+    } catch {}
+  };
+  const syncShopResetVisibility = () => {
+    const hasTicks = shopTicks.size > 0;
+    if (shopResetBtn) {
+      if (hasTicks) shopResetBtn.removeAttribute("hidden");
+      else shopResetBtn.setAttribute("hidden", "");
+    }
+    if (shopCountEl) {
+      if (hasTicks) shopCountEl.setAttribute("hidden", "");
+      else shopCountEl.removeAttribute("hidden");
+    }
+  };
 
   async function renderShop() {
     if (!shopEl) return;
@@ -442,7 +483,7 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
 
     shopEl.hidden = false;
     if (shopCountEl) shopCountEl.textContent = `${total} item${total === 1 ? "" : "s"}`;
-    if (shopItemsEl) shopItemsEl.innerHTML = agg.byCategory.map(renderShopCategory).join("");
+    if (shopItemsEl) shopItemsEl.innerHTML = agg.byCategory.map(c => renderShopCategory(c, shopTicks)).join("");
 
     if (shopManualEl) {
       if (agg.manual.length === 0) {
@@ -450,9 +491,20 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
         if (shopManualItemsEl) shopManualItemsEl.innerHTML = "";
       } else {
         shopManualEl.hidden = false;
-        if (shopManualItemsEl) shopManualItemsEl.innerHTML = agg.manual.map(renderManualItem).join("");
+        if (shopManualItemsEl) shopManualItemsEl.innerHTML = agg.manual.map(item => renderManualItem(item, shopTicks)).join("");
       }
     }
+
+    // Prune stored ticks whose items have left the current aggregate.
+    const liveKeys = new Set();
+    for (const cat of agg.byCategory) for (const it of cat.items) liveKeys.add(shopItemKey(it));
+    for (const it of agg.manual) liveKeys.add(manualItemKey(it));
+    let pruned = false;
+    for (const k of [...shopTicks]) {
+      if (!liveKeys.has(k)) { shopTicks.delete(k); pruned = true; }
+    }
+    if (pruned) persistShopTicks();
+    syncShopResetVisibility();
   }
 
   function render() {
@@ -500,6 +552,41 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
       if (plan.entries.length === 0) return;
       if (typeof confirm === "function" && !confirm("Clear the meal plan?")) return;
       commit(clearEntries(plan));
+    });
+  }
+
+  // Tick a shopping item to mark it bought; tap again to untick. Click is
+  // delegated on the shop container so it covers both categorised and
+  // manual lists without per-item handlers. Toggle just the class — no
+  // re-render needed.
+  if (shopEl) {
+    shopEl.addEventListener("click", e => {
+      if (e.target.closest("[data-plan-shop-reset]")) return;
+      const li = e.target.closest("[data-shop-key]");
+      if (!li || !shopEl.contains(li)) return;
+      const key = li.dataset.shopKey;
+      if (!key) return;
+      if (shopTicks.has(key)) {
+        shopTicks.delete(key);
+        li.classList.remove("ticked");
+      } else {
+        shopTicks.add(key);
+        li.classList.add("ticked");
+      }
+      persistShopTicks();
+      syncShopResetVisibility();
+    });
+  }
+
+  if (shopResetBtn) {
+    shopResetBtn.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      shopTicks.clear();
+      if (shopItemsEl) shopItemsEl.querySelectorAll(".ticked").forEach(el => el.classList.remove("ticked"));
+      if (shopManualItemsEl) shopManualItemsEl.querySelectorAll(".ticked").forEach(el => el.classList.remove("ticked"));
+      persistShopTicks();
+      syncShopResetVisibility();
     });
   }
 
