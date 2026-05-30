@@ -7,14 +7,13 @@ import { setupWakeLock } from "./lib/wake-lock.js";
 import { setupPrintExpansion } from "./lib/print.js";
 import {
   setupPlan, togglePlanEntry, isInPlan,
-  applyPlanMode, setupPlanModeToggle,
+  setupPlanModeToggle,
 } from "./lib/plan.js";
 
-// Apply the stored plan-mode flag at module load so the .plan-mode class
-// lands as early as possible — minimises the brief flash of hidden buttons
-// for users who have plan mode on. (Default off, in which case the CSS
-// already hides them.)
-applyPlanMode();
+// The .plan-mode class on <html> is set by the inline bootstrap script in
+// default.erb (before first paint, no flash). No additional module-level
+// call is needed here — setupPlanModeToggle keeps storage and class in
+// sync on /plan/ when the user flips the switch.
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
