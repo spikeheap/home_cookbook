@@ -2,6 +2,29 @@
 // Pagefind is loaded lazily on first input — keeps the homepage fast for
 // people who never use search.
 
+export function escapeHtml(s) {
+  return String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Pagefind's `excerpt` is HTML — it embeds `<mark>` around matched terms —
+// so we can't `escapeHtml` it without losing highlights. Belt-and-braces:
+// escape the whole excerpt, then restore only the `<mark>` / `</mark>`
+// tags. Any raw HTML the indexed corpus might have leaked in (Kramdown
+// allows raw HTML — see audit M2) ends up rendered as text, not parsed.
+export function safeExcerpt(html) {
+  return String(html ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/&lt;mark&gt;/g, "<mark>")
+    .replace(/&lt;\/mark&gt;/g, "</mark>");
+}
+
 export function setupSearch({
   input,
   resultsEl,
@@ -42,15 +65,6 @@ export function setupSearch({
     input.removeAttribute("aria-activedescendant");
   }
 
-  function escapeHtml(s) {
-    return String(s ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
   function render(results) {
     if (results.length === 0) {
       resultsEl.innerHTML = `<div class="search-results__empty">No matches.</div>`;
@@ -66,7 +80,7 @@ export function setupSearch({
       return `<a class="search-result" role="option" data-index="${i}" id="search-result-${i}" href="${escapeHtml(r.url)}">
         <span class="search-result__name">${escapeHtml(r?.meta?.title || r.url)}</span>
         ${cuisine ? `<span class="search-result__meta">${escapeHtml(cuisine)}</span>` : ""}
-        ${excerpt ? `<span class="search-result__excerpt">${excerpt}</span>` : ""}
+        ${excerpt ? `<span class="search-result__excerpt">${safeExcerpt(excerpt)}</span>` : ""}
       </a>`;
     }).join("");
     activeIndex = -1;

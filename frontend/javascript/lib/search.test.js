@@ -1,6 +1,6 @@
 import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { setupSearch } from "./search.js";
+import { setupSearch, safeExcerpt, escapeHtml } from "./search.js";
 
 // Hand-rolled fakes for the small DOM surface the search UI touches.
 
@@ -213,6 +213,57 @@ test("Escape clears the input and dismisses the dropdown", async () => {
 
   assert.strictEqual(input.value, "");
   assert.strictEqual(resultsEl.hidden, true);
+});
+
+// ---- Security: safeExcerpt ------------------------------------------------
+
+test("safeExcerpt preserves <mark> highlights and escapes everything else", () => {
+  // Pagefind's normal output: matched words wrapped in <mark>.
+  const out = safeExcerpt("a <mark>chicken</mark> curry recipe");
+  assert.equal(out, "a <mark>chicken</mark> curry recipe");
+});
+
+test("safeExcerpt neutralises raw <script> in the indexed corpus", () => {
+  // Simulates a recipe Markdown file that smuggled raw HTML (Kramdown
+  // allows it — see audit M2) which ended up in Pagefind's excerpt.
+  const dirty = `before <script>alert(1)</script> after`;
+  const out   = safeExcerpt(dirty);
+  assert.equal(
+    out,
+    "before &lt;script&gt;alert(1)&lt;/script&gt; after",
+    "script tags must be entity-escaped, not executed when parsed as HTML"
+  );
+});
+
+test("safeExcerpt neutralises <img onerror=…> in the corpus", () => {
+  const dirty = `<img src=x onerror="navigator.clipboard.writeText('pwned')">`;
+  const out   = safeExcerpt(dirty);
+  assert.match(out, /^&lt;img/);
+  // No parsable tags should remain — both `<` and `>` must be entity-escaped
+  // so a browser parser never sees an `<img …>` element.
+  assert.doesNotMatch(out, /<img/);
+  assert.doesNotMatch(out, /<\/?[a-z]/i,
+    "no live HTML tags should survive — every `<` must be entity-escaped");
+});
+
+test("safeExcerpt escapes <mark> with attributes — only the bare tag is restored", () => {
+  // Pagefind never emits attributed <mark>, so any attribute on a mark
+  // tag in the input is treated as untrusted and escaped wholesale.
+  const dirty = `<mark style="background:red">x</mark>`;
+  const out   = safeExcerpt(dirty);
+  assert.doesNotMatch(out, /<mark style/);
+  assert.match(out, /&lt;mark style=/);
+  assert.match(out, /<\/mark>/, "the closing tag is the unattributed form and is preserved");
+});
+
+test("safeExcerpt handles null / undefined / non-string input safely", () => {
+  assert.equal(safeExcerpt(null),       "");
+  assert.equal(safeExcerpt(undefined),  "");
+  assert.equal(safeExcerpt(42),         "42");
+});
+
+test("escapeHtml escapes all five special characters", () => {
+  assert.equal(escapeHtml(`<a href="x">&'`), "&lt;a href=&quot;x&quot;&gt;&amp;&#039;");
 });
 
 test("Enter without an active index does not navigate", async () => {
