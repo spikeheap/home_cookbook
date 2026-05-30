@@ -81,6 +81,44 @@ When an ingredient inlines another recipe (markdown link to `slug.html`), add `u
 
 Omit `uses_fraction` for sub-recipes you intentionally want to display unchanged (e.g. a base recipe whose full batch is used).
 
+## Security / threat model
+
+This site is a single-author cookbook. Recipes are written and reviewed by
+Ryan; there is no contributor flow, no recipe import path, and no CMS.
+That single trust assumption underpins two design choices worth calling
+out so future-me (or anyone) doesn't loosen them by accident:
+
+- **Markdown allows raw HTML.** Both `_partials/_instruction_list.erb` and
+  `_partials/_ingredient_item.erb` markdownify recipe text and pass the
+  output through `safe(...)`. Bridgetown uses Kramdown by default, and
+  Kramdown permits inline raw HTML — `<em>except</em>` in
+  `src/_recipes/bean_ragout.md` is the one legitimate use. A `<script>`
+  in a recipe Markdown file would execute on the recipe page and on the
+  homepage search excerpt. **Do not accept third-party recipe PRs and do
+  not add a "scrape from URL" flow that auto-commits without a sanitiser
+  landing first** (Loofah or Sanitize, scoped to deny `<script>`,
+  `<iframe>`, event-handler attributes, and `javascript:` URLs).
+- **`recipe.url` in the plan JSON.** `src/plan.erb` inlines a JSON blob
+  of every recipe (slug, name, url, ...). The `url` is currently
+  `r.relative_url` — a Bridgetown-computed path, not user input. The
+  client-side renderer (`frontend/javascript/lib/plan.js`) passes every
+  URL through `safeHref()` before placing it in an `href=`, which
+  rejects anything that isn't a site-relative path or `http(s)://…`. If
+  you ever populate `url` from an external source, `safeHref` is the
+  last line of defence — keep it.
+
+Other relevant defences in code; don't loosen without thinking:
+
+- `Content-Security-Policy` in `src/_headers`. The inline theme-bootstrap
+  script in `src/_layouts/default.erb` is allowed via a SHA-256 hash;
+  recompute with `npm run compute-csp-hash` after any edit to that
+  script (whitespace included).
+- The plan-share import flow (URL hash → `decodePlan`) validates schema
+  version, payload shape, and per-entry types, and caps the
+  decompressed JSON at 200 KB to defuse lz-string zip-bombs.
+- Search excerpts from Pagefind are HTML-escaped except for `<mark>` /
+  `</mark>` (the highlight tags), via `safeExcerpt` in `search.js`.
+
 ## Future improvements
 
 - **Readme/skeleton**. Update the readme and recipe rake task to explain fields and provide more guidance when authoring.
