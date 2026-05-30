@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    "schedule:weekends"
+  ],
+  "packageRules": [
+    {
+      "description": "Group all pagefind updates into a single PR",
+      "matchPackageNames": ["pagefind"],
+      "groupName": "pagefind"
+    },
+    {
+      "description": "Auto-merge patch and minor dev-dependency updates after CI passes",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 4am on monday"]
+  }
+}
