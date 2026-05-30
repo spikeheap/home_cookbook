@@ -39,17 +39,30 @@ end
 
 # Closed-set values enforced by the :validate task. Keep these in sync with the
 # documentation in Readme.md.
-RECIPE_ALLOWED_MEALS = %w[Main Lunch Breakfast Side Snack Sweet Drink Condiment].freeze
-RECIPE_ALLOWED_EFFORTS = %w[weeknight weekend project].freeze
-RECIPE_ALLOWED_DIETS = %w[
-  http://schema.org/GlutenFreeDiet
-  http://schema.org/LowCalorieDiet
-  http://schema.org/LowFatDiet
-  http://schema.org/LowLactoseDiet
-  http://schema.org/LowSaltDiet
-  http://schema.org/VeganDiet
-  http://schema.org/VegetarianDiet
-].freeze
+#
+# These are methods rather than constants because Bridgetown's CLI app loads
+# the Rakefile twice in some paths (locate_rake_task + print_usage in
+# bridgetown-core's commands/application.rb), and Ruby warns at default level
+# on constant redefinition but stays quiet on method redefinition.
+def recipe_allowed_meals
+  %w[Main Lunch Breakfast Side Snack Sweet Drink Condiment].freeze
+end
+
+def recipe_allowed_efforts
+  %w[weeknight weekend project].freeze
+end
+
+def recipe_allowed_diets
+  %w[
+    http://schema.org/GlutenFreeDiet
+    http://schema.org/LowCalorieDiet
+    http://schema.org/LowFatDiet
+    http://schema.org/LowLactoseDiet
+    http://schema.org/LowSaltDiet
+    http://schema.org/VeganDiet
+    http://schema.org/VegetarianDiet
+  ].freeze
+end
 
 desc "Generate a skeleton recipe at src/_recipes/<slug>.md (e.g. rake 'recipe[crispy_tofu]')"
 task :recipe, [:slug] do |_t, args|
@@ -69,8 +82,8 @@ task :recipe, [:slug] do |_t, args|
     date: #{Date.today.iso8601}
     name: #{name}
     cuisine:                  # e.g. British, Italian, Mexican
-    meal: [Main]              # one or more of: #{RECIPE_ALLOWED_MEALS.join(", ")}
-    effort:                   # #{RECIPE_ALLOWED_EFFORTS.join(" | ")}
+    meal: [Main]              # one or more of: #{recipe_allowed_meals.join(", ")}
+    effort:                   # #{recipe_allowed_efforts.join(" | ")}
     tags: []                  # free-form, lowercase (e.g. bread, vegan, sous-vide)
     description:
     keywords: []
@@ -165,14 +178,14 @@ task :validate, [:paths] do |_t, args|
       end
 
       meal = Array(data["meal"])
-      bad_meals = meal - RECIPE_ALLOWED_MEALS
+      bad_meals = meal - recipe_allowed_meals
       unless bad_meals.empty?
-        errors << "#{path}: invalid meal value(s): #{bad_meals.join(", ")} (allowed: #{RECIPE_ALLOWED_MEALS.join(", ")})"
+        errors << "#{path}: invalid meal value(s): #{bad_meals.join(", ")} (allowed: #{recipe_allowed_meals.join(", ")})"
       end
 
       effort = data["effort"]
-      if effort && !RECIPE_ALLOWED_EFFORTS.include?(effort)
-        errors << "#{path}: invalid effort: #{effort.inspect} (allowed: #{RECIPE_ALLOWED_EFFORTS.join(", ")})"
+      if effort && !recipe_allowed_efforts.include?(effort)
+        errors << "#{path}: invalid effort: #{effort.inspect} (allowed: #{recipe_allowed_efforts.join(", ")})"
       end
 
       servings = data["servings"]
@@ -200,9 +213,9 @@ task :validate, [:paths] do |_t, args|
       end
 
       diets = Array(data["suitableForDiet"])
-      bad_diets = diets - RECIPE_ALLOWED_DIETS
+      bad_diets = diets - recipe_allowed_diets
       unless bad_diets.empty?
-        errors << "#{path}: invalid suitableForDiet value(s): #{bad_diets.join(", ")} (allowed: #{RECIPE_ALLOWED_DIETS.join(", ")})"
+        errors << "#{path}: invalid suitableForDiet value(s): #{bad_diets.join(", ")} (allowed: #{recipe_allowed_diets.join(", ")})"
       end
     end
   ensure
