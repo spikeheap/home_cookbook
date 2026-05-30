@@ -30,22 +30,13 @@
   <link rel="stylesheet" href="<%= asset_path :css %>">
   <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>">
 
-  <%# Apply stored theme + plan-mode before paint so neither flashes the wrong state.
-     If you edit this script (including whitespace) recompute the CSP hash via
-     `npm run compute-csp-hash` and update src/_headers. %>
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') {
-          document.documentElement.style.colorScheme = t;
-        }
-        if (localStorage.getItem('cookbook.planMode') === 'on') {
-          document.documentElement.classList.add('plan-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <%# Theme + plan-mode bootstrap. Loaded synchronously before first paint so
+     stored preferences land without flashing the wrong state. Lives as a
+     static file in src/assets/ rather than inline because Netlify's HTML
+     minifier rewrites whitespace inside inline <script> blocks, invalidating
+     any CSP hash we'd put in src/_headers. Static file → `script-src 'self'`
+     covers it cleanly. %>
+  <script src="<%= relative_url '/assets/theme-bootstrap.js' %>"></script>
 
   <script src="<%= asset_path :js %>" type="module"></script>
   <%= live_reload_dev_js %>
