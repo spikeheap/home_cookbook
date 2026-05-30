@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "bin/bridgetown start",
-    "build": "bundle exec rake deploy && pagefind --site output",
+    "build": "bundle exec rake deploy",
     "esbuild": "node esbuild.config.js --minify",
     "esbuild-dev": "node esbuild.config.js --watch",
     "test": "node --test \"frontend/javascript/**/*.test.js\"",
