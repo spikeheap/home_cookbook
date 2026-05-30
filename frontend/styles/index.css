@@ -430,12 +430,12 @@ img { max-width: 100%; height: auto; }
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 50%;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2.2rem;
+  height: 2.2rem;
   padding: 0;
   line-height: 1;
   font-family: var(--mono);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--ink-soft);
   cursor: pointer;
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
