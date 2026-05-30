@@ -2,11 +2,15 @@
 # response; more-specific paths below override on a per-header basis.
 #
 # Content-Security-Policy
-#   - `script-src 'self'`: all scripts must be same-origin. The theme +
-#     plan-mode bootstrap lives in /assets/theme-bootstrap.js (static file)
-#     rather than inline so we don't have to track an inline-script hash —
-#     Netlify's HTML minifier rewrites whitespace inside inline <script>
-#     blocks, which invalidates any pre-computed hash.
+#   - `script-src 'self' 'wasm-unsafe-eval'`: all scripts must be same-origin.
+#     Pagefind ships a WebAssembly index; compiling/instantiating WASM under
+#     a strict `script-src` requires either `'unsafe-eval'` (which also
+#     enables eval/new Function) or the narrower `'wasm-unsafe-eval'` — pick
+#     the narrow one. Theme + plan-mode bootstrap lives in
+#     /assets/theme-bootstrap.js (static file) rather than inline so we don't
+#     have to track an inline-script hash — Netlify's HTML minifier rewrites
+#     whitespace inside inline <script> blocks, which invalidates any
+#     pre-computed hash.
 #   - `style-src 'self' 'unsafe-inline'`: a handful of <style> blocks live
 #     in layouts (default.erb's pre-paint defaults) and ERB partials
 #     (data-attribute-driven inline styles for the entry stepper); keep
@@ -16,15 +20,16 @@
 #     is needed for tiny inlined favicons / SVG fallbacks.
 #   - `connect-src 'self'`: Pagefind queries land on /pagefind/ (same
 #     origin) and we don't fetch anything cross-origin from the client.
+#   - `worker-src 'self'`: Pagefind runs its search in a worker
+#     (/pagefind/pagefind-worker.js). Same-origin.
 #   - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`,
 #     `frame-ancestors 'none'`: harden against clickjacking and base
 #     injection.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-  Permissions-Policy: interest-cohort=()
 
 /_bridgetown/static/*
   Cache-Control: public, max-age=31536000, immutable
