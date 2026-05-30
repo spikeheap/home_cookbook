@@ -76,16 +76,30 @@ layout: default
     <%
       ingredient_count = Array(page.recipeIngredient).sum { |s| Array(s["items"]).size }
     %>
-    <section class="recipe-ingredients" aria-label="Ingredients">
-      <details class="recipe-ingredients__panel" open>
-        <summary class="recipe-section-title recipe-ingredients__summary">
-          Ingredients
+    <%# On mobile this section is a fixed-bottom peek sheet — the heading
+        sits at the bottom edge of the viewport at all times and tapping it
+        slides the full list up. On desktop the same markup renders as a
+        normal sticky sidebar (the toggle button is styled flat and the
+        chevron is hidden). %>
+    <section id="ingredients-panel" class="recipe-ingredients" aria-label="Ingredients">
+      <h2 class="recipe-section-title recipe-ingredients__heading">
+        <button type="button"
+                class="recipe-ingredients__toggle"
+                data-ingredients-toggle
+                aria-controls="ingredients-panel-body"
+                aria-expanded="false">
+          <span class="recipe-ingredients__heading-text">Ingredients</span>
           <span class="recipe-ingredients__count" aria-hidden="true"><%= ingredient_count %></span>
-        </summary>
-        <div class="recipe-ingredients__body">
-          <%= render "ingredient_list", list: page.recipeIngredient %>
-        </div>
-      </details>
+          <svg class="recipe-ingredients__chevron" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M6 15l6-6 6 6" />
+          </svg>
+        </button>
+      </h2>
+      <div id="ingredients-panel-body" class="recipe-ingredients__body">
+        <%= render "ingredient_list", list: page.recipeIngredient %>
+      </div>
     </section>
 
     <section class="recipe-steps" aria-label="Method">

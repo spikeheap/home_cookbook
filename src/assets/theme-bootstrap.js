@@ -6,6 +6,9 @@
 //
 // Static file — bypasses esbuild — so the URL is stable and cacheable.
 (function () {
+  // Marks JS as available so progressive-enhancement CSS (e.g. the mobile
+  // ingredients bottom-sheet) only kicks in when JS can actually drive it.
+  document.documentElement.classList.add("js");
   try {
     var t = localStorage.getItem("theme");
     if (t === "light" || t === "dark") {

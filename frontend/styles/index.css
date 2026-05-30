@@ -820,11 +820,8 @@ img { max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--rule);
 }
 
-/* Ingredients use a native <details> for optional collapse. The summary keeps
-   the .recipe-section-title typography and renders the browser-default
-   triangle marker — no custom chevron, no sticky positioning. */
-.recipe-ingredients__summary {
-  cursor: pointer;
+.recipe-ingredients__heading {
+  margin-top: 0;
 }
 
 .recipe-ingredients__count {
@@ -833,6 +830,80 @@ img { max-width: 100%; height: auto; }
   color: var(--mute);
   font-weight: 400;
   margin-left: 0.5rem;
+}
+
+/* Desktop default: the toggle button looks like a plain heading. It stays
+   keyboard-focusable but pressing it has no effect because the
+   .ingredients-open class isn't wired into desktop CSS. Chevron hidden. */
+.recipe-ingredients__toggle {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: default;
+  display: inline;
+}
+.recipe-ingredients__chevron { display: none; }
+
+@media (max-width: 55.999rem) {
+  /* On mobile the section becomes a peek sheet — always glued to the
+     bottom edge with the heading visible above the fold; tapping the
+     heading toggles the full body into view. Translate by the panel's
+     own height minus the peek height so animations stay GPU-cheap. */
+  html.js .recipe-ingredients {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    height: 70vh;
+    overflow: hidden;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+    padding: 0.9rem 1rem calc(1rem + env(safe-area-inset-bottom));
+    --peek-height: 3.6rem;
+    transform: translateY(calc(100% - var(--peek-height)));
+    transition: transform 240ms ease;
+  }
+  html.js.ingredients-open .recipe-ingredients {
+    transform: translateY(0);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Heading + toggle become a real tap target with a visible chevron. */
+  html.js .recipe-ingredients__heading {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.6rem;
+  }
+  html.js .recipe-ingredients__toggle {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+    cursor: pointer;
+  }
+  html.js .recipe-ingredients__heading-text { flex: 0 0 auto; }
+  html.js .recipe-ingredients__count { margin-left: 0; }
+  html.js .recipe-ingredients__chevron {
+    display: block;
+    margin-left: auto;
+    align-self: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--rust);
+    transform: rotate(0deg);
+    transition: transform 240ms ease;
+  }
+  html.js.ingredients-open .recipe-ingredients__chevron {
+    transform: rotate(180deg);
+  }
 }
 
 /* Ingredient list */
