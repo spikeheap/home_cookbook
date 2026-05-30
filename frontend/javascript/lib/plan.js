@@ -5,7 +5,6 @@
 // multiplier otherwise. The aggregator derives the scaling factor from it.
 
 import { formatQuantity, formatQuantityWithUnit, nextOnLadder } from "./scale.js";
-import LZString from "lz-string";
 
 // aggregator.js carries the ~85 KB ingredient dictionary; only the /plan/ page
 // ever calls into it. Lazy-loaded here so every other page (homepage, recipe
@@ -17,6 +16,14 @@ async function getAggregate() {
     _aggregate = mod.aggregate;
   }
   return _aggregate;
+}
+
+// lz-string (~6 KB minified) is only needed by the share encode/decode flow
+// on /plan/. Lazy-loaded so it doesn't ship on every other page.
+let _lzPromise;
+function getLZString() {
+  if (!_lzPromise) _lzPromise = import("lz-string").then(m => m.default || m);
+  return _lzPromise;
 }
 
 const STORAGE_KEY = "cookbook.plan";
@@ -143,7 +150,7 @@ export function setupPlanModeToggle({
 // stripped (the importer regenerates them). The payload carries its own schema
 // version so we can detect mismatches on decode.
 
-export function encodePlan(plan) {
+export async function encodePlan(plan) {
   const payload = {
     v: SHARE_VERSION,
     entries: (plan && Array.isArray(plan.entries) ? plan.entries : []).map(e => ({
@@ -152,6 +159,7 @@ export function encodePlan(plan) {
       slot:  e.slot,
     })),
   };
+  const LZString = await getLZString();
   return LZString.compressToEncodedURIComponent(JSON.stringify(payload));
 }
 
@@ -165,10 +173,11 @@ function isValidShareEntry(e) {
 // Returns `{ ok: true, entries: [...] }` on a well-formed payload, or
 // `{ ok: false, reason }` otherwise. Never throws on malformed input — callers
 // log a warning and treat it as a no-op (matches the recipes-JSON pattern).
-export function decodePlan(encoded) {
+export async function decodePlan(encoded) {
   if (typeof encoded !== "string" || encoded.length === 0) {
     return { ok: false, reason: "empty" };
   }
+  const LZString = await getLZString();
   let json;
   try { json = LZString.decompressFromEncodedURIComponent(encoded); }
   catch (_) { return { ok: false, reason: "decompress" }; }
@@ -515,7 +524,7 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
     const originalLabel = shareBtn.textContent;
     shareBtn.addEventListener("click", async () => {
       if (plan.entries.length === 0) return;
-      const encoded = encodePlan(plan);
+      const encoded = await encodePlan(plan);
       const url = `${location.origin}${location.pathname}#data=${encoded}`;
       try {
         await navigator.clipboard.writeText(url);
@@ -529,39 +538,42 @@ export function setupPlan({ root, recipes, storage = (typeof localStorage !== "u
   }
 
   // Hash-based import. Runs once on setup; clears the hash regardless of choice
-  // so a reload doesn't re-trigger the prompt.
+  // so a reload doesn't re-trigger the prompt. Wrapped in an async IIFE because
+  // decodePlan lazy-loads lz-string.
   if (typeof window !== "undefined" && window.location && window.location.hash) {
     const m = window.location.hash.match(/^#data=(.+)$/);
     if (m) {
-      const raw = m[1];
-      // A malformed escape (e.g. a stray `%` from a truncated paste or
-      // a crafted hash) means the fragment isn't a valid share link.
-      // Skip the import attempt entirely rather than feed the raw,
-      // un-decoded byte sequence into `decodePlan` — defence in depth.
-      let decoded;
-      try { decoded = decodeURIComponent(raw); }
-      catch (_) { decoded = null; }
-      if (decoded === null) {
-        console.warn("plan: ignored malformed shared plan (uri)");
-      } else {
-        const result = decodePlan(decoded);
-        if (!result.ok) {
-          console.warn(`plan: ignored malformed shared plan (${result.reason})`);
-        } else if (result.entries.length === 0) {
-          console.warn("plan: shared link contained no valid entries");
+      (async () => {
+        const raw = m[1];
+        // A malformed escape (e.g. a stray `%` from a truncated paste or
+        // a crafted hash) means the fragment isn't a valid share link.
+        // Skip the import attempt entirely rather than feed the raw,
+        // un-decoded byte sequence into `decodePlan` — defence in depth.
+        let decoded;
+        try { decoded = decodeURIComponent(raw); }
+        catch (_) { decoded = null; }
+        if (decoded === null) {
+          console.warn("plan: ignored malformed shared plan (uri)");
         } else {
-          const choice = resolveImportChoice(result.entries.length, plan.entries.length > 0);
-          if (choice === "replace") {
-            commit(replaceEntries(plan, result.entries));
-          } else if (choice === "merge") {
-            commit(mergeEntries(plan, result.entries));
+          const result = await decodePlan(decoded);
+          if (!result.ok) {
+            console.warn(`plan: ignored malformed shared plan (${result.reason})`);
+          } else if (result.entries.length === 0) {
+            console.warn("plan: shared link contained no valid entries");
+          } else {
+            const choice = resolveImportChoice(result.entries.length, plan.entries.length > 0);
+            if (choice === "replace") {
+              commit(replaceEntries(plan, result.entries));
+            } else if (choice === "merge") {
+              commit(mergeEntries(plan, result.entries));
+            }
           }
         }
-      }
-      // Always clear the hash so reload doesn't re-prompt.
-      if (typeof history !== "undefined" && typeof history.replaceState === "function") {
-        history.replaceState(null, "", `${location.pathname}${location.search}`);
-      }
+        // Always clear the hash so reload doesn't re-prompt.
+        if (typeof history !== "undefined" && typeof history.replaceState === "function") {
+          history.replaceState(null, "", `${location.pathname}${location.search}`);
+        }
+      })();
     }
   }
 

@@ -207,7 +207,7 @@ test("togglePlanEntry ignores empty slug/slot and reports the unchanged plan", (
 
 // ---- URL sharing ----------------------------------------------------------
 
-test("encodePlan strips ids and decodePlan round-trips the entries", () => {
+test("encodePlan strips ids and decodePlan round-trips the entries", async () => {
   const plan = {
     version: 1,
     entries: [
@@ -216,12 +216,12 @@ test("encodePlan strips ids and decodePlan round-trips the entries", () => {
       { id: "device-a-3", slug: "pancakes",      value: 0.5, slot: "Breakfast" },
     ],
   };
-  const encoded = encodePlan(plan);
+  const encoded = await encodePlan(plan);
   assert.equal(typeof encoded, "string");
   assert.ok(encoded.length > 0);
   assert.ok(!encoded.includes("device-a-"), "encoded form must not leak per-device ids");
 
-  const result = decodePlan(encoded);
+  const result = await decodePlan(encoded);
   assert.equal(result.ok, true);
   assert.deepEqual(result.entries, [
     { slug: "focaccia",      value: 1,   slot: "Other"     },
@@ -230,37 +230,37 @@ test("encodePlan strips ids and decodePlan round-trips the entries", () => {
   ]);
 });
 
-test("encodePlan handles an empty plan", () => {
-  const encoded = encodePlan(emptyPlan());
-  const result = decodePlan(encoded);
+test("encodePlan handles an empty plan", async () => {
+  const encoded = await encodePlan(emptyPlan());
+  const result = await decodePlan(encoded);
   assert.equal(result.ok, true);
   assert.deepEqual(result.entries, []);
 });
 
-test("decodePlan returns ok:false on malformed input without throwing", () => {
-  assert.equal(decodePlan("").ok, false);
-  assert.equal(decodePlan(null).ok, false);
-  assert.equal(decodePlan(undefined).ok, false);
-  assert.equal(decodePlan(123).ok, false);
+test("decodePlan returns ok:false on malformed input without throwing", async () => {
+  assert.equal((await decodePlan("")).ok, false);
+  assert.equal((await decodePlan(null)).ok, false);
+  assert.equal((await decodePlan(undefined)).ok, false);
+  assert.equal((await decodePlan(123)).ok, false);
   // Random garbage that doesn't decompress cleanly.
-  assert.equal(decodePlan("!!!not-valid-lz!!!").ok, false);
+  assert.equal((await decodePlan("!!!not-valid-lz!!!")).ok, false);
 });
 
-test("decodePlan rejects payloads with the wrong schema version", () => {
+test("decodePlan rejects payloads with the wrong schema version", async () => {
   const wrongVersion = LZStringEncode({ v: 999, entries: [] });
-  const result = decodePlan(wrongVersion);
+  const result = await decodePlan(wrongVersion);
   assert.equal(result.ok, false);
   assert.equal(result.reason, "version");
 });
 
-test("decodePlan rejects payloads with a non-array entries field", () => {
+test("decodePlan rejects payloads with a non-array entries field", async () => {
   const badShape = LZStringEncode({ v: 1, entries: "nope" });
-  const result = decodePlan(badShape);
+  const result = await decodePlan(badShape);
   assert.equal(result.ok, false);
   assert.equal(result.reason, "shape");
 });
 
-test("decodePlan drops individual entries that fail field-level validation", () => {
+test("decodePlan drops individual entries that fail field-level validation", async () => {
   const payload = LZStringEncode({
     v: 1,
     entries: [
@@ -274,7 +274,7 @@ test("decodePlan drops individual entries that fail field-level validation", () 
       { slug: "also_ok",      value: 1, slot: "Lunch" },
     ],
   });
-  const result = decodePlan(payload);
+  const result = await decodePlan(payload);
   assert.equal(result.ok, true);
   assert.deepEqual(result.entries.map(e => e.slug), ["ok", "also_ok"]);
 });
@@ -325,14 +325,14 @@ test("mergeEntries on an empty plan behaves like a fresh import with new ids", (
   assert.notEqual(next.entries[0].id, next.entries[1].id);
 });
 
-test("import flow keeps unknown slugs — plan renderer degrades them gracefully", () => {
+test("import flow keeps unknown slugs — plan renderer degrades them gracefully", async () => {
   // Sender's plan contains a recipe the receiver doesn't have.
   const sender = {
     version: 1,
     entries: [{ id: "x", slug: "renamed_or_removed", value: 2, slot: "Dinner" }],
   };
-  const encoded = encodePlan(sender);
-  const result = decodePlan(encoded);
+  const encoded = await encodePlan(sender);
+  const result = await decodePlan(encoded);
   assert.equal(result.ok, true);
   assert.deepEqual(result.entries.map(e => e.slug), ["renamed_or_removed"]);
 
@@ -381,7 +381,7 @@ test("renderEntry routes a poisoned recipe.url through safeHref", () => {
 
 // ---- Security: decodePlan size cap ---------------------------------------
 
-test("decodePlan returns ok:false { reason: 'too_big' } for a ~250 KB payload", () => {
+test("decodePlan returns ok:false { reason: 'too_big' } for a ~250 KB payload", async () => {
   // Build a payload whose decompressed JSON exceeds the 200 KB cap.
   // A long string of 'a's compresses extremely well via lz-string, so the
   // encoded fragment is small but expands back to >200 KB.
@@ -389,12 +389,12 @@ test("decodePlan returns ok:false { reason: 'too_big' } for a ~250 KB payload", 
   const payload   = { v: 1, entries: [{ slug: bigString, value: 1, slot: "Other" }] };
   const encoded   = LZString.compressToEncodedURIComponent(JSON.stringify(payload));
 
-  const result = decodePlan(encoded);
+  const result = await decodePlan(encoded);
   assert.equal(result.ok, false);
   assert.equal(result.reason, "too_big");
 });
 
-test("decodePlan stays under the cap for a legitimate plan", () => {
+test("decodePlan stays under the cap for a legitimate plan", async () => {
   // 50 entries (well past any realistic shared plan) decompresses to ~5 KB.
   const entries = Array.from({ length: 50 }, (_, i) => ({
     slug:  `recipe_${i}`,
@@ -402,20 +402,20 @@ test("decodePlan stays under the cap for a legitimate plan", () => {
     slot:  "Dinner",
   }));
   const encoded = LZString.compressToEncodedURIComponent(JSON.stringify({ v: 1, entries }));
-  const result  = decodePlan(encoded);
+  const result  = await decodePlan(encoded);
   assert.equal(result.ok, true);
   assert.equal(result.entries.length, 50);
 });
 
 // ---- Security: decodePlan + decodeURIComponent ---------------------------
 
-test("decodePlan rejects garbage that fails URIComponent decoding upstream", () => {
+test("decodePlan rejects garbage that fails URIComponent decoding upstream", async () => {
   // A bare `%` is illegal in URI escapes — encodeURIComponent on a real
   // share fragment will never produce it. We pass it straight to
   // decodePlan to confirm the function doesn't blow up on hostile input;
   // the upstream setupPlan hash-import path bails before reaching here
   // (covered by the M3 fix in plan.js).
-  const result = decodePlan("%E0%A4%A");
+  const result = await decodePlan("%E0%A4%A");
   assert.equal(result.ok, false);
   // Either "decompress" (lz-string returns "" / null) or "json" — both are
   // acceptable rejections; the point is no throw.
