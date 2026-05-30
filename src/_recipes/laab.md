@@ -24,7 +24,8 @@ recipeIngredient:
     unit: tbsp
     item: uncooked sticky rice (or jasmine rice)
   - quantity: 2
-    item: kaffir lime leaves (optional)
+    item: kaffir lime leaves
+    optional: true
 - heading: Laab
   items:
   - quantity: 500

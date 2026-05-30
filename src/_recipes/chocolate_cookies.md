@@ -43,7 +43,8 @@ recipeIngredient:
     unit: tsp
     item: baking powder
   - item: pinch of salt
-  - item: optional additions like pistachios or other nuts, about 200g
+  - item: additions like pistachios or other nuts, about 200g
+    optional: true
 recipeInstructions:
 - items:
   - Melt the dark chocolate in a heatproof bowl over a saucepan of barely simmering

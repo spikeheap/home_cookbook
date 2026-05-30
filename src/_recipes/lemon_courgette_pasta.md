@@ -41,9 +41,11 @@ recipeIngredient:
     item: Parmesan, grated
   - quantity: 0.5
     unit: bunch
-    item: basil (15g), leaves picked and torn (optional)
+    item: basil (15g), leaves picked and torn
+    optional: true
   - quantity: 2
-    item: courgettes, shaved into ribbons (optional)
+    item: courgettes, shaved into ribbons
+    optional: true
 
 recipeInstructions:
 - items:

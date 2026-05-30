@@ -21,7 +21,8 @@ recipeIngredient:
   - quantity: 0.5
     unit: tsp
     item: fine salt
-  - item: Pinch of sugar (optional — balances acidity if the passata is sharp)
+  - item: Pinch of sugar (balances acidity if the passata is sharp)
+    optional: true
 recipeInstructions:
 - items:
   - Whisk everything together in a bowl.

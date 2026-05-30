@@ -20,9 +20,12 @@ recipeIngredient:
   - quantity: 2
     unit: tbsp
     item: gochujang or miso paste if you don't want it spicy
-  - item: "(optional) 1 Tbsp gochugaru"
-  - item: "(optional) 1 Tbsp sugar"
-  - item: "(optional) 1 Tbsp sou sauce"
+  - item: 1 Tbsp gochugaru
+    optional: true
+  - item: 1 Tbsp sugar
+    optional: true
+  - item: 1 Tbsp sou sauce
+    optional: true
   - quantity: 1
     item: yellow onion, sliced
   - item: peppers, broccoli, baby corn, carrots or any other veg you'd like to use
@@ -31,7 +34,8 @@ recipeIngredient:
       skip this if just veggies.
   - item: mushrooms if you have them, any kind will do, enoki and shiitake particularly
       nice
-  - item: "(optional) grated cheddar or mozarella"
+  - item: grated cheddar or mozarella
+    optional: true
 recipeInstructions:
 - items:
   - Fry the sliced onions until they start to soften.

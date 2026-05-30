@@ -33,7 +33,8 @@ recipeIngredient:
     item: Parmesan, freshly grated, plus extra to serve
   - item: extra virgin olive oil
   - quantity: 0.5
-    item: lemon (juice, optional)
+    item: lemon (juice)
+    optional: true
 - heading: Pasta
   items:
   - quantity: 400
@@ -41,10 +42,12 @@ recipeIngredient:
     item: pasta (penne, fusilli or linguine all work)
   - quantity: 250
     unit: g
-    item: green beans, trimmed and halved (optional)
+    item: green beans, trimmed and halved
+    optional: true
   - quantity: 100
     unit: g
-    item: baby spinach (optional)
+    item: baby spinach
+    optional: true
 - heading: Optional chicken
   items:
   - quantity: 2

@@ -50,7 +50,8 @@ recipeIngredient:
   - quantity: 1
     item: good handful spinach, chopped
   - quantity: 2
-    item: ripe tomatoes, quartered, optional
+    item: ripe tomatoes, quartered
+    optional: true
 recipeInstructions:
 - items:
   - Preheat the oven to 200°C and bring a large pan of salted water to the boil.

@@ -29,7 +29,8 @@ recipeIngredient:
     unit: stalks
     item: spring onions, sliced
   - quantity: 0.5
-    item: carrot, peeled and sliced (optional)
+    item: carrot, peeled and sliced
+    optional: true
   - quantity: 1
     unit: tbsp
     item: toasted sesame oil

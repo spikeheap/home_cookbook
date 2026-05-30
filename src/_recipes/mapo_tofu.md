@@ -40,7 +40,8 @@ recipeIngredient:
     item: fermented black beans, roughly chopped
   - quantity: 1
     unit: tbsp
-    item: pepper flakes or powder (optional)
+    item: pepper flakes or powder
+    optional: true
   - quantity: 2
     unit: clove
     item: garlic, finely chopped
@@ -57,7 +58,8 @@ recipeIngredient:
     item: light soy sauce
   - quantity: 1
     unit: tsp
-    item: sugar (optional)
+    item: sugar
+    optional: true
   - quantity: 0.5
     unit: tbsp
     item: Sichuan pepper

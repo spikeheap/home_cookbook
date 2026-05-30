@@ -43,7 +43,8 @@ recipeIngredient:
     item: cooked beetroot (vac-packed, not pickled), sliced
   - quantity: 1
     unit: tsp
-    item: horseradish, grated or from a jar (optional)
+    item: horseradish, grated or from a jar
+    optional: true
 - heading: Quick pickled cucumber
   items:
   - quantity: 1
