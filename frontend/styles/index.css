@@ -853,7 +853,9 @@ img { max-width: 100%; height: auto; }
   /* On mobile the section becomes a peek sheet — always glued to the
      bottom edge with the heading visible above the fold; tapping the
      heading toggles the full body into view. Translate by the panel's
-     own height minus the peek height so animations stay GPU-cheap. */
+     own height minus the peek height so animations stay GPU-cheap.
+     Heading is a fixed-height flex item so it never scrolls out of view;
+     only the body scrolls when the list overflows. */
   html.js .recipe-ingredients {
     position: fixed;
     left: 0;
@@ -861,7 +863,8 @@ img { max-width: 100%; height: auto; }
     bottom: 0;
     z-index: 20;
     height: 70vh;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background: var(--paper);
     border-top: 1px solid var(--rule);
     border-radius: 16px 16px 0 0;
@@ -873,12 +876,17 @@ img { max-width: 100%; height: auto; }
   }
   html.js.ingredients-open .recipe-ingredients {
     transform: translateY(0);
+  }
+  html.js .recipe-ingredients__body {
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
   /* Heading + toggle become a real tap target with a visible chevron. */
   html.js .recipe-ingredients__heading {
+    flex: 0 0 auto;
     margin-bottom: 0.75rem;
     padding-bottom: 0.6rem;
   }
