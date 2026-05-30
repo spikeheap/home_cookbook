@@ -209,6 +209,14 @@ task :validate, [:paths] do |_t, args|
           if item_text.is_a?(String) && item_text =~ /<[a-z][^>]*>/i
             errors << "#{path}: ingredient #{si}/#{ii} `item` contains raw HTML; use markdown link `[label](slug.html)` instead"
           end
+
+          # The OPTIONAL pill only renders from the `optional: true` schema
+          # field. Embedding the word "optional" in item text (e.g.
+          # "kaffir lime leaves (optional)") leaves the cook with no pill
+          # and a noisier label — flag it so it gets moved to the field.
+          if item_text.is_a?(String) && item_text =~ /\boptional\b/i
+            errors << "#{path}: ingredient #{si}/#{ii} `item` contains the word \"optional\"; remove it from the text and set `optional: true` on the item instead"
+          end
         end
       end
 
