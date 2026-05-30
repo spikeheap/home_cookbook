@@ -157,9 +157,23 @@ Other relevant defences in code; don't loosen without thinking:
   sub-recipe items via a CSS cascade; un-ticking the parent leaves
   individually-ticked sub-items struck.
 
-## Future improvements
+### Images
 
-- **Image scaling.** Add image scaling rake tasks to generate images for different screen sizes.
+Recipe hero images live in `src/images/`. After dropping a new master in
+(named `<slug>.jpg` or `<slug>-2160w.jpg`), run:
+
+```bash
+bundle exec rake images
+```
+
+ImageMagick resizes it into responsive variants (360 / 720 / 1280 /
+2160w), skipping any width larger than the master and any output already
+newer than its source. Commit the generated files. The recipe layout
+emits a `<img srcset>` covering whichever variants exist on disk, so
+browsers pick the right size without further wiring. External image
+URLs (e.g. BBC food images) pass through unchanged with no srcset.
+
+## Future improvements
 
 - **Phase 3 — Ocado integration.** Map shopping-list items to Ocado SKUs (favourites, pack counts) so a basket can be assembled. Smart-paste of an existing basket is the proposed starting point.
 

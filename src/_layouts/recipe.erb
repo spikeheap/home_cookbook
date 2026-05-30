@@ -66,9 +66,26 @@ layout: default
   </header>
 
   <% if page.image %>
-    <% img = page.image.is_a?(Array) ? page.image.first : page.image %>
+    <%
+      img = page.image.is_a?(Array) ? page.image.first : page.image
+      # Build a srcset for local /images/ paths by probing src/images/ for
+      # variants the rake :images task has already generated. External URLs
+      # (e.g. BBC food images) pass through unchanged with no srcset.
+      srcset = nil
+      if img.is_a?(String) && img.start_with?("/images/") &&
+         (m = img.match(%r{/images/(.+?)(?:-\d+w)?(\.[^./]+)\z}))
+        base, ext = m[1], m[2]
+        variants = [360, 720, 1280, 2160].filter_map do |w|
+          path = "/images/#{base}-#{w}w#{ext}"
+          File.exist?(File.join("src", path)) ? "#{relative_url(path)} #{w}w" : nil
+        end
+        srcset = variants.join(", ") unless variants.empty?
+      end
+    %>
     <figure class="recipe-image">
-      <img src="<%= relative_url(img) %>" alt="<%= page.name %>" loading="lazy" />
+      <img src="<%= relative_url(img) %>"
+           <% if srcset %>srcset="<%= srcset %>" sizes="(min-width: 56rem) 36rem, 100vw"<% end %>
+           alt="<%= page.name %>" loading="lazy" />
     </figure>
   <% end %>
 

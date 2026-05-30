@@ -237,3 +237,89 @@ task :validate, [:paths] do |_t, args|
 
   puts "Validated #{paths.size} recipe#{paths.size == 1 ? "" : "s"} — all good."
 end
+
+# Generate responsive variants for every image under src/images/.
+#
+# Convention: files are named `<basename>[-<width>w].<ext>`. The "master"
+# for a basename is either the unsuffixed file (e.g. cold_brew_coffee.jpg)
+# or, if absent, the largest -Nw variant in the group. Each run writes
+# variants at `responsive_image_widths` widths, skipping any width that
+# would upscale beyond the master's actual pixel width, and skipping
+# outputs already newer than their master.
+#
+# Run manually (`bundle exec rake images`) when you add or replace an
+# image; not wired into deploy because variants are committed.
+def responsive_image_widths
+  [360, 720, 1280, 2160].freeze
+end
+
+desc "Generate responsive variants for src/images/*.{jpg,jpeg,png}"
+task :images do
+  require "fileutils"
+  require "open3"
+
+  unless system("magick", "-version", out: File::NULL, err: File::NULL)
+    abort("ImageMagick (`magick`) is required. Install with: brew install imagemagick")
+  end
+
+  src_dir = "src/images"
+  candidates = Dir["#{src_dir}/*.{jpg,jpeg,png}"]
+  groups = candidates.group_by do |f|
+    File.basename(f, ".*").sub(/-\d+w\z/, "")
+  end
+
+  generated = 0
+  skipped = 0
+  errors = []
+
+  groups.each do |basename, files|
+    master = files.find { |f| File.basename(f, ".*") == basename }
+    master ||= files.max_by do |f|
+      m = File.basename(f).match(/-(\d+)w\.[^.]+\z/)
+      m ? m[1].to_i : 0
+    end
+
+    width_out, status = Open3.capture2("magick", "identify", "-format", "%w", master)
+    unless status.success? && width_out.to_i.positive?
+      errors << "#{master}: couldn't read pixel width"
+      next
+    end
+    master_w = width_out.to_i
+    ext = File.extname(master)
+
+    responsive_image_widths.each do |w|
+      next if w > master_w  # don't upscale
+      out = File.join(src_dir, "#{basename}-#{w}w#{ext}")
+      next if File.expand_path(out) == File.expand_path(master)
+
+      if File.exist?(out) && File.mtime(out) >= File.mtime(master)
+        skipped += 1
+        next
+      end
+
+      cmd = [
+        "magick", master,
+        "-resize", "#{w}x",
+        "-sharpen", "0x0.5",
+        "-strip",
+        "-quality", "82",
+        "-interlace", "Plane",
+        out,
+      ]
+      log, status = Open3.capture2e(*cmd)
+      if status.success?
+        generated += 1
+        puts "  #{basename} → #{w}w"
+      else
+        errors << "#{out}: #{log.strip}"
+      end
+    end
+  end
+
+  if errors.any?
+    warn errors.join("\n")
+    abort("Image generation failed (#{errors.size} error#{errors.size == 1 ? "" : "s"})")
+  end
+
+  puts "Generated #{generated}, skipped #{skipped} (up to date)."
+end
