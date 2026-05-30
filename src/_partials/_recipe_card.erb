@@ -12,7 +12,7 @@
       <% unless time_label.empty? %><span class="card__time"><%= time_label %></span><% end %>
     </span>
   </a>
-  <button type="button" class="card__add"
+  <button type="button" class="card__add" data-plan-ui
           data-plan-add-slug="<%= r.basename_without_ext %>"
           data-plan-add-value="<%= default_plan_value_for(r) %>"
           data-plan-add-slot="<%= plan_slot_for(r) %>"

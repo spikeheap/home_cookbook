@@ -8,8 +8,24 @@ import {
   nextStepValue, groupBySlot, addRecipeToPlan, renderEntry,
   isInPlan, togglePlanEntry,
   encodePlan, decodePlan, mergeEntries, replaceEntries,
+  getPlanMode, setPlanMode, applyPlanMode,
   SLOT_ORDER,
 } from "./plan.js";
+
+function fakeHtml() {
+  const classes = new Set();
+  return {
+    classList: {
+      toggle(name, force) {
+        const want = force !== undefined ? !!force : !classes.has(name);
+        if (want) classes.add(name); else classes.delete(name);
+        return want;
+      },
+      contains: n => classes.has(n),
+    },
+    _classes: classes,
+  };
+}
 
 function fakeStorage() {
   const store = new Map();

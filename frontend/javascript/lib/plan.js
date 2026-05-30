@@ -75,6 +75,68 @@ export function clearEntries(plan) {
   return { ...plan, entries: [] };
 }
 
+// ---- Plan mode -------------------------------------------------------------
+//
+// "Plan mode" gates the cross-site plan UI (+ buttons on cards, list rows,
+// recipe pages). When off, the site looks like a plain cookbook; when on,
+// the augmentation appears. The toggle lives on /plan/ only — the underlying
+// plan data is unaffected by flipping the mode.
+
+const PLAN_MODE_KEY = "cookbook.planMode";
+
+export function getPlanMode(storage = (typeof localStorage !== "undefined" ? localStorage : null)) {
+  if (!storage) return false;
+  try { return storage.getItem(PLAN_MODE_KEY) === "on"; } catch (_) { return false; }
+}
+
+export function setPlanMode(on, {
+  root    = (typeof document !== "undefined" ? document.documentElement : null),
+  storage = (typeof localStorage !== "undefined" ? localStorage : null),
+} = {}) {
+  const value = !!on;
+  if (storage) {
+    try { storage.setItem(PLAN_MODE_KEY, value ? "on" : "off"); } catch (_) {}
+  }
+  if (root && root.classList && typeof root.classList.toggle === "function") {
+    root.classList.toggle("plan-mode", value);
+  }
+  return value;
+}
+
+// Apply the stored plan-mode flag to the document root. Called from index.js
+// on every page so the .plan-mode class lands as early as the module runs.
+export function applyPlanMode({
+  root    = (typeof document !== "undefined" ? document.documentElement : null),
+  storage = (typeof localStorage !== "undefined" ? localStorage : null),
+} = {}) {
+  const on = getPlanMode(storage);
+  if (root && root.classList && typeof root.classList.toggle === "function") {
+    root.classList.toggle("plan-mode", on);
+  }
+  return on;
+}
+
+export function setupPlanModeToggle({
+  root,
+  storage = (typeof localStorage !== "undefined" ? localStorage : null),
+} = {}) {
+  if (!root) return null;
+  const checkbox = root.querySelector("[data-plan-mode-toggle]");
+  if (!checkbox) return null;
+
+  const html = (typeof document !== "undefined") ? document.documentElement : null;
+
+  const current = getPlanMode(storage);
+  checkbox.checked = current;
+  if (html) html.classList.toggle("plan-mode", current);
+
+  checkbox.addEventListener("change", () => {
+    setPlanMode(checkbox.checked, { root: html, storage });
+  });
+
+  return { getMode: () => getPlanMode(storage) };
+}
+
 // ---- Share via URL ---------------------------------------------------------
 //
 // Encodes a plan into a URL-safe string using lz-string. Per-device `id`s are

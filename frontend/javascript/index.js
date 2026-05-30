@@ -5,7 +5,16 @@ import { setupSearch } from "./lib/search.js";
 import { setupScale } from "./lib/scale.js";
 import { setupWakeLock } from "./lib/wake-lock.js";
 import { setupPrintExpansion } from "./lib/print.js";
-import { setupPlan, togglePlanEntry, isInPlan } from "./lib/plan.js";
+import {
+  setupPlan, togglePlanEntry, isInPlan,
+  applyPlanMode, setupPlanModeToggle,
+} from "./lib/plan.js";
+
+// Apply the stored plan-mode flag at module load so the .plan-mode class
+// lands as early as possible — minimises the brief flash of hidden buttons
+// for users who have plan mode on. (Default off, in which case the CSS
+// already hides them.)
+applyPlanMode();
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
@@ -41,6 +50,7 @@ function init() {
       console.warn("plan: #plan-recipes-data not found on the page");
     }
     setupPlan({ root: planRoot, recipes });
+    setupPlanModeToggle({ root: planRoot });
   }
 }
 
