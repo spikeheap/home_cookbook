@@ -21,6 +21,12 @@
   --rust:         light-dark(#A23B23, #D9714F);
   --rust-soft:    light-dark(#A85944, #C26045);
 
+  /* Strikethrough line for ticked-off ingredients / shopping items. Kept
+     deliberately stronger than the faded row text so the line reads
+     clearly — the dark-scheme value in particular stays well above the
+     muted body text. */
+  --strike:       light-dark(#4A3F38, #C9BFA8);
+
   /* Translucent rust wash + page shadow — kept in sync per scheme */
   --rust-wash:    light-dark(rgba(162, 59, 35, 0.14), rgba(217, 113, 79, 0.18));
   --rust-wash-soft: light-dark(rgba(162, 59, 35, 0.08), rgba(217, 113, 79, 0.12));
@@ -418,6 +424,9 @@ img { max-width: 100%; height: auto; }
   line-height: 1.15;
   color: var(--ink);
   letter-spacing: -0.005em;
+  /* Match the card border's transition so the line and the title shift to
+     rust in sync on hover rather than the title snapping instantly. */
+  transition: color 160ms ease;
 }
 
 .card:hover .card__name { color: var(--rust); }
@@ -926,6 +935,9 @@ img { max-width: 100%; height: auto; }
     gap: 0.5rem;
     margin-bottom: 0.75rem;
     padding-bottom: 0.6rem;
+    /* The whole header row toggles the sheet (JS), so the empty middle
+       between the text and the chevron is a live touch target too. */
+    cursor: pointer;
   }
   html.js .recipe-ingredients__toggle {
     display: inline-flex;
@@ -1010,10 +1022,10 @@ img { max-width: 100%; height: auto; }
 .ingredient.ticked .ingredient { color: var(--mute); }
 .ingredient.ticked .ingredient__text {
   background-image: linear-gradient(
-    transparent calc(50% - 0.5px),
-    currentColor calc(50% - 0.5px),
-    currentColor calc(50% + 0.5px),
-    transparent calc(50% + 0.5px)
+    transparent calc(50% - 1px),
+    var(--strike) calc(50% - 1px),
+    var(--strike) calc(50% + 1px),
+    transparent calc(50% + 1px)
   );
   background-size: 100% 1.4em;
   background-repeat: repeat-y;
@@ -1621,8 +1633,9 @@ html:not(.plan-mode) [data-plan-ui] { display: none !important; }
   left: 0;
   right: 0;
   top: 50%;
-  height: 1px;
-  background: currentColor;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--strike);
   pointer-events: none;
 }
 

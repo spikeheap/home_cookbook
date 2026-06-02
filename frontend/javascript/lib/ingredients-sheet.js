@@ -67,4 +67,16 @@ export function setupIngredientsSheet(recipeRoot) {
       isOpen() ? close() : open();
     });
   });
+
+  // Make the entire peek-sheet header a touch target, not just the text
+  // and chevron buttons — tapping the empty middle of the row toggles too.
+  // The inner toggle buttons stopPropagation, so they don't double-fire;
+  // the reset button is excluded so it can clear ticks without toggling.
+  const heading = recipeRoot.querySelector(".recipe-ingredients__heading");
+  if (heading) {
+    heading.addEventListener("click", (e) => {
+      if (e.target.closest("[data-ingredients-reset]")) return;
+      isOpen() ? close() : open();
+    });
+  }
 }

@@ -7,6 +7,7 @@ import { setupWakeLock } from "./lib/wake-lock.js";
 import { setupPrintExpansion } from "./lib/print.js";
 import { setupIngredientsSheet } from "./lib/ingredients-sheet.js";
 import { setupIngredientTicks } from "./lib/ingredient-ticks.js";
+import { setupExternalLinks } from "./lib/external-links.js";
 import {
   setupPlan, togglePlanEntry, isInPlan,
   setupPlanModeToggle,
@@ -19,6 +20,7 @@ import {
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
+  setupExternalLinks(document);
 
   const searchInput = document.getElementById("search-input");
   const searchResults = document.getElementById("search-results");
