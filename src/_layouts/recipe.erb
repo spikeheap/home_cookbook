@@ -150,6 +150,9 @@ layout: default
     </section>
   <% end %>
 
+  <%= render "related_list", heading: "More like this", recipes: siblings_via_base(resource), show_effort: false %>
+  <%= render "related_list", heading: "Used in", recipes: used_in(resource), show_effort: false %>
+
   <% if page.isBasedOn || (page.author && page.author["name"]) %>
     <footer class="recipe-source">
       Based on

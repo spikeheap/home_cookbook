@@ -1322,6 +1322,32 @@ img { max-width: 100%; height: auto; }
   margin: var(--gap-6) 0 var(--gap-3);
 }
 
+/* Related recipes (versions / shared base / used-in) — on-screen navigation */
+.recipe-related { margin-top: var(--gap-6); }
+
+.recipe-related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
+}
+
+.recipe-related__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-3);
+}
+
+.recipe-related__effort {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+}
+
 /* ============================================================
    Print
    ============================================================ */

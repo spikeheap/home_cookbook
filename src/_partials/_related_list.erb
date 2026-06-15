@@ -1,0 +1,18 @@
+<% heading = defined?(heading) ? heading : nil
+   show_effort = defined?(show_effort) ? show_effort : false
+   recipes ||= [] %>
+
+<% if recipes && recipes.any? %>
+  <section class="recipe-related" aria-label="<%= heading %>">
+    <h2 class="recipe-section-title"><%= heading %></h2>
+    <ul class="recipe-related__list">
+      <% recipes.each do |r| %>
+        <li class="recipe-related__item">
+          <a href="<%= r.relative_url %>"><%= r.data.name %></a>
+          <% if show_effort && r.data.effort %><span class="recipe-related__effort"><%= r.data.effort %></span><% end %>
+          <% if status_label(r.data.status) %><span class="status-badge status-badge--<%= r.data.status %>"><%= status_label(r.data.status) %></span><% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

@@ -27,6 +27,25 @@ module Builders
       slugs.uniq
     end
 
+    # Sub-recipe slugs linked by `resource` that resolve to a `base-recipe`-tagged
+    # recipe. Requiring the tag stops an incidental shared component (e.g.
+    # mayonnaise) from grouping unrelated dishes.
+    def self.base_recipe_slugs(resource)
+      sub_recipe_slugs(resource).select do |slug|
+        sub = resource.collection.resources.find { |r| r.basename_without_ext == slug }
+        sub && Array(sub.data.tags).include?("base-recipe")
+      end
+    end
+
+    # Stable ordering shared by every relationship block: status order
+    # (favourite → untried → unset) then name.
+    def self.by_status_then_name(resources)
+      resources.sort_by do |r|
+        idx = STATUS_ORDER.index(r.data.status) || STATUS_ORDER.length
+        [idx, r.data.name.to_s.downcase]
+      end
+    end
+
     def build
       helper :sweet? do |resource|
         Array(resource.data.meal).include?("Sweet") ||
@@ -62,6 +81,30 @@ module Builders
       # Sub-recipe slugs linked from this recipe's ingredients.
       helper :sub_recipe_slugs do |resource|
         CookbookHelpers.sub_recipe_slugs(resource)
+      end
+
+      # Other recipes sharing at least one base-recipe-tagged sub-recipe.
+      helper :siblings_via_base do |resource|
+        bases = CookbookHelpers.base_recipe_slugs(resource)
+        if bases.empty?
+          []
+        else
+          slug = resource.basename_without_ext
+          sibs = resource.collection.resources.select do |r|
+            r.basename_without_ext != slug && (CookbookHelpers.sub_recipe_slugs(r) & bases).any?
+          end
+          CookbookHelpers.by_status_then_name(sibs)
+        end
+      end
+
+      # Dishes that link this resource as a sub-recipe (turns a base into a hub).
+      # Not gated on the base-recipe tag.
+      helper :used_in do |resource|
+        slug = resource.basename_without_ext
+        users = resource.collection.resources.select do |r|
+          r.basename_without_ext != slug && CookbookHelpers.sub_recipe_slugs(r).include?(slug)
+        end
+        CookbookHelpers.by_status_then_name(users)
       end
     end
   end
