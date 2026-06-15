@@ -51,7 +51,7 @@ recipeInstructions:
     flatten the dough onto the prepared tray, pushing to the corners, cover with a
     large plastic bag, making sure it does not touch the top of the dough, then leave
     to prove for one hour.
-  - Preheat the oven to 220C/200C Fan/Gas 7. Drizzle the loaves with oil, sprinkle
+  - Preheat the oven to 200°C fan. Drizzle the loaves with oil, sprinkle
     with fine sea salt then bake in the oven for 20 minutes. When cooked, drizzle
     with a little more olive oil and serve hot or warm.
 ---

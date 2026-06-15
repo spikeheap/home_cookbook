@@ -80,7 +80,7 @@ recipeInstructions:
     seeds, and mix through, ensuring even distribution. Leave the other half plain.
     Place both doughs into separate oiled bowls, cover, and leave to prove until doubled
     in size (about 45 minutes).
-  - Preheat the oven to 200C/400F/Gas 6.
+  - Preheat the oven to 200°C.
   - Once proved, turn both the doughs out and divide each one into six equal pieces.
     Using your hands, take each piece, and roll the dough into a long sausage shape,
     tapering the ends, and creating a slight bulge in the middle. Each piece should

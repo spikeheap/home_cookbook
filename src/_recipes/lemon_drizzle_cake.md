@@ -35,7 +35,7 @@ recipeIngredient:
     item: caster sugar
 recipeInstructions:
 - items:
-  - Heat the oven to 180°C/160°C fan/gas 4.
+  - Heat the oven to 160°C fan.
   - Beat together the butter and caster sugar until pale and creamy, then add the
     eggs one at a time, slowly mixing through.
   - Sift in the self-raising flour, then add the lemon zest and mix until well combined.

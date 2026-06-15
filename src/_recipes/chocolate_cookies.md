@@ -63,7 +63,7 @@ recipeInstructions:
     chocolate into the cookie dough balls. Cover and chill for 1 hour until firm,
     then roll each cookie ball in your hands until you have a smooth, firm ball. Cover
     and chill again for 4 hours or overnight.
-  - Preheat the oven to 170C/150C Fan/Gas 3.
+  - Preheat the oven to 150°C fan.
   - Place 6–8 dough balls on each baking tray allowing plenty of space between each
     one as the cookies will spread during cooking. Bake for 12 minutes and then remove
     from the oven.

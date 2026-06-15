@@ -28,7 +28,7 @@ recipeIngredient:
     item: milk
 recipeInstructions:
 - items:
-  - Heat the oven to 220C/200C Fan/Gas 7. Lightly grease a baking sheet.
+  - Heat the oven to 200°C fan. Lightly grease a baking sheet.
   - Mix together the flour and salt and rub in the butter. Stir in the cheese and
     then the milk to get a soft dough.
   - Turn onto a floured work surface and knead very lightly. Pat out to a round 2cm/¾in
