@@ -90,6 +90,7 @@ task :recipe, [:slug] do |_t, args|
     effort:                   # #{recipe_allowed_efforts.join(" | ")}
     tags: []                  # free-form, lowercase (e.g. bread, vegan, sous-vide)
     status:                   # optional: #{recipe_allowed_statuses.join(" | ")}
+    variant_of:               # optional: slug of the canonical version of this dish
     description:
     keywords: []
     prepTime: PT0M

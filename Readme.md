@@ -33,6 +33,7 @@ cuisine: Italian              # one of: British, Italian, Mexican, ...
 meal: [Side]                  # Main, Lunch, Breakfast, Side, Snack, Sweet, Drink, Condiment
 effort: weekend               # weeknight | weekend | project
 tags: [bread, baking, vegan]  # free-form, lowercase
+status: favourite             # optional: favourite | occasional | faded | untried
 servings: 4                   # optional integer; see "Scaling" below
 ---
 ```
@@ -40,8 +41,15 @@ servings: 4                   # optional integer; see "Scaling" below
 - **cuisine** — single value, the dominant cuisine.
 - **meal** — array; one or more of the values above.
 - **effort** — `weeknight` (≤1h, hands-on), `weekend` (1–4h or one involved step), `project` (overnight ferment, multi-day, etc.).
+- **status** — optional; how the recipe is faring in the kitchen. `favourite` (family favourite), `occasional` (in rotation), `faded` (fallen out of favour), `untried` (added but not yet a hit). Omit to leave unclassified. Browse at [`/by-status/`](src/by-status.erb); shown as a badge on cards.
 - **tags** — cross-cutting: `bread`, `pasta`, `vegan`, `vegetarian`, `pizza`, `sous-vide`, `slow-cook`, `salad`, `soup`, `pie`, `eggs`, `salsa`, `dessert`, `sweet`, `baking`, `coffee`, `preserves`, `winter`, `grandma-bo`, `base-recipe`.
 - **servings** — integer; optional. When set, the recipe-page stepper scales by *people* (e.g. "Serves [- 4 +]"). When omitted — typical for breads, batch sweets, drinks, condiments — it scales by *multiplier* (×½, ×1, ×2). A planned meal-plan / shopping-list feature will aggregate quantities across recipes; `servings` lets it scale by household size.
+- **variant_of** — optional slug of a canonical sibling recipe (e.g. `quick_brioche_burger_buns` sets `variant_of: slow_brioche_burger_buns`). Renders an "Other versions" block on both the variant and the canonical. Single level only — the target must not itself be a variant.
+
+Two relationships are derived automatically and need no fields:
+
+- **More like this** — recipes that link the same `base-recipe`-tagged sub-recipe (e.g. the topping pizzas sharing the Gozney dough) cross-link each other.
+- **Used in** — a `base-recipe` page lists the dishes that link it.
 
 ### Ingredients and method shape
 
