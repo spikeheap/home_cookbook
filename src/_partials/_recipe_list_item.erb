@@ -4,6 +4,7 @@
 %>
 <li class="recipe-row">
   <a class="recipe-row__link" href="<%= r.relative_url %>"><%= r.data.name %></a>
+  <% if status_label(r.data.status) %><span class="status-badge status-badge--<%= r.data.status %>"><%= status_label(r.data.status) %></span><% end %>
   <% if meta && !meta.to_s.empty? %><span class="meta"><%= meta %></span><% end %>
   <button type="button" class="recipe-row__add plan-add" data-plan-ui
           data-plan-add-slug="<%= r.basename_without_ext %>"

@@ -5,6 +5,7 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 description: Adapted from Diana Henry's From the Oven to the Table (because caviar wasn't our jam).
+status: favourite
 
 author:
   "@type": Person

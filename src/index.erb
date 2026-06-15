@@ -155,4 +155,21 @@ title: Home
       <% end %>
     </ul>
   </div>
+
+  <% if all_recipes.any? { |r| recipe_statuses.include?(r.data.status) } %>
+  <div class="browse__group">
+    <p class="browse__label">By status</p>
+    <ul class="chip-list">
+      <% recipe_statuses.each do |status|
+           in_status = all_recipes.select { |r| r.data.status == status }
+           next if in_status.empty? %>
+        <li>
+          <a class="chip" href="<%= relative_url "/by-status/##{status}" %>">
+            <%= status_label(status) %><span class="chip__count"><%= in_status.size %></span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 </section>

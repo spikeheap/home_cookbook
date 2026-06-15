@@ -475,6 +475,44 @@ img { max-width: 100%; height: auto; }
   color: var(--mute);
 }
 
+/* Status badge — favourite/occasional/faded/untried. Renders on cards and
+   recipe rows only when a recipe has a status set. */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.status-badge--favourite {
+  color: var(--rust);
+  border-color: var(--rust);
+  background: var(--rust-wash-soft);
+}
+
+.status-badge--occasional {
+  color: var(--ink-soft);
+  border-color: var(--rule-strong);
+}
+
+.status-badge--faded {
+  color: var(--mute);
+  border-color: var(--rule);
+}
+
+.status-badge--untried {
+  color: var(--mute);
+  border-style: dashed;
+}
+
 /* Browse / chips */
 
 .browse {
@@ -574,6 +612,12 @@ img { max-width: 100%; height: auto; }
   font-size: 1.5rem;
   margin: 0 0 var(--gap-4);
   letter-spacing: -0.005em;
+}
+
+.all-recipes__section-blurb {
+  color: var(--ink-soft);
+  margin: 0 0 var(--gap-4);
+  font-size: 0.95rem;
 }
 
 .all-recipes__list {

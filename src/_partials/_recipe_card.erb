@@ -8,6 +8,7 @@
   <a class="card__link" href="<%= r.relative_url %>">
     <span class="card__name"><%= r.data.name %></span>
     <span class="card__meta">
+      <% if status_label(r.data.status) %><span class="status-badge status-badge--<%= r.data.status %>"><%= status_label(r.data.status) %></span><% end %>
       <% if r.data.cuisine %><span class="card__cuisine"><%= r.data.cuisine %></span><% end %>
       <% unless time_label.empty? %><span class="card__time"><%= time_label %></span><% end %>
     </span>

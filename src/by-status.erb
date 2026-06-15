@@ -1,0 +1,45 @@
+---
+layout: default
+title: By status
+permalink: /by-status/
+---
+<%
+  recipes = collections.recipes.resources
+  blurbs = {
+    "favourite"  => "Family favourites.",
+    "occasional" => "In the rotation, cooked now and then.",
+    "faded"      => "Fallen out of favour.",
+    "untried"    => "Coulda, shoulda, woulda",
+  }
+%>
+<article class="all-recipes">
+  <h1 class="all-recipes__title">By status</h1>
+  <p class="all-recipes__lede">How recipes are faring in our kitchen, from favourites to the untried.</p>
+
+  <% recipe_statuses.each do |status|
+       in_status = recipes.select { |r| r.data.status == status }.sort_by { |r| r.data.name.to_s.downcase }
+       next if in_status.empty? %>
+    <section class="all-recipes__section" id="<%= status %>">
+      <h2 class="all-recipes__section-title"><%= status_label(status) %> <span class="meta"><%= in_status.size %></span></h2>
+      <% if blurbs[status] %><p class="all-recipes__section-blurb"><%= blurbs[status] %></p><% end %>
+      <ul class="all-recipes__list">
+        <% in_status.each do |r| %>
+          <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% unclassified = recipes.select { |r| !recipe_statuses.include?(r.data.status) }.sort_by { |r| r.data.name.to_s.downcase } %>
+  <% unless unclassified.empty? %>
+    <section class="all-recipes__section" id="unclassified">
+      <h2 class="all-recipes__section-title">Unclassified <span class="meta"><%= unclassified.size %></span></h2>
+      <p class="all-recipes__section-blurb">No status set yet.</p>
+      <ul class="all-recipes__list">
+        <% unclassified.each do |r| %>
+          <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</article>

@@ -52,6 +52,10 @@ def recipe_allowed_efforts
   %w[weeknight weekend project].freeze
 end
 
+def recipe_allowed_statuses
+  %w[favourite occasional faded untried].freeze
+end
+
 def recipe_allowed_diets
   %w[
     http://schema.org/GlutenFreeDiet
@@ -85,6 +89,7 @@ task :recipe, [:slug] do |_t, args|
     meal: [Main]              # one or more of: #{recipe_allowed_meals.join(", ")}
     effort:                   # #{recipe_allowed_efforts.join(" | ")}
     tags: []                  # free-form, lowercase (e.g. bread, vegan, sous-vide)
+    status:                   # optional: #{recipe_allowed_statuses.join(" | ")}
     description:
     keywords: []
     prepTime: PT0M
@@ -186,6 +191,11 @@ task :validate, [:paths] do |_t, args|
       effort = data["effort"]
       if effort && !recipe_allowed_efforts.include?(effort)
         errors << "#{path}: invalid effort: #{effort.inspect} (allowed: #{recipe_allowed_efforts.join(", ")})"
+      end
+
+      status = data["status"]
+      if status && !recipe_allowed_statuses.include?(status)
+        errors << "#{path}: invalid status: #{status.inspect} (allowed: #{recipe_allowed_statuses.join(", ")})"
       end
 
       servings = data["servings"]
