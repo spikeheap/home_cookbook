@@ -7,15 +7,7 @@ layout: default
   cook = capture { render "duration", iso: page.cookTime }.strip
   body_html = content.to_s.strip
 
-  sub_slugs = []
-  Array(page.recipeIngredient).each do |section|
-    Array(section["items"]).each do |item|
-      text = item.is_a?(Hash) ? (item["item"] || "") : item.to_s
-      next unless text.include?("](") && text.include?(".html)")
-      sub_slugs << text.split("](").last.split(")").first.sub(".html", "")
-    end
-  end
-  sub_recipes = sub_slugs.uniq.filter_map { |s| collections.recipes.resources.find { |r| r.basename_without_ext == s } }
+  sub_recipes = sub_recipe_slugs(resource).filter_map { |s| collections.recipes.resources.find { |r| r.basename_without_ext == s } }
 %>
 <article class="recipe"
          data-recipe-name="<%= page.name %>"

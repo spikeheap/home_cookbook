@@ -12,6 +12,21 @@ module Builders
       "untried"    => "Untried",
     }.freeze
 
+    # Slugs of sub-recipes linked from a recipe's ingredients via the markdown
+    # `[label](slug.html)` form. One parser for the Sub-recipes section and the
+    # relationship indices.
+    def self.sub_recipe_slugs(resource)
+      slugs = []
+      Array(resource.data.recipeIngredient).each do |section|
+        Array(section["items"]).each do |item|
+          text = item.is_a?(Hash) ? (item["item"] || "") : item.to_s
+          next unless text.include?("](") && text.include?(".html)")
+          slugs << text.split("](").last.split(")").first.sub(".html", "")
+        end
+      end
+      slugs.uniq
+    end
+
     def build
       helper :sweet? do |resource|
         Array(resource.data.meal).include?("Sweet") ||
@@ -42,6 +57,11 @@ module Builders
       # Human label for a status value; nil/unknown returns nil.
       helper :status_label do |value|
         STATUS_LABELS[value]
+      end
+
+      # Sub-recipe slugs linked from this recipe's ingredients.
+      helper :sub_recipe_slugs do |resource|
+        CookbookHelpers.sub_recipe_slugs(resource)
       end
     end
   end
