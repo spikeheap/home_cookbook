@@ -4,7 +4,7 @@ name: Pizza oven pizza dough
 cuisine: Italian
 meal: [Main]
 effort: project
-tags: [pizza, bread]
+tags: [pizza, bread, base-recipe]
 description: This consistently comes out well in the pizza oven.
 keywords: [pizza]
 isBasedOn: https://www.gozney.com/blogs/recipes/pizza-for-beginners-simple-pizza-dough
