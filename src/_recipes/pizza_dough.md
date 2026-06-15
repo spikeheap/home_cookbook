@@ -5,6 +5,7 @@ cuisine: Italian
 meal: [Main]
 effort: project
 tags: [pizza, bread]
+variant_of: pizza_dough_gozney
 description:
 isBasedOn: https://www.telegraph.co.uk/foodanddrink/recipes/10680502/Paul-Hollywoods-perfect-pizza-base-recipe.html
 author:

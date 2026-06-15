@@ -150,6 +150,7 @@ layout: default
     </section>
   <% end %>
 
+  <%= render "related_list", heading: "Other versions", recipes: version_set(resource), show_effort: true %>
   <%= render "related_list", heading: "More like this", recipes: siblings_via_base(resource), show_effort: false %>
   <%= render "related_list", heading: "Used in", recipes: used_in(resource), show_effort: false %>
 

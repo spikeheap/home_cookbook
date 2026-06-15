@@ -97,6 +97,23 @@ module Builders
         end
       end
 
+      # Other recipes in the same variant_of set — the canonical plus all
+      # variants pointing at it, minus self. Works from either end.
+      helper :version_set do |resource|
+        slug = resource.basename_without_ext
+        canonical = resource.data.variant_of
+        recipes = resource.collection.resources
+        members =
+          if canonical
+            [recipes.find { |r| r.basename_without_ext == canonical }].compact +
+              recipes.select { |r| r.data.variant_of == canonical }
+          else
+            recipes.select { |r| r.data.variant_of == slug }
+          end
+        members = members.reject { |r| r.basename_without_ext == slug }.uniq
+        CookbookHelpers.by_status_then_name(members)
+      end
+
       # Dishes that link this resource as a sub-recipe (turns a base into a hub).
       # Not gated on the base-recipe tag.
       helper :used_in do |resource|

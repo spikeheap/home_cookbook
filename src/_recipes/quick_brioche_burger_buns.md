@@ -5,6 +5,7 @@ cuisine: American
 meal: [Side]
 effort: weeknight
 tags: [bread, baking]
+variant_of: slow_brioche_burger_buns
 description: "These came from Luke, and they hold up well"
 isBasedOn: https://kristineskitchenblog.com/wprm_print/25826#
 # image:
