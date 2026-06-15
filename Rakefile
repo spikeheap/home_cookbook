@@ -129,6 +129,19 @@ task :validate, [:paths] do |_t, args|
     Dir.glob("src/_recipes/*.md").sort
   end
 
+  # variant_of is a cross-file relationship: resolve targets against ALL
+  # recipes, not just the `paths` subset under validation.
+  all_recipe_files = Dir.glob("src/_recipes/*.md")
+  all_slugs = all_recipe_files.map { |f| File.basename(f, ".md") }
+  # Slugs that are themselves variants (carry variant_of) — a target must not
+  # be one of these, to keep variant_of single-level (no chains).
+  variant_slugs = all_recipe_files.each_with_object([]) do |f, acc|
+    fm = File.read(f)[/\A---\s*\n(.*?)\n---\s*\n/m, 1]
+    next unless fm
+    parsed = (YAML.safe_load(fm, permitted_classes: [Date, Time]) rescue nil)
+    acc << File.basename(f, ".md") if parsed.is_a?(Hash) && parsed["variant_of"]
+  end
+
   yamllint = ENV["YAMLLINT"] || "yamllint"
   unless system("which #{yamllint.shellescape} > /dev/null 2>&1")
     abort("yamllint not found on PATH — install it (e.g. brew install yamllint) or set $YAMLLINT")
@@ -196,6 +209,20 @@ task :validate, [:paths] do |_t, args|
       status = data["status"]
       if status && !recipe_allowed_statuses.include?(status)
         errors << "#{path}: invalid status: #{status.inspect} (allowed: #{recipe_allowed_statuses.join(", ")})"
+      end
+
+      variant_of = data["variant_of"]
+      unless variant_of.nil?
+        slug = File.basename(path, ".md")
+        if !variant_of.is_a?(String) || variant_of.strip.empty?
+          errors << "#{path}: variant_of must be a recipe slug string"
+        elsif variant_of == slug
+          errors << "#{path}: variant_of cannot point at itself"
+        elsif !all_slugs.include?(variant_of)
+          errors << "#{path}: variant_of target `#{variant_of}` is not an existing recipe slug"
+        elsif variant_slugs.include?(variant_of)
+          errors << "#{path}: variant_of target `#{variant_of}` is itself a variant (chains not allowed)"
+        end
       end
 
       servings = data["servings"]
