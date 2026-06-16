@@ -137,7 +137,7 @@ task :validate, [:paths] do |_t, args|
   # Slugs that are themselves variants (carry variant_of) — a target must not
   # be one of these, to keep variant_of single-level (no chains).
   variant_slugs = all_recipe_files.each_with_object([]) do |f, acc|
-    fm = File.read(f)[/\A---\s*\n(.*?)\n---\s*\n/m, 1]
+    fm = File.read(f)[/\A---\s*\n(.*?\n)---\s*(?:\n|\z)/m, 1]
     next unless fm
     parsed = (YAML.safe_load(fm, permitted_classes: [Date, Time]) rescue nil)
     acc << File.basename(f, ".md") if parsed.is_a?(Hash) && parsed["variant_of"]

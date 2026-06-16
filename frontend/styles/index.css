@@ -1749,6 +1749,8 @@ html:not(.plan-mode) [data-plan-ui] { display: none !important; }
   html { color-scheme: light; }
   body { background: white; color: black; font-size: 11pt; }
   .site-header, .site-footer, .recipe-tools, .theme-toggle { display: none; }
+  /* Relationship blocks are on-screen navigation, not cooking content */
+  .recipe-related { display: none; }
   .recipe-body { grid-template-columns: 1fr !important; }
   .recipe-ingredients { position: static !important; }
   a { color: black; }
