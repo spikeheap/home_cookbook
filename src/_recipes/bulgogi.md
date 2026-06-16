@@ -6,6 +6,7 @@ meal: [Main]
 effort: weeknight
 description: Thinly sliced beef in a sweet-savoury soy and pear marinade. Best with at least 4 hours marinating, ideally overnight.
 tags: [beef]
+status: favourite
 
 author:
   "@type": Person

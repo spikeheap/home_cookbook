@@ -5,6 +5,7 @@ cuisine: Indian
 meal: [Main]
 effort: weekend
 tags: [vegan]
+status: favourite
 description: "This dal needs a little more kick than the original recipe, but is great on its own with rice, or as part of a bigger feast"
 isBasedOn: https://www.bbc.co.uk/food/recipes/nadiyas_dhal_45569
 author:

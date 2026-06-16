@@ -5,6 +5,7 @@ cuisine: Korean
 meal: [Main]
 effort: weekend
 tags: [pork]
+status: untried
 description: Based on the Korean dish samgyeopsal-gui. From Diana Henry's From the Oven to the Table.
 keywords: []
 

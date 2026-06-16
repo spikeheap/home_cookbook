@@ -5,6 +5,7 @@ cuisine: British
 meal: [Main]
 effort: weekend
 tags: [pie, winter]
+status: favourite
 description: From Jamie's Ministry of Food
 keywords:
 - fish

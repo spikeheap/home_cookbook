@@ -53,7 +53,7 @@ def recipe_allowed_efforts
 end
 
 def recipe_allowed_statuses
-  %w[favourite occasional faded untried].freeze
+  %w[favourite faded untried].freeze
 end
 
 def recipe_allowed_diets

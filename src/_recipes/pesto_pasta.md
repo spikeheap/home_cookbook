@@ -5,6 +5,7 @@ cuisine: Italian
 meal: [Main]
 effort: weeknight
 tags: [pasta]
+status: favourite
 
 author:
   "@type": Person

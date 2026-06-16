@@ -4,6 +4,7 @@ name: Brooks' Tacos
 cuisine: Mexican
 meal: [Main]
 effort: weeknight
+status: favourite
 description: Definitely not traditionally Mexican, but this is what we grew up with and brings back memories of extra-hot salsa at my grandparents.
 
 prepTime: PT30M

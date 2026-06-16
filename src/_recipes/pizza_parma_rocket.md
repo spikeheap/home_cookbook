@@ -5,6 +5,7 @@ cuisine: Italian
 meal: [Main]
 effort: weeknight
 tags: [pizza]
+status: untried
 description: A margherita finished with prosciutto, rocket and shaved parmesan after baking — the residual heat wilts the leaves and softens the ham.
 
 prepTime: PT10M

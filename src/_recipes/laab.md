@@ -5,7 +5,6 @@ cuisine: Thai
 meal: [Main]
 effort: weeknight
 tags: [pork]
-
 author:
   "@type": Person
   name: Pailin Chongchitnant

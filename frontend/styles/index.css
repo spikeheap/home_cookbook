@@ -498,11 +498,6 @@ img { max-width: 100%; height: auto; }
   background: var(--rust-wash-soft);
 }
 
-.status-badge--occasional {
-  color: var(--ink-soft);
-  border-color: var(--rule-strong);
-}
-
 .status-badge--faded {
   color: var(--mute);
   border-color: var(--rule);

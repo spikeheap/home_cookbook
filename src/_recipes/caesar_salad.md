@@ -6,6 +6,7 @@ cuisine: American
 meal: [Main, Lunch]
 effort: weeknight
 tags: [salad]
+status: favourite
 isBasedOn: https://www.bbc.co.uk/food/recipes/marys_classic_caesar_72903
 author:
   "@type": Person

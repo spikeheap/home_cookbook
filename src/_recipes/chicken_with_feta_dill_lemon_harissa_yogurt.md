@@ -5,6 +5,7 @@ cuisine: Mediterranean
 meal: [Main]
 effort: weeknight
 tags: [chicken]
+status: untried
 description: A one-pan roast of chicken thighs over waxy potatoes, red onion and garlic, finished with lemon, crumbled feta and dill and served with harissa yogurt on the side. From Diana Henry's From the Oven to the Table.
 keywords: []
 image: /images/chicken_with_feta_dill_lemon_harissa_yogurt.jpg

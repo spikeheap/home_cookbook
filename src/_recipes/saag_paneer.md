@@ -5,6 +5,7 @@ cuisine: Indian
 meal: [Main]
 effort: weeknight
 tags: [vegetarian]
+status: favourite
 description:
 
 prepTime: PT10M

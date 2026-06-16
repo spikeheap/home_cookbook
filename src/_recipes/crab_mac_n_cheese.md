@@ -5,6 +5,7 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [pasta, seafood]
+status: favourite
 description: A small, rich mac 'n' cheese. We usually drop the crab. From Nigella Lawson's Cook Eat Repeat.
 keywords: []
 image: /images/crab_mac_n_cheese.jpg

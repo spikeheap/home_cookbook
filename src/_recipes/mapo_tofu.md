@@ -5,6 +5,7 @@ cuisine: Chinese
 meal: [Main]
 effort: weeknight
 tags: [pork, tofu]
+status: favourite
 
 author:
   "@type": Person

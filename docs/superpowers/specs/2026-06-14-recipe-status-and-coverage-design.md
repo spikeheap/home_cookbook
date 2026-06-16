@@ -45,7 +45,7 @@ A new optional closed-set field, mirroring `effort`.
 Follows existing patterns (`by-cuisine.erb`, `by-tag.erb`, `card__meta`).
 
 - **Badge** — add a status pill to `_recipe_card.erb`'s `card__meta` span, and to the list-item meta where shown. Renders only when `status` is set. One CSS class per value; `favourite` accented, `faded`/`untried` muted/de-emphasised. New styles in `frontend/styles/index.css`.
-- **Browse page** — new `src/by-status.erb`, permalink `/by-status/`, following `by-cuisine.erb`. Sections in fixed order favourite → occasional → faded → untried, each `id`'d for anchor links, listing recipes via `recipe_list_item`. Recipes with no status are omitted (or shown in a trailing "unclassified" section — implementer's call, lean towards omitting to keep it clean).
+- **Browse page** — new `src/by-status.erb`, permalink `/by-status/`, following `by-cuisine.erb`. Sections in fixed order favourite → occasional → faded → untried, each `id`'d for anchor links, listing recipes via `recipe_list_item`. If any recipes have no status, list them in a trailing "Unclassified" section.
 - **Home browse chips** — add a "By status" chip group to the Browse section in `index.erb`, linking to `/by-status/#<value>`, with per-value counts.
 - **Out of scope (YAGNI):** a dedicated "Favourites" rail on the home page. Easy to add later if wanted.
 
