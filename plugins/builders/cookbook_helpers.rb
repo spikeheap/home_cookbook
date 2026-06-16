@@ -4,12 +4,11 @@ module Builders
 
     # Closed-set recipe status, in display order. Keep values in sync with
     # recipe_allowed_statuses in the Rakefile. `nil` covers unclassified recipes.
-    STATUS_ORDER = %w[favourite occasional faded untried].freeze
+    STATUS_ORDER = %w[favourite faded untried].freeze
     STATUS_LABELS = {
-      "favourite"  => "Favourite",
-      "occasional" => "Occasional",
-      "faded"      => "Faded",
-      "untried"    => "Untried",
+      "favourite" => "Favourite",
+      "faded"     => "Faded",
+      "untried"   => "Untried",
     }.freeze
 
     # Slugs of sub-recipes linked from a recipe's ingredients via the markdown
@@ -35,6 +34,19 @@ module Builders
         sub = resource.collection.resources.find { |r| r.basename_without_ext == slug }
         sub && Array(sub.data.tags).include?("base-recipe")
       end
+    end
+
+    # All slugs in the same variant_of family as `resource`, including itself:
+    # the canonical plus every variant pointing at that canonical. Lets the
+    # relationship blocks treat interchangeable versions of a base (e.g. the two
+    # pizza doughs) as one logical recipe.
+    def self.variant_family_slugs(resource)
+      slug = resource.basename_without_ext
+      canonical = resource.data.variant_of || slug
+      family = resource.collection.resources.each_with_object([canonical]) do |r, acc|
+        acc << r.basename_without_ext if r.data.variant_of == canonical
+      end
+      family.uniq
     end
 
     # Stable ordering shared by every relationship block: status order
@@ -83,15 +95,21 @@ module Builders
         CookbookHelpers.sub_recipe_slugs(resource)
       end
 
-      # Other recipes sharing at least one base-recipe-tagged sub-recipe.
+      # Other recipes sharing a base-recipe-tagged sub-recipe — treating all
+      # versions of a base (its variant_of family) as the same base, so a pizza
+      # on the slow dough and one on the Gozney dough count as siblings.
       helper :siblings_via_base do |resource|
         bases = CookbookHelpers.base_recipe_slugs(resource)
         if bases.empty?
           []
         else
+          base_family = bases.flat_map do |b|
+            sub = resource.collection.resources.find { |r| r.basename_without_ext == b }
+            sub ? CookbookHelpers.variant_family_slugs(sub) : [b]
+          end.uniq
           slug = resource.basename_without_ext
           sibs = resource.collection.resources.select do |r|
-            r.basename_without_ext != slug && (CookbookHelpers.sub_recipe_slugs(r) & bases).any?
+            r.basename_without_ext != slug && (CookbookHelpers.base_recipe_slugs(r) & base_family).any?
           end
           CookbookHelpers.by_status_then_name(sibs)
         end
@@ -114,12 +132,14 @@ module Builders
         CookbookHelpers.by_status_then_name(members)
       end
 
-      # Dishes that link this resource as a sub-recipe (turns a base into a hub).
-      # Not gated on the base-recipe tag.
+      # Dishes that link this resource — or any version in its variant_of family —
+      # as a sub-recipe, so every dough version lists the pizzas that use any of
+      # them. Turns a base into a hub. Not gated on the base-recipe tag.
       helper :used_in do |resource|
-        slug = resource.basename_without_ext
+        family = CookbookHelpers.variant_family_slugs(resource)
         users = resource.collection.resources.select do |r|
-          r.basename_without_ext != slug && CookbookHelpers.sub_recipe_slugs(r).include?(slug)
+          !family.include?(r.basename_without_ext) &&
+            (CookbookHelpers.sub_recipe_slugs(r) & family).any?
         end
         CookbookHelpers.by_status_then_name(users)
       end
