@@ -15,6 +15,7 @@ author:
 prepTime: PT1H15M
 cookTime: PT4H40M
 recipeYield: Serves 8
+servings: 8
 
 recipeIngredient:
 - heading: Ragù

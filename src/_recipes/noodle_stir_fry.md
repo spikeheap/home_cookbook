@@ -15,6 +15,7 @@ author:
 prepTime: PT10M
 cookTime: PT5M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - heading: Stir fry

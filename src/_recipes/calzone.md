@@ -17,6 +17,7 @@ suitableForDiet:
 prepTime: PT15M
 cookTime: PT20M
 recipeYield: 1 calzone
+servings: 1
 
 recipeIngredient:
 - heading: Dough

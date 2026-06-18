@@ -15,6 +15,7 @@ author:
 prepTime: PT10M
 cookTime: PT3H
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:

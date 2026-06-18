@@ -15,6 +15,7 @@ author:
 prepTime: PT2H30M
 cookTime: PT20M
 recipeYield: 4 bowls
+servings: 4
 
 recipeIngredient:
 - heading: Chashu pork

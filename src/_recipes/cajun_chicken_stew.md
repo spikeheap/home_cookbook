@@ -15,6 +15,7 @@ author:
 prepTime: PT15M
 cookTime: PT40M
 recipeYield: Serves 6
+servings: 6
 
 recipeIngredient:
 - items:

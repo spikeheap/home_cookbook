@@ -18,6 +18,7 @@ suitableForDiet:
 prepTime: PT5M
 cookTime: PT1H40M
 recipeYield: 4 potatoes
+servings: 4
 
 recipeIngredient:
 - items:

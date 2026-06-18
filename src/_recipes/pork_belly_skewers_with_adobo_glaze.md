@@ -48,6 +48,10 @@ recipeIngredient:
   - quantity: 0.5
     unit: tbsp
     item: olive oil
+  - quantity: 6
+    unit: portion
+    item: rice, to serve
+    optional: true
 recipeInstructions:
 - items:
   - Put the pork, garlic, onion, bay leaves, sugar, soy, vinegar, peppercorns and

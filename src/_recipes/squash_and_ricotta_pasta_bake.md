@@ -43,6 +43,7 @@ recipeIngredient:
     unit: sprig
     item: fresh sage leaves
   - item: a pinch of chilli flakes
+  - item: green salad, to serve
 recipeInstructions:
 - heading: Roast the squash
   items:

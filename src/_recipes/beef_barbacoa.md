@@ -59,6 +59,7 @@ recipeIngredient:
   items:
   - item: Tortillas
   - item: Guacamole
+  - item: Sour cream
   - item: Salsa
 recipeInstructions:
 - items:

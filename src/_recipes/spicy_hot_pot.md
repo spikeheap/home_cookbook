@@ -36,6 +36,14 @@ recipeIngredient:
       nice
   - item: grated cheddar or mozarella
     optional: true
+- heading: To serve
+  items:
+  - quantity: 2
+    unit: portion
+    item: rice
+  - item: nori
+  - item: bonito flakes
+  - item: kimchi
 recipeInstructions:
 - items:
   - Fry the sliced onions until they start to soften.

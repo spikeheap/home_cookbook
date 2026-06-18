@@ -15,6 +15,7 @@ author:
 prepTime: PT20M
 cookTime: PT1H40M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:
@@ -48,6 +49,11 @@ recipeIngredient:
   - quantity: 1
     item: bay leaf
   - item: water
+- heading: To serve
+  items:
+  - quantity: 4
+    unit: portion
+    item: nokedli, egg noodles or boiled potatoes
 recipeInstructions:
 - items:
   - Fry the bacon in a heavy pot until done. Add the onion and cook over a medium-high

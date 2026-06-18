@@ -69,6 +69,9 @@ recipeIngredient:
     item: sesame oil
   - quantity: 4
     item: garlic greens or scallion greens, finely chopped
+  - quantity: 2
+    unit: portion
+    item: steamed rice, to serve
 - heading: Cornstarch slurry
   items:
   - quantity: 1

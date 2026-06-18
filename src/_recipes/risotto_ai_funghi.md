@@ -17,6 +17,7 @@ suitableForDiet:
 prepTime: PT15M
 cookTime: PT20M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - items:

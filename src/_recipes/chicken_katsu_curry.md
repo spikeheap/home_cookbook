@@ -15,6 +15,7 @@ author:
 prepTime: PT20M
 cookTime: PT30M
 recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - heading: Chicken and rice

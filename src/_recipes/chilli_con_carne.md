@@ -15,6 +15,7 @@ author:
 prepTime: PT25M
 cookTime: PT3H
 recipeYield: Serves 8
+servings: 8
 
 recipeIngredient:
 - items:

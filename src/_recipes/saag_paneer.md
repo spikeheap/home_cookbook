@@ -43,7 +43,9 @@ recipeIngredient:
     item: garam masala
   - quantity: 1
     item: lemon
-  - item: rice, to serve
+  - quantity: 2
+    unit: portion
+    item: rice, to serve
 recipeInstructions:
 - items:
   - Start by cooking the rice.

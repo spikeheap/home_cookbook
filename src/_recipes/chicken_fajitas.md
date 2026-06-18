@@ -11,6 +11,7 @@ description: Marinated chicken charred with peppers and onions, served in warm t
 prepTime: PT15M
 cookTime: PT15M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - heading: Marinade

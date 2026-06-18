@@ -14,7 +14,7 @@ author:
 
 prepTime: PT30M
 cookTime: PT10M
-recipeYield: Serves 2
+servings: 2
 
 recipeIngredient:
 - items:
@@ -56,7 +56,9 @@ recipeIngredient:
   - quantity: 1
     unit: tbsp
     item: soy sauce
-  - item: egg or rice noodles, to serve
+  - quantity: 2
+    unit: portion
+    item: egg or rice noodles, to serve
   - item: lime wedges, to serve
 recipeInstructions:
 - items:

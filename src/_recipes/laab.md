@@ -55,7 +55,9 @@ recipeIngredient:
     item: coriander leaves, roughly chopped
 - heading: To serve
   items:
-  - item: sticky rice
+  - quantity: 3
+    unit: portion
+    item: sticky rice
   - item: raw vegetables — cucumber, long beans, cabbage, wedges of white cabbage
 
 recipeInstructions:

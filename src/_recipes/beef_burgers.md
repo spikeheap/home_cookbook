@@ -10,6 +10,7 @@ description: Homemade beef patties, keeping it simple.
 prepTime: PT20M
 cookTime: PT20M
 recipeYield: 4 burgers
+servings: 4
 
 recipeIngredient:
 - heading: Patties

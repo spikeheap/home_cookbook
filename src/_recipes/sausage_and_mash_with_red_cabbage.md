@@ -15,6 +15,7 @@ author:
 prepTime: PT20M
 cookTime: PT2H30M
 recipeYield: Serves 4
+servings: 4
 
 recipeIngredient:
 - heading: Braised red cabbage

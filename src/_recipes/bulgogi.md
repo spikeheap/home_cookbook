@@ -65,6 +65,14 @@ recipeIngredient:
   - quantity: 0.125
     unit: tsp
     item: ground black pepper
+- heading: To serve
+  items:
+  - quantity: 4
+    unit: portion
+    item: steamed rice
+  - item: lettuce leaves, for wrapping
+  - item: ssamjang
+  - item: kimchi
 
 recipeInstructions:
 - items:
