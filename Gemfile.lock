@@ -51,7 +51,7 @@ GEM
       zeitwerk (~> 2.5)
     bridgetown-paginate (2.1.2)
       bridgetown-core (= 2.1.2)
-    concurrent-ruby (1.3.6)
+    concurrent-ruby (1.3.7)
     console (1.34.3)
       fiber-annotation
       fiber-local (~> 1.1)
@@ -184,7 +184,7 @@ CHECKSUMS
   bridgetown-feed (4.0.0) sha256=bd41d17f34a8bbaac8db66fe89a91b3959e797a24551ab695e899a89994ae6bb
   bridgetown-foundation (2.1.2) sha256=bfa7b45986fb325ab0b3ac0bcb12687a5ce689e56a1c48bbebf326a1e892f6dc
   bridgetown-paginate (2.1.2) sha256=70b05ab44c09fc6ba3b8433852cc5961ce4f458a3eda3ceeffca893e34bbaa76
-  concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
+  concurrent-ruby (1.3.7) sha256=4412caec3a5ea2e5fdc52076724c071a81f2c0593d83b2ac8cbb8ca63b3151b0
   console (1.34.3) sha256=869fbd74697efc4c606f102d2812b0b008e4e7fd738a91c591e8577140ec0dcc
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
   date (3.5.1) sha256=750d06384d7b9c15d562c76291407d89e368dda4d4fff957eb94962d325a0dc0
