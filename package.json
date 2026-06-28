@@ -13,7 +13,7 @@
   "devDependencies": {
     "esbuild": "^0.25.11",
     "glob": "^11.0.3",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.2.0",
     "pagefind": "1.5.2",
     "postcss": "^8.5.6",
     "postcss-flexbugs-fixes": "^5.0.2",
