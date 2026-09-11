@@ -4,7 +4,7 @@ name: Sous Vide Glazed Carrots
 cuisine: American
 meal: [Side]
 effort: weekend
-tags: [sous-vide, vegetarian]
+tags: [sous-vide, vegetarian, roast]
 description: >
   Cooking carrots sous vide with butter, sugar, and salt intensifies their
   natural sweetness into something deeper and more carrot-flavoured than you'd
