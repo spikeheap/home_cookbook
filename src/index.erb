@@ -4,172 +4,66 @@ title: Home
 ---
 <%
   all_recipes = collections.recipes.resources
-  # Sweet has its own page; the home rails are savoury-only.
-  recipes = all_recipes.reject { |r| sweet?(r) }
+  by_name = ->(list) { list.sort_by { |r| r.data.name.to_s.downcase } }
+  # Sweet has its own page; Tonight is savoury-only.
+  savoury = all_recipes.reject { |r| sweet?(r) }
 
-  by_effort = ->(name) { recipes.select { |r| r.data.effort == name }.sort_by { |r| r.data.name.to_s.downcase } }
-  weeknight = by_effort.("weeknight")
-  weekend   = by_effort.("weekend")
-  project   = by_effort.("project")
-
-  with_tag = ->(tag) { recipes.select { |r| Array(r.data.tags).include?(tag) }.sort_by { |r| r.data.name.to_s.downcase } }
-  pizza = with_tag.("pizza")
-  pasta = with_tag.("pasta")
-
-  latest = recipes.sort_by { |r| r.data.date.to_s }.reverse.first(6)
+  favourites = by_name.(all_recipes.select { |r| r.data.status == "favourite" })
+  weeknight  = by_name.(savoury.select { |r| r.data.effort == "weeknight" })
+  latest     = all_recipes.sort_by { |r| r.data.date.to_s }.reverse.first(5)
 %>
-<section class="home-hero">
-  <h1 class="home-hero__title">Recipes we <em>actually</em> cook.</h1>
-  <p class="home-hero__lede">A bunch of recipes we know and love, from easy weeknight meals, through baking with the kids, to bigger things we don't want to forget.</p>
-  <form class="home-search" role="search" onsubmit="return false;">
-    <input type="search"
-           placeholder="Search recipes…"
-           aria-label="Search recipes"
-           aria-autocomplete="list"
-           aria-controls="search-results"
-           autocomplete="off"
-           spellcheck="false"
-           id="search-input">
-    <span class="home-search__hint">↑↓ to choose · Esc to clear</span>
-  </form>
+<form class="home-search" role="search" onsubmit="return false;">
+  <label class="home-search__label" for="search-input">Find a recipe</label>
+  <input type="search"
+         placeholder="Name, ingredient or cuisine"
+         aria-autocomplete="list"
+         aria-controls="search-results"
+         autocomplete="off"
+         spellcheck="false"
+         id="search-input">
   <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
-</section>
+</form>
 
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Latest</h2>
-    </div>
-  </header>
-  <ul class="card-grid">
-    <% latest.each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
+<p class="home-plan" data-plan-summary hidden>
+  <a href="<%= relative_url '/plan/' %>">This week: <span data-plan-count></span> planned. Shopping list</a>
+</p>
 
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Tonight</h2>
-      <p class="rail__sub"><%= weeknight.size %> recipes · under an hour, weeknight-friendly</p>
-    </div>
-    <a class="rail__more" href="<%= relative_url '/all/#weeknight' %>">All weeknight recipes</a>
-  </header>
-  <ul class="card-grid">
-    <% weeknight.first(9).each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
-
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Weekend</h2>
-      <p class="rail__sub"><%= weekend.size %> recipes · a bit more time, a bit more involved</p>
-    </div>
-    <a class="rail__more" href="<%= relative_url '/all/#weekend' %>">All weekend recipes</a>
-  </header>
-  <ul class="card-grid">
-    <% weekend.first(9).each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
-
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Projects</h2>
-      <p class="rail__sub"><%= project.size %> recipes · multi-day or hands-on</p>
-    </div>
-  </header>
-  <ul class="card-grid">
-    <% project.each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
-
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Pizza</h2>
-      <p class="rail__sub"><%= pizza.size %> recipes · doughs and toppings</p>
-    </div>
-    <a class="rail__more" href="<%= relative_url '/by-tag/#pizza' %>">All pizzas</a>
-  </header>
-  <ul class="card-grid">
-    <% pizza.each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
-
-<section class="rail">
-  <header class="rail__header">
-    <div>
-      <h2 class="rail__title">Pasta</h2>
-      <p class="rail__sub"><%= pasta.size %> recipes · doughs and sauces</p>
-    </div>
-    <a class="rail__more" href="<%= relative_url '/by-tag/#pasta' %>">All pasta</a>
-  </header>
-  <ul class="card-grid">
-    <% pasta.each do |r| %>
-      <li><%= render "recipe_card", recipe: r %></li>
-    <% end %>
-  </ul>
-</section>
-
-<section class="browse">
-  <h2 class="browse__title">Browse</h2>
-
-  <div class="browse__group">
-    <p class="browse__label">By cuisine</p>
-    <% cuisines = all_recipes.map { |r| r.data.cuisine }.compact.uniq.sort %>
-    <ul class="chip-list">
-      <% cuisines.each do |cuisine|
-           in_cuisine = all_recipes.select { |r| r.data.cuisine == cuisine }
-           anchor = cuisine.downcase.gsub(" ", "-") %>
-        <li>
-          <a class="chip" href="<%= relative_url "/by-cuisine/##{anchor}" %>">
-            <%= cuisine %><span class="chip__count"><%= in_cuisine.size %></span>
-          </a>
-        </li>
+<div class="home-lists">
+  <section class="home-list home-list--favourites">
+    <h2 class="home-list__title">Favourites</h2>
+    <ul class="home-list__items">
+      <% favourites.each do |r| %>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
-  </div>
+  </section>
 
-  <div class="browse__group">
-    <p class="browse__label">By tag</p>
-    <% all_tags = all_recipes.flat_map { |r| Array(r.data.tags) }.uniq.sort %>
-    <ul class="chip-list">
-      <% all_tags.each do |tag|
-           tagged = all_recipes.select { |r| Array(r.data.tags).include?(tag) } %>
-        <li>
-          <a class="chip" href="<%= relative_url "/by-tag/##{tag}" %>">
-            <%= tag %><span class="chip__count"><%= tagged.size %></span>
-          </a>
-        </li>
+  <section class="home-list">
+    <h2 class="home-list__title">Tonight</h2>
+    <ul class="home-list__items">
+      <% weeknight.first(12).each do |r| %>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
-  </div>
+    <a class="home-list__more" href="<%= relative_url '/all/#weeknight' %>">All <%= weeknight.size %> weeknight recipes</a>
+  </section>
 
-  <% if all_recipes.any? { |r| recipe_statuses.include?(r.data.status) } %>
-  <div class="browse__group">
-    <p class="browse__label">By status</p>
-    <ul class="chip-list">
-      <% recipe_statuses.each do |status|
-           in_status = all_recipes.select { |r| r.data.status == status }
-           next if in_status.empty? %>
-        <li>
-          <a class="chip" href="<%= relative_url "/by-status/##{status}" %>">
-            <%= status_label(status) %><span class="chip__count"><%= in_status.size %></span>
-          </a>
-        </li>
+  <section class="home-list">
+    <h2 class="home-list__title">Recently added</h2>
+    <ul class="home-list__items">
+      <% latest.each do |r| %>
+        <%= render "recipe_list_item", recipe: r, meta: r.data.cuisine %>
       <% end %>
     </ul>
-  </div>
-  <% end %>
-</section>
+  </section>
+</div>
+
+<nav class="home-browse" aria-label="Browse">
+  <a href="<%= relative_url '/all/#weekend' %>">Weekend</a>
+  <a href="<%= relative_url '/all/#project' %>">Projects</a>
+  <a href="<%= relative_url '/by-tag/#pizza' %>">Pizza</a>
+  <a href="<%= relative_url '/by-tag/#pasta' %>">Pasta</a>
+  <a href="<%= relative_url '/sweet/' %>">Sweet</a>
+  <a href="<%= relative_url '/by-cuisine/' %>">By cuisine</a>
+  <a href="<%= relative_url '/by-tag/' %>">By tag</a>
+</nav>

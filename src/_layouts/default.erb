@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="<%= asset_path :css %>">
   <link rel="alternate" type="application/rss+xml" title="<%= site.metadata.title %>" href="<%= relative_url '/feed.xml' %>">
 
-  <%# Theme + plan-mode bootstrap. Loaded synchronously before first paint so
+  <%# Theme bootstrap. Loaded synchronously before first paint so
      stored preferences land without flashing the wrong state. Lives as a
      static file in src/assets/ rather than inline because Netlify's HTML
      minifier rewrites whitespace inside inline <script> blocks, invalidating
@@ -60,7 +60,7 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="<%= relative_url '/all/' %>">All</a>
       <a href="<%= relative_url '/sweet/' %>">Sweet</a>
-      <a href="<%= relative_url '/plan/' %>">Plan</a>
+      <a href="<%= relative_url '/plan/' %>">Plan<span class="site-nav__count" data-plan-count></span></a>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: auto" title="Toggle theme" data-theme="auto">
         <svg class="theme-toggle__icon theme-toggle__icon--auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="9" />
@@ -89,8 +89,5 @@
     <%= yield %>
   </main>
 
-  <footer class="site-footer">
-    <span><%= collections.recipes.resources.size %> recipes · cooked at home</span>
-  </footer>
 </body>
 </html>

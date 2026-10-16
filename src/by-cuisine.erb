@@ -9,7 +9,6 @@ permalink: /by-cuisine/
 %>
 <article class="all-recipes">
   <h1 class="all-recipes__title">By cuisine</h1>
-  <p class="all-recipes__lede"><%= recipes.size %> recipes from across our regular rotation.</p>
 
   <% cuisines.each do |cuisine|
        in_cuisine = recipes.select { |r| r.data.cuisine == cuisine }.sort_by { |r| r.data.name.to_s.downcase }

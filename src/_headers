@@ -6,7 +6,7 @@
 #     Pagefind ships a WebAssembly index; compiling/instantiating WASM under
 #     a strict `script-src` requires either `'unsafe-eval'` (which also
 #     enables eval/new Function) or the narrower `'wasm-unsafe-eval'` — pick
-#     the narrow one. Theme + plan-mode bootstrap lives in
+#     the narrow one. Theme bootstrap lives in
 #     /assets/theme-bootstrap.js (static file) rather than inline so we don't
 #     have to track an inline-script hash — Netlify's HTML minifier rewrites
 #     whitespace inside inline <script> blocks, which invalidates any

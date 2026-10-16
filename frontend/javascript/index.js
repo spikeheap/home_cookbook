@@ -8,15 +8,7 @@ import { setupPrintExpansion } from "./lib/print.js";
 import { setupIngredientsSheet } from "./lib/ingredients-sheet.js";
 import { setupIngredientTicks } from "./lib/ingredient-ticks.js";
 import { setupExternalLinks } from "./lib/external-links.js";
-import {
-  setupPlan, togglePlanEntry, isInPlan,
-  setupPlanModeToggle,
-} from "./lib/plan.js";
-
-// The .plan-mode class on <html> is set by the inline bootstrap script in
-// default.erb (before first paint, no flash). No additional module-level
-// call is needed here — setupPlanModeToggle keeps storage and class in
-// sync on /plan/ when the user flips the switch.
+import { setupPlan, togglePlanEntry, isInPlan, loadPlan } from "./lib/plan.js";
 
 function init() {
   setupTheme({ btn: document.getElementById("theme-toggle") });
@@ -26,6 +18,8 @@ function init() {
   const searchResults = document.getElementById("search-results");
   if (searchInput && searchResults) {
     setupSearch({ input: searchInput, resultsEl: searchResults });
+    // Desktop only: focusing on touch devices would pop the keyboard.
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) searchInput.focus();
   }
 
   const recipeRoot = document.querySelector(".recipe");
@@ -55,8 +49,27 @@ function init() {
       console.warn("plan: #plan-recipes-data not found on the page");
     }
     setupPlan({ root: planRoot, recipes });
-    setupPlanModeToggle({ root: planRoot });
   }
+
+  setupPlanCount();
+}
+
+// Fills every [data-plan-count] with the number of planned recipes and
+// reveals [data-plan-summary] blocks once the plan has something in it.
+function setupPlanCount() {
+  const render = plan => {
+    const n = plan.entries.length;
+    document.querySelectorAll("[data-plan-count]").forEach(el => {
+      el.textContent = n ? String(n) : "";
+    });
+    document.querySelectorAll("[data-plan-summary]").forEach(el => {
+      el.hidden = n === 0;
+    });
+  };
+  let plan = { entries: [] };
+  try { plan = loadPlan(localStorage); } catch (_) {}
+  render(plan);
+  document.addEventListener("cookbook:plan-changed", e => render(e.detail));
 }
 
 function setAddedState(btn, added, { addedLabel, restLabel } = {}) {

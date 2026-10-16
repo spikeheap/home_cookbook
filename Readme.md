@@ -132,7 +132,7 @@ out so future-me (or anyone) doesn't loosen them by accident:
 Other relevant defences in code; don't loosen without thinking:
 
 - `Content-Security-Policy` in `src/_headers`. Headers stay strict
-  (`script-src 'self' 'wasm-unsafe-eval'`); the theme + plan-mode
+  (`script-src 'self' 'wasm-unsafe-eval'`); the theme
   bootstrap lives in `src/assets/theme-bootstrap.js` as a static file
   rather than inline so the CSP doesn't need a per-edit SHA-256 hash
   (Netlify's HTML minifier rewrites whitespace inside inline

@@ -13,7 +13,6 @@ permalink: /by-status/
 %>
 <article class="all-recipes">
   <h1 class="all-recipes__title">By status</h1>
-  <p class="all-recipes__lede">How recipes are faring in our kitchen, from favourites to the untried.</p>
 
   <% recipe_statuses.each do |status|
        in_status = recipes.select { |r| r.data.status == status }.sort_by { |r| r.data.name.to_s.downcase }

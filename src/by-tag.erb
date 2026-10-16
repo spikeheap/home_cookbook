@@ -9,7 +9,6 @@ permalink: /by-tag/
 %>
 <article class="all-recipes">
   <h1 class="all-recipes__title">By tag</h1>
-  <p class="all-recipes__lede">Cross-cutting themes — bread, pasta, vegan, and the rest.</p>
 
   <% all_tags.each do |tag|
        tagged = recipes.select { |r| Array(r.data.tags).include?(tag) }.sort_by { |r| r.data.name.to_s.downcase } %>
