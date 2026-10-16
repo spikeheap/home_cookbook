@@ -93,11 +93,58 @@ test("aggregate sums same-name same-unit quantities across recipes", () => {
   assert.equal(tomatoes.unit, "tin");
   assert.deepEqual(tomatoes.sources.sort(), ["Chetna's chicken curry", "Fish pie"].sort());
 
-  // Onions are merged ("onions" vs "onion" don't currently match — fuzzy matching
-  // is intentionally strict; mismatches surface as separate rows so the user
-  // notices and fixes the source text.)
+  // "onions" (curry) and "onion" (fish pie) merge into one row.
   const onionRows = flatItems(agg).filter(g => g.name.startsWith("onion"));
-  assert.ok(onionRows.length >= 1);
+  assert.equal(onionRows.length, 1);
+  assert.equal(onionRows[0].quantity, 3);
+  assert.equal(onionRows[0].displayName, "onions", "plural display when quantity > 1");
+});
+
+test("aggregate merges singular and plural forms of the same item and unit", () => {
+  const a = { slug: "a", name: "A", servings: 1, recipeIngredient: [{ items: [
+    { quantity: 2, item: "tomatoes, chopped" },
+    { quantity: 1, item: "red chillies" },
+    { quantity: 2, unit: "sprigs", item: "thyme" },
+    { quantity: 1, item: "cloves" },
+  ] }] };
+  const b = { slug: "b", name: "B", servings: 1, recipeIngredient: [{ items: [
+    { quantity: 1, item: "tomato" },
+    { quantity: 1, item: "red chilli" },
+    { quantity: 1, unit: "sprig", item: "thyme" },
+    { quantity: 1, item: "clove" },
+  ] }] };
+  const plan = { version: 1, entries: [
+    { id: "a", slug: "a", value: 1, slot: "Dinner" },
+    { id: "b", slug: "b", value: 1, slot: "Dinner" },
+  ] };
+  const rows = flatItems(aggregate(plan, [a, b]));
+
+  const byName = n => rows.filter(g => g.name === n);
+  assert.equal(byName("tomato").length, 1);
+  assert.equal(byName("tomato")[0].quantity, 3);
+  assert.equal(byName("tomato")[0].displayName, "tomatoes");
+  assert.equal(byName("red chilli").length, 1);
+  assert.equal(byName("red chilli")[0].displayName, "red chillies");
+  assert.equal(byName("thyme").length, 1);
+  assert.equal(byName("thyme")[0].quantity, 3);
+  assert.equal(byName("clove").length, 1, "'cloves' → 'clove', not 'clov'");
+  assert.equal(rows.length, 4);
+});
+
+test("aggregate uses the singular display name when the merged quantity is 1 or less", () => {
+  const a = { slug: "a", name: "A", servings: 2, recipeIngredient: [{ items: [
+    { quantity: 1, item: "onions" },
+  ] }] };
+  const b = { slug: "b", name: "B", servings: 2, recipeIngredient: [{ items: [
+    { quantity: 1, item: "onion" },
+  ] }] };
+  const plan = { version: 1, entries: [
+    { id: "a", slug: "a", value: 1, slot: "Dinner" }, // ×0.5
+    { id: "b", slug: "b", value: 1, slot: "Dinner" }, // ×0.5
+  ] };
+  const [onion] = flatItems(aggregate(plan, [a, b]));
+  assert.equal(onion.quantity, 1);
+  assert.equal(onion.displayName, "onion");
 });
 
 test("aggregate scales servings recipes by entry.value / recipe.servings", () => {

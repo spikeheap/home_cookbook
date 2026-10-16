@@ -6,7 +6,8 @@
 //
 // Items without a numeric quantity ("salt and pepper to taste") go in a
 // separate `manual` bucket so the cook can scan them. Different units of the
-// same item stay on separate rows — no unit conversion (v0).
+// same item stay on separate rows — no unit conversion (v0). Singular and
+// plural spellings ("onion" / "onions", "sprig" / "sprigs") are merged.
 
 import dictionaryData from "./categoriser-dictionary.json" with { type: "json" };
 
@@ -203,6 +204,32 @@ export function displayItemName(text) {
     .replace(/\s+/g, " ");
 }
 
+// Candidate singulars for a plural word, most specific first:
+// chillies → chilli / chillie / chilly, tomatoes → tomato, onions → onion.
+function singularCandidates(word) {
+  const out = [];
+  if (/ies$/.test(word)) out.push(word.slice(0, -2), word.slice(0, -3) + "y", word.slice(0, -1));
+  if (/es$/.test(word))  out.push(word.slice(0, -1), word.slice(0, -2));
+  else if (/[^s]s$/.test(word)) out.push(word.slice(0, -1));
+  return out;
+}
+
+// Maps each plural to its singular, but only when the singular also appears
+// in `names`. Data-driven so irregulars ("leaves", "cloves" → "clov") never
+// produce a spurious key: an unmatched plural stays as written.
+function singularMap(names) {
+  const present = new Set(names);
+  const map = new Map();
+  for (const name of present) {
+    const words = name.split(" ");
+    const last  = words.pop();
+    const stem  = words.length ? words.join(" ") + " " : "";
+    const hit   = singularCandidates(last).map(w => stem + w).find(n => n !== name && present.has(n));
+    if (hit) map.set(name, hit);
+  }
+  return map;
+}
+
 function expandItems(recipe, factor, sourceLabel, recipesIndex) {
   const out = [];
   for (const section of recipe.recipeIngredient || []) {
@@ -249,18 +276,23 @@ export function aggregate(plan, recipes) {
 
   const grouped = new Map();
   const manual  = [];
+  const quantified = items.filter(it => it.quantity != null);
+  const nameMap = singularMap(quantified.map(it => it.normalised));
+  const unitMap = singularMap(quantified.map(it => it.unit).filter(Boolean));
 
   for (const it of items) {
     if (it.quantity == null) {
       manual.push(it);
       continue;
     }
-    const key = `${it.normalised}|${it.unit || ""}`;
+    const name = nameMap.get(it.normalised) || it.normalised;
+    const unit = (it.unit && unitMap.get(it.unit)) || it.unit;
+    const key  = `${name}|${unit || ""}`;
     if (!grouped.has(key)) {
       grouped.set(key, {
-        name:        it.normalised,
+        name,
         displayName: it.displayName,
-        unit:        it.unit,
+        unit,
         quantity:    0,
         sources:     new Set(),
       });
@@ -268,10 +300,18 @@ export function aggregate(plan, recipes) {
     const agg = grouped.get(key);
     agg.quantity += it.quantity;
     agg.sources.add(it.source);
+    // Remember the singular and plural spellings so the row reads naturally.
+    if (nameMap.has(it.normalised)) agg.pluralDisplay   = it.displayName;
+    else                            agg.singularDisplay = it.displayName;
   }
 
   const groupedList = Array.from(grouped.values())
-    .map(g => ({ ...g, sources: Array.from(g.sources), category: categorise(g.name, g.unit) }))
+    .map(({ singularDisplay, pluralDisplay, ...g }) => {
+      if (singularDisplay && pluralDisplay) {
+        g.displayName = !g.unit && g.quantity > 1 ? pluralDisplay : singularDisplay;
+      }
+      return { ...g, sources: Array.from(g.sources), category: categorise(g.name, g.unit) };
+    })
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const buckets = new Map(CATEGORY_ORDER.map(c => [c, []]));
