@@ -5,7 +5,7 @@ cuisine: Mexican
 meal: [Breakfast, Lunch]
 effort: weeknight
 tags: [eggs]
-description: Don't have the time for an hour of simmering? This can go from idea to belly in 30 minutes
+description: For when we realise we need this when we wake up (with kids).
 
 prepTime: PT10H
 cookTime: PT20M

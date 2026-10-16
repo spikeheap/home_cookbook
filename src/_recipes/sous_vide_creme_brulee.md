@@ -5,7 +5,7 @@ cuisine: French
 meal: [Sweet]
 effort: weekend
 tags: [sous-vide, dessert, sweet]
-description: Custards cooked in sealed jars in the water bath, so no bain-marie and no risk of scrambling. Chill, then torch the tops to order.
+description: Custards cooked in sealed jars in the water bath. Chill then torch sugar on top.
 isBasedOn: https://www.greatbritishchefs.com/how-to-cook/how-to-cook-creme-brulee-sous-vide
 author:
   "@type": Company

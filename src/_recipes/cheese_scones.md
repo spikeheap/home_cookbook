@@ -5,7 +5,7 @@ cuisine: British
 meal: [Snack]
 effort: weeknight
 tags: [baking]
-description: The perfect savoury cheese scone recipe – best eaten warm spread liberally with butter! These scones are so easy to whip up for lunchboxes or picnics.
+description: Scones, but cheesy
 
 prepTime: PT20M
 cookTime: PT20M
