@@ -1,4 +1,5 @@
 require "bridgetown"
+require_relative "plugins/recipe_variants"
 
 Bridgetown.load_tasks
 
@@ -17,6 +18,11 @@ desc "Build the site in a test environment"
 task :test => :validate do
   ENV["BRIDGETOWN_ENV"] = "test"
   Bridgetown::Commands::Build.start
+end
+
+desc "Run the Ruby specs"
+task :spec do
+  sh "bundle exec rspec"
 end
 
 desc "Runs the clean command"
@@ -136,12 +142,13 @@ task :validate, [:paths] do |_t, args|
   all_slugs = all_recipe_files.map { |f| File.basename(f, ".md") }
   # Slugs that are themselves variants (carry variant_of) — a target must not
   # be one of these, to keep variant_of single-level (no chains).
-  variant_slugs = all_recipe_files.each_with_object([]) do |f, acc|
+  all_data = all_recipe_files.each_with_object({}) do |f, acc|
     fm = File.read(f)[/\A---\s*\n(.*?\n)---\s*(?:\n|\z)/m, 1]
     next unless fm
     parsed = (YAML.safe_load(fm, permitted_classes: [Date, Time]) rescue nil)
-    acc << File.basename(f, ".md") if parsed.is_a?(Hash) && parsed["variant_of"]
+    acc[File.basename(f, ".md")] = parsed if parsed.is_a?(Hash)
   end
+  variant_slugs = all_data.select { |_, d| d["variant_of"] }.keys
 
   yamllint = ENV["YAMLLINT"] || "yamllint"
   unless system("which #{yamllint.shellescape} > /dev/null 2>&1")
@@ -187,6 +194,27 @@ task :validate, [:paths] do |_t, args|
       unless data.is_a?(Hash)
         errors << "#{path}: frontmatter is not a mapping"
         next
+      end
+
+      # Swap-based variants: check keys, then validate the merged recipe so
+      # fields inherited from the main recipe count as present.
+      RecipeVariants.key_errors(data).each { |e| errors << "#{path}: #{e}" }
+      if data.key?("swap")
+        main = all_data[data["variant_of"]]
+        if !data["swap"].is_a?(Hash)
+          errors << "#{path}: swap must be a mapping of key → replacement"
+        elsif main.nil?
+          errors << "#{path}: swap needs variant_of pointing at an existing recipe"
+        elsif data.key?("recipeIngredient") || data.key?("recipeInstructions")
+          errors << "#{path}: a swap variant inherits its lists; put changes in `swap` rather than its own recipeIngredient / recipeInstructions"
+        else
+          begin
+            data = RecipeVariants.merge(main, data)
+          rescue RecipeVariants::UnknownKey, ArgumentError => e
+            errors << "#{path}: #{e.message}"
+            next
+          end
+        end
       end
 
       %w[date name cuisine meal effort].each do |field|

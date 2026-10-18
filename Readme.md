@@ -44,7 +44,7 @@ servings: 4                   # optional integer; see "Scaling" below
 - **status** — optional; how the recipe is faring in the kitchen. `favourite` (family favourite), `faded` (fallen out of favour), `untried` (added but not yet a hit). Omit to leave unclassified. Browse at [`/by-status/`](src/by-status.erb); shown as a badge on cards.
 - **tags** — cross-cutting: `bread`, `pasta`, `vegan`, `vegetarian`, `pizza`, `sous-vide`, `slow-cook`, `salad`, `soup`, `pie`, `eggs`, `salsa`, `dessert`, `sweet`, `baking`, `coffee`, `preserves`, `winter`, `grandma-bo`, `base-recipe`.
 - **servings** — integer; optional. When set, the recipe-page stepper scales by *people* (e.g. "Serves [- 4 +]"). When omitted — typical for breads, batch sweets, drinks, condiments — it scales by *multiplier* (×½, ×1, ×2). A planned meal-plan / shopping-list feature will aggregate quantities across recipes; `servings` lets it scale by household size.
-- **variant_of** — optional slug of a canonical sibling recipe (e.g. `quick_brioche_burger_buns` sets `variant_of: slow_brioche_burger_buns`). Renders an "Other versions" block on both the variant and the canonical. Single level only — the target must not itself be a variant.
+- **variant_of** — optional slug of a canonical sibling recipe (e.g. `quick_brioche_burger_buns` sets `variant_of: slow_brioche_burger_buns`). Renders an "Other versions" block on both the variant and the canonical. Single level only — the target must not itself be a variant. A variant is either a full standalone recipe or a swap variant (see [Swap variants](#swap-variants)).
 
 Two relationships are derived automatically and need no fields:
 
@@ -102,6 +102,58 @@ core `quantity` / `unit` / `item`:
   the sub's summary line shows e.g. "make ½ batch" — updating as the
   parent scales. Omit `uses_fraction` for sub-recipes whose full batch
   is used.
+
+### Swap variants
+
+When a variant differs from the main recipe by only an ingredient or
+two (chicken, chickpea or falafel souvlaki), write just the
+differences. The main recipe labels the swappable parts with `key:`.
+That can be an ingredient line, an ingredient or method section, or a
+step (written as `{ key, text }` in place of a plain string):
+
+```yaml
+# souvlaki.md
+recipeIngredient:
+  - heading: Marinade
+    key: marinade
+    items:
+      - { key: protein, quantity: 12, item: boneless, skinless chicken thighs }
+      - { quantity: 2, unit: tsp, item: dried oregano }
+recipeInstructions:
+  - items:
+      - key: cook
+        text: Grill the chicken for 15 to 20 minutes...
+      - Serve in the warm pittas...
+```
+
+The variant sets `variant_of`, any fields that differ, and a `swap`
+map keyed by those labels:
+
+```yaml
+# souvlaki_chickpea.md
+variant_of: souvlaki
+name: Chickpea souvlaki
+tags: [vegetarian]
+swap:
+  protein:                    # a list replaces the line (with any number of lines)
+    - { quantity: 2, item: x 400g tins chickpeas, drained }
+  skewers: []                 # an empty list removes it
+  cook: Roast the chickpeas for 20 to 25 minutes...   # a string replaces a step's text
+```
+
+- At build time (`plugins/builders/recipe_variant_merge.rb`) every
+  swap variant is expanded into a full recipe and all `key:` labels
+  are stripped. Recipe pages, the plan, the shopping list and scaling
+  only ever see plain recipes.
+- A variant inherits every field it doesn't set, except `status`,
+  `image` and `date`, which it sets for itself. It can't have its own
+  `recipeIngredient` / `recipeInstructions`.
+- Keep anything specific to the swapped ingredient inside a keyed
+  step. Unkeyed steps are shared word for word.
+- `rake validate` checks that keys are unique within a recipe, that
+  every swap key exists in the main recipe, and validates the merged
+  result. The merge logic is in `plugins/recipe_variants.rb`, with
+  specs in `spec/` (`bundle exec rake spec`).
 
 ## Security / threat model
 

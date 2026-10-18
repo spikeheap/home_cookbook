@@ -6,3 +6,7 @@ git_source(:codeberg) { "https://codeberg.org/#{_1}.git" }
 gem "bridgetown", "~> 2.1.2"
 gem "bridgetown-feed", "~> 4.0"
 gem "puma", "< 8"
+
+group :test do
+  gem "rspec", "~> 3.13"
+end
