@@ -23,9 +23,11 @@ recipeIngredient:
 - heading: Dough
   items:
   - item: "1 ball [pizza dough](pizza_dough.html)"
+    uses_fraction: 0.5
 - heading: Filling
   items:
   - item: "55g [pizza tomato sauce](pizza_tomato_sauce.html)"
+    uses_fraction: 0.25
   - quantity: 170
     unit: g
     item: ricotta
