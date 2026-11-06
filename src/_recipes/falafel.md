@@ -5,7 +5,6 @@ cuisine: Middle Eastern
 meal: [Side, Lunch]
 effort: weeknight
 tags: [vegetarian]
-status: untried
 description: Quick pan-fried falafel from tinned chickpeas.
 isBasedOn: https://www.bbc.co.uk/food/recipes/homemade_falafels_with_30527
 author:

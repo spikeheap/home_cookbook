@@ -5,7 +5,6 @@ cuisine: Mexican
 meal: [Main]
 effort: weekend
 tags: [beef, slow-cook, winter]
-status: untried
 description: Slow-braised beef chilli enriched with toasted whole spices, dark chocolate and a hit of espresso.
 isBasedOn: https://www.bbcgoodfood.com/recipes/next-level-chilli-con-carne
 author:

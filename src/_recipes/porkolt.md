@@ -5,7 +5,6 @@ cuisine: Hungarian
 meal: [Main]
 effort: weekend
 tags: [beef, slow-cook, winter]
-status: untried
 description: The thick Hungarian paprika beef stew most UK cooks mean by "goulash" — not the brothy gulyás soup.
 isBasedOn: https://www.daringgourmet.com/hungarian-beef-and-onion-stew-marhaporkolt/
 author:

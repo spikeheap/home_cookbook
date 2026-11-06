@@ -4,7 +4,6 @@ name: Falafel souvlaki
 variant_of: souvlaki
 effort: weeknight
 tags: [vegetarian]
-status: untried
 description: Falafel in pitta with tzatziki and salad.
 suitableForDiet:
 - http://schema.org/VegetarianDiet

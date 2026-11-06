@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [pork]
-status: untried
 isBasedOn: https://www.easypeasyfoodie.com/easy-sausage-traybake/
 author:
   "@type": Person

@@ -5,7 +5,6 @@ cuisine: Italian
 meal: [Main]
 effort: weekend
 tags: [pasta, slow-cook, base-recipe]
-status: untried
 description: Authentic Bologna-style meat ragù — soffritto, pancetta, beef, white wine, a little passata and milk, simmered gently for three hours. The base for tagliatelle al ragù and lasagne alla bolognese.
 isBasedOn: https://www.insidetherustickitchen.com/authentic-bolognese-sauce/
 author:

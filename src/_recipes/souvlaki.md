@@ -5,7 +5,6 @@ cuisine: Greek
 meal: [Main]
 effort: weekend
 tags: [chicken]
-status: untried
 description: Spiced chicken kebabs in pitta with tzatziki and salad.
 isBasedOn: https://www.bbcgoodfood.com/recipes/chicken-gyros
 author:

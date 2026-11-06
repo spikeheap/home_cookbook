@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [pork, pasta]
-status: untried
 description: Sausagemeat browned in a herby tomato sauce, tossed with gnocchi and baked under melted Cheddar and mozzarella.
 isBasedOn: https://daisiesandpie.co.uk/sausage-gnocchi-bake/
 author:

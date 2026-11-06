@@ -5,7 +5,6 @@ cuisine: Mexican
 meal: [Main]
 effort: weeknight
 tags: [chicken]
-status: untried
 description: Marinated chicken charred with peppers and onions, served in warm tortillas with the usual toppings.
 
 prepTime: PT15M

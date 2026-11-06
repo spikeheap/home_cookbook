@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [seafood]
-status: untried
 isBasedOn: https://www.olivemagazine.com/recipes/fish-and-seafood/cajun-salmon-with-rosemary-sweet-potato-wedges/
 author:
   "@type": Person

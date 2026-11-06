@@ -5,7 +5,6 @@ cuisine: Italian
 meal: [Main]
 effort: weekend
 tags: [pizza, bread, vegetarian]
-status: untried
 description: A folded, stuffed pizza filled with three cheeses and tomato sauce.
 isBasedOn: https://bakingsteel.com/blogs/recipes/classic-cheese-calzone-recipe
 author:

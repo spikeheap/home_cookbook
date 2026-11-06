@@ -5,7 +5,6 @@ cuisine: Japanese
 meal: [Main]
 effort: weeknight
 tags: [chicken, rice]
-status: untried
 description: Crispy panko chicken with a smooth, lightly sweet Wagamama-style katsu curry sauce, served over rice.
 isBasedOn: https://recipefairy.com/wagamama-chicken-katsu-curry/
 author:

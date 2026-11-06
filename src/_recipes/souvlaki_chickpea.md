@@ -4,7 +4,6 @@ name: Chickpea souvlaki
 variant_of: souvlaki
 effort: weeknight
 tags: [vegetarian]
-status: untried
 description: Roasted spiced chickpeas in pitta with tzatziki and salad.
 suitableForDiet:
 - http://schema.org/VegetarianDiet

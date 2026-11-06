@@ -5,7 +5,6 @@ cuisine: Italian
 meal: [Main]
 effort: weeknight
 tags: [rice, vegetarian]
-status: untried
 description: Mushroom risotto with fresh wild mushrooms and dried porcini, finished with butter and Parmigiano (mantecatura).
 isBasedOn: https://www.carluccios.com/blogs/journal/risotto-ai-funghi
 author:

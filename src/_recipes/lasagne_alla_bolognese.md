@@ -5,7 +5,6 @@ cuisine: Italian
 meal: [Main]
 effort: project
 tags: [pasta, slow-cook]
-status: untried
 description: Baked lasagne built on bolognese ragù, layered with béchamel, Parmigiano-Reggiano and green spinach egg pasta sheets. Best made over two days.
 isBasedOn: https://www.insidetherustickitchen.com/lasagna-bolognese/
 author:

@@ -5,7 +5,6 @@ cuisine: Mediterranean
 meal: [Main]
 effort: weekend
 tags: [lamb]
-status: untried
 description: From Diana Henry's From the Oven to the Table.
 keywords: []
 

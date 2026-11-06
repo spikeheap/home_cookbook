@@ -3,7 +3,6 @@ date: 2026-10-17
 name: Salmon rice bowl
 variant_of: tofu_rice_bowl
 tags: [seafood, rice]
-status: untried
 description: Salt and pepper roast salmon with jasmine rice and garlicky greens.
 suitableForDiet:
 - http://schema.org/LowLactoseDiet

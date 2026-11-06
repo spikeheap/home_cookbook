@@ -5,7 +5,6 @@ cuisine: Japanese
 meal: [Side]
 effort: weeknight
 tags: [rice, base-recipe, vegetarian]
-status: untried
 description: Properly seasoned Japanese short-grain rice — the base for any sushi.
 isBasedOn: https://www.justonecookbook.com/how-to-make-sushi-rice/
 author:

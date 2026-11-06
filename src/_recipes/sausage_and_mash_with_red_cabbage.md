@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weekend
 tags: [pork, winter]
-status: untried
 description: Browned bangers with creamy mash and rich onion gravy, served with slow-braised spiced red cabbage and apple.
 isBasedOn: https://www.recipetineats.com/bangers-and-mash-sausage-with-onion-gravy/
 author:

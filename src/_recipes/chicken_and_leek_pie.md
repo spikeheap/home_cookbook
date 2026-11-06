@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [chicken, pie]
-status: untried
 isBasedOn: https://www.bbc.co.uk/food/recipes/chickenandleekpie_90191
 author:
   "@type": Person

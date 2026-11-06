@@ -5,7 +5,6 @@ cuisine: Indian
 meal: [Main]
 effort: weeknight
 tags: [vegetarian]
-status: untried
 isBasedOn: https://www.bbc.co.uk/food/recipes/butter_paneer_curry_98394
 author:
   "@type": Person

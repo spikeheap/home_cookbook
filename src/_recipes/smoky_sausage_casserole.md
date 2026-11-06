@@ -5,7 +5,6 @@ cuisine: British
 meal: [Main]
 effort: weeknight
 tags: [pork, winter]
-status: untried
 description: Browned pork sausages simmered with peppers, tomatoes and cannellini beans, finished with a crisp breadcrumb top.
 isBasedOn: https://www.bbcgoodfood.com/recipes/smoky-sausage-casserole
 author:

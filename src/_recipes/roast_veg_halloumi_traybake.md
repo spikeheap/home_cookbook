@@ -3,7 +3,6 @@ date: 2026-10-17
 name: Roast veg and halloumi traybake
 variant_of: sausage_potato_pepper_traybake
 tags: [vegetarian]
-status: untried
 description: With courgette and a pesto drizzle.
 suitableForDiet:
 - http://schema.org/VegetarianDiet

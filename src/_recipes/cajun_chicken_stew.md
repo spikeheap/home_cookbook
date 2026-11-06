@@ -5,7 +5,6 @@ cuisine: American
 meal: [Main]
 effort: weeknight
 tags: [chicken, rice]
-status: untried
 description: A no-roux Cajun chicken thigh stew with the holy trinity and tomatoes, served over rice.
 isBasedOn: https://www.pepperbowl.com/cajun-chicken-stew/
 author:

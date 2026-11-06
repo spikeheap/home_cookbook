@@ -5,7 +5,6 @@ cuisine: Chinese
 meal: [Main]
 effort: weeknight
 tags: [vegan, tofu, rice]
-status: untried
 description: Salt and pepper crispy tofu with jasmine rice and garlicky greens.
 isBasedOn: https://www.bbc.co.uk/food/recipes/salt_pepper_tofu_bowl_09369
 author:

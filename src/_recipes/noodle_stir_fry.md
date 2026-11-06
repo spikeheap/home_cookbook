@@ -5,7 +5,6 @@ cuisine: Chinese
 meal: [Main]
 effort: weeknight
 tags: [vegetarian, noodles]
-status: untried
 description: A flexible vegetable and egg noodle stir fry — use whatever veg you have.
 isBasedOn: https://www.recipetineats.com/vegetable-stir-fry/
 author:

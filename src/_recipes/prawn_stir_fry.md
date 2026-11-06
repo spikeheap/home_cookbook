@@ -5,7 +5,6 @@ cuisine: Thai
 meal: [Main]
 effort: weeknight
 tags: [seafood, noodles]
-status: untried
 description: Prawns in a fragrant chilli, lime and fish sauce dressing, stir-fried with crunchy veg and noodles.
 isBasedOn: https://www.bbcgoodfood.com/recipes/thai-prawn-ginger-spring-onion-stir-fry
 author:

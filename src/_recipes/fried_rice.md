@@ -5,7 +5,6 @@ cuisine: Chinese
 meal: [Main]
 effort: weeknight
 tags: [vegetarian, rice, eggs]
-status: untried
 isBasedOn: https://www.bbc.co.uk/food/recipes/eggfriedrice_89260
 author:
   "@type": Person

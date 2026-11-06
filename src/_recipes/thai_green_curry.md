@@ -4,7 +4,6 @@ name: Thai green curry
 cuisine: Thai
 meal: [Main]
 effort: weeknight
-status: untried
 isBasedOn: https://www.bbc.co.uk/food/recipes/thaigreenchickencurr_92440
 author:
   "@type": Person

@@ -6,7 +6,6 @@ meal: [Main, Lunch]
 effort: weeknight
 tags: [vegetarian]
 variant_of: jacket_potato_smoked_trout_beetroot
-status: untried
 description: The proper oven method for a crisp-skinned baked potato, topped with beans, butter and cheese.
 isBasedOn: https://www.bbcgoodfood.com/recipes/perfect-jacket-potatoes
 author:

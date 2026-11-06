@@ -5,7 +5,6 @@ cuisine: Japanese
 meal: [Main, Lunch]
 effort: weekend
 tags: [sushi, rice, seafood]
-status: untried
 description: Thin maki rolls of seasoned rice and a single filling — salmon, cucumber or avocado — wrapped in nori.
 isBasedOn: https://www.justonecookbook.com/sushi-rolls/
 author:

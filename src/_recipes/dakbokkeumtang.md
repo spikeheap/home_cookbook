@@ -5,7 +5,6 @@ cuisine: Korean
 meal: [Main]
 effort: weeknight
 tags: [chicken, slow-cook]
-status: untried
 description: Chicken braised in a gochugaru-gochujang sauce with potato and onion. Also called dakdoritang.
 isBasedOn: https://www.maangchi.com/recipe/traditional-dakbokkeumtang
 author:

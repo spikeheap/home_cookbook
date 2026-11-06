@@ -5,7 +5,6 @@ cuisine: Japanese
 meal: [Main]
 effort: weekend
 tags: [noodles, pork, soup]
-status: untried
 description: A from-scratch weekend bowl — braised chashu, homemade miso tare and soft eggs in a chicken broth.
 isBasedOn: https://glebekitchen.com/miso-ramen-with-chashu-pork/
 author:
